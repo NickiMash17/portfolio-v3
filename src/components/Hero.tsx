@@ -89,7 +89,7 @@ export const Hero = () => {
                 </span>
                 <span className="text-xs sm:text-sm font-medium text-foreground">Open to Opportunities</span>
                 <span className="w-px h-3 sm:h-4 bg-border"></span>
-                <span className="text-xs sm:text-sm text-muted-foreground">Johannesburg, SA</span>
+                <span className="text-xs sm:text-sm text-muted-foreground">Polokwane, SA</span>
               </div>
 
               {/* Name and Title */}
