@@ -1,5 +1,5 @@
 import { Code2, Cloud, Anchor, Trophy } from 'lucide-react';
-import profileImage from '@/assets/profile-coding-professional.jpg';
+import profileImage from '@/assets/Myself.jpg';
 
 export const About = () => {
   const highlights = [

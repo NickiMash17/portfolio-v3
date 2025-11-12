@@ -56,7 +56,7 @@ export const Projects = () => {
       subtitle: 'Demo Project - AI-Powered Productivity',
       description:
         'Intelligent task management system with AI-powered suggestions and priority optimization.',
-      tech: ['React', 'TypeScript', 'Lovable AI', 'Tailwind CSS'],
+      tech: ['React', 'TypeScript', 'AI', 'Tailwind CSS'],
       highlights: [
         'AI-powered task suggestions and categorization',
         'Smart priority detection and scheduling',
@@ -72,7 +72,7 @@ export const Projects = () => {
       subtitle: 'Demo Project - Data Visualization',
       description:
         'Interactive analytics dashboard showcasing data visualization and real-time metrics.',
-      tech: ['React', 'TypeScript', 'Recharts', 'Lovable Cloud'],
+      tech: ['React', 'TypeScript', 'Recharts', 'Cloud'],
       highlights: [
         'Real-time data updates and visualizations',
         'Interactive charts and graphs',

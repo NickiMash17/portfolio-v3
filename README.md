@@ -33,3 +33,5 @@ npm run build
 ## Deployment
 
 Build output is in the `dist/` folder. Deploy to Vercel, Netlify, or your preferred host.
+
+Repository: https://github.com/NickiMash17/portfolio-v3
