@@ -39,7 +39,7 @@ export const Experience = () => {
     },
     {
       type: 'work',
-      title: 'Junior Navigation Officer',
+      title: 'Navigation Officer',
       company: 'South African Navy',
       period: 'Jan 2015 - Jul 2021',
       location: "Simon's Town",
