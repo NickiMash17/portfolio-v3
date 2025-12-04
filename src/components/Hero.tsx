@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
+import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
 
 export const Hero = () => {
   const [displayText, setDisplayText] = useState('');
@@ -8,12 +7,23 @@ export const Hero = () => {
   const [codeDisplay, setCodeDisplay] = useState('');
   const [codeIndex, setCodeIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [titleText, setTitleText] = useState('');
+  const [isTitleDeleting, setIsTitleDeleting] = useState(false);
+  
   const fullText = '> Nicolette Mashaba_';
   const snippets = [
     'git clone https://github.com/NickiMash17/portfolio',
     'npm run build && npm run preview',
     'docker build -t nmashaba/app .',
     'az webapp up --runtime "NODE:18-lts"',
+  ];
+  const titles = [
+    'Software Engineer',
+    'AI/ML Enthusiast',
+    'Azure Cloud Expert',
+    'Hackathon Winner',
+    'Full-Stack Developer',
   ];
 
   useEffect(() => {
@@ -61,142 +71,129 @@ export const Hero = () => {
     return () => clearTimeout(timer);
   }, [codeDisplay, codeIndex, isDeleting]);
 
+  // Animated typing for title rotation
+  useEffect(() => {
+    const current = titles[titleIndex % titles.length];
+    const speed = isTitleDeleting ? 40 : 80;
+
+    const timer = setTimeout(() => {
+      if (!isTitleDeleting) {
+        setTitleText(current.slice(0, titleText.length + 1));
+        if (titleText.length + 1 === current.length) {
+          setTimeout(() => setIsTitleDeleting(true), 2000);
+        }
+      } else {
+        setTitleText(current.slice(0, Math.max(0, titleText.length - 1)));
+        if (titleText.length === 0) {
+          setIsTitleDeleting(false);
+          setTitleIndex((i) => (i + 1) % titles.length);
+        }
+      }
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [titleText, titleIndex, isTitleDeleting]);
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-0">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
       {/* Animated gradient mesh background */}
       <div className="gradient-mesh" />
       
       {/* Additional depth layers */}
-      <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/4 right-1/4 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[80px] sm:blur-[100px] animate-float" />
+      <div className="absolute bottom-1/4 left-1/4 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[80px] sm:blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
           {/* Left: Headline and CTAs */}
-          <header className="text-center md:text-left space-y-5 sm:space-y-6 md:space-y-8" aria-label="Introduction">
-            {/* Professional Header Card */}
-            <div className="space-y-3 sm:space-y-4">
-              {/* Status Badge */}
-              <div className="inline-flex items-center gap-2 sm:gap-3 glass rounded-full px-3 sm:px-4 py-1.5 sm:py-2 border border-primary/20">
-                <span className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-accent"></span>
-                </span>
-                <span className="text-xs sm:text-sm font-medium text-foreground">Open to Opportunities</span>
-                <span className="w-px h-3 sm:h-4 bg-border"></span>
-                <span className="text-xs sm:text-sm text-muted-foreground">Polokwane, SA</span>
-              </div>
+          <header className="text-center md:text-left w-full" aria-label="Introduction">
+            {/* Status Badge */}
+            <div className="inline-flex items-center gap-1.5 sm:gap-3 glass rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 border border-primary/20 mb-4 sm:mb-6">
+              <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-accent"></span>
+              </span>
+              <span className="text-[10px] sm:text-sm font-medium text-foreground">Open to Opportunities</span>
+              <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">• Johannesburg, SA</span>
+            </div>
+
+            {/* Name with Orbiting Icons */}
+            <div className="relative py-8 sm:py-12 md:py-16">
+              {/* Floating Icons */}
+              <a
+                href="https://github.com/NickiMash17"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute -top-2 left-[10%] sm:left-[5%] animate-float group"
+                style={{ animationDelay: '0s', animationDuration: '4s' }}
+              >
+                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                  <Github className="w-5 h-5 sm:w-7 sm:h-7 text-foreground/70 group-hover:text-foreground transition-colors" />
+                </div>
+              </a>
+
+              <a
+                href="https://linkedin.com/in/nicolette-mashaba"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-0 right-[5%] sm:right-[10%] animate-float group"
+                style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
+              >
+                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20">
+                  <Linkedin className="w-5 h-5 sm:w-7 sm:h-7 text-[#0A66C2] group-hover:text-[#0A66C2]/80 transition-colors" />
+                </div>
+              </a>
+
+              <button
+                onClick={() => scrollToSection('projects')}
+                className="absolute bottom-0 left-[5%] sm:left-[15%] animate-float group"
+                style={{ animationDelay: '1s', animationDuration: '5s' }}
+              >
+                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                  <Folder className="w-5 h-5 sm:w-7 sm:h-7 text-primary fill-primary/20 group-hover:fill-primary/40 transition-colors" />
+                </div>
+              </button>
+
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="absolute -bottom-4 right-[15%] sm:right-[5%] animate-float group"
+                style={{ animationDelay: '1.5s', animationDuration: '4.2s' }}
+              >
+                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-accent/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent/20">
+                  <Mail className="w-5 h-5 sm:w-7 sm:h-7 text-accent group-hover:text-accent/80 transition-colors" />
+                </div>
+              </button>
+
+              <a
+                href="/Nicolette-Mashaba-CV.pdf"
+                download="Nicolette_Mashaba_Resume.pdf"
+                className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-0 animate-float group"
+                style={{ animationDelay: '2s', animationDuration: '4.8s' }}
+              >
+                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-secondary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-secondary/20">
+                  <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-secondary group-hover:text-secondary/80 transition-colors" />
+                </div>
+              </a>
 
               {/* Name and Title */}
-              <div className="space-y-2 sm:space-y-3">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
-                  <span className="block text-foreground mb-1 sm:mb-2">Nicolette Mashaba</span>
-                  <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-extrabold">
-                    Software Engineer
+              <div className="space-y-1 sm:space-y-3 relative z-10">
+                <h1 className="font-medium tracking-tight">
+                  <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-foreground">Nicolette Mashaba</span>
+                  <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-semibold mt-1 sm:mt-2 min-h-[1.2em]">
+                    {titleText}<span className="animate-pulse text-primary">|</span>
                   </span>
                 </h1>
-                
-                {/* Specializations */}
-                <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 text-xs sm:text-sm font-mono text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <span className="text-primary">//</span>
-                    Full-Stack Development
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span className="text-primary">//</span>
-                    Cloud Architecture
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span className="text-primary">//</span>
-                    AI Integration
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Value Proposition */}
-            <div className="space-y-3">
-              <div className="glass rounded-lg sm:rounded-xl p-4 sm:p-5 border-l-4 border-primary/50 backdrop-blur-xl">
-                <p className="text-sm sm:text-base md:text-lg text-foreground/90 leading-relaxed">
-                  Crafting scalable solutions at the intersection of{' '}
-                  <span className="text-primary font-semibold">cloud infrastructure</span>,{' '}
-                  <span className="text-accent font-semibold">AI innovation</span>, and{' '}
-                  <span className="text-secondary font-semibold">full-stack development</span>.
-                </p>
-              </div>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-2.5 sm:gap-3">
-              <Button 
-                size="lg" 
-                className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-primary/50 font-semibold px-6"
-                onClick={() => scrollToSection('projects')}
-              >
-                View Projects
-                <ArrowDown className="ml-2 w-4 h-4" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="w-full sm:w-auto glass border-2 border-primary/30 hover:border-primary hover:bg-primary/5 transition-all duration-300 font-semibold px-6"
-                onClick={() => scrollToSection('contact')}
-              >
-                Get In Touch
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="w-full sm:w-auto glass border-2 border-accent/30 hover:border-accent hover:bg-accent/5 transition-all duration-300 font-semibold px-6"
-                asChild
-              >
-                <a href="/Nicolette-Mashaba-CV.pdf" download="Nicolette_Mashaba_Resume.pdf">
-                  <Download className="mr-2 w-4 h-4" />
-                  Resume
-                </a>
-              </Button>
-            </div>
-
-            {/* Professional Links */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4 pt-2 pb-4 sm:pb-6">
-              <span className="text-xs sm:text-sm text-muted-foreground font-mono">Connect:</span>
-              <div className="flex gap-2 sm:gap-3">
-                <a 
-                  href="https://github.com/NickiMash17" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="glass p-2.5 sm:p-3 rounded-lg hover:bg-primary/10 hover:scale-110 transition-all duration-300 border border-transparent hover:border-primary/30 group"
-                  aria-label="GitHub Profile"
-                >
-                  <Github className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
-                </a>
-                <a 
-                  href="https://linkedin.com/in/nicolette-mashaba" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="glass p-2.5 sm:p-3 rounded-lg hover:bg-primary/10 hover:scale-110 transition-all duration-300 border border-transparent hover:border-primary/30 group"
-                  aria-label="LinkedIn Profile"
-                >
-                  <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
-                </a>
-                <a 
-                  href="mailto:nene171408@gmail.com"
-                  className="glass p-2.5 sm:p-3 rounded-lg hover:bg-primary/10 hover:scale-110 transition-all duration-300 border border-transparent hover:border-primary/30 group"
-                  aria-label="Email Contact"
-                >
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-y-[-2px] transition-transform" />
-                </a>
               </div>
             </div>
           </header>
 
           {/* Right: Interactive Terminal Card */}
-          <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30">
+          <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30 w-full">
             <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
               <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-destructive/70" />
               <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-secondary/70" />
@@ -204,7 +201,7 @@ export const Hero = () => {
               <span className="ml-2 sm:ml-3 text-[10px] sm:text-xs text-muted-foreground font-mono">/dev/terminal</span>
             </div>
             <div className="bg-card/50 rounded-lg p-3 sm:p-4 min-h-[180px] sm:min-h-[220px] md:min-h-[260px] overflow-hidden">
-              <pre className="text-left font-mono text-xs sm:text-sm md:text-base leading-relaxed text-foreground/90">
+              <pre className="text-left font-mono text-xs sm:text-sm md:text-base leading-relaxed text-foreground/90 overflow-x-auto">
                 <code>
                   <span className="text-primary">$ </span>{codeDisplay}
                   <span className="terminal-cursor">|</span>
@@ -218,11 +215,6 @@ export const Hero = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Scan line effect */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="scan-line absolute w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
         </div>
       </div>
     </section>
