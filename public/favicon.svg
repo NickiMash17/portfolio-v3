@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background with rounded square for modern look -->
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="url(#grad)"/>
+  
+  <!-- N and M letters - bold and clear -->
+  <text x="32" y="42" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="32" letter-spacing="-2">NM</text>
+  
+  <!-- Subtle glow effect -->
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+</svg>
+
