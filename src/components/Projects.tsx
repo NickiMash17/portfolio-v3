@@ -1,5 +1,7 @@
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { TiltCard } from '@/components/TiltCard';
+import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export const Projects = () => {
   const projects = [
@@ -56,7 +58,7 @@ export const Projects = () => {
       subtitle: 'Demo Project - AI-Powered Productivity',
       description:
         'Intelligent task management system with AI-powered suggestions and priority optimization.',
-      tech: ['React', 'TypeScript', 'AI', 'Tailwind CSS'],
+      tech: ['React', 'TypeScript', 'Lovable AI', 'Tailwind CSS'],
       highlights: [
         'AI-powered task suggestions and categorization',
         'Smart priority detection and scheduling',
@@ -72,7 +74,7 @@ export const Projects = () => {
       subtitle: 'Demo Project - Data Visualization',
       description:
         'Interactive analytics dashboard showcasing data visualization and real-time metrics.',
-      tech: ['React', 'TypeScript', 'Recharts', 'Cloud'],
+      tech: ['React', 'TypeScript', 'Recharts', 'Lovable Cloud'],
       highlights: [
         'Real-time data updates and visualizations',
         'Interactive charts and graphs',
@@ -88,21 +90,22 @@ export const Projects = () => {
   return (
     <section id="projects" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
-        <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
-            <span className="text-primary font-mono">{'<'}</span>
-            Featured Projects
-            <span className="text-primary font-mono">{' />'}</span>
-          </h2>
-          <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Building solutions that make an impact</p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div className="mb-8 sm:mb-12 md:mb-16 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
+              <span className="text-primary font-mono">{'<'}</span>
+              Featured Projects
+              <span className="text-primary font-mono">{' />'}</span>
+            </h2>
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Building solutions that make an impact</p>
+          </div>
+        </ScrollAnimation>
 
         <div className="grid gap-3 sm:gap-4 md:gap-6 lg:gap-8">
           {projects.map((project, index) => (
-            <div
-              key={index}
-              className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 hover:scale-[1.01] sm:hover:scale-[1.02] transition-all duration-300 hover:glow-primary group"
-            >
+            <ScrollAnimation key={index} animation="fade-up" delay={index * 100}>
+              <TiltCard tiltAmount={5} scale={1.01}>
+                <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary group">
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Image */}
                 <div className="lg:w-72 xl:w-80 h-32 sm:h-40 md:h-48 lg:h-auto rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary transition-all flex-shrink-0">
@@ -171,10 +174,12 @@ export const Projects = () => {
                   </ul>
                 </div>
 
-                {/* Side decoration */}
-                <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-primary/50 to-transparent" />
+                  {/* Side decoration */}
+                  <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-primary/50 to-transparent" />
+                </div>
               </div>
-            </div>
+              </TiltCard>
+            </ScrollAnimation>
           ))}
         </div>
 
