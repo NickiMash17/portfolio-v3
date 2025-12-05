@@ -129,7 +129,7 @@ export const Hero = () => {
                 href="https://github.com/NickiMash17"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute -top-2 left-[10%] sm:left-[5%] animate-float group"
+                className="absolute -top-2 left-[10%] sm:left-[5%] animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '0s', animationDuration: '4s' }}
               >
                 <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
@@ -141,7 +141,7 @@ export const Hero = () => {
                 href="https://linkedin.com/in/nicolette-mashaba"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute top-0 right-[5%] sm:right-[10%] animate-float group"
+                className="absolute top-0 right-[5%] sm:right-[10%] animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
               >
                 <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20">
@@ -151,7 +151,7 @@ export const Hero = () => {
 
               <button
                 onClick={() => scrollToSection('projects')}
-                className="absolute bottom-0 left-[5%] sm:left-[15%] animate-float group"
+                className="absolute bottom-0 left-[5%] sm:left-[15%] animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '1s', animationDuration: '5s' }}
               >
                 <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
@@ -161,7 +161,7 @@ export const Hero = () => {
 
               <button
                 onClick={() => scrollToSection('contact')}
-                className="absolute -bottom-4 right-[15%] sm:right-[5%] animate-float group"
+                className="absolute -bottom-4 right-[15%] sm:right-[5%] animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '1.5s', animationDuration: '4.2s' }}
               >
                 <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-accent/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent/20">
@@ -171,12 +171,14 @@ export const Hero = () => {
 
               <a
                 href="/Nicolette-Mashaba-CV.pdf"
-                download="Nicolette_Mashaba_Resume.pdf"
-                className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-0 animate-float group"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-0 animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '2s', animationDuration: '4.8s' }}
               >
-                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-secondary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-secondary/20">
-                  <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-secondary group-hover:text-secondary/80 transition-colors" />
+                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                  <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
                 </div>
               </a>
 
