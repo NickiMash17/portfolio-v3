@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, X, MessageSquare, Sparkles, Zap, Code2, Copy, Check } from 'lucide-react';
+import { Send, Bot, User, X, MessageSquare, Sparkles, Zap, Code2, Copy, Check, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { portfolioData, getSystemPrompt, generateLocalResponse } from '@/lib/portfolioData';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -42,6 +43,7 @@ const quickCommands = [
   { icon: Code2, label: 'Skills', query: 'What are your technical skills?' },
   { icon: Sparkles, label: 'Projects', query: 'Tell me about your best projects' },
   { icon: Zap, label: 'Experience', query: 'What is your work experience?' },
+  { icon: MessageSquare, label: 'About', query: 'Tell me about yourself' },
 ];
 
 export const AIChat = () => {
@@ -55,6 +57,7 @@ export const AIChat = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [streamingMessage, setStreamingMessage] = useState('');
+  const [useLocalFallback, setUseLocalFallback] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const { toast } = useToast();
@@ -85,7 +88,33 @@ export const AIChat = () => {
 
     abortControllerRef.current = new AbortController();
 
+    // Check if we should use local fallback
+    const shouldUseLocal = useLocalFallback || !import.meta.env.VITE_SUPABASE_URL;
+
+    if (shouldUseLocal) {
+      // Simulate typing delay for better UX
+      setTimeout(() => {
+        const localResponse = generateLocalResponse(messageText);
+        setMessages((prev) => [...prev, { role: 'assistant', content: localResponse }]);
+        setIsLoading(false);
+        setStreamingMessage('');
+      }, 500);
+      return;
+    }
+
     try {
+      // Prepare messages with system prompt
+      const systemMessage = {
+        role: 'system' as const,
+        content: getSystemPrompt(),
+      };
+      
+      const conversationMessages = [
+        systemMessage,
+        ...messages.map((m) => ({ role: m.role, content: m.content })),
+        { role: 'user' as const, content: messageText },
+      ];
+
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat-assistant`,
         {
@@ -94,7 +123,11 @@ export const AIChat = () => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
           },
-          body: JSON.stringify({ messages: [...messages, userMessage] }),
+          body: JSON.stringify({ 
+            messages: conversationMessages,
+            systemPrompt: getSystemPrompt(),
+            portfolioData: portfolioData,
+          }),
           signal: abortControllerRef.current.signal,
         }
       );
@@ -156,20 +189,34 @@ export const AIChat = () => {
       }
 
       console.error('Chat error:', error);
+      
+      // Fallback to local response on error
+      const localResponse = generateLocalResponse(messageText);
+      
       toast({
-        title: '⚠️ Neural Link Disrupted',
-        description: error.message || 'Connection failed. Try again.',
-        variant: 'destructive',
+        title: '⚠️ Using Local Mode',
+        description: 'API unavailable, using local knowledge base',
+        variant: 'default',
       });
+      
       setMessages((prev) => [...prev, {
         role: 'assistant',
-        content: '⚠️ Connection interrupted. Please try again.'
+        content: localResponse + '\n\n*Note: Using local knowledge base. For full AI capabilities, the API connection is needed.*'
       }]);
       setStreamingMessage('');
+      setUseLocalFallback(true);
     } finally {
       setIsLoading(false);
       abortControllerRef.current = null;
     }
+  };
+
+  const handleReset = () => {
+    setMessages([{
+      role: 'assistant',
+      content: "⚡ Neural link established. I'm Nicolette's AI consciousness—ask me anything about skills, projects, or experience. Try a quick command below!",
+    }]);
+    setUseLocalFallback(false);
   };
 
   // Cleanup on unmount
@@ -218,22 +265,39 @@ export const AIChat = () => {
             <div className="flex items-center gap-3">
               <div className="relative p-2 rounded-full bg-primary/20">
                 <Bot className="text-primary animate-pulse" size={24} />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
+                <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full animate-pulse ${
+                  useLocalFallback ? 'bg-yellow-500' : 'bg-accent'
+                }`} />
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-foreground flex items-center gap-2">
                   Neural Assistant
-                  <span className="text-xs font-mono text-primary animate-pulse">●</span>
+                  <span className={`text-xs font-mono animate-pulse ${
+                    useLocalFallback ? 'text-yellow-500' : 'text-primary'
+                  }`}>●</span>
                 </h3>
-                <p className="text-xs text-muted-foreground font-mono">AI.v2.5 • Real-time</p>
+                <p className="text-xs text-muted-foreground font-mono">
+                  {useLocalFallback ? 'Local Mode • v2.5' : 'AI.v2.5 • Real-time'}
+                </p>
               </div>
+              {messages.length > 1 && (
+                <Button
+                  onClick={handleReset}
+                  size="sm"
+                  variant="ghost"
+                  className="h-8 w-8 p-0 rounded-full hover:bg-primary/10"
+                  title="Reset conversation"
+                >
+                  <RefreshCw size={14} />
+                </Button>
+              )}
             </div>
           </div>
 
           {/* Messages */}
           <div className="relative flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
             {messages.length === 1 && (
-              <div className="mb-3 sm:mb-4 grid grid-cols-3 gap-2">
+              <div className="mb-3 sm:mb-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {quickCommands.map((cmd, idx) => (
                   <button
                     key={idx}
@@ -277,7 +341,45 @@ export const AIChat = () => {
                   }`}
                 >
                   {message.role === 'assistant' && <CopyButton text={message.content} />}
-                  <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words">{message.content}</p>
+                  <div className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words">
+                    {message.content.split('\n').map((line, i) => {
+                      // Enhanced markdown-like formatting
+                      const parts: (string | JSX.Element)[] = [];
+                      let remaining = line;
+                      let partIndex = 0;
+                      
+                      // Process bold text **text**
+                      while (remaining.includes('**')) {
+                        const start = remaining.indexOf('**');
+                        if (start > 0) {
+                          parts.push(remaining.slice(0, start));
+                        }
+                        const end = remaining.indexOf('**', start + 2);
+                        if (end > start) {
+                          parts.push(
+                            <strong key={`${i}-${partIndex++}`} className="text-foreground font-semibold">
+                              {remaining.slice(start + 2, end)}
+                            </strong>
+                          );
+                          remaining = remaining.slice(end + 2);
+                        } else {
+                          parts.push(remaining);
+                          remaining = '';
+                        }
+                      }
+                      if (remaining) parts.push(remaining);
+                      
+                      const content = parts.length > 0 ? parts : [line];
+                      
+                      if (line.trim() === '') {
+                        return <br key={i} />;
+                      }
+                      if (line.startsWith('•') || line.startsWith('-')) {
+                        return <div key={i} className="ml-2">{content}</div>;
+                      }
+                      return <div key={i}>{content}</div>;
+                    })}
+                  </div>
                 </div>
               </div>
             ))}
@@ -289,10 +391,10 @@ export const AIChat = () => {
                   <div className="absolute inset-0 rounded-full bg-primary/30 animate-ping" />
                 </div>
                 <div className="flex-1 p-2.5 sm:p-3 rounded-2xl glass border border-primary/20">
-                  <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words">
+                  <div className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words">
                     {streamingMessage}
                     <span className="inline-block w-0.5 sm:w-1 h-3 sm:h-4 ml-1 bg-primary animate-pulse" />
-                  </p>
+                  </div>
                 </div>
               </div>
             )}
