@@ -144,7 +144,7 @@ export const Hero = () => {
                 className="absolute top-0 right-[5%] sm:right-[10%] animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
               >
-                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20">
+                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/40 group-hover:shadow-[0_0_20px_rgba(10,102,194,0.3)]">
                   <Linkedin className="w-5 h-5 sm:w-7 sm:h-7 text-[#0A66C2] group-hover:text-[#0A66C2]/80 transition-colors" />
                 </div>
               </a>
