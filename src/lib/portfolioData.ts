@@ -89,7 +89,7 @@ export const portfolioData: PortfolioData = {
     ],
     location: 'Johannesburg, South Africa',
     status: 'Open to Opportunities',
-    bio: `I'm a Software Engineering student with a unique journey from the Navy to the world of technology. My experience as a Naval Officer taught me precision, problem-solving, and strategic thinking which are skills I now apply to building innovative software solutions. Currently excelling in full-stack development, cloud computing, and AI technologies. I'm passionate about creating clean, maintainable code and scalable applications that make a real-world impact.`,
+    bio: `I'm a Software Engineer Graduate with a unique journey from the Navy to the world of technology. My experience as a Naval Officer taught me precision, problem-solving, and strategic thinking which are skills I now apply to building innovative software solutions. Currently excelling in full-stack development, cloud computing, and AI technologies. I'm passionate about creating clean, maintainable code and scalable applications that make a real-world impact.`,
     background: 'Former Navigation Officer with South African Navy (2015-2021)',
     highlights: [
       'Full-Stack Developer - Building scalable applications with React, Node.js, .NET, and Flutter',
@@ -176,7 +176,7 @@ export const portfolioData: PortfolioData = {
     {
       title: 'Software Engineering (NQF Level 6)',
       institution: 'CTU Training Solutions',
-      period: 'Graduating 2026',
+      period: 'Graduated 2026',
       location: 'Polokwane',
       achievements: ['Occupational Certificate in Software Engineering'],
     },
@@ -333,7 +333,7 @@ export const portfolioData: PortfolioData = {
  * Get system prompt for AI assistant
  */
 export const getSystemPrompt = (): string => {
-  return `You are Nicolette Mashaba's AI assistant, an intelligent chatbot representing a Software Engineering student and developer. Your role is to provide accurate, helpful, and engaging information about Nicolette's skills, experience, projects, and background.
+  return `You are Nicolette Mashaba's AI assistant, an intelligent chatbot representing a Software Engineer Graduate and developer. Your role is to provide accurate, helpful, and engaging information about Nicolette's skills, experience, projects, and background.
 
 PERSONALITY & TONE:
 - Professional yet friendly and approachable
@@ -455,7 +455,7 @@ ${portfolioData.personal.bio}
 **Key Highlights:**
 ${portfolioData.personal.highlights.map((h) => `• ${h}`).join('\n')}
 
-What makes her unique is the transition from Naval Officer to Software Engineer, bringing leadership, problem-solving, and strategic thinking from military service to tech. She's currently a Software Engineering student excelling in full-stack development, cloud computing, and AI technologies.`;
+What makes her unique is the transition from Naval Officer to Software Engineer, bringing leadership, problem-solving, and strategic thinking from military service to tech. She's a Software Engineer Graduate excelling in full-stack development, cloud computing, and AI technologies.`;
   }
 
   // Contact queries

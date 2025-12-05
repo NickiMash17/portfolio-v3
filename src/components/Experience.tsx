@@ -53,7 +53,7 @@ export const Experience = () => {
       type: 'education',
       title: 'Software Engineering (NQF Level 6)',
       company: 'CTU Training Solutions',
-      period: 'Graduating 2026',
+      period: 'Graduated 2026',
       location: 'Polokwane',
       description: ['Occupational Certificate in Software Engineering'],
     },

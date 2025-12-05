@@ -55,7 +55,7 @@ export const About = () => {
             {/* Bio Text */}
             <div>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-3 sm:mb-4 md:mb-6">
-                I'm a <span className="text-primary font-semibold">Software Engineering student</span> with a unique journey from the 
+                I'm a <span className="text-primary font-semibold">Software Engineer Graduate</span> with a unique journey from the 
                 Navy to the world of technology. My experience as a Naval Officer taught me precision, 
                 problem-solving, and strategic thinking which are skills I now apply to building innovative software solutions.
               </p>
