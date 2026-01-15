@@ -54,7 +54,7 @@ export const Projects = () => {
         'Designed to scale with growing property inventory and traffic',
       ],
       github: 'https://github.com/NickiMash17/RealHomes',
-      demo: null,
+      demo: 'https://real-homes.vercel.app/',
       emoji: '🏠',
     },
     {
@@ -70,7 +70,7 @@ export const Projects = () => {
         'Built to demonstrate strong backend and .NET skills',
       ],
       github: 'https://github.com/NickiMash17/BookReviewApp',
-      demo: null,
+      demo: 'https://bookreviewapp-1755367448.azurewebsites.net/',
       emoji: '📚',
     },
     {
