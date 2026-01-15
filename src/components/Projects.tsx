@@ -42,6 +42,29 @@ export const Projects = () => {
       emoji: '🧠',
     },
     {
+      title: 'LoanLife EDGE',
+      subtitle: 'AI-Powered Loan Risk & Compliance Platform',
+      description:
+        'Collaborative fintech platform for real-time loan health monitoring, predictive risk analytics, ESG compliance, and auditable document trails.',
+      tech: [
+        'Next.js',
+        'TypeScript',
+        'Tailwind CSS',
+        'Supabase',
+        'PostgreSQL',
+        'AI/ML',
+      ],
+      highlights: [
+        'Built interactive dashboards for portfolio health and risk analytics',
+        'Designed offline-first UX with synced blockchain-inspired audit logs',
+        'Implemented secure document upload and AI-powered insight workflows',
+        'Collaborated in a multi-dev team on architecture, UI, and data flows',
+      ],
+      github: 'https://github.com/Lunga-Mashaba/LoanLife_Edge',
+      demo: 'https://loan-life-edge.vercel.app/',
+      emoji: '📈',
+    },
+    {
       title: 'RealHomes',
       subtitle: 'South African Luxury Real Estate Platform',
       description:
