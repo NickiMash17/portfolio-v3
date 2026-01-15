@@ -1,23 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import { InteractiveTerminal } from './InteractiveTerminal';
 
 export const Hero = () => {
   const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
-  const [codeDisplay, setCodeDisplay] = useState('');
-  const [codeIndex, setCodeIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
   const [titleIndex, setTitleIndex] = useState(0);
   const [titleText, setTitleText] = useState('');
   const [isTitleDeleting, setIsTitleDeleting] = useState(false);
   
   const fullText = '> Nicolette Mashaba_';
-  const snippets = [
-    'git clone https://github.com/NickiMash17/portfolio',
-    'npm run build && npm run preview',
-    'docker build -t nmashaba/app .',
-    'az webapp up --runtime "NODE:18-lts"',
-  ];
   const titles = [
     'Software Engineer',
     'AI/ML Enthusiast',
@@ -46,30 +38,6 @@ export const Hero = () => {
       clearInterval(cursorInterval);
     };
   }, []);
-
-  // Animated typing for code snippets in the terminal card
-  useEffect(() => {
-    const current = snippets[codeIndex % snippets.length];
-    const isComplete = codeDisplay.length === current.length;
-    const speed = isDeleting ? 30 : 50;
-
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        setCodeDisplay(current.slice(0, codeDisplay.length + 1));
-        if (codeDisplay.length + 1 === current.length) {
-          setTimeout(() => setIsDeleting(true), 800);
-        }
-      } else {
-        setCodeDisplay(current.slice(0, Math.max(0, codeDisplay.length - 1)));
-        if (codeDisplay.length === 0) {
-          setIsDeleting(false);
-          setCodeIndex((i) => (i + 1) % snippets.length);
-        }
-      }
-    }, isComplete && !isDeleting ? 1000 : speed);
-
-    return () => clearTimeout(timer);
-  }, [codeDisplay, codeIndex, isDeleting]);
 
   // Animated typing for title rotation
   useEffect(() => {
@@ -144,7 +112,7 @@ export const Hero = () => {
                 className="absolute top-0 right-[5%] sm:right-[10%] animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
               >
-                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/40 group-hover:shadow-[0_0_20px_rgba(10,102,194,0.3)]">
+                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20">
                   <Linkedin className="w-5 h-5 sm:w-7 sm:h-7 text-[#0A66C2] group-hover:text-[#0A66C2]/80 transition-colors" />
                 </div>
               </a>
@@ -194,29 +162,8 @@ export const Hero = () => {
             </div>
           </header>
 
-          {/* Right: Interactive Terminal Card */}
-          <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30 w-full">
-            <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-              <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-destructive/70" />
-              <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-secondary/70" />
-              <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-accent/70" />
-              <span className="ml-2 sm:ml-3 text-[10px] sm:text-xs text-muted-foreground font-mono">/dev/terminal</span>
-            </div>
-            <div className="bg-card/50 rounded-lg p-3 sm:p-4 min-h-[180px] sm:min-h-[220px] md:min-h-[260px] overflow-hidden">
-              <pre className="text-left font-mono text-xs sm:text-sm md:text-base leading-relaxed text-foreground/90 overflow-x-auto">
-                <code>
-                  <span className="text-primary">$ </span>{codeDisplay}
-                  <span className="terminal-cursor">|</span>
-                </code>
-              </pre>
-              <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 sm:gap-3 text-[10px] sm:text-xs text-muted-foreground">
-                <div className="glass rounded-md px-2 sm:px-3 py-1.5 sm:py-2">Tech: React • Node</div>
-                <div className="glass rounded-md px-2 sm:px-3 py-1.5 sm:py-2">Cloud: Azure</div>
-                <div className="glass rounded-md px-2 sm:px-3 py-1.5 sm:py-2">AI: Gemini</div>
-                <div className="glass rounded-md px-2 sm:px-3 py-1.5 sm:py-2">Deploy: Docker</div>
-              </div>
-            </div>
-          </div>
+          {/* Right: Interactive Terminal */}
+          <InteractiveTerminal />
         </div>
       </div>
     </section>
