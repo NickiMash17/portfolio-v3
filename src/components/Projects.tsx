@@ -20,7 +20,7 @@ export const Projects = () => {
       title: 'AI Compliance Interrogator',
       subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly',
       description:
-        'Hackathon-winning AI tool that helps organizations detect and prevent human trafficking through intelligent data analysis and pattern recognition.',
+        'Hackathon-winning AI tool that helps organizations detect and prevent human trafficking using intelligent data analysis and pattern recognition.',
       tech: [
         'React',
         'TypeScript',
@@ -45,7 +45,7 @@ export const Projects = () => {
       title: 'LoanLife EDGE',
       subtitle: 'AI-Powered Loan Risk & Compliance Platform',
       description:
-        'Hackathon fintech platform that turns each loan into a digital twin, continuously monitored by AI, governed by smart contracts, and logged on a permissioned blockchain.',
+        'Fintech platform that turns each loan into a digital twin, monitored by AI with early covenant and ESG risk warnings.',
       tech: [
         'Next.js',
         'TypeScript',
@@ -58,10 +58,9 @@ export const Projects = () => {
         'Solidity',
       ],
       highlights: [
-        'Backend & AI Integration Lead – designed ingestion, digital twin, prediction, ESG and audit services in FastAPI.',
-        'Predicts covenant breaches and ESG failures 30–90 days ahead so banks get early warnings before loans go bad.',
-        'Implements document upload (PDF/DOCX), covenant and ESG extraction, and AI-powered risk timelines.',
-        'Integrates with a blockchain layer for immutable audit trails and smart-contract governed covenant checks.',
+        'Backend & AI Integration Lead for ingestion, digital twin, prediction, ESG and audit services in FastAPI.',
+        'Predicts covenant breaches and ESG issues 30–90 days ahead for proactive risk management.',
+        'Uses blockchain-style audit trails and smart-contract logic for transparent governance.',
       ],
       github: 'https://github.com/Lunga-Mashaba/LoanLife_Edge',
       demo: 'https://loan-life-edge.vercel.app/',
@@ -139,49 +138,95 @@ export const Projects = () => {
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Visual / Creative Placeholder */}
                 <div className="lg:w-72 xl:w-80 h-32 sm:h-40 md:h-48 lg:h-auto rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary transition-all flex-shrink-0">
-                  <div
-                    className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(
-                      index
-                    )} overflow-hidden`}
-                  >
-                    {/* Animated holographic overlay */}
-                    <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_10%_0%,white,transparent_55%),radial-gradient(circle_at_90%_100%,white,transparent_55%)] mix-blend-screen" />
-                    <div className="absolute inset-0 opacity-20 bg-[linear-gradient(120deg,rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(210deg,rgba(255,255,255,0.15)_1px,transparent_1px)] bg-[length:40px_40px]" />
-
-                    {/* Animated scan line */}
-                    <div className="absolute inset-x-0 -top-full h-1/2 bg-gradient-to-b from-white/20 via-white/5 to-transparent animate-[scan_6s_linear_infinite]" />
-
-                    {/* Center content */}
-                    <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-                      <div className="mb-1.5 sm:mb-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-wide border border-white/20">
-                        <span className="opacity-80">
-                          {project.emoji ?? '💡'}
-                        </span>
-                        <span className="truncate max-w-[120px] sm:max-w-[160px]">
-                          {project.title}
-                        </span>
-                      </div>
-                      <p className="text-[10px] sm:text-xs text-white/85 leading-snug line-clamp-2">
-                        {project.subtitle}
-                      </p>
-
-                      <div className="mt-2 flex items-center gap-1.5 text-[9px] sm:text-[10px] text-white/70 font-mono">
-                        <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
-                        <span className="uppercase tracking-wide">
-                          {index === 0
-                            ? 'AI • CLOUD • HACKATHON'
-                            : index === 1
-                            ? 'FULL-STACK • REAL ESTATE'
-                            : index === 2
-                            ? 'DOTNET • CLEAN ARCH'
-                            : 'MOBILE • FLUTTER • WELLNESS'}
-                        </span>
+                  {/* Different visual language per project so each feels unique */}
+                  {index === 0 && (
+                    // AI Compliance: neural / circuit vibes
+                    <div
+                      className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(
+                        index
+                      )} overflow-hidden`}
+                    >
+                      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_10%_0%,white,transparent_60%),radial-gradient(circle_at_90%_100%,white,transparent_55%)] mix-blend-screen" />
+                      <div className="absolute inset-6 rounded-2xl border border-white/20 bg-black/10 backdrop-blur-md" />
+                      <div className="absolute inset-8 rounded-2xl border border-dashed border-white/20" />
+                      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_30%_50%,transparent_0,transparent_40%,rgba(255,255,255,0.6)_41%,transparent_55%)] animate-[pulse-glow_6s_ease-in-out_infinite]" />
+                      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+                        <span className="text-3xl sm:text-4xl mb-1">{project.emoji ?? '🧠'}</span>
+                        <p className="text-[10px] sm:text-xs text-white/85 font-mono uppercase tracking-wide">
+                          Neural Risk Monitor
+                        </p>
+                        <p className="mt-1 text-[9px] sm:text-[10px] text-white/70 line-clamp-2">
+                          AI digital twins • human trafficking compliance
+                        </p>
                       </div>
                     </div>
+                  )}
 
-                    {/* Corner accent */}
-                    <div className="absolute -bottom-10 -right-10 w-24 h-24 rounded-full bg-black/20 border border-white/10 blur-2xl" />
-                  </div>
+                  {index === 1 && (
+                    // RealHomes: map / city grid
+                    <div
+                      className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(
+                        index
+                      )} overflow-hidden`}
+                    >
+                      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.12)_1px,transparent_1px)] bg-[length:22px_22px] opacity-40" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.4),transparent_55%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.45),transparent_55%)] opacity-40" />
+                      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent" />
+                      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+                        <div className="flex items-center gap-1 mb-1.5">
+                          <span className="text-2xl sm:text-3xl">{project.emoji ?? '🏠'}</span>
+                          <span className="text-[10px] sm:text-xs font-mono bg-black/30 px-2 py-0.5 rounded-full border border-white/20">
+                            SA Real Estate
+                          </span>
+                        </div>
+                        <p className="text-[9px] sm:text-[10px] text-white/80 line-clamp-2">
+                          Luxury property search • rich filters • modern UI
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {index === 2 && (
+                    // BookReviewApp: bookshelf / cards
+                    <div
+                      className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(
+                        index
+                      )} overflow-hidden`}
+                    >
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(255,255,255,0.35),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(255,255,255,0.35),transparent_55%)] opacity-60" />
+                      <div className="absolute inset-x-4 bottom-3 h-1 rounded-full bg-black/30 blur-md" />
+                      <div className="relative z-10 h-full flex items-center justify-center gap-2 sm:gap-3 px-4">
+                        <div className="w-8 sm:w-9 h-16 sm:h-18 rounded-md bg-white/90 shadow-md rotate-[-4deg]" />
+                        <div className="w-8 sm:w-9 h-18 sm:h-20 rounded-md bg-amber-100/90 shadow-md rotate-[3deg]" />
+                        <div className="w-8 sm:w-9 h-14 sm:h-16 rounded-md bg-rose-100/90 shadow-md rotate-[-2deg]" />
+                      </div>
+                      <div className="absolute top-2 left-2 text-[10px] sm:text-xs font-mono bg-black/35 text-white px-2 py-0.5 rounded-full border border-white/15 flex items-center gap-1">
+                        <span>{project.emoji ?? '📚'}</span>
+                        <span>Book Review App</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {index === 3 && (
+                    // FitQuest: wellness / growth rings
+                    <div
+                      className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(
+                        index
+                      )} overflow-hidden`}
+                    >
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_110%,rgba(255,255,255,0.5),transparent_60%)] opacity-70" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-white/40 flex items-center justify-center">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/60 flex items-center justify-center">
+                            <span className="text-2xl sm:text-3xl">{project.emoji ?? '🌱'}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="absolute bottom-2 left-2 text-[9px] sm:text-[10px] font-mono bg-black/35 text-white px-2 py-0.5 rounded-full border border-white/15">
+                        Gamified wellness • Flutter + Firebase
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
@@ -217,7 +262,9 @@ export const Projects = () => {
                     </div>
                   </div>
 
-                  <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-2 sm:mb-3 md:mb-4 leading-relaxed">{project.description}</p>
+                  <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-2 sm:mb-3 md:mb-4 leading-relaxed line-clamp-2">
+                    {project.description}
+                  </p>
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-1 sm:gap-1.5 md:gap-2 mb-2 sm:mb-3 md:mb-4">
