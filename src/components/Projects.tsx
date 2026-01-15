@@ -111,17 +111,50 @@ export const Projects = () => {
               <TiltCard tiltAmount={5} scale={1.01}>
                 <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary group">
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
-                {/* Project Visual / Placeholder */}
+                {/* Project Visual / Creative Placeholder */}
                 <div className="lg:w-72 xl:w-80 h-32 sm:h-40 md:h-48 lg:h-auto rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary transition-all flex-shrink-0">
                   <div
-                    className={`w-full h-full bg-gradient-to-br ${getProjectGradient(
+                    className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(
                       index
-                    )} relative flex items-center justify-center overflow-hidden`}
+                    )} overflow-hidden`}
                   >
-                    <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,white,transparent_55%),radial-gradient(circle_at_80%_80%,white,transparent_55%)]" />
-                    <span className="relative text-3xl sm:text-4xl md:text-5xl">
-                      {project.emoji ?? '💡'}
-                    </span>
+                    {/* Animated holographic overlay */}
+                    <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_10%_0%,white,transparent_55%),radial-gradient(circle_at_90%_100%,white,transparent_55%)] mix-blend-screen" />
+                    <div className="absolute inset-0 opacity-20 bg-[linear-gradient(120deg,rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(210deg,rgba(255,255,255,0.15)_1px,transparent_1px)] bg-[length:40px_40px]" />
+
+                    {/* Animated scan line */}
+                    <div className="absolute inset-x-0 -top-full h-1/2 bg-gradient-to-b from-white/20 via-white/5 to-transparent animate-[scan_6s_linear_infinite]" />
+
+                    {/* Center content */}
+                    <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+                      <div className="mb-1.5 sm:mb-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-wide border border-white/20">
+                        <span className="opacity-80">
+                          {project.emoji ?? '💡'}
+                        </span>
+                        <span className="truncate max-w-[120px] sm:max-w-[160px]">
+                          {project.title}
+                        </span>
+                      </div>
+                      <p className="text-[10px] sm:text-xs text-white/85 leading-snug line-clamp-2">
+                        {project.subtitle}
+                      </p>
+
+                      <div className="mt-2 flex items-center gap-1.5 text-[9px] sm:text-[10px] text-white/70 font-mono">
+                        <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
+                        <span className="uppercase tracking-wide">
+                          {index === 0
+                            ? 'AI • CLOUD • HACKATHON'
+                            : index === 1
+                            ? 'FULL-STACK • REAL ESTATE'
+                            : index === 2
+                            ? 'DOTNET • CLEAN ARCH'
+                            : 'MOBILE • FLUTTER • WELLNESS'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Corner accent */}
+                    <div className="absolute -bottom-10 -right-10 w-24 h-24 rounded-full bg-black/20 border border-white/10 blur-2xl" />
                   </div>
                 </div>
 
