@@ -3,87 +3,91 @@ import { Button } from '@/components/ui/button';
 import { TiltCard } from '@/components/TiltCard';
 import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
+const getProjectGradient = (index: number) => {
+  const gradients = [
+    'from-primary/50 via-accent/40 to-secondary/40',
+    'from-accent/50 via-primary/40 to-secondary/40',
+    'from-secondary/50 via-primary/40 to-accent/40',
+    'from-primary/60 via-secondary/40 to-accent/40',
+  ];
+
+  return gradients[index % gradients.length];
+};
+
 export const Projects = () => {
   const projects = [
     {
       title: 'AI Compliance Interrogator',
-      subtitle: 'AIMS Hackathon 2025 Winner',
+      subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly',
       description:
-        'AI-powered tool to help organizations identify and prevent human trafficking through automated data analysis and NLP.',
-      tech: ['React', 'TypeScript', '.NET', 'SQL', 'Python', 'OpenAI API', 'Azure'],
-      highlights: [
-        'Won "Best Team" at AIMS Hackathon 2025',
-        'Automated data analysis with NLP using OpenAI API',
-        'Interactive React dashboard with real-time notifications',
-        'Scalable backend with .NET and SQL hosted on Azure',
+        'Hackathon-winning AI tool that helps organizations detect and prevent human trafficking through intelligent data analysis and pattern recognition.',
+      tech: [
+        'React',
+        'TypeScript',
+        '.NET Core',
+        'Azure Functions',
+        'OpenAI API',
+        'Tailwind CSS',
+        'Docker',
+        'Kubernetes',
       ],
-      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop',
-      github: 'https://github.com/NickiMash17',
-      demo: 'https://demo.example.com/ai-compliance',
-    },
-    {
-      title: 'Full-Stack Web Applications',
-      subtitle: 'CodeCatalyst Internship',
-      description:
-        'Built multiple full-stack applications with JWT authentication, responsive UIs, and efficient backend systems.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS', 'JWT'],
       highlights: [
-        'Implemented JWT authentication system',
-        'Reduced report generation time by 20%',
-        'Delivered responsive UIs with Tailwind CSS',
-        'RESTful API design and implementation',
+        '🏆 1st Place at AIMS Hackathon 2025 for AI Compliance Interrogator',
+        'Real-time data processing with NLP and OpenAI-powered analysis',
+        'Interactive React dashboard with live analytics and alerting',
+        'Deployed on Azure with a scalable, cloud-native architecture',
       ],
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop',
-      github: 'https://github.com/NickiMash17',
+      github: 'https://github.com/NickiMash17/AIMS-Firefly',
       demo: null,
+      emoji: '🧠',
     },
     {
-      title: 'Mobile Applications',
-      subtitle: 'Flutter Development',
+      title: 'RealHomes',
+      subtitle: 'South African Luxury Real Estate Platform',
       description:
-        'Cross-platform mobile applications using Flutter, focusing on performance and user experience.',
-      tech: ['Flutter', 'Dart', 'Firebase', 'REST APIs'],
+        'A modern, responsive real estate platform showcasing premium properties across South Africa, with rich search and filtering.',
+      tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'JWT'],
       highlights: [
-        'Cross-platform deployment (iOS & Android)',
-        'Clean architecture and state management',
-        'Integration with backend APIs',
-        'Focus on performance optimization',
+        'Built end-to-end MERN stack application for property listing and discovery',
+        'Responsive UI optimized for both mobile and desktop viewing',
+        'Secure authentication and role-based access using JWT',
+        'Designed to scale with growing property inventory and traffic',
       ],
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop',
-      github: 'https://github.com/NickiMash17',
-      demo: 'https://demo.example.com/mobile-app',
+      github: 'https://github.com/NickiMash17/RealHomes',
+      demo: null,
+      emoji: '🏠',
     },
     {
-      title: 'Smart Task Manager',
-      subtitle: 'Demo Project - AI-Powered Productivity',
+      title: 'BookReviewApp',
+      subtitle: 'Advanced Book Review Application',
       description:
-        'Intelligent task management system with AI-powered suggestions and priority optimization.',
-      tech: ['React', 'TypeScript', 'Lovable AI', 'Tailwind CSS'],
+        'Full-featured book review platform built with ASP.NET Core and Entity Framework Core, focused on clean architecture and performance.',
+      tech: ['ASP.NET Core', 'C#', 'Entity Framework Core', 'SQL Server'],
       highlights: [
-        'AI-powered task suggestions and categorization',
-        'Smart priority detection and scheduling',
-        'Beautiful, responsive interface',
-        'Real-time updates and notifications',
+        'Implements clean architecture with separation of concerns',
+        'Supports rich review features and user interactions',
+        'Uses EF Core for efficient data access and persistence',
+        'Built to demonstrate strong backend and .NET skills',
       ],
-      image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop',
-      github: 'https://github.com/NickiMash17',
-      demo: 'https://demo.example.com/task-manager',
+      github: 'https://github.com/NickiMash17/BookReviewApp',
+      demo: null,
+      emoji: '📚',
     },
     {
-      title: 'Portfolio Analytics Dashboard',
-      subtitle: 'Demo Project - Data Visualization',
+      title: 'FitQuest',
+      subtitle: 'Gamified Wellness Companion',
       description:
-        'Interactive analytics dashboard showcasing data visualization and real-time metrics.',
-      tech: ['React', 'TypeScript', 'Recharts', 'Lovable Cloud'],
+        'A gamified wellness application with an evolving plant companion. Track activities, earn XP, and watch your companion grow.',
+      tech: ['Flutter', 'Dart', 'Firebase'],
       highlights: [
-        'Real-time data updates and visualizations',
-        'Interactive charts and graphs',
-        'Responsive design for all devices',
-        'Performance-optimized rendering',
+        'Built with Flutter for smooth cross-platform mobile experiences',
+        'Gamified system that rewards healthy habits with XP and growth',
+        'Real-time data sync and auth powered by Firebase',
+        'Shows strong mobile UI/UX and state management skills',
       ],
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop',
-      github: 'https://github.com/NickiMash17',
-      demo: 'https://demo.example.com/analytics',
+      github: 'https://github.com/NickiMash17/fitquest-app',
+      demo: null,
+      emoji: '🌱',
     },
   ];
 
@@ -107,13 +111,18 @@ export const Projects = () => {
               <TiltCard tiltAmount={5} scale={1.01}>
                 <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary group">
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
-                {/* Project Image */}
+                {/* Project Visual / Placeholder */}
                 <div className="lg:w-72 xl:w-80 h-32 sm:h-40 md:h-48 lg:h-auto rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary transition-all flex-shrink-0">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                  <div
+                    className={`w-full h-full bg-gradient-to-br ${getProjectGradient(
+                      index
+                    )} relative flex items-center justify-center overflow-hidden`}
+                  >
+                    <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,white,transparent_55%),radial-gradient(circle_at_80%_80%,white,transparent_55%)]" />
+                    <span className="relative text-3xl sm:text-4xl md:text-5xl">
+                      {project.emoji ?? '💡'}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Content */}
