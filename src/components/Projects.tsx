@@ -111,7 +111,7 @@ export const Projects = () => {
         'Shows strong mobile UI/UX and state management skills',
       ],
       github: 'https://github.com/NickiMash17/fitquest-app',
-      demo: null,
+      demo: 'https://youtu.be/Ist1QrlhFIg?si=lv-JSEcLseUJj4h0',
       emoji: '🌱',
     },
   ];
