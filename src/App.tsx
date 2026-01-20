@@ -12,10 +12,10 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <GoogleAnalytics />
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <GoogleAnalytics />
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
