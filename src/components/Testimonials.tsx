@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
     name: 'Lindy Heyns',
     role: 'Director & Life Coach',
     company: 'TechBridle Foundation',
-    content: 'What sets Nicolette apart is her combination of technical excellence, leadership qualities, and genuine passion for software development. She has achieved recognition as the #3 ranked female GitHub contributor in South Africa while balancing full-time studies and family responsibilities, showcasing exceptional time management and dedication. Her proactive approach to learning, willingness to tackle complex backend challenges, and ability to mentor peers through technical discussions make her an invaluable team member. I recommend Nicolette without reservation for any software development role.',
+    content: 'What sets Nicolette apart is her combination of technical excellence, leadership qualities, and genuine passion for software development. She has achieved recognition as the #1 ranked female GitHub contributor in South Africa while balancing full-time studies and family responsibilities, showcasing exceptional time management and dedication. Her proactive approach to learning, willingness to tackle complex backend challenges, and ability to mentor peers through technical discussions make her an invaluable team member. I recommend Nicolette without reservation for any software development role.',
     avatar: '/testimonials/lindy-heyns.jpg',
     rating: 5,
   },
