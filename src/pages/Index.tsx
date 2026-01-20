@@ -12,10 +12,12 @@ import { Footer } from '@/components/Footer';
 import { Preloader } from '@/components/Preloader';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { CustomCursor } from '@/components/CustomCursor';
+import { SEO } from '@/components/SEO';
 
 const Index = () => {
   return (
     <>
+      <SEO />
       <Preloader />
       <CustomCursor />
       <div className="relative min-h-screen bg-background overflow-hidden">
@@ -28,7 +30,7 @@ const Index = () => {
       </div>
       
       {/* Main Content */}
-      <div className="relative z-10">
+      <main className="relative z-10" role="main">
         <Hero />
         <About />
         <Skills />
@@ -38,7 +40,7 @@ const Index = () => {
         <GitHubActivity />
         <Contact />
         <Footer />
-      </div>
+      </main>
 
       {/* AI Chat Assistant */}
       <AIChat />
