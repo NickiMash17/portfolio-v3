@@ -18,7 +18,7 @@ const testimonials: Testimonial[] = [
     name: 'Oluwafemi Olasubomi Otusanya',
     role: 'Founder & Director',
     company: 'TechBridle Foundation',
-    content: 'Nicolette has demonstrated exceptional technical proficiency throughout our intensive 11-month software development bootcamp. Her GitHub contributions reveal mastery across multiple programming languages and frameworks, with 138 total commits across diverse projects. She has successfully built full-stack applications and contributed significantly to team projects, demonstrating both theoretical understanding and practical application. Her code quality and problem-solving capabilities are evident in her systematic approach to debugging and continuous learning.',
+    content: 'Nicolette has demonstrated exceptional technical proficiency throughout our intensive 11-month software development bootcamp. Her GitHub contributions reveal mastery across multiple programming languages and frameworks, with over 1,000 total commits across diverse projects. She has successfully built full-stack applications and contributed significantly to team projects, demonstrating both theoretical understanding and practical application. Her code quality and problem-solving capabilities are evident in her systematic approach to debugging and continuous learning.',
     avatar: '/testimonials/oluwafemi-otusanya.jpg',
     rating: 5,
   },
