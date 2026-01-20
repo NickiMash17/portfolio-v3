@@ -1,0 +1,39 @@
+{
+  "name": "Nicolette Mashaba - Software Engineer Portfolio",
+  "short_name": "Nicolette Portfolio",
+  "description": "Software Engineer Graduate specializing in full-stack development, cloud computing, and AI technologies. Experienced in React, Node.js, Flutter, Azure, and .NET.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "developer", "technology"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "View portfolio projects",
+      "url": "/#projects",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch",
+      "url": "/#contact",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { ExternalLink, Github, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TiltCard } from '@/components/TiltCard';
 import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { trackProjectView, trackExternalLink } from '@/lib/analytics';
 
 // Simple YouTube icon component
 const YoutubeIcon = ({ size = 16 }: { size?: number }) => (
@@ -217,6 +218,7 @@ export const Projects = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-1.5 sm:p-2 glass rounded-lg hover:bg-primary/20 transition-colors"
+                          onClick={() => trackExternalLink(project.github!, 'github')}
                         >
                           <Github size={16} className="sm:w-5 sm:h-5" />
                         </a>
@@ -228,6 +230,7 @@ export const Projects = () => {
                           rel="noopener noreferrer"
                           className="p-1.5 sm:p-2 glass rounded-lg hover:bg-primary/20 transition-colors"
                           title={isYouTubeUrl(project.demo) ? 'Watch demo video' : 'View live demo'}
+                          onClick={() => trackExternalLink(project.demo!, isYouTubeUrl(project.demo) ? 'youtube' : 'demo')}
                         >
                           {isYouTubeUrl(project.demo) ? (
                             <YoutubeIcon size={16} className="sm:w-5 sm:h-5" />
@@ -284,7 +287,12 @@ export const Projects = () => {
             className="w-full sm:w-auto glass border-primary/50 hover:bg-primary/10 group text-sm sm:text-base"
             asChild
           >
-            <a href="https://github.com/NickiMash17" target="_blank" rel="noopener noreferrer">
+            <a 
+              href="https://github.com/NickiMash17" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github_profile')}
+            >
               <Github className="mr-2 group-hover:rotate-12 transition-transform" size={18} />
               <span className="hidden sm:inline">View All Projects on GitHub</span>
               <span className="sm:hidden">View on GitHub</span>

@@ -1,9 +1,42 @@
+# robots.txt for nicmash-porfolio.vercel.app
+# Optimized for search engine crawling
+
 User-agent: *
 Allow: /
+Allow: /#projects
+Allow: /#about
+Allow: /#experience
+Allow: /#skills
+Allow: /#testimonials
+Allow: /#contact
 
-# Sitemap
-Sitemap: https://nicmash-porfolio.vercel.app/sitemap.xml
-
-# Disallow admin/private areas if any
+# Disallow admin/private areas
 Disallow: /api/
 Disallow: /admin/
+Disallow: /_next/
+Disallow: /.next/
+
+# Allow important resources
+Allow: /favicon.svg
+Allow: /manifest.json
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Crawl-delay (optional, helps with server load)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://nicmash-porfolio.vercel.app/sitemap.xml
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1

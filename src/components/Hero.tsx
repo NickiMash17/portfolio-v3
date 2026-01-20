@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { InteractiveTerminal } from './InteractiveTerminal';
+import { trackExternalLink, trackDownload } from '@/lib/analytics';
 
 export const Hero = () => {
   const [displayText, setDisplayText] = useState('');
@@ -99,6 +100,7 @@ export const Hero = () => {
                 rel="noopener noreferrer"
                 className="absolute -top-2 left-[10%] sm:left-[5%] animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '0s', animationDuration: '4s' }}
+                onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github')}
               >
                 <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
                   <Github className="w-5 h-5 sm:w-7 sm:h-7 text-foreground/70 group-hover:text-foreground transition-colors" />
@@ -111,6 +113,7 @@ export const Hero = () => {
                 rel="noopener noreferrer"
                 className="absolute top-0 right-[5%] sm:right-[10%] animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
+                onClick={() => trackExternalLink('https://linkedin.com/in/nicolette-mashaba', 'linkedin')}
               >
                 <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20">
                   <Linkedin className="w-5 h-5 sm:w-7 sm:h-7 text-[#0A66C2] group-hover:text-[#0A66C2]/80 transition-colors" />
@@ -144,6 +147,7 @@ export const Hero = () => {
                 rel="noopener noreferrer"
                 className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-0 animate-float group z-20 cursor-pointer"
                 style={{ animationDelay: '2s', animationDuration: '4.8s' }}
+                onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
               >
                 <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
                   <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />

@@ -51,11 +51,37 @@
     <link rel="alternate icon" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
     <link rel="dns-prefetch" href="https://github.com" />
     <link rel="dns-prefetch" href="https://linkedin.com" />
+    <link rel="dns-prefetch" href="https://youtube.com" />
+    <link rel="dns-prefetch" href="https://vercel.app" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Nicolette Portfolio" />
+    <meta name="application-name" content="Nicolette Portfolio" />
+    <meta name="msapplication-TileColor" content="#3b82f6" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- Google Analytics 4 - Will be initialized by React component -->
+    <!-- Add your GA4 Measurement ID to .env file as VITE_GA_MEASUREMENT_ID -->
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -158,6 +184,137 @@
         "AI/ML Solutions",
         "Full-Stack Development"
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Portfolio Projects",
+      "description": "Featured software engineering projects by Nicolette Mashaba",
+      "itemListElement": [
+        {
+          "@type": "SoftwareApplication",
+          "position": 1,
+          "name": "AI Compliance Interrogator",
+          "description": "Hackathon-winning AI tool that helps organizations detect and prevent human trafficking using intelligent data analysis and pattern recognition.",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "creator": {
+            "@type": "Person",
+            "name": "Nicolette Mashaba"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "position": 2,
+          "name": "LoanLife EDGE",
+          "description": "AI-Powered Loan Risk & Compliance Platform that turns each loan into a digital twin, monitored by AI with early covenant and ESG risk warnings.",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web",
+          "url": "https://loan-life-edge.vercel.app/",
+          "creator": {
+            "@type": "Person",
+            "name": "Nicolette Mashaba"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "position": 3,
+          "name": "RealHomes",
+          "description": "A modern, responsive real estate platform showcasing premium properties across South Africa, with rich search and filtering.",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web",
+          "url": "https://real-homes.vercel.app/",
+          "creator": {
+            "@type": "Person",
+            "name": "Nicolette Mashaba"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "position": 4,
+          "name": "BookReviewApp",
+          "description": "Full-featured book review platform built with ASP.NET Core and Entity Framework Core, focused on clean architecture and performance.",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web",
+          "url": "https://bookreviewapp-1755367448.azurewebsites.net/",
+          "creator": {
+            "@type": "Person",
+            "name": "Nicolette Mashaba"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "position": 5,
+          "name": "FitQuest",
+          "description": "A gamified wellness application with an evolving plant companion. Track activities, earn XP, and watch your companion grow.",
+          "applicationCategory": "MobileApplication",
+          "operatingSystem": "iOS, Android",
+          "creator": {
+            "@type": "Person",
+            "name": "Nicolette Mashaba"
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nicmash-porfolio.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projects",
+          "item": "https://nicmash-porfolio.vercel.app/#projects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "About",
+          "item": "https://nicmash-porfolio.vercel.app/#about"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Contact",
+          "item": "https://nicmash-porfolio.vercel.app/#contact"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Nicolette Mashaba Portfolio",
+      "url": "https://nicmash-porfolio.vercel.app/",
+      "logo": "https://nicmash-porfolio.vercel.app/favicon.svg",
+      "sameAs": [
+        "https://github.com/NickiMash17",
+        "https://linkedin.com/in/nicolette-mashaba",
+        "https://twitter.com/m_neyi"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "nene171408@gmail.com",
+        "contactType": "Professional",
+        "areaServed": "ZA",
+        "availableLanguage": "English"
+      }
     }
     </script>
   </head>

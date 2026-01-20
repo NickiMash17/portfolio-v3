@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { portfolioData, getSystemPrompt, generateLocalResponse } from '@/lib/portfolioData';
+import { trackAIChat } from '@/lib/analytics';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -85,6 +86,9 @@ export const AIChat = () => {
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
     setStreamingMessage('');
+    
+    // Track AI chat interaction
+    trackAIChat('query_sent', messageText);
 
     abortControllerRef.current = new AbortController();
 
