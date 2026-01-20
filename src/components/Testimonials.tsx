@@ -19,7 +19,7 @@ const testimonials: Testimonial[] = [
     role: 'Founder & Director',
     company: 'TechBridle Foundation',
     content: 'Nicolette has demonstrated exceptional technical proficiency throughout our intensive 11-month software development bootcamp. Her GitHub contributions reveal mastery across multiple programming languages and frameworks, with 138 total commits across diverse projects. She has successfully built full-stack applications and contributed significantly to team projects, demonstrating both theoretical understanding and practical application. Her code quality and problem-solving capabilities are evident in her systematic approach to debugging and continuous learning.',
-    avatar: 'https://ui-avatars.com/api/?name=Oluwafemi+Otusanya&size=150&background=3b82f6&color=fff&bold=true',
+    avatar: '/testimonials/oluwafemi-otusanya.jpg',
     rating: 5,
   },
   {
@@ -28,7 +28,7 @@ const testimonials: Testimonial[] = [
     role: 'Director & Life Coach',
     company: 'TechBridle Foundation',
     content: 'What sets Nicolette apart is her combination of technical excellence, leadership qualities, and genuine passion for software development. She has achieved recognition as the #3 ranked female GitHub contributor in South Africa while balancing full-time studies and family responsibilities, showcasing exceptional time management and dedication. Her proactive approach to learning, willingness to tackle complex backend challenges, and ability to mentor peers through technical discussions make her an invaluable team member. I recommend Nicolette without reservation for any software development role.',
-    avatar: 'https://ui-avatars.com/api/?name=Lindy+Heyns&size=150&background=06b6d4&color=fff&bold=true',
+    avatar: '/testimonials/lindy-heyns.jpg',
     rating: 5,
   },
   {
@@ -37,7 +37,7 @@ const testimonials: Testimonial[] = [
     role: 'Software Developer',
     company: 'TechBridle Foundation',
     content: 'Thank you for being my constant reminder that I\'m capable of more than I think. Our collaboration, energy, and shared vision made this journey even more meaningful. Working alongside Nicolette showed me what true partnership looks like in tech - she brings incredible technical skills, unwavering support, and the kind of positive energy that lifts everyone around her.',
-    avatar: 'https://ui-avatars.com/api/?name=Lunga+Mashaba&size=150&background=8b5cf6&color=fff&bold=true',
+    avatar: '/testimonials/lunga-mashaba.png',
     rating: 5,
   },
   {
@@ -46,7 +46,7 @@ const testimonials: Testimonial[] = [
     role: 'Supervisor',
     company: 'Coast IT',
     content: 'Nicolette showed strong engagement, rapid technical progression, and consistent contribution across backend development, architecture design, real-time integration, and full system preparation. She demonstrated professionalism, solid growth, and reliable delivery across all software engineering tasks. Her ability to collaborate effectively within a multi-disciplinary team, manage backend responsibilities while coordinating with other components, and deliver under deadline-driven environments shows strong readiness for advanced development responsibilities.',
-    avatar: 'https://ui-avatars.com/api/?name=Jason+Oosthuizen&size=150&background=10b981&color=fff&bold=true',
+    avatar: '/testimonials/jason-oosthuizen.jpg',
     rating: 5,
   },
   {
@@ -55,7 +55,7 @@ const testimonials: Testimonial[] = [
     role: 'Senior Developer',
     company: 'Online Discipleship',
     content: 'I had the pleasure of mentoring Nicolette on the Online Discipleship project, where she built the entire website supporting both Lithuanian and English languages. Her ability to take on complex multilingual requirements, implement clean architecture, and deliver a polished product under mentorship was impressive. Nicolette showed exceptional learning agility, attention to detail, and commitment to quality throughout the project.',
-    avatar: 'https://ui-avatars.com/api/?name=Chibuzor+Victor&size=150&background=f59e0b&color=fff&bold=true',
+    avatar: '/testimonials/chibuzor-victor.jpg',
     rating: 5,
   },
 ];
