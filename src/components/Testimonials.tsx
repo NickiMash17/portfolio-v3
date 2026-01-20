@@ -43,7 +43,7 @@ const testimonials: Testimonial[] = [
   {
     id: 4,
     name: 'Jason Oosthuizen',
-    role: 'Supervisor',
+    role: 'Managing Director',
     company: 'Coast IT',
     content: 'Nicolette showed strong engagement, rapid technical progression, and consistent contribution across backend development, architecture design, real-time integration, and full system preparation. She demonstrated professionalism, solid growth, and reliable delivery across all software engineering tasks. Her ability to collaborate effectively within a multi-disciplinary team, manage backend responsibilities while coordinating with other components, and deliver under deadline-driven environments shows strong readiness for advanced development responsibilities.',
     avatar: '/testimonials/jason-oosthuizen.jpg',
