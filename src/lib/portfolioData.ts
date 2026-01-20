@@ -133,19 +133,6 @@ export const portfolioData: PortfolioData = {
       ],
     },
     {
-      title: 'Web Developer Intern',
-      company: 'CodeCatalyst',
-      period: 'Jun 2025 - Jul 2025',
-      location: 'Remote',
-      type: 'work',
-      description: [
-        'Built full-stack applications with React, Node.js, and MongoDB',
-        'Implemented JWT authentication, reducing report generation time by 20%',
-        'Delivered responsive UIs using Tailwind CSS',
-      ],
-      achievements: ['Reduced report generation time by 20%'],
-    },
-    {
       title: 'AI Model Trainer',
       company: 'Outlier',
       period: 'Oct 2024 - Dec 2024',
@@ -205,20 +192,6 @@ export const portfolioData: PortfolioData = {
       github: 'https://github.com/NickiMash17',
       demo: 'https://demo.example.com/ai-compliance',
       award: 'Best Team - AIMS Hackathon 2025',
-    },
-    {
-      title: 'Full-Stack Web Applications',
-      subtitle: 'CodeCatalyst Internship',
-      description:
-        'Built multiple full-stack applications with JWT authentication, responsive UIs, and efficient backend systems.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS', 'JWT'],
-      highlights: [
-        'Implemented JWT authentication system',
-        'Reduced report generation time by 20%',
-        'Delivered responsive UIs with Tailwind CSS',
-        'RESTful API design and implementation',
-      ],
-      github: 'https://github.com/NickiMash17',
     },
     {
       title: 'Mobile Applications',
@@ -315,11 +288,6 @@ export const portfolioData: PortfolioData = {
     {
       title: 'Navy Leadership',
       description: 'Mentored 5+ junior officers during Naval service',
-    },
-    {
-      title: 'Performance Optimization',
-      description: 'Reduced report generation time by 20% at CodeCatalyst',
-      year: '2025',
     },
     {
       title: 'AI Model Training',

@@ -16,18 +16,6 @@ export const Experience = () => {
     },
     {
       type: 'work',
-      title: 'Web Developer Intern',
-      company: 'CodeCatalyst',
-      period: 'Jun 2025 - Jul 2025',
-      location: 'Remote',
-      description: [
-        'Built full-stack applications with React, Node.js, and MongoDB',
-        'Implemented JWT authentication, reducing report generation time by 20%',
-        'Delivered responsive UIs using Tailwind CSS',
-      ],
-    },
-    {
-      type: 'work',
       title: 'AI Model Trainer',
       company: 'Outlier',
       period: 'Oct 2024 - Dec 2024',
