@@ -4,13 +4,44 @@ A modern, responsive portfolio built with React, TypeScript, and Tailwind CSS.
 
 ## Tech Stack
 
-- **Vite** - Fast build tool
+### Core Framework & Language
 - **React 18** - UI library
 - **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first styling
-- **shadcn-ui** - Component library
-- **React Router** - Client-side routing
-- **React Hook Form** - Form management
+- **Vite** - Fast build tool & dev server
+- **React Router DOM** - Client-side routing
+
+### Styling & UI
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn-ui** - Component library (Radix UI primitives)
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Icon library
+- **next-themes** - Dark/light theme management
+- **tailwindcss-animate** - Animation utilities
+
+### State Management & Data Fetching
+- **TanStack Query (React Query)** - Server state management
+- **React Hook Form** - Form state management
+- **Zod** - Schema validation
+
+### UI Components & Libraries
+- **Embla Carousel** - Carousel/slider component
+- **Sonner** - Toast notifications
+- **Recharts** - Chart library
+- **CMDK** - Command menu component
+- **Vaul** - Drawer component
+
+### Backend & APIs
+- **Supabase** - Backend-as-a-Service (for AI chat)
+- **Server-Sent Events (SSE)** - Streaming API responses
+
+### Build Tools & Development
+- **ESLint** - Code linting
+- **PostCSS** - CSS processing
+- **Autoprefixer** - CSS vendor prefixing
+- **@vitejs/plugin-react-swc** - Fast React refresh with SWC
+
+### Deployment
+- **Vercel** - Hosting platform
 
 ## Getting Started
 
