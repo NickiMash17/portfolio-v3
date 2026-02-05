@@ -1,5 +1,6 @@
 import { Github } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export const GitHubActivity = () => {
   const [contributionData, setContributionData] = useState<{ count: number; level: number }[][]>([]);
@@ -41,16 +42,19 @@ export const GitHubActivity = () => {
   return (
     <section id="github" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
-        <div className="mb-12 sm:mb-16 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 glow-text">
-            <span className="text-primary font-mono">{'<'}</span>
-            GitHub Contributions
-            <span className="text-primary font-mono">{' />'}</span>
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base md:text-lg">Coding activity over the past year</p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div className="mb-12 sm:mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 glow-text">
+              <span className="text-primary font-mono">{'<'}</span>
+              GitHub Contributions
+              <span className="text-primary font-mono">{' />'}</span>
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base md:text-lg">Coding activity over the past year</p>
+          </div>
+        </ScrollAnimation>
 
-        <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:glow-primary transition-all duration-300">
+        <ScrollAnimation animation="scale" delay={100}>
+          <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:glow-primary transition-all duration-300">
           <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             <Github className="text-primary" size={20} />
             <h3 className="text-base sm:text-lg md:text-xl font-semibold">@NickiMash17</h3>
@@ -107,8 +111,10 @@ export const GitHubActivity = () => {
             </div>
           </div>
         </div>
+        </ScrollAnimation>
 
-        <div className="mt-8 sm:mt-12 text-center">
+        <ScrollAnimation animation="fade-up" delay={200}>
+          <div className="mt-8 sm:mt-12 text-center">
           <a
             href="https://github.com/NickiMash17"
             target="_blank"
@@ -119,6 +125,7 @@ export const GitHubActivity = () => {
             <span>View Full GitHub Profile</span>
           </a>
         </div>
+        </ScrollAnimation>
       </div>
     </section>
   );
