@@ -2,67 +2,17 @@ import reactLogo from '@/assets/logos/react.svg';
 import typescriptLogo from '@/assets/logos/typescript.svg';
 import nodejsLogo from '@/assets/logos/nodejs.svg';
 import dotnetLogo from '@/assets/logos/dotnet.svg';
-import csharpLogo from '@/assets/logos/csharp.svg';
 import flutterLogo from '@/assets/logos/flutter.svg';
 import azureLogo from '@/assets/logos/azure.svg';
 import mongodbLogo from '@/assets/logos/mongodb.svg';
 import sqlLogo from '@/assets/logos/sql.svg';
 import pythonLogo from '@/assets/logos/python.svg';
-import tailwindLogo from '@/assets/logos/tailwind.svg';
 import dockerLogo from '@/assets/logos/docker.svg';
 import gitLogo from '@/assets/logos/git.svg';
 import javascriptLogo from '@/assets/logos/javascript.svg';
 import { ScrollAnimation } from '@/hooks/useScrollAnimation';
-import { portfolioData } from '@/lib/portfolioData';
-
-// Map skill names to logos
-const skillLogoMap: Record<string, string> = {
-  'React.js': reactLogo,
-  'TypeScript': typescriptLogo,
-  'Node.js': nodejsLogo,
-  '.NET / C#': dotnetLogo,
-  'Flutter': flutterLogo,
-  'Microsoft Azure': azureLogo,
-  'MongoDB': mongodbLogo,
-  'SQL': sqlLogo,
-  'Python': pythonLogo,
-  'Tailwind CSS': tailwindLogo,
-  'Docker': dockerLogo,
-  'Git': gitLogo,
-  'JavaScript': javascriptLogo,
-};
-
-// Map skill levels to percentages
-const levelToPercentage: Record<string, number> = {
-  beginner: 40,
-  intermediate: 65,
-  advanced: 85,
-  expert: 95,
-};
 
 export const Skills = () => {
-  // Get skills from portfolioData with proficiency levels
-  const skillsWithLevels = portfolioData.skills.map(skill => ({
-    ...skill,
-    logo: skillLogoMap[skill.name] || reactLogo,
-    proficiency: levelToPercentage[skill.level || 'intermediate'],
-  }));
-
-  const skills = [
-    { name: 'React.js', category: 'Frontend', logo: reactLogo },
-    { name: 'TypeScript', category: 'Languages', logo: typescriptLogo },
-    { name: 'Node.js', category: 'Backend', logo: nodejsLogo },
-    { name: '.NET / C#', category: 'Backend', logo: dotnetLogo },
-    { name: 'Flutter', category: 'Mobile', logo: flutterLogo },
-    { name: 'Microsoft Azure', category: 'Cloud', logo: azureLogo },
-    { name: 'MongoDB', category: 'Database', logo: mongodbLogo },
-    { name: 'SQL', category: 'Database', logo: sqlLogo },
-    { name: 'Python', category: 'Languages', logo: pythonLogo },
-    { name: 'Tailwind CSS', category: 'Frontend', logo: tailwindLogo },
-    { name: 'Docker', category: 'DevOps', logo: dockerLogo },
-    { name: 'Git', category: 'DevOps', logo: gitLogo },
-  ];
-
   const techStack = [
     { name: 'JavaScript', logo: javascriptLogo },
     { name: 'TypeScript', logo: typescriptLogo },
@@ -94,44 +44,8 @@ export const Skills = () => {
           </div>
         </ScrollAnimation>
 
-        {/* Skill Proficiency Bars */}
-        <ScrollAnimation animation="fade-up" delay={100}>
-          <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
-            <h3 className="text-base sm:text-lg md:text-xl font-bold mb-4 sm:mb-6 text-center">Skill Proficiency</h3>
-            <div className="space-y-3 sm:space-y-4">
-              {skillsWithLevels.map((skill, index) => (
-                <div key={skill.name} className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      <img
-                        src={skill.logo}
-                        alt={`${skill.name} logo`}
-                        className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
-                        loading="lazy"
-                      />
-                      <span className="text-sm sm:text-base font-medium text-foreground">{skill.name}</span>
-                    </div>
-                    <span className="text-xs sm:text-sm font-mono text-muted-foreground">
-                      {skill.proficiency}%
-                    </span>
-                  </div>
-                  <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full transition-all duration-1000 ease-out glow-primary"
-                      style={{
-                        width: `${skill.proficiency}%`,
-                        animationDelay: `${index * 100}ms`,
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </ScrollAnimation>
-
         {/* Tech Stack Showcase */}
-        <ScrollAnimation animation="scale" delay={200}>
+        <ScrollAnimation animation="scale" delay={100}>
           <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden">
           <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 md:mb-8 text-center">Key Technologies</h3>
 
@@ -177,7 +91,6 @@ export const Skills = () => {
                         alt={`${tech.name} logo`}
                         loading="lazy"
                         decoding="async"
-                        loading="lazy"
                         className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-contain"
                       />
                       <span className="text-foreground font-mono font-semibold text-xs sm:text-sm md:text-base text-center">
