@@ -1,4 +1,5 @@
 import { Briefcase, GraduationCap } from 'lucide-react';
+import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export const Experience = () => {
   const experiences = [
@@ -58,16 +59,19 @@ export const Experience = () => {
   return (
     <section id="experience" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
-        <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
-            <span className="text-primary font-mono">{'<'}</span>
-            Journey
-            <span className="text-primary font-mono">{' />'}</span>
-          </h2>
-          <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Experience & Education</p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div className="mb-8 sm:mb-12 md:mb-16 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
+              <span className="text-primary font-mono">{'<'}</span>
+              Journey
+              <span className="text-primary font-mono">{' />'}</span>
+            </h2>
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Experience & Education</p>
+          </div>
+        </ScrollAnimation>
 
-        <div className="relative">
+        <ScrollAnimation animation="fade-up" delay={100}>
+          <div className="relative">
           {/* Timeline line - hidden on mobile */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary via-accent to-secondary opacity-30" />
 
@@ -112,11 +116,13 @@ export const Experience = () => {
               </div>
             );
           })}
-        </div>
+          </div>
+        </ScrollAnimation>
 
         {/* Certifications */}
-        <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 md:mb-8 text-center glow-text">Certifications & Awards</h3>
+        <ScrollAnimation animation="fade-up" delay={200}>
+          <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 md:mb-8 text-center glow-text">Certifications & Awards</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
             {[
               'Microsoft Certified: Azure Developer Associate (AZ-204)',
@@ -138,6 +144,7 @@ export const Experience = () => {
             ))}
           </div>
         </div>
+        </ScrollAnimation>
       </div>
     </section>
   );

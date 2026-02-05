@@ -12,6 +12,7 @@ import tailwindLogo from '@/assets/logos/tailwind.svg';
 import dockerLogo from '@/assets/logos/docker.svg';
 import gitLogo from '@/assets/logos/git.svg';
 import javascriptLogo from '@/assets/logos/javascript.svg';
+import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export const Skills = () => {
   const skills = [
@@ -49,17 +50,20 @@ export const Skills = () => {
   return (
     <section id="skills" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
-        <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
-            <span className="text-primary font-mono">{'<'}</span>
-            Tech Stack
-            <span className="text-primary font-mono">{' />'}</span>
-          </h2>
-          <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Technologies I work with</p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div className="mb-8 sm:mb-12 md:mb-16 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
+              <span className="text-primary font-mono">{'<'}</span>
+              Tech Stack
+              <span className="text-primary font-mono">{' />'}</span>
+            </h2>
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Technologies I work with</p>
+          </div>
+        </ScrollAnimation>
 
         {/* Tech Stack Showcase */}
-        <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden">
+        <ScrollAnimation animation="scale" delay={100}>
+          <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden">
           <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 md:mb-8 text-center">Key Technologies</h3>
 
           {/* Mobile: Crisp Grid (no 3D to avoid blur and improve performance) */}
@@ -120,6 +124,7 @@ export const Skills = () => {
             </p>
           </div>
         </div>
+        </ScrollAnimation>
       </div>
     </section>
   );

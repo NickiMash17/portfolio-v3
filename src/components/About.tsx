@@ -1,5 +1,6 @@
 import { Code2, Cloud, Anchor, Trophy } from 'lucide-react';
 import profileImage from '@/assets/Myself.jpg';
+import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export const About = () => {
   const highlights = [
@@ -28,17 +29,20 @@ export const About = () => {
   return (
     <section id="about" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
-        <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
-            <span className="text-primary font-mono">{'<'}</span>
-            About Me
-            <span className="text-primary font-mono">{' />'}</span>
-          </h2>
-          <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">From Naval Officer to Software Engineer</p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div className="mb-8 sm:mb-12 md:mb-16 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
+              <span className="text-primary font-mono">{'<'}</span>
+              About Me
+              <span className="text-primary font-mono">{' />'}</span>
+            </h2>
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">From Naval Officer to Software Engineer</p>
+          </div>
+        </ScrollAnimation>
 
         {/* Bio Card with Image */}
-        <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 mb-8 sm:mb-10 md:mb-12 glow-primary">
+        <ScrollAnimation animation="fade-up" delay={100}>
+          <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 mb-8 sm:mb-10 md:mb-12 glow-primary">
           <div className="grid md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr] gap-4 sm:gap-6 md:gap-8 items-center">
             {/* Profile Image */}
             <div className="relative group mx-auto md:mx-0">
@@ -72,9 +76,11 @@ export const About = () => {
             </div>
           </div>
         </div>
+        </ScrollAnimation>
 
         {/* Highlights Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+        <ScrollAnimation animation="scale" delay={200}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
           {highlights.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -95,10 +101,12 @@ export const About = () => {
               </div>
             );
           })}
-        </div>
+          </div>
+        </ScrollAnimation>
 
         {/* Stats */}
-        <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
+        <ScrollAnimation animation="fade-up" delay={300}>
+          <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
           {[
             { value: '5+', label: 'Technologies' },
             { value: '10+', label: 'Projects' },
@@ -115,7 +123,8 @@ export const About = () => {
               <div className="text-muted-foreground font-mono text-[10px] sm:text-xs md:text-sm">{stat.label}</div>
             </div>
           ))}
-        </div>
+          </div>
+        </ScrollAnimation>
       </div>
     </section>
   );

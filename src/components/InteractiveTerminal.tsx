@@ -1,4 +1,8 @@
 import { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import { getTerminalData } from '@/lib/terminalData';
+import { MatrixRain } from './MatrixRain';
+import { SnakeGame } from './SnakeGame';
+import { useTheme } from 'next-themes';
 
 interface CommandOutput {
   command: string;
@@ -6,54 +10,47 @@ interface CommandOutput {
   isError?: boolean;
 }
 
-const portfolioData = {
-  about: {
-    name: 'Nicolette Mashaba',
-    title: 'Software Engineer & AI/ML Enthusiast',
-    location: 'Johannesburg, South Africa',
-    email: 'nicolettemashaba@outlook.com',
-    bio: 'Passionate about building innovative solutions with modern technologies. Azure certified, hackathon winner, and lifelong learner.',
-  },
-  skills: {
-    languages: ['TypeScript', 'JavaScript', 'Python', 'C#', 'SQL'],
-    frontend: ['React', 'Tailwind CSS', 'Next.js', 'Flutter'],
-    backend: ['Node.js', '.NET', 'MongoDB', 'PostgreSQL'],
-    cloud: ['Azure', 'Docker', 'Git', 'CI/CD'],
-    ai: ['Machine Learning', 'Gemini', 'OpenAI', 'Data Analysis'],
-  },
-  projects: [
-    { name: 'AI-Powered Chat Assistant', tech: 'React, Supabase, Gemini', status: '🟢 Live' },
-    { name: 'Cloud Infrastructure Tool', tech: 'Azure, Docker, .NET', status: '🟢 Live' },
-    { name: 'E-Commerce Platform', tech: 'React, Node.js, MongoDB', status: '🟡 In Progress' },
-  ],
-  experience: [
-    { role: 'Software Developer', company: 'Tech Company', period: '2023 - Present' },
-    { role: 'Junior Developer', company: 'Startup', period: '2022 - 2023' },
-  ],
-  social: {
-    github: 'https://github.com/NickiMash17',
-    linkedin: 'https://linkedin.com/in/nicolette-mashaba',
-  },
-};
+const portfolioData = getTerminalData();
 
-const commands: Record<string, (args?: string[]) => React.ReactNode> = {
-  help: () => (
-    <div className="space-y-1">
-      <p className="text-accent font-semibold">Available Commands:</p>
-      <p><span className="text-primary">about</span>     - Learn about me</p>
-      <p><span className="text-primary">skills</span>    - View my technical skills</p>
-      <p><span className="text-primary">projects</span>  - Browse my projects</p>
-      <p><span className="text-primary">experience</span>- View work experience</p>
-      <p><span className="text-primary">contact</span>   - Get my contact info</p>
-      <p><span className="text-primary">social</span>    - Social media links</p>
-      <p><span className="text-primary">download cv</span>- Download my resume</p>
-      <p><span className="text-primary">clear</span>     - Clear terminal</p>
-      <p><span className="text-primary">ls</span>        - List portfolio sections</p>
-      <p><span className="text-primary">whoami</span>    - Who am I?</p>
-      <p><span className="text-primary">date</span>      - Current date</p>
-      <p><span className="text-primary">neofetch</span>  - System info (fun!)</p>
-    </div>
-  ),
+export const InteractiveTerminal = () => {
+  const { theme, setTheme } = useTheme();
+  const [input, setInput] = useState('');
+  const [history, setHistory] = useState<CommandOutput[]>([
+    { command: '', output: (
+      <div className="space-y-1">
+        <p className="text-accent font-semibold">Welcome to Nicolette's Portfolio Terminal! 🚀</p>
+        <p className="text-muted-foreground">Type <span className="text-primary">help</span> to see available commands.</p>
+      </div>
+    )}
+  ]);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [showMatrix, setShowMatrix] = useState(false);
+  const [showGame, setShowGame] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
+
+  const commands: Record<string, (args?: string[]) => React.ReactNode> = {
+    help: () => (
+      <div className="space-y-1">
+        <p className="text-accent font-semibold">Available Commands:</p>
+        <p><span className="text-primary">about</span>     - Learn about me</p>
+        <p><span className="text-primary">skills</span>    - View my technical skills</p>
+        <p><span className="text-primary">projects</span>  - Browse my projects</p>
+        <p><span className="text-primary">experience</span>- View work experience</p>
+        <p><span className="text-primary">contact</span>   - Get my contact info</p>
+        <p><span className="text-primary">social</span>    - Social media links</p>
+        <p><span className="text-primary">download cv</span>- Download my resume</p>
+        <p><span className="text-primary">matrix</span>    - Matrix rain effect</p>
+        <p><span className="text-primary">theme</span>     - Toggle dark/light mode</p>
+        <p><span className="text-primary">game</span>      - Play Snake game</p>
+        <p><span className="text-primary">clear</span>     - Clear terminal</p>
+        <p><span className="text-primary">ls</span>        - List portfolio sections</p>
+        <p><span className="text-primary">whoami</span>    - Who am I?</p>
+        <p><span className="text-primary">date</span>      - Current date</p>
+        <p><span className="text-primary">neofetch</span>  - System info (fun!)</p>
+      </div>
+    ),
   about: () => (
     <div className="space-y-2">
       <p className="text-accent font-semibold text-lg">{portfolioData.about.name}</p>
@@ -177,25 +174,23 @@ const commands: Record<string, (args?: string[]) => React.ReactNode> = {
   pwd: () => <p className="text-foreground/80">/home/visitor/nicolette-portfolio</p>,
   cd: () => <p className="text-muted-foreground">Use 'scroll [section]' to navigate the portfolio</p>,
   cat: () => <p className="text-muted-foreground">Try 'about', 'skills', or 'projects' to view content</p>,
-  echo: (args) => <p className="text-foreground/80">{args?.join(' ') || ''}</p>,
-  history: () => <p className="text-muted-foreground">Command history is stored locally in this session</p>,
-  exit: () => <p className="text-accent">👋 Thanks for visiting! Refresh to restart.</p>,
-};
-
-export const InteractiveTerminal = () => {
-  const [input, setInput] = useState('');
-  const [history, setHistory] = useState<CommandOutput[]>([
-    { command: '', output: (
-      <div className="space-y-1">
-        <p className="text-accent font-semibold">Welcome to Nicolette's Portfolio Terminal! 🚀</p>
-        <p className="text-muted-foreground">Type <span className="text-primary">help</span> to see available commands.</p>
-      </div>
-    )}
-  ]);
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState(-1);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const terminalRef = useRef<HTMLDivElement>(null);
+    echo: (args) => <p className="text-foreground/80">{args?.join(' ') || ''}</p>,
+    history: () => <p className="text-muted-foreground">Command history is stored locally in this session</p>,
+    exit: () => <p className="text-accent">👋 Thanks for visiting! Refresh to restart.</p>,
+    matrix: () => {
+      setShowMatrix(true);
+      return <p className="text-accent">🌧️ Matrix rain activated! Press ESC to exit.</p>;
+    },
+    theme: () => {
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+      return <p className="text-accent">🎨 Theme switched to {newTheme} mode</p>;
+    },
+    game: () => {
+      setShowGame(true);
+      return <p className="text-accent">🐍 Snake game started! Use arrow keys to play. Press ESC to exit.</p>;
+    },
+  };
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -259,6 +254,33 @@ export const InteractiveTerminal = () => {
     }
   };
 
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setShowMatrix(false);
+        setShowGame(false);
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
+
+  if (showMatrix) {
+    return (
+      <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30 w-full">
+        <MatrixRain onClose={() => setShowMatrix(false)} />
+      </div>
+    );
+  }
+
+  if (showGame) {
+    return (
+      <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30 w-full">
+        <SnakeGame onClose={() => setShowGame(false)} />
+      </div>
+    );
+  }
+
   return (
     <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30 w-full">
       {/* Terminal Header */}
@@ -313,7 +335,7 @@ export const InteractiveTerminal = () => {
 
       {/* Quick Commands */}
       <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
-        {['help', 'about', 'skills', 'projects', 'neofetch'].map((cmd) => (
+        {['help', 'about', 'skills', 'projects', 'matrix', 'theme', 'game'].map((cmd) => (
           <button
             key={cmd}
             onClick={() => {

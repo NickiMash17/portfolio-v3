@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { toast } from 'sonner';
+import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,18 +30,21 @@ export const Contact = () => {
   return (
     <section id="contact" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
-        <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
-            <span className="text-primary font-mono">{'<'}</span>
-            Get In Touch
-            <span className="text-primary font-mono">{' />'}</span>
-          </h2>
-          <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Let's build something amazing together</p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div className="mb-8 sm:mb-12 md:mb-16 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
+              <span className="text-primary font-mono">{'<'}</span>
+              Get In Touch
+              <span className="text-primary font-mono">{' />'}</span>
+            </h2>
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Let's build something amazing together</p>
+          </div>
+        </ScrollAnimation>
 
         <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
           {/* Contact Info */}
-          <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
+          <ScrollAnimation animation="fade-right" delay={100}>
+            <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
             <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6 text-foreground">Contact Information</h3>
               
@@ -98,10 +102,12 @@ export const Contact = () => {
                 <span className="text-accent font-mono text-[10px] sm:text-xs md:text-sm">Open to opportunities</span>
               </div>
             </div>
-          </div>
+            </div>
+          </ScrollAnimation>
 
           {/* Contact Form */}
-          <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8">
+          <ScrollAnimation animation="fade-left" delay={100}>
+            <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8">
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6 text-foreground">Send a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6">
               <div>
@@ -157,7 +163,8 @@ export const Contact = () => {
                 Send Message
               </Button>
             </form>
-          </div>
+            </div>
+          </ScrollAnimation>
         </div>
       </div>
     </section>
