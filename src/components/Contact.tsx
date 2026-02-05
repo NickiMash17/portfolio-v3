@@ -2,9 +2,16 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { trackEvent } from '@/lib/analytics';
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,19 +19,90 @@ export const Contact = () => {
     email: '',
     message: '',
   });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateField = (name: string, value: string): string | undefined => {
+    switch (name) {
+      case 'name':
+        if (!value.trim()) return 'Name is required';
+        if (value.trim().length < 2) return 'Name must be at least 2 characters';
+        return undefined;
+      case 'email':
+        if (!value.trim()) return 'Email is required';
+        if (!validateEmail(value)) return 'Please enter a valid email address';
+        return undefined;
+      case 'message':
+        if (!value.trim()) return 'Message is required';
+        if (value.trim().length < 10) return 'Message must be at least 10 characters';
+        return undefined;
+      default:
+        return undefined;
+    }
+  };
+
+  const handleBlur = (field: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+    const error = validateField(field, formData[field as keyof typeof formData]);
+    setErrors(prev => ({ ...prev, [field]: error }));
+  };
+
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[field as keyof FormErrors]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[field as keyof FormErrors];
+        return newErrors;
+      });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate all fields
+    const newErrors: FormErrors = {};
+    Object.keys(formData).forEach(key => {
+      const error = validateField(key, formData[key as keyof typeof formData]);
+      if (error) {
+        newErrors[key as keyof FormErrors] = error;
+        setTouched(prev => ({ ...prev, [key]: true }));
+      }
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      toast.error('Please fix the errors in the form');
+      return;
+    }
+
+    setIsSubmitting(true);
+    trackEvent('Contact', 'Form Submit', 'success');
+
     // Create mailto link
     const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
-    window.location.href = `mailto:nene171408@gmail.com?subject=${subject}&body=${body}`;
     
-    toast.success('Opening email client...');
-    setFormData({ name: '', email: '', message: '' });
+    // Small delay for better UX
+    setTimeout(() => {
+      window.location.href = `mailto:nene171408@gmail.com?subject=${subject}&body=${body}`;
+      toast.success('Opening email client...');
+      setFormData({ name: '', email: '', message: '' });
+      setErrors({});
+      setTouched({});
+      setIsSubmitting(false);
+    }, 300);
   };
 
   return (
@@ -112,55 +190,127 @@ export const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6">
               <div>
                 <label htmlFor="name" className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2 text-foreground">
-                  Name
+                  Name <span className="text-destructive">*</span>
                 </label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className="glass border-primary/30 focus:border-primary focus:glow-primary transition-all text-sm sm:text-base"
-                  placeholder="John Doe"
-                />
+                <div className="relative">
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
+                    onBlur={() => handleBlur('name')}
+                    className={`glass transition-all text-sm sm:text-base ${
+                      touched.name && errors.name
+                        ? 'border-destructive focus:border-destructive'
+                        : touched.name && !errors.name
+                        ? 'border-accent focus:border-accent'
+                        : 'border-primary/30 focus:border-primary'
+                    } focus:glow-primary`}
+                    placeholder="John Doe"
+                    aria-invalid={touched.name && !!errors.name}
+                    aria-describedby={touched.name && errors.name ? 'name-error' : undefined}
+                  />
+                  {touched.name && !errors.name && formData.name && (
+                    <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-accent" />
+                  )}
+                </div>
+                {touched.name && errors.name && (
+                  <p id="name-error" className="mt-1 text-xs text-destructive flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.name}
+                  </p>
+                )}
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2 text-foreground">
-                  Email
+                  Email <span className="text-destructive">*</span>
                 </label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  className="glass border-primary/30 focus:border-primary focus:glow-primary transition-all text-sm sm:text-base"
-                  placeholder="john@example.com"
-                />
+                <div className="relative">
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleChange('email', e.target.value)}
+                    onBlur={() => handleBlur('email')}
+                    className={`glass transition-all text-sm sm:text-base ${
+                      touched.email && errors.email
+                        ? 'border-destructive focus:border-destructive'
+                        : touched.email && !errors.email
+                        ? 'border-accent focus:border-accent'
+                        : 'border-primary/30 focus:border-primary'
+                    } focus:glow-primary`}
+                    placeholder="john@example.com"
+                    aria-invalid={touched.email && !!errors.email}
+                    aria-describedby={touched.email && errors.email ? 'email-error' : undefined}
+                  />
+                  {touched.email && !errors.email && formData.email && (
+                    <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-accent" />
+                  )}
+                </div>
+                {touched.email && errors.email && (
+                  <p id="email-error" className="mt-1 text-xs text-destructive flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.email}
+                  </p>
+                )}
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2 text-foreground">
-                  Message
+                  Message <span className="text-destructive">*</span>
                 </label>
-                <Textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  rows={5}
-                  className="glass border-primary/30 focus:border-primary focus:glow-primary transition-all resize-none text-sm sm:text-base"
-                  placeholder="Tell me about your project..."
-                />
+                <div className="relative">
+                  <Textarea
+                    id="message"
+                    value={formData.message}
+                    onChange={(e) => handleChange('message', e.target.value)}
+                    onBlur={() => handleBlur('message')}
+                    rows={5}
+                    className={`glass transition-all resize-none text-sm sm:text-base ${
+                      touched.message && errors.message
+                        ? 'border-destructive focus:border-destructive'
+                        : touched.message && !errors.message
+                        ? 'border-accent focus:border-accent'
+                        : 'border-primary/30 focus:border-primary'
+                    } focus:glow-primary`}
+                    placeholder="Tell me about your project..."
+                    aria-invalid={touched.message && !!errors.message}
+                    aria-describedby={touched.message && errors.message ? 'message-error' : undefined}
+                  />
+                  {touched.message && !errors.message && formData.message && (
+                    <CheckCircle className="absolute right-3 top-3 w-4 h-4 text-accent" />
+                  )}
+                </div>
+                {touched.message && errors.message && (
+                  <p id="message-error" className="mt-1 text-xs text-destructive flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.message}
+                  </p>
+                )}
+                {formData.message && (
+                  <p className="mt-1 text-xs text-muted-foreground text-right">
+                    {formData.message.length} characters
+                  </p>
+                )}
               </div>
 
               <Button 
                 type="submit" 
                 size="lg" 
-                className="w-full glass glow-primary hover:scale-105 transition-all group text-sm sm:text-base"
+                disabled={isSubmitting}
+                className="w-full glass glow-primary hover:scale-105 transition-all group text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Send className="mr-2 group-hover:translate-x-1 transition-transform" size={18} />
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 animate-spin" size={18} />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 group-hover:translate-x-1 transition-transform" size={18} />
+                    Send Message
+                  </>
+                )}
               </Button>
             </form>
             </div>

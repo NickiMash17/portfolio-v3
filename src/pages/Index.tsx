@@ -17,6 +17,7 @@ import { SocialShare } from '@/components/SocialShare';
 import { Navigation } from '@/components/Navigation';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { ScrollProgress } from '@/components/ScrollProgress';
+import { SectionDivider } from '@/components/SectionDivider';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
 
 const Index = () => {
@@ -45,12 +46,19 @@ const Index = () => {
       {/* Main Content */}
       <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
         <Hero />
+        <SectionDivider variant="gradient" />
         <About />
+        <SectionDivider variant="dots" />
         <Skills />
+        <SectionDivider variant="gradient" />
         <Experience />
+        <SectionDivider variant="dots" />
         <Projects />
+        <SectionDivider variant="gradient" />
         <Testimonials />
+        <SectionDivider variant="dots" />
         <GitHubActivity />
+        <SectionDivider variant="gradient" />
         <Contact />
         <Footer />
       </main>
