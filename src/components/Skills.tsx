@@ -28,8 +28,6 @@ export const Skills = () => {
     { name: 'Git', logo: gitLogo },
   ];
 
-  const categories = Array.from(new Set(skills.map(s => s.category)));
-
   return (
     <section id="skills" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
