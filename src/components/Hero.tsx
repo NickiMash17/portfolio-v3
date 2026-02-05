@@ -68,7 +68,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
       {/* Animated gradient mesh background */}
       <div className="gradient-mesh" />
       

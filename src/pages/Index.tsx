@@ -14,14 +14,26 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { CustomCursor } from '@/components/CustomCursor';
 import { SEO } from '@/components/SEO';
 import { SocialShare } from '@/components/SocialShare';
+import { Navigation } from '@/components/Navigation';
+import { ScrollToTop } from '@/components/ScrollToTop';
+import { ScrollProgress } from '@/components/ScrollProgress';
+import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
 
 const Index = () => {
+  useKeyboardNavigation();
+
   return (
     <>
       <SEO />
       <Preloader />
       <CustomCursor />
       <div className="relative min-h-screen bg-background overflow-hidden">
+      {/* Scroll Progress Indicator */}
+      <ScrollProgress />
+      
+      {/* Navigation */}
+      <Navigation />
+      
       {/* Aurora Background */}
       <AuroraBackground />
       
@@ -31,7 +43,7 @@ const Index = () => {
       </div>
       
       {/* Main Content */}
-      <main className="relative z-10" role="main">
+      <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
         <Hero />
         <About />
         <Skills />
@@ -48,6 +60,9 @@ const Index = () => {
       
       {/* Social Share Button */}
       <SocialShare />
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </div>
     </>
   );

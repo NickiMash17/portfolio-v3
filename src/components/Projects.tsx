@@ -1,8 +1,9 @@
-import { ExternalLink, Github, Play } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { ExternalLink, Github, Play, Filter, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TiltCard } from '@/components/TiltCard';
 import { ScrollAnimation } from '@/hooks/useScrollAnimation';
-import { trackProjectView, trackExternalLink } from '@/lib/analytics';
+import { trackProjectView, trackExternalLink, trackEvent } from '@/lib/analytics';
 
 // Simple YouTube icon component
 const YoutubeIcon = ({ size = 16 }: { size?: number }) => (
@@ -35,6 +36,8 @@ const getProjectGradient = (index: number) => {
 };
 
 export const Projects = () => {
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
+
   const projects = [
     {
       title: 'AI Compliance Interrogator',
@@ -136,6 +139,28 @@ export const Projects = () => {
     },
   ];
 
+  // Get all unique technologies
+  const allTechs = useMemo(() => {
+    const techSet = new Set<string>();
+    projects.forEach(project => {
+      project.tech.forEach(tech => techSet.add(tech));
+    });
+    return Array.from(techSet).sort();
+  }, []);
+
+  // Filter projects by selected technology
+  const filteredProjects = useMemo(() => {
+    if (!selectedTech) return projects;
+    return projects.filter(project => 
+      project.tech.some(tech => tech.toLowerCase().includes(selectedTech.toLowerCase()))
+    );
+  }, [selectedTech]);
+
+  const handleTechFilter = (tech: string | null) => {
+    setSelectedTech(tech);
+    trackEvent('Projects', 'Filter', tech || 'all');
+  };
+
   return (
     <section id="projects" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
@@ -150,14 +175,64 @@ export const Projects = () => {
           </div>
         </ScrollAnimation>
 
+        {/* Filter Bar */}
+        <ScrollAnimation animation="fade-up" delay={50}>
+          <div className="mb-6 sm:mb-8 md:mb-10">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 justify-center">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground font-mono">
+                <Filter className="w-4 h-4" />
+                <span>Filter:</span>
+              </div>
+              <button
+                onClick={() => handleTechFilter(null)}
+                className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-mono transition-all ${
+                  !selectedTech
+                    ? 'bg-primary text-primary-foreground border border-primary'
+                    : 'glass border border-foreground/10 hover:border-primary/50 hover:bg-primary/10 text-foreground'
+                }`}
+              >
+                All
+              </button>
+              {allTechs.slice(0, 8).map((tech) => (
+                <button
+                  key={tech}
+                  onClick={() => handleTechFilter(tech)}
+                  className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-mono transition-all ${
+                    selectedTech === tech
+                      ? 'bg-primary text-primary-foreground border border-primary'
+                      : 'glass border border-foreground/10 hover:border-primary/50 hover:bg-primary/10 text-foreground'
+                  }`}
+                >
+                  {tech}
+                </button>
+              ))}
+              {selectedTech && (
+                <button
+                  onClick={() => handleTechFilter(null)}
+                  className="p-1.5 rounded-lg glass border border-foreground/10 hover:border-destructive/50 hover:bg-destructive/10 transition-all"
+                  aria-label="Clear filter"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              )}
+            </div>
+            {selectedTech && (
+              <p className="text-center mt-3 text-xs sm:text-sm text-muted-foreground">
+                Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} with <span className="text-primary font-semibold">{selectedTech}</span>
+              </p>
+            )}
+          </div>
+        </ScrollAnimation>
+
         <div className="grid gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-          {projects.map((project, index) => (
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project, index) => (
             <ScrollAnimation key={index} animation="fade-up" delay={index * 100}>
               <TiltCard tiltAmount={5} scale={1.01}>
-                <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary group">
+                <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary hover:shadow-xl hover:-translate-y-1 group cursor-pointer">
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Visual / Unified Creative Placeholder */}
-                <div className="lg:w-72 xl:w-80 h-32 sm:h-40 md:h-48 lg:h-auto rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary transition-all flex-shrink-0">
+                <div className="lg:w-72 xl:w-80 h-32 sm:h-40 md:h-48 lg:h-auto rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0">
                   <div
                     className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(
                       index
@@ -275,7 +350,18 @@ export const Projects = () => {
               </div>
               </TiltCard>
             </ScrollAnimation>
-          ))}
+            ))
+          ) : (
+            <div className="text-center py-12 glass rounded-xl">
+              <p className="text-muted-foreground mb-2">No projects found with this filter.</p>
+              <button
+                onClick={() => handleTechFilter(null)}
+                className="text-primary hover:underline text-sm font-mono"
+              >
+                Clear filter
+              </button>
+            </div>
+          )}
         </div>
 
         {/* GitHub CTA */}
