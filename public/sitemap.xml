@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <!-- Homepage -->
@@ -12,9 +13,18 @@
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://nicmash-porfolio.vercel.app/src/assets/Myself.jpg</image:loc>
-      <image:title>Nicolette Mashaba - Software Engineer Graduate</image:title>
-      <image:caption>Portfolio profile image</image:caption>
+      <image:title>Nicolette Mashaba - Software Engineer Graduate | Full-Stack Developer</image:title>
+      <image:caption>Nicolette Mashaba, Software Engineer Graduate and Full-Stack Developer from Johannesburg, South Africa. Azure Certified, #1 ranked female GitHub contributor.</image:caption>
+      <image:geo_location>Johannesburg, South Africa</image:geo_location>
     </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/Ist1QrlhFIg/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>FitQuest - Gamified Wellness App Demo</video:title>
+      <video:description>Demo video showcasing FitQuest, a gamified wellness application built with Flutter</video:description>
+      <video:content_loc>https://youtu.be/Ist1QrlhFIg</video:content_loc>
+      <video:duration>300</video:duration>
+      <video:publication_date>2025-01-01T00:00:00+00:00</video:publication_date>
+    </video:video>
   </url>
   <!-- Projects Section -->
   <url>
