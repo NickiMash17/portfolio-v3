@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { X, RotateCcw, Play, Trophy, Zap } from 'lucide-react';
+import { X, RotateCcw, Play, Trophy, Zap, ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface PacmanGameProps {
   onClose: () => void;
@@ -17,6 +17,12 @@ type Ghost = {
 const GRID_WIDTH = 19;
 const GRID_HEIGHT = 19;
 const CELL_SIZE = 20;
+
+// Responsive cell size for mobile
+const getCellSize = () => {
+  if (typeof window === 'undefined') return CELL_SIZE;
+  return window.innerWidth < 640 ? 14 : CELL_SIZE;
+};
 
 // Maze layout (1 = wall, 0 = path, 2 = dot, 3 = power pellet)
 const MAZE: number[][] = [
@@ -69,6 +75,8 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
   ]);
   const gameLoopRef = useRef<number>();
   const pacmanMouthRef = useRef(0);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const [cellSize, setCellSize] = useState(getCellSize());
 
   // Get theme colors
   const getThemeColors = () => {
@@ -95,6 +103,21 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
     setDotsRemaining(count);
   }, []);
 
+  // Handle responsive cell size
+  useEffect(() => {
+    const handleResize = () => {
+      setCellSize(getCellSize());
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Handle direction change
+  const changeDirection = (dir: Direction) => {
+    if (!gameStarted || gameOver || isPaused) return;
+    nextDirectionRef.current = dir;
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !gameStarted || gameOver || isPaused) return;
@@ -102,8 +125,9 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    canvas.width = GRID_WIDTH * CELL_SIZE;
-    canvas.height = GRID_HEIGHT * CELL_SIZE;
+    const currentCellSize = cellSize;
+    canvas.width = GRID_WIDTH * currentCellSize;
+    canvas.height = GRID_HEIGHT * currentCellSize;
 
     const canMove = (pos: Position, dir: Direction): boolean => {
       let newX = pos.x;
@@ -274,21 +298,23 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
       ctx.fillStyle = colors.bg;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      const currentCellSize = cellSize;
+      
       // Draw maze
       MAZE.forEach((row, y) => {
         row.forEach((cell, x) => {
-          const pixelX = x * CELL_SIZE;
-          const pixelY = y * CELL_SIZE;
+          const pixelX = x * currentCellSize;
+          const pixelY = y * currentCellSize;
 
           if (cell === 1) {
             // Wall
             ctx.fillStyle = colors.wall;
-            ctx.fillRect(pixelX, pixelY, CELL_SIZE, CELL_SIZE);
-          } else if (cell === 2) {
+            ctx.fillRect(pixelX, pixelY, currentCellSize, currentCellSize);
+          } else           if (cell === 2) {
             // Dot
             ctx.fillStyle = colors.dot;
             ctx.beginPath();
-            ctx.arc(pixelX + CELL_SIZE / 2, pixelY + CELL_SIZE / 2, 2, 0, Math.PI * 2);
+            ctx.arc(pixelX + currentCellSize / 2, pixelY + currentCellSize / 2, Math.max(1.5, currentCellSize / 10), 0, Math.PI * 2);
             ctx.fill();
           } else if (cell === 3) {
             // Power pellet
@@ -296,7 +322,7 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
             ctx.shadowBlur = 10;
             ctx.shadowColor = colors.powerPellet;
             ctx.beginPath();
-            ctx.arc(pixelX + CELL_SIZE / 2, pixelY + CELL_SIZE / 2, 4, 0, Math.PI * 2);
+            ctx.arc(pixelX + currentCellSize / 2, pixelY + currentCellSize / 2, Math.max(3, currentCellSize / 5), 0, Math.PI * 2);
             ctx.fill();
             ctx.shadowBlur = 0;
           }
@@ -305,43 +331,46 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
 
       // Draw ghosts
       ghostsRef.current.forEach(ghost => {
-        const pixelX = ghost.position.x * CELL_SIZE + CELL_SIZE / 2;
-        const pixelY = ghost.position.y * CELL_SIZE + CELL_SIZE / 2;
+        const pixelX = ghost.position.x * currentCellSize + currentCellSize / 2;
+        const pixelY = ghost.position.y * currentCellSize + currentCellSize / 2;
         
+        const ghostSize = Math.max(4, currentCellSize * 0.35);
         ctx.fillStyle = ghost.scared ? '#0000ff' : ghost.color;
         ctx.shadowBlur = ghost.scared ? 15 : 5;
         ctx.shadowColor = ghost.scared ? '#0000ff' : ghost.color;
         
         // Draw ghost body
         ctx.beginPath();
-        ctx.arc(pixelX, pixelY - 2, 6, Math.PI, 0, false);
-        ctx.lineTo(pixelX + 6, pixelY + 4);
-        ctx.lineTo(pixelX + 3, pixelY + 2);
-        ctx.lineTo(pixelX, pixelY + 4);
-        ctx.lineTo(pixelX - 3, pixelY + 2);
-        ctx.lineTo(pixelX - 6, pixelY + 4);
+        ctx.arc(pixelX, pixelY - currentCellSize * 0.1, ghostSize, Math.PI, 0, false);
+        ctx.lineTo(pixelX + ghostSize, pixelY + currentCellSize * 0.2);
+        ctx.lineTo(pixelX + ghostSize * 0.5, pixelY + currentCellSize * 0.1);
+        ctx.lineTo(pixelX, pixelY + currentCellSize * 0.2);
+        ctx.lineTo(pixelX - ghostSize * 0.5, pixelY + currentCellSize * 0.1);
+        ctx.lineTo(pixelX - ghostSize, pixelY + currentCellSize * 0.2);
         ctx.closePath();
         ctx.fill();
         
         // Draw eyes
+        const eyeSize = Math.max(1, currentCellSize * 0.075);
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
-        ctx.arc(pixelX - 2, pixelY - 2, 1.5, 0, Math.PI * 2);
-        ctx.arc(pixelX + 2, pixelY - 2, 1.5, 0, Math.PI * 2);
+        ctx.arc(pixelX - currentCellSize * 0.1, pixelY - currentCellSize * 0.1, eyeSize, 0, Math.PI * 2);
+        ctx.arc(pixelX + currentCellSize * 0.1, pixelY - currentCellSize * 0.1, eyeSize, 0, Math.PI * 2);
         ctx.fill();
         
         ctx.fillStyle = '#000000';
         ctx.beginPath();
-        ctx.arc(pixelX - 2, pixelY - 2, 0.8, 0, Math.PI * 2);
-        ctx.arc(pixelX + 2, pixelY - 2, 0.8, 0, Math.PI * 2);
+        ctx.arc(pixelX - currentCellSize * 0.1, pixelY - currentCellSize * 0.1, eyeSize * 0.5, 0, Math.PI * 2);
+        ctx.arc(pixelX + currentCellSize * 0.1, pixelY - currentCellSize * 0.1, eyeSize * 0.5, 0, Math.PI * 2);
         ctx.fill();
         
         ctx.shadowBlur = 0;
       });
 
       // Draw Pacman
-      const pacmanX = pacmanRef.current.x * CELL_SIZE + CELL_SIZE / 2;
-      const pacmanY = pacmanRef.current.y * CELL_SIZE + CELL_SIZE / 2;
+      const pacmanX = pacmanRef.current.x * currentCellSize + currentCellSize / 2;
+      const pacmanY = pacmanRef.current.y * currentCellSize + currentCellSize / 2;
+      const pacmanRadius = Math.max(5, currentCellSize * 0.35);
       
       ctx.fillStyle = colors.pacman;
       ctx.shadowBlur = 10;
@@ -354,7 +383,7 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
                         directionRef.current === 'UP' ? Math.PI / 2 + mouthAngle :
                         -Math.PI / 2 + mouthAngle;
       
-      ctx.arc(pacmanX, pacmanY, 7, startAngle, startAngle + Math.PI * 2 - mouthAngle * 2);
+      ctx.arc(pacmanX, pacmanY, pacmanRadius, startAngle, startAngle + Math.PI * 2 - mouthAngle * 2);
       ctx.lineTo(pacmanX, pacmanY);
       ctx.closePath();
       ctx.fill();
@@ -404,7 +433,7 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
         clearTimeout(gameLoopRef.current);
       }
     };
-  }, [gameOver, isPaused, gameStarted, score, highScore, dotsRemaining, scaredTimer]);
+  }, [gameOver, isPaused, gameStarted, score, highScore, dotsRemaining, scaredTimer, cellSize]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -435,6 +464,53 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [gameOver, gameStarted, onClose]);
+
+  // Touch/swipe gesture handling
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!touchStartRef.current || !gameStarted || gameOver || isPaused) return;
+
+      const touch = e.changedTouches[0];
+      const deltaX = touch.clientX - touchStartRef.current.x;
+      const deltaY = touch.clientY - touchStartRef.current.y;
+      const minSwipeDistance = 30;
+
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (Math.abs(deltaX) > minSwipeDistance) {
+          if (deltaX > 0) {
+            changeDirection('RIGHT');
+          } else {
+            changeDirection('LEFT');
+          }
+        }
+      } else {
+        // Vertical swipe
+        if (Math.abs(deltaY) > minSwipeDistance) {
+          if (deltaY > 0) {
+            changeDirection('DOWN');
+          } else {
+            changeDirection('UP');
+          }
+        }
+      }
+
+      touchStartRef.current = null;
+    };
+
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [gameStarted, gameOver, isPaused]);
 
   const resetGame = () => {
     // Reset maze
@@ -593,12 +669,75 @@ export const PacmanGame = ({ onClose }: PacmanGameProps) => {
         </div>
       </div>
 
+      {/* Mobile Directional Controls */}
+      {gameStarted && !gameOver && (
+        <div className="md:hidden glass border-t border-primary/20 p-4">
+          <div className="flex flex-col items-center gap-3">
+            <p className="text-xs font-mono text-muted-foreground mb-1">Swipe or use buttons</p>
+            {/* Up Button */}
+            <button
+              onTouchStart={(e) => {
+                e.preventDefault();
+                changeDirection('UP');
+              }}
+              onClick={() => changeDirection('UP')}
+              className="w-14 h-14 glass border-2 border-primary/30 hover:border-primary hover:bg-primary/10 rounded-lg flex items-center justify-center transition-all active:scale-95 active:bg-primary/20"
+              aria-label="Move up"
+            >
+              <ArrowUp className="w-6 h-6 text-primary" />
+            </button>
+            
+            {/* Middle Row - Left, Down, Right */}
+            <div className="flex items-center gap-3">
+              <button
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  changeDirection('LEFT');
+                }}
+                onClick={() => changeDirection('LEFT')}
+                className="w-14 h-14 glass border-2 border-primary/30 hover:border-primary hover:bg-primary/10 rounded-lg flex items-center justify-center transition-all active:scale-95 active:bg-primary/20"
+                aria-label="Move left"
+              >
+                <ArrowLeft className="w-6 h-6 text-primary" />
+              </button>
+              
+              <button
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  changeDirection('DOWN');
+                }}
+                onClick={() => changeDirection('DOWN')}
+                className="w-14 h-14 glass border-2 border-primary/30 hover:border-primary hover:bg-primary/10 rounded-lg flex items-center justify-center transition-all active:scale-95 active:bg-primary/20"
+                aria-label="Move down"
+              >
+                <ArrowDown className="w-6 h-6 text-primary" />
+              </button>
+              
+              <button
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  changeDirection('RIGHT');
+                }}
+                onClick={() => changeDirection('RIGHT')}
+                className="w-14 h-14 glass border-2 border-primary/30 hover:border-primary hover:bg-primary/10 rounded-lg flex items-center justify-center transition-all active:scale-95 active:bg-primary/20"
+                aria-label="Move right"
+              >
+                <ArrowRight className="w-6 h-6 text-primary" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Controls Footer */}
       <div className="glass border-t border-primary/20 p-3">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">
-            <span>
+            <span className="hidden md:inline">
               <kbd className="px-1.5 py-0.5 rounded bg-primary/10 text-primary">WASD</kbd> or <kbd className="px-1.5 py-0.5 rounded bg-primary/10 text-primary">↑↓←→</kbd> Move
+            </span>
+            <span className="md:hidden">
+              Swipe or use buttons
             </span>
             <span>
               <kbd className="px-1.5 py-0.5 rounded bg-primary/10 text-primary">SPACE</kbd> Pause
