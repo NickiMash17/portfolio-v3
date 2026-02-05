@@ -38,11 +38,6 @@ const Index = () => {
       {/* Aurora Background */}
       <AuroraBackground />
       
-      {/* Theme Toggle */}
-      <div className="fixed top-6 right-6 z-50">
-        <ThemeToggle />
-      </div>
-      
       {/* Main Content */}
       <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
         <Hero />

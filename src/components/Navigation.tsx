@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Code2, User, Briefcase, FolderOpen, MessageSquare, Award, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { trackEvent } from '@/lib/analytics';
 
 const navItems = [
@@ -124,19 +125,27 @@ export const Navigation = () => {
               })}
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg glass border border-primary/20 hover:border-primary/50 transition-all"
-              aria-label="Toggle menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5 text-foreground" />
-              ) : (
-                <Menu className="w-5 h-5 text-foreground" />
-              )}
-            </button>
+            {/* Right side buttons - Mobile */}
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-lg glass border border-primary/20 hover:border-primary/50 transition-all"
+                aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-5 h-5 text-foreground" />
+                ) : (
+                  <Menu className="w-5 h-5 text-foreground" />
+                )}
+              </button>
+            </div>
+
+            {/* Right side - Desktop */}
+            <div className="hidden md:flex items-center">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
 
