@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { getTerminalData } from '@/lib/terminalData';
 import { MatrixRain } from './MatrixRain';
 import { SnakeGame } from './SnakeGame';
-import { useTheme } from 'next-themes';
 
 interface CommandOutput {
   command: string;
@@ -13,7 +12,6 @@ interface CommandOutput {
 const portfolioData = getTerminalData();
 
 export const InteractiveTerminal = () => {
-  const { theme, setTheme } = useTheme();
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<CommandOutput[]>([
     { command: '', output: (
@@ -42,7 +40,6 @@ export const InteractiveTerminal = () => {
         <p><span className="text-primary">social</span>    - Social media links</p>
         <p><span className="text-primary">download cv</span>- Download my resume</p>
         <p><span className="text-primary">matrix</span>    - Matrix rain effect</p>
-        <p><span className="text-primary">theme</span>     - Toggle dark/light mode</p>
         <p><span className="text-primary">game</span>      - Play Snake game</p>
         <p><span className="text-primary">clear</span>     - Clear terminal</p>
         <p><span className="text-primary">ls</span>        - List portfolio sections</p>
@@ -180,11 +177,6 @@ export const InteractiveTerminal = () => {
     matrix: () => {
       setShowMatrix(true);
       return <p className="text-accent">🌧️ Matrix rain activated! Press ESC to exit.</p>;
-    },
-    theme: () => {
-      const newTheme = theme === 'dark' ? 'light' : 'dark';
-      setTheme(newTheme);
-      return <p className="text-accent">🎨 Theme switched to {newTheme} mode</p>;
     },
     game: () => {
       setShowGame(true);
@@ -335,7 +327,7 @@ export const InteractiveTerminal = () => {
 
       {/* Quick Commands */}
       <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
-        {['help', 'about', 'skills', 'projects', 'matrix', 'theme', 'game'].map((cmd) => (
+        {['help', 'about', 'skills', 'projects', 'matrix', 'game'].map((cmd) => (
           <button
             key={cmd}
             onClick={() => {

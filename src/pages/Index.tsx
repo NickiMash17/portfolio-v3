@@ -11,6 +11,7 @@ import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { Preloader } from '@/components/Preloader';
 import { CustomCursor } from '@/components/CustomCursor';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { SEO } from '@/components/SEO';
 import { SocialShare } from '@/components/SocialShare';
 import { Navigation } from '@/components/Navigation';
@@ -36,6 +37,11 @@ const Index = () => {
       
       {/* Aurora Background */}
       <AuroraBackground />
+      
+      {/* Theme Toggle */}
+      <div className="fixed top-6 right-6 z-50">
+        <ThemeToggle />
+      </div>
       
       {/* Main Content */}
       <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
