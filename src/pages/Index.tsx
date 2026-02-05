@@ -13,6 +13,7 @@ import { Preloader } from '@/components/Preloader';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { CustomCursor } from '@/components/CustomCursor';
 import { SEO } from '@/components/SEO';
+import { SocialShare } from '@/components/SocialShare';
 
 const Index = () => {
   return (
@@ -44,6 +45,9 @@ const Index = () => {
 
       {/* AI Chat Assistant */}
       <AIChat />
+      
+      {/* Social Share Button */}
+      <SocialShare />
     </div>
     </>
   );
