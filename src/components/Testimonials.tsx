@@ -140,8 +140,12 @@ export const Testimonials = () => {
                       <div className="relative">
                         <img
                           src={testimonials[currentIndex].avatar}
-                          alt={testimonials[currentIndex].name}
+                          alt={`${testimonials[currentIndex].name} - ${testimonials[currentIndex].role} at ${testimonials[currentIndex].company}`}
                           className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-primary/50"
+                          loading="lazy"
+                          decoding="async"
+                          width="64"
+                          height="64"
                         />
                         <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-accent rounded-full border-2 border-background flex items-center justify-center">
                           <span className="text-[10px]">✓</span>

@@ -103,6 +103,8 @@ export const Skills = () => {
                         src={tech.logo}
                         alt={`${tech.name} logo`}
                         loading="lazy"
+                        decoding="async"
+                        loading="lazy"
                         className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-contain"
                       />
                       <span className="text-foreground font-mono font-semibold text-xs sm:text-sm md:text-base text-center">

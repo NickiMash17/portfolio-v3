@@ -46,7 +46,11 @@ export const About = () => {
               <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-full md:h-full rounded-xl sm:rounded-2xl overflow-hidden border-2 border-primary/30 group-hover:border-primary/50 transition-all duration-300">
                 <img 
                   src={profileImage} 
-                  alt="Nicolette Mashaba" 
+                  alt="Nicolette Mashaba - Software Engineer Graduate"
+                  loading="eager"
+                  decoding="async"
+                  width="400"
+                  height="400" 
                   className="w-full h-full object-cover"
                 />
               </div>

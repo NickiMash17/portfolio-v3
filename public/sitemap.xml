@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://nicmash-porfolio.vercel.app/</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -19,42 +19,42 @@
   <!-- Projects Section -->
   <url>
     <loc>https://nicmash-porfolio.vercel.app/#projects</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <!-- About Section -->
   <url>
     <loc>https://nicmash-porfolio.vercel.app/#about</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Experience Section -->
   <url>
     <loc>https://nicmash-porfolio.vercel.app/#experience</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Skills Section -->
   <url>
     <loc>https://nicmash-porfolio.vercel.app/#skills</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Testimonials Section -->
   <url>
     <loc>https://nicmash-porfolio.vercel.app/#testimonials</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Contact Section -->
   <url>
     <loc>https://nicmash-porfolio.vercel.app/#contact</loc>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
