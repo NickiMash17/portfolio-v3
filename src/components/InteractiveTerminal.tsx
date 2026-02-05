@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { getTerminalData } from '@/lib/terminalData';
 import { MatrixRain } from './MatrixRain';
-import { SnakeGame } from './SnakeGame';
+import { PacmanGame } from './PacmanGame';
 
 interface CommandOutput {
   command: string;
@@ -24,7 +24,7 @@ export const InteractiveTerminal = () => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [showMatrix, setShowMatrix] = useState(false);
-  const [showGame, setShowGame] = useState(false);
+  const [showPacman, setShowPacman] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +40,7 @@ export const InteractiveTerminal = () => {
         <p><span className="text-primary">social</span>    - Social media links</p>
         <p><span className="text-primary">download cv</span>- Download my resume</p>
         <p><span className="text-primary">matrix</span>    - Matrix rain effect</p>
-        <p><span className="text-primary">game</span>      - Play Snake game</p>
+        <p><span className="text-primary">pacman</span>      - Play Pacman game</p>
         <p><span className="text-primary">clear</span>     - Clear terminal</p>
         <p><span className="text-primary">ls</span>        - List portfolio sections</p>
         <p><span className="text-primary">whoami</span>    - Who am I?</p>
@@ -178,9 +178,9 @@ export const InteractiveTerminal = () => {
       setShowMatrix(true);
       return <p className="text-accent">🌧️ Matrix rain activated! Press ESC to exit.</p>;
     },
-    game: () => {
-      setShowGame(true);
-      return <p className="text-accent">🐍 Snake game started! Use arrow keys to play. Press ESC to exit.</p>;
+    pacman: () => {
+      setShowPacman(true);
+      return <p className="text-accent">👾 Pacman game started! Use WASD or arrow keys to play. Press ESC to exit.</p>;
     },
   };
 
@@ -250,7 +250,7 @@ export const InteractiveTerminal = () => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setShowMatrix(false);
-        setShowGame(false);
+        setShowPacman(false);
       }
     };
     window.addEventListener('keydown', handleEscape);
@@ -265,10 +265,10 @@ export const InteractiveTerminal = () => {
     );
   }
 
-  if (showGame) {
+  if (showPacman) {
     return (
       <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30 w-full">
-        <SnakeGame onClose={() => setShowGame(false)} />
+        <PacmanGame onClose={() => setShowPacman(false)} />
       </div>
     );
   }
@@ -327,7 +327,7 @@ export const InteractiveTerminal = () => {
 
       {/* Quick Commands */}
       <div className="mt-3 sm:mt-4 flex flex-wrap gap-2">
-        {['help', 'about', 'skills', 'projects', 'matrix', 'game'].map((cmd) => (
+        {['help', 'about', 'skills', 'projects', 'matrix', 'pacman'].map((cmd) => (
           <button
             key={cmd}
             onClick={() => {
