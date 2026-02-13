@@ -106,35 +106,14 @@ export const About = () => {
             {/* Bio Text */}
             <div>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-3 sm:mb-4 md:mb-6">
-                I'm a <span className="text-primary font-semibold">Software Engineer Graduate</span> with a unique journey from the 
-                South African Navy to the world of technology. My experience as a Naval Officer taught me precision, 
-                leadership, and strategic thinking - skills I now apply to building innovative software solutions that make a real impact.
-              </p>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-3 sm:mb-4 md:mb-6 text-muted-foreground">
-                Currently excelling in <span className="text-accent">full-stack development</span>, 
-                <span className="text-accent"> cloud computing</span>, and 
-                <span className="text-accent"> AI/ML technologies</span>, I'm passionate about creating 
-                clean, maintainable code and scalable applications. As the <span className="text-primary font-semibold">#1 ranked female GitHub contributor in South Africa</span>, 
-                I demonstrate consistent commitment to open-source and technical excellence.
+                I'm a <span className="text-primary font-semibold">Software Engineer Graduate</span> transitioning from the 
+                South African Navy to technology. My naval background taught me precision, leadership, and strategic thinking - skills I now apply to building innovative software solutions.
               </p>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-muted-foreground">
-                I graduated from <span className="text-primary">CTU Training Solutions</span> with a <span className="text-primary font-semibold">Software Engineering Associate Degree</span> 
-                and completed intensive training at <span className="text-primary">TechBridle Foundation</span>. 
-                As a <span className="text-accent font-semibold">volunteer Technical Trainer</span> at TechBridle, I teach aspiring developers 
-                <span className="text-accent"> HTML/CSS</span>, 
-                <span className="text-accent"> JavaScript</span>, 
-                <span className="text-accent"> Bootstrap</span>, 
-                <span className="text-accent"> React</span>, 
-                <span className="text-accent"> TypeScript</span>, 
-                <span className="text-accent"> C#</span>, 
-                <span className="text-accent"> ASP.NET Core Web API</span>, 
-                <span className="text-accent"> Python</span>, 
-                <span className="text-accent"> Python Flask</span>, 
-                <span className="text-accent"> AI-assisted coding</span>, 
-                <span className="text-accent"> Git/GitHub</span>, and 
-                <span className="text-accent"> Agile methodology</span>. 
-                I'm currently open to opportunities in software development, full-stack engineering, cloud computing, and AI/ML roles, 
-                bringing my diverse background and technical expertise to create innovative solutions.
+                Currently excelling in <span className="text-accent">full-stack development</span>, 
+                <span className="text-accent"> cloud computing</span>, and 
+                <span className="text-accent"> AI/ML technologies</span>. As the <span className="text-primary font-semibold">#1 ranked female GitHub contributor in South Africa</span>, 
+                I demonstrate consistent commitment to technical excellence.
               </p>
             </div>
           </div>

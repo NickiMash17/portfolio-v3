@@ -43,18 +43,61 @@ export const Navigation = () => {
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
+    console.log('Scrolling to:', id, 'Element found:', !!element);
+    
     if (element) {
       const offset = 80; // Account for fixed navbar
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      console.log('Scroll position:', offsetPosition);
 
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth',
       });
 
-      trackEvent('Navigation', 'Section Click', id);
+      trackEvent('navigation_click', { section: id });
       setIsMobileMenuOpen(false);
+    } else {
+      console.error('Element not found:', id);
+      // Try multiple times with increasing delays (for lazy loaded components)
+      const delays = [300, 600, 1000, 1500];
+      let found = false;
+      
+      delays.forEach(delay => {
+        setTimeout(() => {
+          if (!found) {
+            const retryElement = document.getElementById(id);
+            if (retryElement) {
+              console.log(`Found element after ${delay}ms delay`);
+              found = true;
+              const offset = 80;
+              const elementPosition = retryElement.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - offset;
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth',
+              });
+              setIsMobileMenuOpen(false);
+            }
+          }
+        }, delay);
+      });
+      
+      // Fallback for contact - scroll to bottom if still not found
+      if (id === 'contact') {
+        setTimeout(() => {
+          if (!found) {
+            console.log('Contact not found, scrolling to bottom as fallback');
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: 'smooth',
+            });
+            setIsMobileMenuOpen(false);
+          }
+        }, 2000);
+      }
     }
   };
 
@@ -84,7 +127,7 @@ export const Navigation = () => {
             <button
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                trackEvent('Navigation', 'Logo Click', 'home');
+                trackEvent('navigation_click', { section: 'home' });
               }}
               className="flex items-center gap-2 group"
               aria-label="Go to top"

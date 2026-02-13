@@ -19,7 +19,8 @@ export const Preloader = () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isSmallViewport = window.innerWidth < 640;
-    const hasSeenPreloader = sessionStorage.getItem('preloader-seen') === '1';
+    // Temporarily disable sessionStorage check to ensure preloader shows
+    const hasSeenPreloader = false; // sessionStorage.getItem('preloader-seen') === '1';
 
     if (prefersReducedMotion || isSmallViewport || hasSeenPreloader) {
       setShouldShow(false);
@@ -27,7 +28,8 @@ export const Preloader = () => {
       return;
     }
 
-    sessionStorage.setItem('preloader-seen', '1');
+    // Temporarily disable sessionStorage to show preloader every time
+    // sessionStorage.setItem('preloader-seen', '1');
   }, []);
 
   useEffect(() => {
