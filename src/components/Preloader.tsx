@@ -5,6 +5,7 @@ export const Preloader = () => {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [loadingStage, setLoadingStage] = useState(0);
+  const [shouldShow, setShouldShow] = useState(true);
 
   const stages = [
     { text: 'Loading assets...', icon: '📦' },
@@ -14,10 +15,28 @@ export const Preloader = () => {
   ];
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isSmallViewport = window.innerWidth < 640;
+    const hasSeenPreloader = sessionStorage.getItem('preloader-seen') === '1';
+
+    if (prefersReducedMotion || isSmallViewport || hasSeenPreloader) {
+      setShouldShow(false);
+      setIsVisible(false);
+      return;
+    }
+
+    sessionStorage.setItem('preloader-seen', '1');
+  }, []);
+
+  useEffect(() => {
+    if (!shouldShow) return;
+
     // Simulate loading progress with stages
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
-        const newProgress = prev + 1.5;
+        const newProgress = prev + 2.5;
         
         // Update stage based on progress
         if (newProgress < 30) {
@@ -32,17 +51,17 @@ export const Preloader = () => {
 
         if (newProgress >= 100) {
           clearInterval(progressInterval);
-          setTimeout(() => setIsVisible(false), 600);
+          setTimeout(() => setIsVisible(false), 300);
           return 100;
         }
         return newProgress;
       });
-    }, 25);
+    }, 40);
 
     return () => clearInterval(progressInterval);
-  }, []);
+  }, [shouldShow]);
 
-  if (!isVisible) return null;
+  if (!shouldShow || !isVisible) return null;
 
   return (
     <div 

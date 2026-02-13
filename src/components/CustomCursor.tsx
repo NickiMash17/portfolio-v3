@@ -1,14 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isPointer, setIsPointer] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const frameRef = useRef<number | null>(null);
+  const pointerRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isSmallViewport = window.innerWidth < 1024;
+    setIsEnabled(!coarsePointer && !prefersReducedMotion && !isSmallViewport);
+  }, []);
+
+  useEffect(() => {
+    if (!isEnabled) return;
+
+    const updatePosition = () => {
+      setPosition({ x: pointerRef.current.x, y: pointerRef.current.y });
+      frameRef.current = null;
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      pointerRef.current = { x: e.clientX, y: e.clientY };
+      if (frameRef.current === null) {
+        frameRef.current = requestAnimationFrame(updatePosition);
+      }
       setIsVisible(true);
       
       const target = e.target as HTMLElement;
@@ -35,16 +57,18 @@ export const CustomCursor = () => {
     document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+      }
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, []);
+  }, [isEnabled]);
 
-  // Don't render on touch devices
-  if (typeof window !== 'undefined' && 'ontouchstart' in window) {
+  if (!isEnabled) {
     return null;
   }
 

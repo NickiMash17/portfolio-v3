@@ -67,6 +67,9 @@ export const Hero = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const iconButtonClass =
+    'p-2 sm:p-3 glass rounded-xl border border-foreground/10 transition-all duration-300';
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
       {/* Animated gradient mesh background */}
@@ -100,7 +103,7 @@ export const Hero = () => {
                   <img 
                     src="/my-caricature.jpeg" 
                     alt="Nicolette Mashaba - Software Engineer"
-                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-24 h-24 sm:w-28 sm:h-28 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
@@ -128,16 +131,16 @@ export const Hero = () => {
 
                 {/* Name with Orbiting Icons */}
                 <div className="relative">
-                  {/* Floating Icons */}
+                  {/* Floating Icons (tablet/desktop) */}
                   <a
                     href="https://github.com/NickiMash17"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute -top-2 left-[10%] sm:left-[5%] animate-float group z-20 cursor-pointer"
+                    className="hidden sm:block absolute -top-2 left-[5%] animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '0s', animationDuration: '4s' }}
                     onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github')}
                   >
-                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                    <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
                       <Github className="w-5 h-5 sm:w-7 sm:h-7 text-foreground/70 group-hover:text-foreground transition-colors" />
                     </div>
                   </a>
@@ -146,31 +149,31 @@ export const Hero = () => {
                     href="https://linkedin.com/in/nicolette-mashaba"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute top-0 right-[5%] sm:right-[10%] animate-float group z-20 cursor-pointer"
+                    className="hidden sm:block absolute top-0 right-[10%] animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
                     onClick={() => trackExternalLink('https://linkedin.com/in/nicolette-mashaba', 'linkedin')}
                   >
-                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20">
+                    <div className={`${iconButtonClass} group-hover:border-[#0A66C2]/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20`}>
                       <Linkedin className="w-5 h-5 sm:w-7 sm:h-7 text-[#0A66C2] group-hover:text-[#0A66C2]/80 transition-colors" />
                     </div>
                   </a>
 
                   <button
                     onClick={() => scrollToSection('projects')}
-                    className="absolute bottom-0 left-[5%] sm:left-[15%] animate-float group z-20 cursor-pointer"
+                    className="hidden sm:block absolute bottom-0 left-[15%] animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '1s', animationDuration: '5s' }}
                   >
-                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                    <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
                       <Folder className="w-5 h-5 sm:w-7 sm:h-7 text-primary fill-primary/20 group-hover:fill-primary/40 transition-colors" />
                     </div>
                   </button>
 
                   <button
                     onClick={() => scrollToSection('contact')}
-                    className="absolute -bottom-4 right-[15%] sm:right-[5%] animate-float group z-20 cursor-pointer"
+                    className="hidden sm:block absolute -bottom-4 right-[5%] animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '1.5s', animationDuration: '4.2s' }}
                   >
-                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-accent/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent/20">
+                    <div className={`${iconButtonClass} group-hover:border-accent/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/20`}>
                       <Mail className="w-5 h-5 sm:w-7 sm:h-7 text-accent group-hover:text-accent/80 transition-colors" />
                     </div>
                   </button>
@@ -180,23 +183,67 @@ export const Hero = () => {
                     download
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-0 animate-float group z-20 cursor-pointer"
+                    className="hidden sm:block absolute top-1/2 -translate-y-1/2 right-0 animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '2s', animationDuration: '4.8s' }}
                     onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
                   >
-                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                    <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
                       <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
                     </div>
                   </a>
 
                   {/* Name and Title */}
-                  <div className="space-y-1 sm:space-y-3 relative z-10 py-4 sm:py-8 md:py-12">
+                  <div className="space-y-1 sm:space-y-3 relative z-10 py-2 sm:py-8 md:py-12 px-2 sm:px-10 md:px-0">
                     <h1 className="font-medium tracking-tight">
                       <span className="block text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-foreground">Nicolette Mashaba</span>
                       <span className="block text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-semibold mt-1 sm:mt-2 min-h-[1.2em]">
                         {titleText}<span className="animate-pulse text-primary">|</span>
                       </span>
                     </h1>
+
+                    {/* Mobile action icons */}
+                    <div className="sm:hidden flex flex-wrap justify-center gap-2 pt-3">
+                      <a
+                        href="https://github.com/NickiMash17"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
+                        onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github')}
+                      >
+                        <Github className="w-5 h-5 text-foreground/70" />
+                      </a>
+                      <a
+                        href="https://linkedin.com/in/nicolette-mashaba"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${iconButtonClass} hover:border-[#0A66C2]/50 hover:shadow-lg hover:shadow-[#0A66C2]/20`}
+                        onClick={() => trackExternalLink('https://linkedin.com/in/nicolette-mashaba', 'linkedin')}
+                      >
+                        <Linkedin className="w-5 h-5 text-[#0A66C2]" />
+                      </a>
+                      <button
+                        onClick={() => scrollToSection('projects')}
+                        className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
+                      >
+                        <Folder className="w-5 h-5 text-primary fill-primary/20" />
+                      </button>
+                      <button
+                        onClick={() => scrollToSection('contact')}
+                        className={`${iconButtonClass} hover:border-accent/50 hover:shadow-lg hover:shadow-accent/20`}
+                      >
+                        <Mail className="w-5 h-5 text-accent" />
+                      </button>
+                      <a
+                        href="/Nicolette-Mashaba-CV.pdf"
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
+                        onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
+                      >
+                        <FileText className="w-5 h-5 text-primary" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </header>

@@ -249,6 +249,11 @@ export const Projects = () => {
                           alt={`${project.title} screenshot`}
                           className="w-full h-full object-cover"
                           loading="lazy"
+                          decoding="async"
+                          fetchPriority="low"
+                          sizes="(max-width: 1024px) 100vw, 320px"
+                          width="640"
+                          height="360"
                         />
                         {/* Creative Overlay Effects */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />

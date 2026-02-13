@@ -92,8 +92,10 @@ export const About = () => {
                 <img 
                   src={profileImage} 
                   alt="Nicolette Mashaba - Software Engineer Graduate"
-                  loading="eager"
+                  loading="lazy"
                   decoding="async"
+                  fetchPriority="low"
+                  sizes="(max-width: 768px) 224px, 320px"
                   width="400"
                   height="400" 
                   className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
