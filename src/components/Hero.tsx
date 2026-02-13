@@ -78,96 +78,135 @@ export const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
-          {/* Left: Headline and CTAs */}
-          <header className="text-center md:text-left w-full" aria-label="Introduction">
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-1.5 sm:gap-3 glass rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 border border-primary/20 mb-4 sm:mb-6">
-              <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-accent"></span>
-              </span>
-              <span className="text-[10px] sm:text-sm font-medium text-foreground">Open to Opportunities</span>
-              <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">• Johannesburg, SA</span>
-            </div>
-
-            {/* Name with Orbiting Icons */}
-            <div className="relative py-8 sm:py-12 md:py-16">
-              {/* Floating Icons */}
-              <a
-                href="https://github.com/NickiMash17"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute -top-2 left-[10%] sm:left-[5%] animate-float group z-20 cursor-pointer"
-                style={{ animationDelay: '0s', animationDuration: '4s' }}
-                onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github')}
-              >
-                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
-                  <Github className="w-5 h-5 sm:w-7 sm:h-7 text-foreground/70 group-hover:text-foreground transition-colors" />
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Left: Profile Image and Headline */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6">
+            {/* Profile Image and Name on same line */}
+            <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
+              {/* Profile Image */}
+              <div className="relative group flex-shrink-0">
+                {/* Animated gradient frame */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-rotate-slow"></div>
+                <div className="absolute -inset-1 bg-gradient-to-tr from-primary/50 via-accent/30 to-primary/50 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
+                
+                {/* Inner frame with decorative corners */}
+                <div className="relative glass rounded-full p-2 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300">
+                  {/* Corner decorations */}
+                  <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-accent rounded-tl-full group-hover:scale-125 transition-transform duration-300"></div>
+                  <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-primary rounded-tr-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.1s' }}></div>
+                  <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-primary rounded-bl-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.2s' }}></div>
+                  <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-accent rounded-br-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.3s' }}></div>
+                  
+                  <img 
+                    src="/my-caricature.jpeg" 
+                    alt="Nicolette Mashaba - Software Engineer"
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
                 </div>
-              </a>
-
-              <a
-                href="https://linkedin.com/in/nicolette-mashaba"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute top-0 right-[5%] sm:right-[10%] animate-float group z-20 cursor-pointer"
-                style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
-                onClick={() => trackExternalLink('https://linkedin.com/in/nicolette-mashaba', 'linkedin')}
-              >
-                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20">
-                  <Linkedin className="w-5 h-5 sm:w-7 sm:h-7 text-[#0A66C2] group-hover:text-[#0A66C2]/80 transition-colors" />
+                
+                {/* Floating badges */}
+                <div className="absolute -top-2 -right-2 glass rounded-full px-2 py-1 text-xs font-medium text-primary border border-primary/20 animate-float">
+                  #1 SA
                 </div>
-              </a>
-
-              <button
-                onClick={() => scrollToSection('projects')}
-                className="absolute bottom-0 left-[5%] sm:left-[15%] animate-float group z-20 cursor-pointer"
-                style={{ animationDelay: '1s', animationDuration: '5s' }}
-              >
-                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
-                  <Folder className="w-5 h-5 sm:w-7 sm:h-7 text-primary fill-primary/20 group-hover:fill-primary/40 transition-colors" />
+                <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 animate-float" style={{ animationDelay: '1s' }}>
+                  Azure
                 </div>
-              </button>
-
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="absolute -bottom-4 right-[15%] sm:right-[5%] animate-float group z-20 cursor-pointer"
-                style={{ animationDelay: '1.5s', animationDuration: '4.2s' }}
-              >
-                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-accent/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent/20">
-                  <Mail className="w-5 h-5 sm:w-7 sm:h-7 text-accent group-hover:text-accent/80 transition-colors" />
-                </div>
-              </button>
-
-              <a
-                href="/Nicolette-Mashaba-CV.pdf"
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-0 animate-float group z-20 cursor-pointer"
-                style={{ animationDelay: '2s', animationDuration: '4.8s' }}
-                onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
-              >
-                <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
-                  <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
-                </div>
-              </a>
+              </div>
 
               {/* Name and Title */}
-              <div className="space-y-1 sm:space-y-3 relative z-10">
-                <h1 className="font-medium tracking-tight">
-                  <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-foreground">Nicolette Mashaba</span>
-                  <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-semibold mt-1 sm:mt-2 min-h-[1.2em]">
-                    {titleText}<span className="animate-pulse text-primary">|</span>
+              <header className="w-full" aria-label="Introduction">
+                {/* Status Badge */}
+                <div className="inline-flex items-center gap-1.5 sm:gap-3 glass rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 border border-primary/20 mb-3 sm:mb-4 lg:mb-6">
+                  <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-accent"></span>
                   </span>
-                </h1>
-              </div>
+                  <span className="text-[10px] sm:text-sm font-medium text-foreground">Open to Opportunities</span>
+                  <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">• Johannesburg, SA</span>
+                </div>
+
+                {/* Name with Orbiting Icons */}
+                <div className="relative">
+                  {/* Floating Icons */}
+                  <a
+                    href="https://github.com/NickiMash17"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute -top-2 left-[10%] sm:left-[5%] animate-float group z-20 cursor-pointer"
+                    style={{ animationDelay: '0s', animationDuration: '4s' }}
+                    onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github')}
+                  >
+                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                      <Github className="w-5 h-5 sm:w-7 sm:h-7 text-foreground/70 group-hover:text-foreground transition-colors" />
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://linkedin.com/in/nicolette-mashaba"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-0 right-[5%] sm:right-[10%] animate-float group z-20 cursor-pointer"
+                    style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
+                    onClick={() => trackExternalLink('https://linkedin.com/in/nicolette-mashaba', 'linkedin')}
+                  >
+                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-[#0A66C2]/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20">
+                      <Linkedin className="w-5 h-5 sm:w-7 sm:h-7 text-[#0A66C2] group-hover:text-[#0A66C2]/80 transition-colors" />
+                    </div>
+                  </a>
+
+                  <button
+                    onClick={() => scrollToSection('projects')}
+                    className="absolute bottom-0 left-[5%] sm:left-[15%] animate-float group z-20 cursor-pointer"
+                    style={{ animationDelay: '1s', animationDuration: '5s' }}
+                  >
+                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                      <Folder className="w-5 h-5 sm:w-7 sm:h-7 text-primary fill-primary/20 group-hover:fill-primary/40 transition-colors" />
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => scrollToSection('contact')}
+                    className="absolute -bottom-4 right-[15%] sm:right-[5%] animate-float group z-20 cursor-pointer"
+                    style={{ animationDelay: '1.5s', animationDuration: '4.2s' }}
+                  >
+                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-accent/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent/20">
+                      <Mail className="w-5 h-5 sm:w-7 sm:h-7 text-accent group-hover:text-accent/80 transition-colors" />
+                    </div>
+                  </button>
+
+                  <a
+                    href="/Nicolette-Mashaba-CV.pdf"
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-1/2 -translate-y-1/2 -right-2 sm:right-0 animate-float group z-20 cursor-pointer"
+                    style={{ animationDelay: '2s', animationDuration: '4.8s' }}
+                    onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
+                  >
+                    <div className="p-2 sm:p-3 glass rounded-xl border border-foreground/10 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                      <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
+                    </div>
+                  </a>
+
+                  {/* Name and Title */}
+                  <div className="space-y-1 sm:space-y-3 relative z-10 py-4 sm:py-8 md:py-12">
+                    <h1 className="font-medium tracking-tight">
+                      <span className="block text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-foreground">Nicolette Mashaba</span>
+                      <span className="block text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-semibold mt-1 sm:mt-2 min-h-[1.2em]">
+                        {titleText}<span className="animate-pulse text-primary">|</span>
+                      </span>
+                    </h1>
+                  </div>
+                </div>
+              </header>
             </div>
-          </header>
+          </div>
 
           {/* Right: Interactive Terminal */}
-          <InteractiveTerminal />
+          <div className="flex flex-col items-center justify-center">
+            <InteractiveTerminal />
+          </div>
         </div>
       </div>
     </section>

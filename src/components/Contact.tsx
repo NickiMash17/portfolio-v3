@@ -86,7 +86,7 @@ export const Contact = () => {
     }
 
     setIsSubmitting(true);
-    trackEvent('Contact', 'Form Submit', 'success');
+    trackEvent('form_submit', { category: 'contact' });
 
     // Create mailto link
     const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
@@ -163,7 +163,8 @@ export const Contact = () => {
                   </div>
                   <div>
                     <div className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mb-0.5 sm:mb-1">Location</div>
-                    <div className="text-xs sm:text-sm md:text-base text-foreground">South Africa</div>
+                    <div className="text-xs sm:text-sm md:text-base text-foreground">Johannesburg, South Africa</div>
+                    <div className="text-[10px] sm:text-xs text-muted-foreground">Available for remote & local opportunities</div>
                   </div>
                 </div>
               </div>
@@ -173,11 +174,19 @@ export const Contact = () => {
             <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 animate-pulse-glow">
               <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 md:mb-4 text-foreground">Availability</h3>
               <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-2 sm:mb-3 md:mb-4 leading-relaxed">
-                Currently available for internships, freelance projects, and full-time opportunities.
+                Currently available for <span className="text-primary font-semibold">software engineering opportunities</span>, 
+                <span className="text-accent"> freelance projects</span>, and 
+                <span className="text-accent"> consulting work</span>. 
+                Open to full-time positions, remote work, and collaborative projects.
               </p>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-accent animate-pulse" />
-                <span className="text-accent font-mono text-[10px] sm:text-xs md:text-sm">Open to opportunities</span>
+              <div className="space-y-2">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-accent animate-pulse" />
+                  <span className="text-accent font-mono text-[10px] sm:text-xs md:text-sm">Open to opportunities</span>
+                </div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground">
+                  Specializing in: Full-Stack Development • Cloud Computing • AI/ML Solutions
+                </div>
               </div>
             </div>
             </div>

@@ -1,4 +1,4 @@
-import { Code2, Cloud, Anchor, Trophy } from 'lucide-react';
+import { Code2, Cloud, Anchor, Trophy, Users } from 'lucide-react';
 import profileImage from '@/assets/Myself.jpg';
 import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -7,22 +7,27 @@ export const About = () => {
     {
       icon: Code2,
       title: 'Full-Stack Developer',
-      description: 'Building scalable applications with React, Node.js, .NET, and Flutter',
+      description: 'Building scalable applications with React, TypeScript, Node.js, .NET, and Flutter',
     },
     {
       icon: Cloud,
       title: 'Azure Certified',
-      description: 'Microsoft Azure Developer Associate & Data Fundamentals certified',
+      description: 'Microsoft Certified: Azure Developer Associate (AZ-204) & Data Fundamentals (DP-900)',
     },
     {
       icon: Anchor,
       title: 'Naval Background',
-      description: 'Former Navigation Officer with South African Navy',
+      description: 'Former Navigation Officer with South African Navy - precision & strategic thinking',
     },
     {
       icon: Trophy,
-      title: 'Award Winner',
-      description: 'Winner at AIMS Hackathon 2025 - AI Compliance Interrogator',
+      title: 'Hackathon Winner',
+      description: 'AIMS Hackathon 2025 Winner - AI Compliance Interrogator for human trafficking prevention',
+    },
+    {
+      icon: Users,
+      title: 'Technical Trainer',
+      description: 'Volunteer Trainer at TechBridle Foundation - teaching software development to aspiring developers',
     },
   ];
 
@@ -46,8 +51,44 @@ export const About = () => {
           <div className="grid md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr] gap-4 sm:gap-6 md:gap-8 items-center">
             {/* Profile Image */}
             <div className="relative group mx-auto md:mx-0">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl sm:rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-full md:h-full rounded-xl sm:rounded-2xl overflow-hidden border-2 border-primary/30 group-hover:border-primary/50 transition-all duration-300">
+              {/* Unique animated geometric frame */}
+              <div className="absolute -inset-4">
+                {/* Rotating outer ring */}
+                <div className="absolute inset-0 rounded-3xl border-2 border-primary/20 animate-spin-slow"></div>
+                
+                {/* Pulsing middle ring */}
+                <div className="absolute inset-2 rounded-3xl border border-accent/30 animate-pulse-ring"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-0 left-1/4 w-2 h-2 bg-primary rounded-full animate-float-particle"></div>
+                <div className="absolute top-1/4 right-0 w-1.5 h-1.5 bg-accent rounded-full animate-float-particle" style={{ animationDelay: '0.5s' }}></div>
+                <div className="absolute bottom-0 left-1/3 w-2.5 h-2.5 bg-primary rounded-full animate-float-particle" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute bottom-1/4 right-1/4 w-1.5 h-1.5 bg-accent rounded-full animate-float-particle" style={{ animationDelay: '1.5s' }}></div>
+                
+                {/* Corner triangles */}
+                <div className="absolute -top-1 -left-1 w-0 h-0 border-l-[12px] border-l-transparent border-b-[12px] border-b-primary/40 animate-triangle-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-0 h-0 border-r-[12px] border-r-transparent border-b-[12px] border-b-accent/40 animate-triangle-pulse" style={{ animationDelay: '0.3s' }}></div>
+                <div className="absolute -bottom-1 -left-1 w-0 h-0 border-l-[12px] border-l-transparent border-t-[12px] border-t-accent/40 animate-triangle-pulse" style={{ animationDelay: '0.6s' }}></div>
+                <div className="absolute -bottom-1 -right-1 w-0 h-0 border-r-[12px] border-r-transparent border-t-[12px] border-t-primary/40 animate-triangle-pulse" style={{ animationDelay: '0.9s' }}></div>
+              </div>
+              
+              {/* Main image container with holographic effect */}
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-full md:h-full rounded-2xl overflow-hidden border-2 border-primary/50 group-hover:border-primary/80 transition-all duration-500">
+                {/* Holographic overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Scanning line effect */}
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent animate-scan-line"></div>
+                
+                {/* Data matrix effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500">
+                  <div className="grid grid-cols-4 grid-rows-4 h-full">
+                    {[...Array(16)].map((_, i) => (
+                      <div key={i} className="border border-primary/20 animate-matrix-flicker" style={{ animationDelay: `${i * 0.1}s` }}></div>
+                    ))}
+                  </div>
+                </div>
+                
                 <img 
                   src={profileImage} 
                   alt="Nicolette Mashaba - Software Engineer Graduate"
@@ -55,7 +96,7 @@ export const About = () => {
                   decoding="async"
                   width="400"
                   height="400" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
                 />
               </div>
             </div>
@@ -64,14 +105,34 @@ export const About = () => {
             <div>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-3 sm:mb-4 md:mb-6">
                 I'm a <span className="text-primary font-semibold">Software Engineer Graduate</span> with a unique journey from the 
-                Navy to the world of technology. My experience as a Naval Officer taught me precision, 
-                problem-solving, and strategic thinking which are skills I now apply to building innovative software solutions.
+                South African Navy to the world of technology. My experience as a Naval Officer taught me precision, 
+                leadership, and strategic thinking - skills I now apply to building innovative software solutions that make a real impact.
               </p>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-muted-foreground">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-3 sm:mb-4 md:mb-6 text-muted-foreground">
                 Currently excelling in <span className="text-accent">full-stack development</span>, 
                 <span className="text-accent"> cloud computing</span>, and 
-                <span className="text-accent"> AI technologies</span>. I'm passionate about creating 
-                clean, maintainable code and scalable applications that make a real-world impact.
+                <span className="text-accent"> AI/ML technologies</span>, I'm passionate about creating 
+                clean, maintainable code and scalable applications. As the <span className="text-primary font-semibold">#1 ranked female GitHub contributor in South Africa</span>, 
+                I demonstrate consistent commitment to open-source and technical excellence.
+              </p>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-muted-foreground">
+                I graduated from <span className="text-primary">CTU Training Solutions</span> with a <span className="text-primary font-semibold">Software Engineering Associate Degree</span> 
+                and completed intensive training at <span className="text-primary">TechBridle Foundation</span>. 
+                As a <span className="text-accent font-semibold">volunteer Technical Trainer</span> at TechBridle, I teach aspiring developers 
+                <span className="text-accent"> HTML/CSS</span>, 
+                <span className="text-accent"> JavaScript</span>, 
+                <span className="text-accent"> Bootstrap</span>, 
+                <span className="text-accent"> React</span>, 
+                <span className="text-accent"> TypeScript</span>, 
+                <span className="text-accent"> C#</span>, 
+                <span className="text-accent"> ASP.NET Core Web API</span>, 
+                <span className="text-accent"> Python</span>, 
+                <span className="text-accent"> Python Flask</span>, 
+                <span className="text-accent"> AI-assisted coding</span>, 
+                <span className="text-accent"> Git/GitHub</span>, and 
+                <span className="text-accent"> Agile methodology</span>. 
+                I'm currently open to opportunities in software development, full-stack engineering, cloud computing, and AI/ML roles, 
+                bringing my diverse background and technical expertise to create innovative solutions.
               </p>
             </div>
           </div>
@@ -108,10 +169,10 @@ export const About = () => {
         <ScrollAnimation animation="fade-up" delay={300}>
           <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
           {[
-            { value: '5+', label: 'Technologies' },
-            { value: '10+', label: 'Projects' },
-            { value: '3+', label: 'Certifications' },
-            { value: '100%', label: 'Dedication' },
+            { value: '1000+', label: 'GitHub Commits' },
+            { value: '15+', label: 'Projects Built' },
+            { value: '2', label: 'Azure Certs' },
+            { value: '#1', label: 'Female Dev SA' },
           ].map((stat, index) => (
             <div
               key={index}

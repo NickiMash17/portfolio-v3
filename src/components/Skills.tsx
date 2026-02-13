@@ -28,6 +28,39 @@ export const Skills = () => {
     { name: 'Git', logo: gitLogo },
   ];
 
+  const additionalSkills = [
+    'RESTful APIs',
+    'GraphQL',
+    'Entity Framework Core',
+    'ASP.NET Core',
+    'TailwindCSS',
+    'Next.js',
+    'Firebase',
+    'AWS Basics',
+    'Machine Learning',
+    'Data Structures',
+    'Algorithms',
+    'Clean Architecture',
+  ];
+
+  const getSkillIcon = (skill: string): string => {
+    const icons: Record<string, string> = {
+      'RESTful APIs': '🔌',
+      'GraphQL': '🔄',
+      'Entity Framework Core': '🏗️',
+      'ASP.NET Core': '⚡',
+      'TailwindCSS': '🎨',
+      'Next.js': '▲',
+      'Firebase': '🔥',
+      'AWS Basics': '☁️',
+      'Machine Learning': '🤖',
+      'Data Structures': '📊',
+      'Algorithms': '⚙️',
+      'Clean Architecture': '🏛️',
+    };
+    return icons[skill] || '💻';
+  };
+
   return (
     <section id="skills" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
@@ -44,8 +77,8 @@ export const Skills = () => {
 
         {/* Tech Stack Showcase */}
         <ScrollAnimation animation="scale" delay={100}>
-          <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden">
-          <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 md:mb-8 text-center">Key Technologies</h3>
+          <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden mb-6">
+          <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 md:mb-8 text-center">Core Technologies</h3>
 
           {/* Mobile: Crisp Grid (no 3D to avoid blur and improve performance) */}
           <div className="sm:hidden">
@@ -109,4 +142,3 @@ export const Skills = () => {
     </section>
   );
 };
-

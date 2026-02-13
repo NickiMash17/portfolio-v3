@@ -5,6 +5,19 @@ export const Experience = () => {
   const experiences = [
     {
       type: 'work',
+      title: 'Technical Trainer (Volunteer)',
+      company: 'TechBridle Foundation',
+      period: '2026 - Present',
+      location: 'Remote',
+      description: [
+        'Teaching software development to aspiring developers',
+        'Covering HTML/CSS, JavaScript, Bootstrap, React, TypeScript',
+        'Instructing C#, ASP.NET Core Web API, Python, Python Flask',
+        'Training on AI-assisted coding, Git/GitHub, and Agile methodology',
+      ],
+    },
+    {
+      type: 'work',
       title: 'Software Engineering Intern',
       company: 'Coast IT (PTY) Ltd',
       period: 'Nov 2025 - Dec 2025',
@@ -98,10 +111,11 @@ export const Experience = () => {
                     <div className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mb-2 sm:mb-3">
                       {exp.period} • {exp.location}
                     </div>
-                    <ul className={`space-y-1 sm:space-y-1.5 md:space-y-2 ${isLeft ? 'md:text-right' : 'md:text-left'} text-left`}>
+                    <ul className={`space-y-1 sm:space-y-1.5 md:space-y-2 text-left ${isLeft ? 'md:text-right' : ''}`}>
                       {exp.description.map((item, i) => (
-                        <li key={i} className="text-[11px] sm:text-xs md:text-sm text-muted-foreground leading-relaxed">
-                          {item}
+                        <li key={i} className="text-[11px] sm:text-xs md:text-sm text-muted-foreground leading-relaxed flex items-start gap-1.5">
+                          <span className="text-accent mt-0.5 flex-shrink-0">▹</span>
+                          <span>{item}</span>
                         </li>
                       ))}
                     </ul>

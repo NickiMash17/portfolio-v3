@@ -6,15 +6,15 @@ import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 import { trackProjectView, trackExternalLink, trackEvent } from '@/lib/analytics';
 
 // Simple YouTube icon component
-const YoutubeIcon = ({ size = 16 }: { size?: number }) => (
+const YoutubeIcon = ({ size }: { size?: number }) => (
   <svg
-    width={size}
-    height={size}
+    width={size || 16}
+    height={size || 16}
     viewBox="0 0 24 24"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
   </svg>
 );
 
@@ -38,7 +38,7 @@ const getProjectGradient = (index: number) => {
 export const Projects = () => {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
 
-  const projects = [
+  const projectsData = [
     {
       title: 'AI Compliance Interrogator',
       subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly',
@@ -63,6 +63,7 @@ export const Projects = () => {
       github: 'https://github.com/NickiMash17/AIMS-Firefly',
       demo: null,
       emoji: '🧠',
+      screenshot: '/screenshots/aims.jpg',
     },
     {
       title: 'LoanLife EDGE',
@@ -88,6 +89,7 @@ export const Projects = () => {
       github: 'https://github.com/Lunga-Mashaba/LoanLife_Edge',
       demo: 'https://loan-life-edge.vercel.app/',
       emoji: '📈',
+      screenshot: '/screenshots/loanlife.jpg',
     },
     {
       title: 'RealHomes',
@@ -104,6 +106,7 @@ export const Projects = () => {
       github: 'https://github.com/NickiMash17/RealHomes',
       demo: 'https://real-homes.vercel.app/',
       emoji: '🏠',
+      screenshot: '/screenshots/realhomes.jpeg',
     },
     {
       title: 'BookReviewApp',
@@ -120,6 +123,7 @@ export const Projects = () => {
       github: 'https://github.com/NickiMash17/BookReviewApp',
       demo: 'https://bookreviewapp-1755367448.azurewebsites.net/',
       emoji: '📚',
+      screenshot: '/screenshots/bookreviewapp.jpeg',
     },
     {
       title: 'FitQuest',
@@ -136,8 +140,11 @@ export const Projects = () => {
       github: 'https://github.com/NickiMash17/fitquest-app',
       demo: 'https://youtu.be/Ist1QrlhFIg?si=lv-JSEcLseUJj4h0',
       emoji: '🌱',
+      screenshot: '/screenshots/fitquest.jpeg',
     },
   ];
+
+  const projects = useMemo(() => projectsData, [projectsData]);
 
   // Get all unique technologies
   const allTechs = useMemo(() => {
@@ -146,7 +153,7 @@ export const Projects = () => {
       project.tech.forEach(tech => techSet.add(tech));
     });
     return Array.from(techSet).sort();
-  }, []);
+  }, [projects]);
 
   // Filter projects by selected technology
   const filteredProjects = useMemo(() => {
@@ -154,11 +161,11 @@ export const Projects = () => {
     return projects.filter(project => 
       project.tech.some(tech => tech.toLowerCase().includes(selectedTech.toLowerCase()))
     );
-  }, [selectedTech]);
+  }, [projects, selectedTech]);
 
   const handleTechFilter = (tech: string | null) => {
     setSelectedTech(tech);
-    trackEvent('Projects', 'Filter', tech || 'all');
+    trackEvent('Projects', { category: 'filter', tech: tech || 'all' });
   };
 
   return (
@@ -231,49 +238,84 @@ export const Projects = () => {
               <TiltCard tiltAmount={5} scale={1.01}>
                 <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary hover:shadow-xl hover:-translate-y-1 group cursor-pointer">
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
-                {/* Project Visual / Unified Creative Placeholder */}
+                {/* Project Visual with Creative Screenshot Display */}
                 <div className="lg:w-72 xl:w-80 h-32 sm:h-40 md:h-48 lg:h-auto rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0">
-                  <div
-                    className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(
-                      index
-                    )} overflow-hidden`}
-                  >
-                    {/* Soft glow + subtle grid */}
-                    <div className="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_0%_0%,white,transparent_55%),radial-gradient(circle_at_100%_100%,white,transparent_55%)] mix-blend-screen" />
-                    <div className="absolute inset-0 opacity-20 bg-[linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[length:26px_26px]" />
-
-                    {/* Inner card */}
-                    <div className="relative z-10 m-[3px] h-[calc(100%-6px)] rounded-xl bg-gradient-to-br from-background/95 to-background/80 border border-white/10 flex flex-col justify-between p-2.5 sm:p-3">
-                      <div className="flex items-center justify-between gap-1.5">
-                        <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-[10px] sm:text-[11px] font-mono border border-primary/30">
-                          <span>{project.emoji ?? '💡'}</span>
-                          <span className="truncate max-w-[110px] sm:max-w-[140px]">
-                            {project.title}
-                          </span>
+                  <div className="relative w-full h-full">
+                    {/* Screenshot Background */}
+                    {project.screenshot ? (
+                      <div className="absolute inset-0">
+                        <img 
+                          src={project.screenshot} 
+                          alt={`${project.title} screenshot`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        {/* Creative Overlay Effects */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-transparent" />
+                        
+                        {/* Animated Border Frame */}
+                        <div className="absolute inset-0 border-2 border-transparent rounded-lg">
+                          <div className="absolute -top-0.5 -left-0.5 w-4 h-4 border-t-2 border-l-2 border-primary rounded-tl-full animate-pulse" />
+                          <div className="absolute -top-0.5 -right-0.5 w-4 h-4 border-t-2 border-r-2 border-accent rounded-tr-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+                          <div className="absolute -bottom-0.5 -left-0.5 w-4 h-4 border-b-2 border-l-2 border-accent rounded-bl-full animate-pulse" style={{ animationDelay: '1s' }} />
+                          <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 border-b-2 border-r-2 border-primary rounded-br-full animate-pulse" style={{ animationDelay: '1.5s' }} />
                         </div>
-                        <span className="hidden sm:inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        
+                        {/* Project Info Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-primary/20 backdrop-blur-sm">
+                              <span className="text-white text-xs font-bold">{project.emoji ?? '💡'}</span>
+                              <span className="text-white text-xs font-mono truncate max-w-[100px]">{project.title}</span>
+                            </div>
+                            <div className="flex gap-1">
+                              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-lg shadow-emerald-400/50" />
+                            </div>
+                          </div>
+                        </div>
                       </div>
+                    ) : (
+                      /* Fallback to gradient design if no screenshot */
+                      <div className={`relative w-full h-full bg-gradient-to-br ${getProjectGradient(index)} overflow-hidden`}>
+                        {/* Soft glow + subtle grid */}
+                        <div className="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_0%_0%,white,transparent_55%),radial-gradient(circle_at_100%_100%,white,transparent_55%)] mix-blend-screen" />
+                        <div className="absolute inset-0 opacity-20 bg-[linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[length:26px_26px]" />
 
-                      <p className="mt-1 text-[9px] sm:text-[10px] text-muted-foreground line-clamp-2">
-                        {project.subtitle}
-                      </p>
+                        {/* Inner card */}
+                        <div className="relative z-10 m-[3px] h-[calc(100%-6px)] rounded-xl bg-gradient-to-br from-background/95 to-background/80 border border-white/10 flex flex-col justify-between p-2.5 sm:p-3">
+                          <div className="flex items-center justify-between gap-1.5">
+                            <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-[10px] sm:text-[11px] font-mono border border-primary/30">
+                              <span>{project.emoji ?? '💡'}</span>
+                              <span className="truncate max-w-[110px] sm:max-w-[140px]">
+                                {project.title}
+                              </span>
+                            </div>
+                            <span className="hidden sm:inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          </div>
 
-                      <div className="mt-1 flex flex-wrap gap-1 text-[8px] sm:text-[9px] text-muted-foreground/80 font-mono">
-                        {project.tech.slice(0, 3).map((t) => (
-                          <span
-                            key={t}
-                            className="px-1.5 py-0.5 rounded-full bg-primary/5 border border-primary/20"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                        {project.tech.length > 3 && (
-                          <span className="px-1.5 py-0.5 rounded-full bg-primary/5 border border-primary/20">
-                            +{project.tech.length - 3} more
-                          </span>
-                        )}
+                          <p className="mt-1 text-[9px] sm:text-[10px] text-muted-foreground line-clamp-2">
+                            {project.subtitle}
+                          </p>
+
+                          <div className="mt-1 flex flex-wrap gap-1 text-[8px] sm:text-[9px] text-muted-foreground/80 font-mono">
+                            {project.tech.slice(0, 3).map((t) => (
+                              <span
+                                key={t}
+                                className="px-1.5 py-0.5 rounded-full bg-primary/5 border border-primary/20"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                            {project.tech.length > 3 && (
+                              <span className="px-1.5 py-0.5 rounded-full bg-primary/5 border border-primary/20">
+                                +{project.tech.length - 3} more
+                              </span>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
 
