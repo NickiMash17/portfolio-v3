@@ -18,8 +18,8 @@ export const Preloader = () => {
     if (typeof window === 'undefined') return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isSmallViewport = window.innerWidth < 640;
-    // Temporarily disable sessionStorage check to ensure preloader shows
+    // Temporarily disable viewport check to show preloader on mobile too
+    const isSmallViewport = false; // window.innerWidth < 640;
     const hasSeenPreloader = false; // sessionStorage.getItem('preloader-seen') === '1';
 
     if (prefersReducedMotion || isSmallViewport || hasSeenPreloader) {

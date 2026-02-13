@@ -4,8 +4,9 @@ export const AuroraBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const isSmallViewport = window.innerWidth < 768;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Temporarily disable viewport and motion checks to ensure parallax shows
+    const isSmallViewport = false; // window.innerWidth < 768;
+    const prefersReducedMotion = false; // window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (isSmallViewport || prefersReducedMotion) return;
 
     const canvas = canvasRef.current;
