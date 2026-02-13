@@ -4,6 +4,10 @@ export const AuroraBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const isSmallViewport = window.innerWidth < 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isSmallViewport || prefersReducedMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -59,7 +63,21 @@ export const AuroraBackground = () => {
     };
 
     let animationId: number;
+    let lastFrame = 0;
+    const targetFrameTime = 1000 / 30;
     const animate = () => {
+      if (document.hidden) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
+
+      const now = performance.now();
+      if (now - lastFrame < targetFrameTime) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrame = now;
+
       ctx.fillStyle = hslVar('--background', isDark ? 0.12 : 0.06);
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 

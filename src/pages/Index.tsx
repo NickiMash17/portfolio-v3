@@ -1,27 +1,101 @@
+import { Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react';
 import { AuroraBackground } from '@/components/AuroraBackground';
-import { AIChat } from '@/components/AIChat';
-import { GitHubActivity } from '@/components/GitHubActivity';
 import { Hero } from '@/components/Hero';
-import { About } from '@/components/About';
-import { Skills } from '@/components/Skills';
-import { Experience } from '@/components/Experience';
-import { Projects } from '@/components/Projects';
-import { Testimonials } from '@/components/Testimonials';
-import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { Preloader } from '@/components/Preloader';
 import { CustomCursor } from '@/components/CustomCursor';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { SEO } from '@/components/SEO';
-import { SocialShare } from '@/components/SocialShare';
 import { Navigation } from '@/components/Navigation';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { SectionDivider } from '@/components/SectionDivider';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
 
+const About = lazy(async () => {
+  const mod = await import('@/components/About');
+  return { default: mod.About };
+});
+const Skills = lazy(async () => {
+  const mod = await import('@/components/Skills');
+  return { default: mod.Skills };
+});
+const Experience = lazy(async () => {
+  const mod = await import('@/components/Experience');
+  return { default: mod.Experience };
+});
+const Projects = lazy(async () => {
+  const mod = await import('@/components/Projects');
+  return { default: mod.Projects };
+});
+const Testimonials = lazy(async () => {
+  const mod = await import('@/components/Testimonials');
+  return { default: mod.Testimonials };
+});
+const GitHubActivity = lazy(async () => {
+  const mod = await import('@/components/GitHubActivity');
+  return { default: mod.GitHubActivity };
+});
+const Contact = lazy(async () => {
+  const mod = await import('@/components/Contact');
+  return { default: mod.Contact };
+});
+const SocialShare = lazy(async () => {
+  const mod = await import('@/components/SocialShare');
+  return { default: mod.SocialShare };
+});
+const AIChat = lazy(async () => {
+  const mod = await import('@/components/AIChat');
+  return { default: mod.AIChat };
+});
+
+const DeferredSection = ({
+  children,
+  minHeight = 280,
+}: {
+  children: ReactNode;
+  minHeight?: number;
+}) => {
+  const [isMounted, setIsMounted] = useState(false);
+  const markerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isMounted) return;
+
+    const marker = markerRef.current;
+    if (!marker) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsMounted(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '350px 0px' }
+    );
+
+    observer.observe(marker);
+    return () => observer.disconnect();
+  }, [isMounted]);
+
+  return (
+    <div ref={markerRef}>
+      {isMounted ? children : <div style={{ minHeight }} aria-hidden="true" />}
+    </div>
+  );
+};
+
 const Index = () => {
   useKeyboardNavigation();
+  const [loadInteractiveTools, setLoadInteractiveTools] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setLoadInteractiveTools(true);
+    }, 2000);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -42,27 +116,63 @@ const Index = () => {
       <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
         <Hero />
         <SectionDivider variant="gradient" />
-        <About />
+        <DeferredSection minHeight={720}>
+          <Suspense fallback={<div style={{ minHeight: 720 }} aria-hidden="true" />}>
+            <About />
+          </Suspense>
+        </DeferredSection>
         <SectionDivider variant="dots" />
-        <Skills />
+        <DeferredSection minHeight={520}>
+          <Suspense fallback={<div style={{ minHeight: 520 }} aria-hidden="true" />}>
+            <Skills />
+          </Suspense>
+        </DeferredSection>
         <SectionDivider variant="gradient" />
-        <Experience />
+        <DeferredSection minHeight={520}>
+          <Suspense fallback={<div style={{ minHeight: 520 }} aria-hidden="true" />}>
+            <Experience />
+          </Suspense>
+        </DeferredSection>
         <SectionDivider variant="dots" />
-        <Projects />
+        <DeferredSection minHeight={920}>
+          <Suspense fallback={<div style={{ minHeight: 920 }} aria-hidden="true" />}>
+            <Projects />
+          </Suspense>
+        </DeferredSection>
         <SectionDivider variant="gradient" />
-        <Testimonials />
+        <DeferredSection minHeight={560}>
+          <Suspense fallback={<div style={{ minHeight: 560 }} aria-hidden="true" />}>
+            <Testimonials />
+          </Suspense>
+        </DeferredSection>
         <SectionDivider variant="dots" />
-        <GitHubActivity />
+        <DeferredSection minHeight={520}>
+          <Suspense fallback={<div style={{ minHeight: 520 }} aria-hidden="true" />}>
+            <GitHubActivity />
+          </Suspense>
+        </DeferredSection>
         <SectionDivider variant="gradient" />
-        <Contact />
+        <DeferredSection minHeight={480}>
+          <Suspense fallback={<div style={{ minHeight: 480 }} aria-hidden="true" />}>
+            <Contact />
+          </Suspense>
+        </DeferredSection>
         <Footer />
       </main>
 
       {/* AI Chat Assistant */}
-      <AIChat />
+      {loadInteractiveTools && (
+        <Suspense fallback={null}>
+          <AIChat />
+        </Suspense>
+      )}
       
       {/* Social Share Button */}
-      <SocialShare />
+      {loadInteractiveTools && (
+        <Suspense fallback={null}>
+          <SocialShare />
+        </Suspense>
+      )}
       
       {/* Scroll to Top Button */}
       <ScrollToTop />
