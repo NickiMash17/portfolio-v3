@@ -12,31 +12,6 @@ const navItems = [
   { id: 'contact', label: 'Contact', icon: Mail },
 ];
 
-const waitForElement = (id: string, timeoutMs = 2000): Promise<HTMLElement | null> => {
-  const immediate = document.getElementById(id);
-  if (immediate) {
-    return Promise.resolve(immediate as HTMLElement);
-  }
-
-  return new Promise((resolve) => {
-    const observer = new MutationObserver(() => {
-      const found = document.getElementById(id);
-      if (found) {
-        observer.disconnect();
-        window.clearTimeout(timeout);
-        resolve(found as HTMLElement);
-      }
-    });
-
-    const timeout = window.setTimeout(() => {
-      observer.disconnect();
-      resolve(null);
-    }, timeoutMs);
-
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-};
-
 export const Navigation = () => {
   const [activeSection, setActiveSection] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -123,19 +98,12 @@ export const Navigation = () => {
     };
   }, []);
 
-  const scrollToSection = async (id: string) => {
-    const target = await waitForElement(id, 2200);
+  const scrollToSection = (id: string) => {
+    const target =
+      document.getElementById(id) ??
+      (document.querySelector(`[data-nav-target="${id}"]`) as HTMLElement | null);
 
-    if (!target) {
-      if (id === 'contact') {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: 'smooth',
-        });
-        setIsMobileMenuOpen(false);
-      }
-      return;
-    }
+    if (!target) return;
 
     const offset = 80;
     const elementPosition = target.getBoundingClientRect().top;

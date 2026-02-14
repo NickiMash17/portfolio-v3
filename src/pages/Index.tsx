@@ -97,6 +97,10 @@ const DeferredSection = ({
   );
 };
 
+const NavAnchor = ({ id }: { id: string }) => (
+  <div data-nav-target={id} className="relative -top-20 h-0" aria-hidden="true" />
+);
+
 const Index = () => {
   useKeyboardNavigation();
   const isMobile = useIsMobile();
@@ -178,30 +182,35 @@ const Index = () => {
       <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
         <Hero />
         <SectionDivider variant="gradient" />
+        <NavAnchor id="about" />
         <DeferredSection minHeight={720}>
           <Suspense fallback={<div style={{ minHeight: 720 }} aria-hidden="true" />}>
             <About />
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="dots" />
+        <NavAnchor id="skills" />
         <DeferredSection minHeight={520}>
           <Suspense fallback={<div style={{ minHeight: 520 }} aria-hidden="true" />}>
             <Skills />
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="gradient" />
+        <NavAnchor id="experience" />
         <DeferredSection minHeight={520}>
           <Suspense fallback={<div style={{ minHeight: 520 }} aria-hidden="true" />}>
             <Experience />
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="dots" />
+        <NavAnchor id="projects" />
         <DeferredSection minHeight={920}>
           <Suspense fallback={<div style={{ minHeight: 920 }} aria-hidden="true" />}>
             <Projects />
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="gradient" />
+        <NavAnchor id="testimonials" />
         <DeferredSection minHeight={560}>
           <Suspense fallback={<div style={{ minHeight: 560 }} aria-hidden="true" />}>
             <Testimonials />
@@ -214,6 +223,7 @@ const Index = () => {
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="gradient" />
+        <NavAnchor id="contact" />
         <DeferredSection minHeight={480}>
           <Suspense fallback={<div style={{ minHeight: 480 }} aria-hidden="true" />}>
             <Contact />
