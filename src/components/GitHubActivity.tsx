@@ -102,7 +102,7 @@ export const GitHubActivity = () => {
               <div className="text-[10px] sm:text-xs text-muted-foreground">Current Streak</div>
             </div>
             <div className="text-center">
-              <div className="text-xl sm:text-2xl font-bold text-primary mb-0.5 sm:mb-1">28</div>
+              <div className="text-xl sm:text-2xl font-bold text-primary mb-0.5 sm:mb-1">65</div>
               <div className="text-[10px] sm:text-xs text-muted-foreground">Repositories</div>
             </div>
             <div className="text-center">
@@ -130,4 +130,5 @@ export const GitHubActivity = () => {
     </section>
   );
 };
+
 
