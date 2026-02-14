@@ -15,13 +15,14 @@ declare global {
 }
 
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
+let gaInitialized = false;
 
 /**
  * Initialize Google Analytics
  */
 export const initGA = () => {
   // Only initialize if measurement ID is provided and not the placeholder
-  if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX' || typeof window === 'undefined') return;
+  if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX' || typeof window === 'undefined' || gaInitialized) return;
 
   // Create dataLayer
   window.dataLayer = window.dataLayer || [];
@@ -42,6 +43,8 @@ export const initGA = () => {
     page_path: window.location.pathname,
     send_page_view: true,
   });
+
+  gaInitialized = true;
 };
 
 /**

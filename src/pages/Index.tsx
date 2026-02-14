@@ -127,7 +127,7 @@ const Index = () => {
     <>
       <SEO />
       <Preloader />
-      <CustomCursor />
+      {!isMobile && <CustomCursor />}
       <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Scroll Progress Indicator */}
       {!isMobile && <ScrollProgress />}

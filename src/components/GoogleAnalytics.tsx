@@ -10,8 +10,13 @@ export const GoogleAnalytics = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Initialize GA on mount
-    initGA();
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(() => initGA(), { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const timer = window.setTimeout(() => initGA(), 1200);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {

@@ -19,15 +19,36 @@ export const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let rafId = 0;
+    const sectionMap = new Map<string, HTMLElement>();
+    let missingSections = true;
+
+    const refreshSections = () => {
+      missingSections = false;
+      navItems.forEach((item) => {
+        const el = document.getElementById(item.id);
+        if (el) {
+          sectionMap.set(item.id, el);
+        } else {
+          sectionMap.delete(item.id);
+          missingSections = true;
+        }
+      });
+    };
+
+    refreshSections();
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Determine active section based on scroll position
-      const sections = navItems.map(item => document.getElementById(item.id));
+      if (missingSections) {
+        refreshSections();
+      }
+
       const scrollPosition = window.scrollY + 150; // Offset for better UX
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
+      for (let i = navItems.length - 1; i >= 0; i--) {
+        const section = sectionMap.get(navItems[i].id);
         if (section && section.offsetTop <= scrollPosition) {
           setActiveSection(navItems[i].id);
           break;
@@ -35,22 +56,32 @@ export const Navigation = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      if (rafId !== 0) return;
+      rafId = window.requestAnimationFrame(() => {
+        handleScroll();
+        rafId = 0;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
     handleScroll(); // Initial check
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId !== 0) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-    console.log('Scrolling to:', id, 'Element found:', !!element);
     
     if (element) {
       const offset = 80; // Account for fixed navbar
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      console.log('Scroll position:', offsetPosition);
 
       window.scrollTo({
         top: offsetPosition,
@@ -70,7 +101,6 @@ export const Navigation = () => {
           if (!found) {
             const retryElement = document.getElementById(id);
             if (retryElement) {
-              console.log(`Found element after ${delay}ms delay`);
               found = true;
               const offset = 80;
               const elementPosition = retryElement.getBoundingClientRect().top;
@@ -89,7 +119,6 @@ export const Navigation = () => {
       if (id === 'contact') {
         setTimeout(() => {
           if (!found) {
-            console.log('Contact not found, scrolling to bottom as fallback');
             window.scrollTo({
               top: document.body.scrollHeight,
               behavior: 'smooth',
