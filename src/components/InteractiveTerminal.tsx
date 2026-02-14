@@ -119,7 +119,7 @@ export const InteractiveTerminal = () => {
   ),
   'download': (args) => {
     if (args?.[0] === 'cv') {
-      window.open('/Nicolette-Mashaba-CV.pdf', '_blank');
+      window.open('/Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf', '_blank');
       return <p className="text-accent">📄 Opening CV download...</p>;
     }
     return <p className="text-destructive">Unknown file. Try 'download cv'</p>;

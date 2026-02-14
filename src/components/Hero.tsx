@@ -110,8 +110,10 @@ export const Hero = () => {
                 
                 {/* Floating badges */}
                 <div className="absolute -top-11 sm:-top-16 left-1/2 -translate-x-1/2 glass rounded-xl px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 leading-tight w-max">
-                  <span className="block whitespace-nowrap">#1 Female Most Active</span>
-                  <span className="block whitespace-nowrap">GitHub User 🇿🇦</span>
+                  <div className="animate-float-soft">
+                    <span className="block whitespace-nowrap">#1 Female Most Active</span>
+                    <span className="block whitespace-nowrap">GitHub User 🇿🇦</span>
+                  </div>
                 </div>
                 <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 animate-float" style={{ animationDelay: '1s' }}>
                   Azure
@@ -180,13 +182,13 @@ export const Hero = () => {
                   </button>
 
                   <a
-                    href="/Nicolette-Mashaba-CV.pdf"
+                    href="/Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf"
                     download
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hidden sm:block absolute top-1/2 -translate-y-1/2 right-0 animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '2s', animationDuration: '4.8s' }}
-                    onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
+                    onClick={() => trackDownload('Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf', 'pdf')}
                   >
                     <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
                       <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
@@ -235,12 +237,12 @@ export const Hero = () => {
                         <Mail className="w-5 h-5 text-accent" />
                       </button>
                       <a
-                        href="/Nicolette-Mashaba-CV.pdf"
+                        href="/Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf"
                         download
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
-                        onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
+                        onClick={() => trackDownload('Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf', 'pdf')}
                       >
                         <FileText className="w-5 h-5 text-primary" />
                       </a>
