@@ -109,8 +109,9 @@ export const Hero = () => {
                 </div>
                 
                 {/* Floating badges */}
-                <div className="absolute -top-3 sm:-top-2 -right-2 glass rounded-full px-2 py-1 text-xs font-medium text-primary border border-primary/20 animate-float">
-                  #1 Female Most Active GitHub User
+                <div className="absolute -top-6 sm:-top-2 -right-1 sm:-right-2 glass rounded-xl px-2 py-1 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 animate-float leading-tight">
+                  <span className="block">#1 Female Most Active</span>
+                  <span className="block">GitHub User in South Africa 🇿🇦</span>
                 </div>
                 <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 animate-float" style={{ animationDelay: '1s' }}>
                   Azure
