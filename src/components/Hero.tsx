@@ -44,7 +44,13 @@ export const Hero = () => {
       return;
     }
 
-    const timer = window.setTimeout(() => setIsPanelReady(true), 600);
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (connection?.saveData) {
+      setIsPanelReady(false);
+      return;
+    }
+
+    const timer = window.setTimeout(() => setIsPanelReady(true), 1800);
     return () => window.clearTimeout(timer);
   }, [isMobile]);
 
@@ -279,7 +285,10 @@ export const Hero = () => {
           <div className="order-2 lg:order-2 flex w-full flex-col items-center justify-center gap-4">
             <div className="inline-flex items-center gap-2 glass rounded-full p-1 border border-primary/20">
               <button
-                onClick={() => setShowCube(false)}
+                onClick={() => {
+                  setIsPanelReady(true);
+                  setShowCube(false);
+                }}
                 className={`px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all ${
                   !showCube ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
                 }`}
@@ -287,7 +296,10 @@ export const Hero = () => {
                 Terminal
               </button>
               <button
-                onClick={() => setShowCube(true)}
+                onClick={() => {
+                  setIsPanelReady(true);
+                  setShowCube(true);
+                }}
                 className={`px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all ${
                   showCube ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
                 }`}
@@ -301,7 +313,14 @@ export const Hero = () => {
                 {showCube ? <PortfolioCube /> : <InteractiveTerminal />}
               </Suspense>
             ) : (
-              <div className="w-full min-h-[340px] sm:min-h-[420px] glass rounded-2xl border border-primary/30" aria-hidden="true" />
+              <div className="w-full min-h-[340px] sm:min-h-[420px] glass rounded-2xl border border-primary/30 flex items-center justify-center px-4">
+                <button
+                  onClick={() => setIsPanelReady(true)}
+                  className="px-4 py-2 rounded-full border border-primary/30 text-sm text-primary hover:bg-primary/10 transition-colors"
+                >
+                  Load Interactive Panel
+                </button>
+              </div>
             )}
           </div>
         </div>
