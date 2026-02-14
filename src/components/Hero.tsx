@@ -40,8 +40,24 @@ export const Hero = () => {
   }, [isMobile]);
 
   useEffect(() => {
+    if (!isMobile) return;
+
+    const interval = window.setInterval(() => {
+      setTitleIndex((i) => (i + 1) % titles.length);
+    }, 2200);
+
+    return () => window.clearInterval(interval);
+  }, [isMobile, titles.length]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    setTitleText(titles[titleIndex % titles.length]);
+    setIsTitleDeleting(false);
+  }, [isMobile, titleIndex]);
+
+  useEffect(() => {
     if (isMobile) {
-      setTitleText(titles[0]);
       return;
     }
 
@@ -76,6 +92,8 @@ export const Hero = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
       <div className="hidden sm:block gradient-mesh" />
+      <div className="sm:hidden absolute top-8 left-1/2 -translate-x-1/2 w-40 h-40 bg-primary/15 rounded-full blur-3xl animate-float-soft" />
+      <div className="sm:hidden absolute bottom-8 right-6 w-28 h-28 bg-accent/10 rounded-full blur-2xl animate-float-soft" style={{ animationDelay: '1.2s' }} />
 
       <div className="hidden sm:block absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float" />
       <div className="hidden sm:block absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
@@ -105,12 +123,12 @@ export const Hero = () => {
                 </div>
 
                 <div className="absolute -top-11 sm:-top-16 left-1/2 -translate-x-1/2 glass rounded-xl px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 leading-tight w-max">
-                  <div className="sm:animate-float-soft">
+                  <div className="animate-float-soft">
                     <span className="block whitespace-nowrap">#1 Female Most Active</span>
                     <span className="block whitespace-nowrap">GitHub User 🇿🇦</span>
                   </div>
                 </div>
-                <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 sm:animate-float" style={{ animationDelay: '1s' }}>
+                <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 animate-float" style={{ animationDelay: '1s' }}>
                   Azure
                 </div>
               </div>
