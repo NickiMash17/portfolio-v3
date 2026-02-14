@@ -85,7 +85,7 @@ export const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left: Profile Image and Headline */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 order-2 lg:order-1">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 order-1">
             {/* Profile Image and Name on same line */}
             <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
               {/* Profile Image */}
@@ -256,7 +256,7 @@ export const Hero = () => {
           </div>
 
           {/* Right: Interactive Panel */}
-          <div className="order-1 lg:order-2 flex w-full flex-col items-center justify-center gap-4">
+          <div className="order-2 lg:order-2 flex w-full flex-col items-center justify-center gap-4">
             <div className="inline-flex items-center gap-2 glass rounded-full p-1 border border-primary/20">
               <button
                 onClick={() => setShowCube(false)}
