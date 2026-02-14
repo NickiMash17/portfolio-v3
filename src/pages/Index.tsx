@@ -2,7 +2,6 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { AuroraBackground } from '@/components/AuroraBackground';
 import { Hero } from '@/components/Hero';
 import { Footer } from '@/components/Footer';
-import { Preloader } from '@/components/Preloader';
 import { SEO } from '@/components/SEO';
 import { Navigation } from '@/components/Navigation';
 import { SectionDivider } from '@/components/SectionDivider';
@@ -57,6 +56,10 @@ const ScrollToTop = lazy(async () => {
 const ScrollProgress = lazy(async () => {
   const mod = await import('@/components/ScrollProgress');
   return { default: mod.ScrollProgress };
+});
+const Preloader = lazy(async () => {
+  const mod = await import('@/components/Preloader');
+  return { default: mod.Preloader };
 });
 
 const SectionSkeleton = ({ minHeight = 420 }: { minHeight?: number }) => (
@@ -115,7 +118,7 @@ const Index = () => {
 
   useEffect(() => {
     if ('requestIdleCallback' in window) {
-      const timeout = isMobile ? 3200 : 1400;
+      const timeout = isMobile ? 7000 : 1400;
       const idleId = window.requestIdleCallback(() => {
         setLoadChromeEnhancements(true);
       }, { timeout });
@@ -124,14 +127,14 @@ const Index = () => {
 
     const timer = window.setTimeout(() => {
       setLoadChromeEnhancements(true);
-    }, isMobile ? 2600 : 1000);
+    }, isMobile ? 6000 : 1000);
 
     return () => window.clearTimeout(timer);
   }, [isMobile]);
 
   useEffect(() => {
     if ('requestIdleCallback' in window) {
-      const timeout = isMobile ? 5200 : 2600;
+      const timeout = isMobile ? 14000 : 2600;
       const idleId = window.requestIdleCallback(() => {
         setLoadInteractiveTools(true);
       }, { timeout });
@@ -140,7 +143,7 @@ const Index = () => {
 
     const timer = window.setTimeout(() => {
       setLoadInteractiveTools(true);
-    }, isMobile ? 4500 : 2000);
+    }, isMobile ? 12000 : 2000);
 
     return () => window.clearTimeout(timer);
   }, [isMobile]);
@@ -163,7 +166,11 @@ const Index = () => {
   return (
     <>
       <SEO />
-      <Preloader />
+      {!isMobile && (
+        <Suspense fallback={null}>
+          <Preloader />
+        </Suspense>
+      )}
       {!isMobile && loadChromeEnhancements && (
         <Suspense fallback={null}>
           <CustomCursor />
