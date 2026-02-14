@@ -18,9 +18,8 @@ export const Preloader = () => {
     if (typeof window === 'undefined') return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Temporarily disable viewport check to show preloader on mobile too
-    const isSmallViewport = false; // window.innerWidth < 640;
-    const hasSeenPreloader = false; // sessionStorage.getItem('preloader-seen') === '1';
+    const isSmallViewport = window.innerWidth < 768;
+    const hasSeenPreloader = sessionStorage.getItem('preloader-seen') === '1';
 
     if (prefersReducedMotion || isSmallViewport || hasSeenPreloader) {
       setShouldShow(false);
@@ -28,8 +27,7 @@ export const Preloader = () => {
       return;
     }
 
-    // Temporarily disable sessionStorage to show preloader every time
-    // sessionStorage.setItem('preloader-seen', '1');
+    sessionStorage.setItem('preloader-seen', '1');
   }, []);
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export const Preloader = () => {
     // Simulate loading progress with stages
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
-        const newProgress = prev + 2.5;
+        const newProgress = prev + 4;
         
         // Update stage based on progress
         if (newProgress < 30) {
@@ -53,12 +51,12 @@ export const Preloader = () => {
 
         if (newProgress >= 100) {
           clearInterval(progressInterval);
-          setTimeout(() => setIsVisible(false), 300);
+          setTimeout(() => setIsVisible(false), 220);
           return 100;
         }
         return newProgress;
       });
-    }, 40);
+    }, 32);
 
     return () => clearInterval(progressInterval);
   }, [shouldShow]);

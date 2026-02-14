@@ -4,9 +4,8 @@ export const AuroraBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // Temporarily disable viewport and motion checks to ensure parallax shows
-    const isSmallViewport = false; // window.innerWidth < 768;
-    const prefersReducedMotion = false; // window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isSmallViewport = window.innerWidth < 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (isSmallViewport || prefersReducedMotion) return;
 
     const canvas = canvasRef.current;
@@ -16,8 +15,12 @@ export const AuroraBackground = () => {
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
@@ -65,7 +68,7 @@ export const AuroraBackground = () => {
 
     let animationId: number;
     let lastFrame = 0;
-    const targetFrameTime = 1000 / 30;
+    const targetFrameTime = 1000 / 24;
     const animate = () => {
       if (document.hidden) {
         animationId = requestAnimationFrame(animate);

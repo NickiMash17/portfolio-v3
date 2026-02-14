@@ -10,6 +10,7 @@ import { ScrollToTop } from '@/components/ScrollToTop';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { SectionDivider } from '@/components/SectionDivider';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const About = lazy(async () => {
   const mod = await import('@/components/About');
@@ -87,6 +88,8 @@ const DeferredSection = ({
 
 const Index = () => {
   useKeyboardNavigation();
+  const isMobile = useIsMobile();
+  const [renderAurora, setRenderAurora] = useState(false);
   const [loadInteractiveTools, setLoadInteractiveTools] = useState(false);
 
   useEffect(() => {
@@ -96,6 +99,21 @@ const Index = () => {
 
     return () => window.clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      setRenderAurora(false);
+      return;
+    }
+
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(() => setRenderAurora(true), { timeout: 1200 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const timer = window.setTimeout(() => setRenderAurora(true), 500);
+    return () => window.clearTimeout(timer);
+  }, [isMobile]);
 
   return (
     <>
@@ -110,7 +128,7 @@ const Index = () => {
       <Navigation />
       
       {/* Aurora Background */}
-      <AuroraBackground />
+      {renderAurora && <AuroraBackground />}
       
       {/* Main Content */}
       <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
