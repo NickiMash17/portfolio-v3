@@ -64,6 +64,8 @@ const DeferredSection = ({
 
     const marker = markerRef.current;
     if (!marker) return;
+    const mobile = window.innerWidth < 768;
+    const rootMargin = mobile ? '180px 0px' : '350px 0px';
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -72,7 +74,7 @@ const DeferredSection = ({
           observer.disconnect();
         }
       },
-      { rootMargin: '350px 0px' }
+      { rootMargin }
     );
 
     observer.observe(marker);

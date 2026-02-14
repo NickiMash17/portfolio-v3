@@ -3,9 +3,15 @@ import { Code2, Sparkles } from 'lucide-react';
 
 export const Preloader = () => {
   const [progress, setProgress] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
   const [loadingStage, setLoadingStage] = useState(0);
-  const [shouldShow, setShouldShow] = useState(true);
+  const [shouldShow] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isSmallViewport = window.innerWidth < 768;
+    const hasSeenPreloader = sessionStorage.getItem('preloader-seen') === '1';
+    return !(prefersReducedMotion || isSmallViewport || hasSeenPreloader);
+  });
+  const [isVisible, setIsVisible] = useState(shouldShow);
 
   const stages = [
     { text: 'Loading assets...', icon: '📦' },
@@ -15,20 +21,9 @@ export const Preloader = () => {
   ];
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isSmallViewport = window.innerWidth < 768;
-    const hasSeenPreloader = sessionStorage.getItem('preloader-seen') === '1';
-
-    if (prefersReducedMotion || isSmallViewport || hasSeenPreloader) {
-      setShouldShow(false);
-      setIsVisible(false);
-      return;
-    }
-
+    if (!shouldShow || typeof window === 'undefined') return;
     sessionStorage.setItem('preloader-seen', '1');
-  }, []);
+  }, [shouldShow]);
 
   useEffect(() => {
     if (!shouldShow) return;

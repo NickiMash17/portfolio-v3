@@ -47,7 +47,6 @@ export const Navigation = () => {
   useEffect(() => {
     const observed = new Set<Element>();
     const sectionVisibility = new Map<string, number>();
-    let timer: number | undefined;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -65,7 +64,7 @@ export const Navigation = () => {
           }
         });
 
-        if (bestId) {
+      if (bestId) {
           setActiveSection(bestId);
         }
       },
@@ -84,22 +83,18 @@ export const Navigation = () => {
           observer.observe(el);
         }
       });
-
-      if (observed.size === navItems.length) {
-        if (timer) {
-          window.clearInterval(timer);
-          timer = undefined;
-        }
-      }
     };
 
     connectSections();
-    timer = window.setInterval(connectSections, 1200);
+    const mutationObserver = new MutationObserver(() => {
+      if (observed.size < navItems.length) {
+        connectSections();
+      }
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      if (timer) {
-        window.clearInterval(timer);
-      }
+      mutationObserver.disconnect();
       observer.disconnect();
     };
   }, []);
@@ -120,7 +115,6 @@ export const Navigation = () => {
       trackEvent('navigation_click', { section: id });
       setIsMobileMenuOpen(false);
     } else {
-      console.error('Element not found:', id);
       // Try multiple times with increasing delays (for lazy loaded components)
       const delays = [300, 600, 1000, 1500];
       let found = false;
