@@ -25,6 +25,7 @@ export const PortfolioCube = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [faceFlash, setFaceFlash] = useState(false);
   const cubeRef = useRef<HTMLDivElement>(null);
 
   const faces = useMemo<CubeFace[]>(
@@ -78,6 +79,12 @@ export const PortfolioCube = () => {
   useEffect(() => {
     setIsTouchDevice(window.matchMedia('(hover: none), (pointer: coarse)').matches);
   }, []);
+
+  useEffect(() => {
+    setFaceFlash(true);
+    const timer = window.setTimeout(() => setFaceFlash(false), 340);
+    return () => window.clearTimeout(timer);
+  }, [faceIndex]);
 
   useEffect(() => {
     if (isPaused) return;
@@ -169,6 +176,11 @@ export const PortfolioCube = () => {
         <div className="absolute inset-0 translate-y-10 bg-primary/20 blur-2xl rounded-full pointer-events-none" />
         <div className="absolute left-1/2 top-1/2 w-[calc(var(--cube-size)_+_90px)] h-[calc(var(--cube-size)_+_90px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/20 cube-orbit pointer-events-none" />
         <div
+          className={`absolute left-1/2 top-1/2 w-[calc(var(--cube-size)_+_130px)] h-[calc(var(--cube-size)_+_130px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/35 pointer-events-none transition-all duration-300 ${
+            faceFlash ? 'opacity-85 scale-100' : 'opacity-0 scale-90'
+          }`}
+        />
+        <div
           ref={cubeRef}
           className={`relative transition-transform duration-700 ${isSpinning ? 'animate-spin' : ''}`}
           style={{
@@ -194,45 +206,45 @@ export const PortfolioCube = () => {
           }}
         >
           <div
-            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[0].glow} overflow-hidden`}
+            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[0].glow} overflow-hidden transition-all duration-500 ${faceIndex === 0 ? 'brightness-110 saturate-125' : ''}`}
             style={{ transform: `rotateY(0deg) translateZ(${cubeDepth})`, backfaceVisibility: 'hidden' }}
           >
-            <FaceContent face={faces[0]} />
+            <FaceContent face={faces[0]} isActive={faceIndex === 0} flash={faceFlash && faceIndex === 0} />
           </div>
           <div
-            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[1].glow} overflow-hidden`}
+            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[1].glow} overflow-hidden transition-all duration-500 ${faceIndex === 1 ? 'brightness-110 saturate-125' : ''}`}
             style={{ transform: `rotateY(90deg) translateZ(${cubeDepth})`, backfaceVisibility: 'hidden' }}
           >
-            <FaceContent face={faces[1]} />
+            <FaceContent face={faces[1]} isActive={faceIndex === 1} flash={faceFlash && faceIndex === 1} />
           </div>
           <div
-            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[2].glow} overflow-hidden`}
+            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[2].glow} overflow-hidden transition-all duration-500 ${faceIndex === 2 ? 'brightness-110 saturate-125' : ''}`}
             style={{ transform: `rotateY(180deg) translateZ(${cubeDepth})`, backfaceVisibility: 'hidden' }}
           >
-            <FaceContent face={faces[2]} />
+            <FaceContent face={faces[2]} isActive={faceIndex === 2} flash={faceFlash && faceIndex === 2} />
           </div>
           <div
-            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[3].glow} overflow-hidden`}
+            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[3].glow} overflow-hidden transition-all duration-500 ${faceIndex === 3 ? 'brightness-110 saturate-125' : ''}`}
             style={{ transform: `rotateY(-90deg) translateZ(${cubeDepth})`, backfaceVisibility: 'hidden' }}
           >
-            <FaceContent face={faces[3]} />
+            <FaceContent face={faces[3]} isActive={faceIndex === 3} flash={faceFlash && faceIndex === 3} />
           </div>
           <div
-            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[4].glow} overflow-hidden`}
+            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[4].glow} overflow-hidden transition-all duration-500 ${faceIndex === 4 ? 'brightness-110 saturate-125' : ''}`}
             style={{ transform: `rotateX(90deg) translateZ(${cubeDepth})`, backfaceVisibility: 'hidden' }}
           >
-            <FaceContent face={faces[4]} />
+            <FaceContent face={faces[4]} isActive={faceIndex === 4} flash={faceFlash && faceIndex === 4} />
           </div>
           <div
-            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[5].glow} overflow-hidden`}
+            className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[5].glow} overflow-hidden transition-all duration-500 ${faceIndex === 5 ? 'brightness-110 saturate-125' : ''}`}
             style={{ transform: `rotateX(-90deg) translateZ(${cubeDepth})`, backfaceVisibility: 'hidden' }}
           >
-            <FaceContent face={faces[5]} />
+            <FaceContent face={faces[5]} isActive={faceIndex === 5} flash={faceFlash && faceIndex === 5} />
           </div>
         </div>
         <div className="pointer-events-none absolute inset-0 -z-10 transition-all duration-500">
           <div
-            className={`absolute left-1/2 top-1/2 w-[calc(var(--cube-size)_+_110px)] h-[calc(var(--cube-size)_+_110px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl opacity-50 ${frontFace.glow}`}
+            className={`absolute left-1/2 top-1/2 w-[calc(var(--cube-size)_+_110px)] h-[calc(var(--cube-size)_+_110px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl transition-all duration-500 ${frontFace.glow} ${faceFlash ? 'opacity-85 scale-105' : 'opacity-55 scale-100'}`}
           />
           <div
             className="absolute left-1/2 top-1/2 w-[calc(var(--cube-size)_+_40px)] h-[calc(var(--cube-size)_+_40px)] -translate-x-1/2 -translate-y-1/2 rounded-2xl"
@@ -264,13 +276,19 @@ export const PortfolioCube = () => {
   );
 };
 
-const FaceContent = ({ face }: { face: CubeFace }) => {
+const FaceContent = ({ face, isActive, flash }: { face: CubeFace; isActive: boolean; flash: boolean }) => {
   const Icon = face.icon;
 
   return (
-    <div className={`relative w-full h-full rounded-2xl bg-gradient-to-br ${face.gradient} p-4 text-white flex flex-col items-center justify-center text-center`} style={{ backfaceVisibility: 'hidden' }}>
+    <div
+      className={`relative w-full h-full rounded-2xl bg-gradient-to-br ${face.gradient} p-4 text-white flex flex-col items-center justify-center text-center transition-transform duration-500 ${isActive ? 'scale-[1.02]' : 'scale-100'}`}
+      style={{ backfaceVisibility: 'hidden' }}
+    >
       <div className="absolute inset-0 bg-black/25" />
       <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.35),transparent_45%)]" />
+      <div
+        className={`absolute inset-y-0 -left-1/3 w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent rotate-12 transition-transform duration-500 ${flash ? 'translate-x-[320%] opacity-100' : 'translate-x-0 opacity-0'}`}
+      />
       <div className="relative z-10">
         <Icon className="w-8 h-8 mb-2 mx-auto" />
         <h3 className="text-base font-bold">{face.title}</h3>
