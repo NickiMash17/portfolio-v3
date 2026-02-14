@@ -15,7 +15,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'Oluwafemi Olasubomi Otusanya',
+    name: 'Oluwafemi Otusanya',
     role: 'Founder & Director',
     company: 'TechBridle Foundation',
     content: 'Nicolette has demonstrated exceptional technical proficiency throughout our intensive 11-month software development bootcamp. Her GitHub contributions reveal mastery across multiple programming languages and frameworks, with over 1,000 total commits across diverse projects. She has successfully built full-stack applications and contributed significantly to team projects, demonstrating both theoretical understanding and practical application. Her code quality and problem-solving capabilities are evident in her systematic approach to debugging and continuous learning.',
@@ -138,15 +138,17 @@ export const Testimonials = () => {
                     {/* Author */}
                     <div className="flex items-center gap-4 justify-center md:justify-start">
                       <div className="relative">
-                        <img
-                          src={testimonials[currentIndex].avatar}
-                          alt={`${testimonials[currentIndex].name} - ${testimonials[currentIndex].role} at ${testimonials[currentIndex].company}`}
-                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-primary/50"
-                          loading="lazy"
-                          decoding="async"
-                          width="64"
-                          height="64"
-                        />
+                        <div className="w-14 h-14 md:w-16 md:h-16 rounded-full p-[2px] bg-primary/60 shadow-sm">
+                          <img
+                            src={testimonials[currentIndex].avatar}
+                            alt={`${testimonials[currentIndex].name} - ${testimonials[currentIndex].role} at ${testimonials[currentIndex].company}`}
+                            className="w-full h-full rounded-full object-cover bg-muted/20"
+                            loading="lazy"
+                            decoding="async"
+                            width="64"
+                            height="64"
+                          />
+                        </div>
                         <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-accent rounded-full border-2 border-background flex items-center justify-center">
                           <span className="text-[10px]">✓</span>
                         </div>
