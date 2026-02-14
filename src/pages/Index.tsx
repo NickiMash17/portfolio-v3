@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { AuroraBackground } from '@/components/AuroraBackground';
 import { Hero } from '@/components/Hero';
 import { Footer } from '@/components/Footer';
@@ -8,35 +8,14 @@ import { Navigation } from '@/components/Navigation';
 import { SectionDivider } from '@/components/SectionDivider';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { About } from '@/components/About';
+import { Skills } from '@/components/Skills';
+import { Experience } from '@/components/Experience';
+import { Projects } from '@/components/Projects';
+import { Testimonials } from '@/components/Testimonials';
+import { GitHubActivity } from '@/components/GitHubActivity';
+import { Contact } from '@/components/Contact';
 
-const About = lazy(async () => {
-  const mod = await import('@/components/About');
-  return { default: mod.About };
-});
-const Skills = lazy(async () => {
-  const mod = await import('@/components/Skills');
-  return { default: mod.Skills };
-});
-const Experience = lazy(async () => {
-  const mod = await import('@/components/Experience');
-  return { default: mod.Experience };
-});
-const Projects = lazy(async () => {
-  const mod = await import('@/components/Projects');
-  return { default: mod.Projects };
-});
-const Testimonials = lazy(async () => {
-  const mod = await import('@/components/Testimonials');
-  return { default: mod.Testimonials };
-});
-const GitHubActivity = lazy(async () => {
-  const mod = await import('@/components/GitHubActivity');
-  return { default: mod.GitHubActivity };
-});
-const Contact = lazy(async () => {
-  const mod = await import('@/components/Contact');
-  return { default: mod.Contact };
-});
 const SocialShare = lazy(async () => {
   const mod = await import('@/components/SocialShare');
   return { default: mod.SocialShare };
@@ -57,49 +36,6 @@ const ScrollProgress = lazy(async () => {
   const mod = await import('@/components/ScrollProgress');
   return { default: mod.ScrollProgress };
 });
-
-const DeferredSection = ({
-  children,
-  minHeight = 280,
-}: {
-  children: ReactNode;
-  minHeight?: number;
-}) => {
-  const [isMounted, setIsMounted] = useState(false);
-  const markerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isMounted) return;
-
-    const marker = markerRef.current;
-    if (!marker) return;
-    const mobile = window.innerWidth < 768;
-    const rootMargin = mobile ? '180px 0px' : '350px 0px';
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsMounted(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin }
-    );
-
-    observer.observe(marker);
-    return () => observer.disconnect();
-  }, [isMounted]);
-
-  return (
-    <div ref={markerRef}>
-      {isMounted ? children : <div style={{ minHeight }} aria-hidden="true" />}
-    </div>
-  );
-};
-
-const NavAnchor = ({ id }: { id: string }) => (
-  <div data-nav-target={id} className="relative -top-20 h-0" aria-hidden="true" />
-);
 
 const Index = () => {
   useKeyboardNavigation();
@@ -182,53 +118,19 @@ const Index = () => {
       <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
         <Hero />
         <SectionDivider variant="gradient" />
-        <NavAnchor id="about" />
-        <DeferredSection minHeight={720}>
-          <Suspense fallback={<div style={{ minHeight: 720 }} aria-hidden="true" />}>
-            <About />
-          </Suspense>
-        </DeferredSection>
+        <About />
         <SectionDivider variant="dots" />
-        <NavAnchor id="skills" />
-        <DeferredSection minHeight={520}>
-          <Suspense fallback={<div style={{ minHeight: 520 }} aria-hidden="true" />}>
-            <Skills />
-          </Suspense>
-        </DeferredSection>
+        <Skills />
         <SectionDivider variant="gradient" />
-        <NavAnchor id="experience" />
-        <DeferredSection minHeight={520}>
-          <Suspense fallback={<div style={{ minHeight: 520 }} aria-hidden="true" />}>
-            <Experience />
-          </Suspense>
-        </DeferredSection>
+        <Experience />
         <SectionDivider variant="dots" />
-        <NavAnchor id="projects" />
-        <DeferredSection minHeight={920}>
-          <Suspense fallback={<div style={{ minHeight: 920 }} aria-hidden="true" />}>
-            <Projects />
-          </Suspense>
-        </DeferredSection>
+        <Projects />
         <SectionDivider variant="gradient" />
-        <NavAnchor id="testimonials" />
-        <DeferredSection minHeight={560}>
-          <Suspense fallback={<div style={{ minHeight: 560 }} aria-hidden="true" />}>
-            <Testimonials />
-          </Suspense>
-        </DeferredSection>
+        <Testimonials />
         <SectionDivider variant="dots" />
-        <DeferredSection minHeight={520}>
-          <Suspense fallback={<div style={{ minHeight: 520 }} aria-hidden="true" />}>
-            <GitHubActivity />
-          </Suspense>
-        </DeferredSection>
+        <GitHubActivity />
         <SectionDivider variant="gradient" />
-        <NavAnchor id="contact" />
-        <DeferredSection minHeight={480}>
-          <Suspense fallback={<div style={{ minHeight: 480 }} aria-hidden="true" />}>
-            <Contact />
-          </Suspense>
-        </DeferredSection>
+        <Contact />
         <Footer />
       </main>
 
