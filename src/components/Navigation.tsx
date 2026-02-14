@@ -12,6 +12,31 @@ const navItems = [
   { id: 'contact', label: 'Contact', icon: Mail },
 ];
 
+const waitForElement = (id: string, timeoutMs = 2000): Promise<HTMLElement | null> => {
+  const immediate = document.getElementById(id);
+  if (immediate) {
+    return Promise.resolve(immediate as HTMLElement);
+  }
+
+  return new Promise((resolve) => {
+    const observer = new MutationObserver(() => {
+      const found = document.getElementById(id);
+      if (found) {
+        observer.disconnect();
+        window.clearTimeout(timeout);
+        resolve(found as HTMLElement);
+      }
+    });
+
+    const timeout = window.setTimeout(() => {
+      observer.disconnect();
+      resolve(null);
+    }, timeoutMs);
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+};
+
 export const Navigation = () => {
   const [activeSection, setActiveSection] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -98,58 +123,31 @@ export const Navigation = () => {
     };
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    
-    if (element) {
-      const offset = 80; // Account for fixed navbar
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+  const scrollToSection = async (id: string) => {
+    const target = await waitForElement(id, 2200);
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      trackEvent('navigation_click', { section: id });
-      setIsMobileMenuOpen(false);
-    } else {
-      // Try multiple times with increasing delays (for lazy loaded components)
-      const delays = [300, 600, 1000, 1500];
-      let found = false;
-      
-      delays.forEach(delay => {
-        setTimeout(() => {
-          if (!found) {
-            const retryElement = document.getElementById(id);
-            if (retryElement) {
-              found = true;
-              const offset = 80;
-              const elementPosition = retryElement.getBoundingClientRect().top;
-              const offsetPosition = elementPosition + window.pageYOffset - offset;
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth',
-              });
-              setIsMobileMenuOpen(false);
-            }
-          }
-        }, delay);
-      });
-      
-      // Fallback for contact - scroll to bottom if still not found
+    if (!target) {
       if (id === 'contact') {
-        setTimeout(() => {
-          if (!found) {
-            window.scrollTo({
-              top: document.body.scrollHeight,
-              behavior: 'smooth',
-            });
-            setIsMobileMenuOpen(false);
-          }
-        }, 2000);
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth',
+        });
+        setIsMobileMenuOpen(false);
       }
+      return;
     }
+
+    const offset = 80;
+    const elementPosition = target.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
+
+    trackEvent('navigation_click', { section: id });
+    setIsMobileMenuOpen(false);
   };
 
   return (
