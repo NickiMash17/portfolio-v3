@@ -1,18 +1,26 @@
-﻿import { useState, useEffect } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
-import { InteractiveTerminal } from './InteractiveTerminal';
-import { PortfolioCube } from './PortfolioCube';
 import { trackExternalLink, trackDownload } from '@/lib/analytics';
+import { useIsMobile } from '@/hooks/use-mobile';
+
+const InteractiveTerminal = lazy(async () => {
+  const mod = await import('./InteractiveTerminal');
+  return { default: mod.InteractiveTerminal };
+});
+
+const PortfolioCube = lazy(async () => {
+  const mod = await import('./PortfolioCube');
+  return { default: mod.PortfolioCube };
+});
 
 export const Hero = () => {
-  const [displayText, setDisplayText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
+  const isMobile = useIsMobile();
   const [titleIndex, setTitleIndex] = useState(0);
   const [titleText, setTitleText] = useState('');
   const [isTitleDeleting, setIsTitleDeleting] = useState(false);
   const [showCube, setShowCube] = useState(false);
-  
-  const fullText = '> Nicolette Mashaba_';
+  const [isPanelReady, setIsPanelReady] = useState(false);
+
   const titles = [
     'Software Engineer',
     'AI/ML Enthusiast',
@@ -22,28 +30,21 @@ export const Hero = () => {
   ];
 
   useEffect(() => {
-    let i = 0;
-    const typingInterval = setInterval(() => {
-      if (i < fullText.length) {
-        setDisplayText(fullText.slice(0, i + 1));
-        i++;
-      } else {
-        clearInterval(typingInterval);
-      }
-    }, 100);
+    if (!isMobile) {
+      setIsPanelReady(true);
+      return;
+    }
 
-    const cursorInterval = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 530);
+    const timer = window.setTimeout(() => setIsPanelReady(true), 600);
+    return () => window.clearTimeout(timer);
+  }, [isMobile]);
 
-    return () => {
-      clearInterval(typingInterval);
-      clearInterval(cursorInterval);
-    };
-  }, []);
-
-  // Animated typing for title rotation
   useEffect(() => {
+    if (isMobile) {
+      setTitleText(titles[0]);
+      return;
+    }
+
     const current = titles[titleIndex % titles.length];
     const speed = isTitleDeleting ? 40 : 80;
 
@@ -63,7 +64,7 @@ export const Hero = () => {
     }, speed);
 
     return () => clearTimeout(timer);
-  }, [titleText, titleIndex, isTitleDeleting]);
+  }, [isMobile, titleText, titleIndex, isTitleDeleting]);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -74,57 +75,47 @@ export const Hero = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
-      {/* Animated gradient mesh background */}
-      <div className="gradient-mesh" />
-      
-      {/* Additional depth layers */}
-      <div className="absolute top-1/4 right-1/4 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[80px] sm:blur-[100px] animate-float" />
-      <div className="absolute bottom-1/4 left-1/4 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[80px] sm:blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
+      <div className="hidden sm:block gradient-mesh" />
 
-      {/* Content */}
+      <div className="hidden sm:block absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float" />
+      <div className="hidden sm:block absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
+
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Left: Profile Image and Headline */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 order-1">
-            {/* Profile Image and Name on same line */}
             <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
-              {/* Profile Image */}
               <div className="relative group flex-shrink-0">
-                {/* Animated gradient frame */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-rotate-slow"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 sm:animate-rotate-slow"></div>
                 <div className="absolute -inset-1 bg-gradient-to-tr from-primary/50 via-accent/30 to-primary/50 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
-                
-                {/* Inner frame with decorative corners */}
+
                 <div className="relative glass rounded-full p-2 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300">
-                  {/* Corner decorations */}
                   <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-accent rounded-tl-full group-hover:scale-125 transition-transform duration-300"></div>
                   <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-primary rounded-tr-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.1s' }}></div>
                   <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-primary rounded-bl-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.2s' }}></div>
                   <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-accent rounded-br-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.3s' }}></div>
-                  
-                  <img 
-                    src="/my-caricature.jpeg" 
+
+                  <img
+                    src="/my-caricature.jpeg"
                     alt="Nicolette Mashaba - Software Engineer"
                     className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                 </div>
-                
-                {/* Floating badges */}
+
                 <div className="absolute -top-11 sm:-top-16 left-1/2 -translate-x-1/2 glass rounded-xl px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 leading-tight w-max">
-                  <div className="animate-float-soft">
+                  <div className="sm:animate-float-soft">
                     <span className="block whitespace-nowrap">#1 Female Most Active</span>
                     <span className="block whitespace-nowrap">GitHub User 🇿🇦</span>
                   </div>
                 </div>
-                <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 animate-float" style={{ animationDelay: '1s' }}>
+                <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 sm:animate-float" style={{ animationDelay: '1s' }}>
                   Azure
                 </div>
               </div>
 
-              {/* Name and Title */}
               <header className="w-full" aria-label="Introduction">
-                {/* Status Badge */}
                 <div className="inline-flex items-center gap-1.5 sm:gap-3 glass rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 border border-primary/20 mb-3 sm:mb-4 lg:mb-6">
                   <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -134,9 +125,7 @@ export const Hero = () => {
                   <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">Johannesburg, SA</span>
                 </div>
 
-                {/* Name with Orbiting Icons */}
                 <div className="relative">
-                  {/* Floating Icons (tablet/desktop) */}
                   <a
                     href="https://github.com/NickiMash17"
                     target="_blank"
@@ -197,16 +186,14 @@ export const Hero = () => {
                     </div>
                   </a>
 
-                  {/* Name and Title */}
                   <div className="space-y-1 sm:space-y-3 relative z-10 py-2 sm:py-8 md:py-12 px-2 sm:px-10 md:px-0">
                     <h1 className="font-medium tracking-tight">
                       <span className="block text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-foreground">Nicolette Mashaba</span>
                       <span className="block text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-semibold mt-1 sm:mt-2 min-h-[1.2em]">
-                        {titleText}<span className="animate-pulse text-primary">|</span>
+                        {titleText}<span className={isMobile ? 'text-primary' : 'animate-pulse text-primary'}>|</span>
                       </span>
                     </h1>
 
-                    {/* Mobile action icons */}
                     <div className="sm:hidden flex flex-wrap justify-center gap-2 pt-3">
                       <a
                         href="https://github.com/NickiMash17"
@@ -255,7 +242,6 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Right: Interactive Panel */}
           <div className="order-2 lg:order-2 flex w-full flex-col items-center justify-center gap-4">
             <div className="inline-flex items-center gap-2 glass rounded-full p-1 border border-primary/20">
               <button
@@ -276,7 +262,13 @@ export const Hero = () => {
               </button>
             </div>
 
-            {showCube ? <PortfolioCube /> : <InteractiveTerminal />}
+            {isPanelReady ? (
+              <Suspense fallback={<div className="w-full min-h-[340px] sm:min-h-[420px] glass rounded-2xl border border-primary/30" aria-hidden="true" />}>
+                {showCube ? <PortfolioCube /> : <InteractiveTerminal />}
+              </Suspense>
+            ) : (
+              <div className="w-full min-h-[340px] sm:min-h-[420px] glass rounded-2xl border border-primary/30" aria-hidden="true" />
+            )}
           </div>
         </div>
       </div>
