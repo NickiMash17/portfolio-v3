@@ -13,21 +13,30 @@ const PortfolioCube = lazy(async () => {
   return { default: mod.PortfolioCube };
 });
 
+const TITLES = [
+  'Software Engineer',
+  'AI/ML Enthusiast',
+  'Azure Cloud Expert',
+  'Hackathon Winner',
+  'Full-Stack Developer',
+];
+
 export const Hero = () => {
   const isMobile = useIsMobile();
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [titleIndex, setTitleIndex] = useState(0);
   const [titleText, setTitleText] = useState('');
   const [isTitleDeleting, setIsTitleDeleting] = useState(false);
   const [showCube, setShowCube] = useState(false);
   const [isPanelReady, setIsPanelReady] = useState(false);
 
-  const titles = [
-    'Software Engineer',
-    'AI/ML Enthusiast',
-    'Azure Cloud Expert',
-    'Hackathon Winner',
-    'Full-Stack Developer',
-  ];
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = () => setPrefersReducedMotion(mql.matches);
+    onChange();
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
 
   useEffect(() => {
     if (!isMobile) {
@@ -40,28 +49,35 @@ export const Hero = () => {
   }, [isMobile]);
 
   useEffect(() => {
-    if (!isMobile) return;
+    if (!isMobile || prefersReducedMotion) return;
 
     const interval = window.setInterval(() => {
-      setTitleIndex((i) => (i + 1) % titles.length);
+      setTitleIndex((i) => (i + 1) % TITLES.length);
     }, 2200);
 
     return () => window.clearInterval(interval);
-  }, [isMobile, titles.length]);
+  }, [isMobile, prefersReducedMotion]);
 
   useEffect(() => {
-    if (!isMobile) return;
+    if (!isMobile || prefersReducedMotion) return;
 
-    setTitleText(titles[titleIndex % titles.length]);
+    setTitleText(TITLES[titleIndex % TITLES.length]);
     setIsTitleDeleting(false);
-  }, [isMobile, titleIndex]);
+  }, [isMobile, prefersReducedMotion, titleIndex]);
 
   useEffect(() => {
-    if (isMobile) {
+    if (!isMobile || !prefersReducedMotion) return;
+
+    setTitleText(TITLES[0]);
+    setIsTitleDeleting(false);
+  }, [isMobile, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (isMobile || prefersReducedMotion) {
       return;
     }
 
-    const current = titles[titleIndex % titles.length];
+    const current = TITLES[titleIndex % TITLES.length];
     const speed = isTitleDeleting ? 40 : 80;
 
     const timer = setTimeout(() => {
@@ -80,7 +96,7 @@ export const Hero = () => {
     }, speed);
 
     return () => clearTimeout(timer);
-  }, [isMobile, titleText, titleIndex, isTitleDeleting]);
+  }, [isMobile, prefersReducedMotion, titleText, titleIndex, isTitleDeleting]);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -91,19 +107,19 @@ export const Hero = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
-      <div className="hidden sm:block gradient-mesh" />
-      <div className="sm:hidden absolute top-8 left-1/2 -translate-x-1/2 w-40 h-40 bg-primary/15 rounded-full blur-3xl animate-float-soft" />
-      <div className="sm:hidden absolute bottom-8 right-6 w-28 h-28 bg-accent/10 rounded-full blur-2xl animate-float-soft" style={{ animationDelay: '1.2s' }} />
+      <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block gradient-mesh'} />
+      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute top-8 left-1/2 -translate-x-1/2 w-40 h-40 bg-primary/15 rounded-full blur-3xl animate-float-soft'} />
+      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute bottom-8 right-6 w-28 h-28 bg-accent/10 rounded-full blur-2xl animate-float-soft'} style={{ animationDelay: '1.2s' }} />
 
-      <div className="hidden sm:block absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float" />
-      <div className="hidden sm:block absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
+      <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float'} />
+      <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float'} style={{ animationDelay: '2s' }} />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 order-1">
             <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
               <div className="relative group flex-shrink-0">
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 sm:animate-rotate-slow"></div>
+                <div className={`absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 ${prefersReducedMotion ? '' : 'sm:animate-rotate-slow'}`}></div>
                 <div className="absolute -inset-1 bg-gradient-to-tr from-primary/50 via-accent/30 to-primary/50 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
 
                 <div className="relative glass rounded-full p-2 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300">
@@ -123,12 +139,12 @@ export const Hero = () => {
                 </div>
 
                 <div className="absolute -top-11 sm:-top-16 left-1/2 -translate-x-1/2 glass rounded-xl px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 leading-tight w-max">
-                  <div className="animate-float-soft">
+                  <div className={prefersReducedMotion ? '' : 'animate-float-soft'}>
                     <span className="block whitespace-nowrap">#1 Female Most Active</span>
                     <span className="block whitespace-nowrap">GitHub User 🇿🇦</span>
                   </div>
                 </div>
-                <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 animate-float" style={{ animationDelay: '1s' }}>
+                <div className={`absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 ${prefersReducedMotion ? '' : 'animate-float'}`} style={{ animationDelay: '1s' }}>
                   Azure
                 </div>
               </div>
@@ -208,7 +224,7 @@ export const Hero = () => {
                     <h1 className="font-medium tracking-tight">
                       <span className="block text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-foreground">Nicolette Mashaba</span>
                       <span className="block text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-semibold mt-1 sm:mt-2 min-h-[1.2em]">
-                        {titleText}<span className={isMobile ? 'text-primary' : 'animate-pulse text-primary'}>|</span>
+                        {titleText}<span className={isMobile || prefersReducedMotion ? 'text-primary' : 'animate-pulse text-primary'}>|</span>
                       </span>
                     </h1>
 

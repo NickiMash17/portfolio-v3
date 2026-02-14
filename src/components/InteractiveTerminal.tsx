@@ -1,7 +1,15 @@
-import { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import { Suspense, lazy, useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { getTerminalData } from '@/lib/terminalData';
-import { MatrixRain } from './MatrixRain';
-import { PacmanGame } from './PacmanGame';
+
+const MatrixRain = lazy(async () => {
+  const mod = await import('./MatrixRain');
+  return { default: mod.MatrixRain };
+});
+
+const PacmanGame = lazy(async () => {
+  const mod = await import('./PacmanGame');
+  return { default: mod.PacmanGame };
+});
 
 interface CommandOutput {
   command: string;
@@ -260,7 +268,9 @@ export const InteractiveTerminal = () => {
   if (showMatrix) {
     return (
       <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30 w-full">
-        <MatrixRain onClose={() => setShowMatrix(false)} />
+        <Suspense fallback={<div className="min-h-[260px] sm:min-h-[320px]" aria-hidden="true" />}>
+          <MatrixRain onClose={() => setShowMatrix(false)} />
+        </Suspense>
       </div>
     );
   }
@@ -268,7 +278,9 @@ export const InteractiveTerminal = () => {
   if (showPacman) {
     return (
       <div className="glass rounded-2xl p-4 sm:p-6 md:p-8 glow-primary border border-primary/30 w-full">
-        <PacmanGame onClose={() => setShowPacman(false)} />
+        <Suspense fallback={<div className="min-h-[260px] sm:min-h-[320px]" aria-hidden="true" />}>
+          <PacmanGame onClose={() => setShowPacman(false)} />
+        </Suspense>
       </div>
     );
   }
