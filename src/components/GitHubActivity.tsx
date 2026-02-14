@@ -1,4 +1,4 @@
-import { Github } from 'lucide-react';
+﻿import { Github } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -94,7 +94,7 @@ export const GitHubActivity = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-primary/20">
             <div className="text-center">
-              <div className="text-xl sm:text-2xl font-bold text-primary mb-0.5 sm:mb-1">1,247</div>
+              <div className="text-xl sm:text-2xl font-bold text-primary mb-0.5 sm:mb-1">1,962</div>
               <div className="text-[10px] sm:text-xs text-muted-foreground">Total Contributions</div>
             </div>
             <div className="text-center">
@@ -130,3 +130,4 @@ export const GitHubActivity = () => {
     </section>
   );
 };
+
