@@ -23,6 +23,8 @@ export const PortfolioCube = () => {
   const [faceIndex, setFaceIndex] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const cubeRef = useRef<HTMLDivElement>(null);
 
   const faces = useMemo<CubeFace[]>(
@@ -72,6 +74,10 @@ export const PortfolioCube = () => {
     ],
     []
   );
+
+  useEffect(() => {
+    setIsTouchDevice(window.matchMedia('(hover: none), (pointer: coarse)').matches);
+  }, []);
 
   useEffect(() => {
     if (isPaused) return;
@@ -135,6 +141,10 @@ export const PortfolioCube = () => {
   }, [faces.length]);
 
   const view = FACE_ROTATIONS[faceIndex];
+  const frontFace = faces[faceIndex];
+  const tiltMax = isTouchDevice ? 3 : 7;
+  const lightX = 50 + (tilt.y / tiltMax) * 14;
+  const lightY = 36 - (tilt.x / tiltMax) * 12;
   const cubeRootStyle = { '--cube-size': 'clamp(176px, 58vw, 260px)' } as CSSProperties;
   const cubeDepth = 'calc(var(--cube-size) / 2 - 2px)';
 
@@ -165,10 +175,23 @@ export const PortfolioCube = () => {
             width: 'var(--cube-size)',
             height: 'var(--cube-size)',
             transformStyle: 'preserve-3d',
-            transform: `rotateX(${view.x}deg) rotateY(${view.y}deg)`,
+            transform: `rotateX(${view.x + tilt.x}deg) rotateY(${view.y + tilt.y}deg)`,
           }}
           onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
+          onMouseMove={(e) => {
+            if (isTouchDevice) return;
+            const rect = e.currentTarget.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width;
+            const py = (e.clientY - rect.top) / rect.height;
+            setTilt({
+              x: (0.5 - py) * tiltMax,
+              y: (px - 0.5) * tiltMax,
+            });
+          }}
+          onMouseLeave={() => {
+            setIsPaused(false);
+            setTilt({ x: 0, y: 0 });
+          }}
         >
           <div
             className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[0].glow} overflow-hidden`}
@@ -207,6 +230,18 @@ export const PortfolioCube = () => {
             <FaceContent face={faces[5]} />
           </div>
         </div>
+        <div className="pointer-events-none absolute inset-0 -z-10 transition-all duration-500">
+          <div
+            className={`absolute left-1/2 top-1/2 w-[calc(var(--cube-size)_+_110px)] h-[calc(var(--cube-size)_+_110px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl opacity-50 ${frontFace.glow}`}
+          />
+          <div
+            className="absolute left-1/2 top-1/2 w-[calc(var(--cube-size)_+_40px)] h-[calc(var(--cube-size)_+_40px)] -translate-x-1/2 -translate-y-1/2 rounded-2xl"
+            style={{
+              background: `radial-gradient(circle at ${lightX}% ${lightY}%, rgba(255,255,255,0.34), rgba(255,255,255,0) 52%)`,
+            }}
+          />
+        </div>
+        <div className="pointer-events-none absolute left-1/2 top-1/2 w-[calc(var(--cube-size)_+_14px)] h-[calc(var(--cube-size)_+_14px)] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/20 opacity-70 transition-all duration-500" />
       </div>
 
       <div className="mt-6 flex items-center gap-2">
