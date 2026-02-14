@@ -93,12 +93,20 @@ const Index = () => {
   const [loadInteractiveTools, setLoadInteractiveTools] = useState(false);
 
   useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const timeout = isMobile ? 5200 : 2600;
+      const idleId = window.requestIdleCallback(() => {
+        setLoadInteractiveTools(true);
+      }, { timeout });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
     const timer = window.setTimeout(() => {
       setLoadInteractiveTools(true);
-    }, 2000);
+    }, isMobile ? 4500 : 2000);
 
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     if (isMobile) {
@@ -122,7 +130,7 @@ const Index = () => {
       <CustomCursor />
       <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Scroll Progress Indicator */}
-      <ScrollProgress />
+      {!isMobile && <ScrollProgress />}
       
       {/* Navigation */}
       <Navigation />
