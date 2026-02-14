@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect } from 'react';
 import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { InteractiveTerminal } from './InteractiveTerminal';
+import { PortfolioCube } from './PortfolioCube';
 import { trackExternalLink, trackDownload } from '@/lib/analytics';
 
 export const Hero = () => {
@@ -9,6 +10,7 @@ export const Hero = () => {
   const [titleIndex, setTitleIndex] = useState(0);
   const [titleText, setTitleText] = useState('');
   const [isTitleDeleting, setIsTitleDeleting] = useState(false);
+  const [showCube, setShowCube] = useState(false);
   
   const fullText = '> Nicolette Mashaba_';
   const titles = [
@@ -83,7 +85,7 @@ export const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left: Profile Image and Headline */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 order-2 lg:order-1">
             {/* Profile Image and Name on same line */}
             <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
               {/* Profile Image */}
@@ -103,7 +105,7 @@ export const Hero = () => {
                   <img 
                     src="/my-caricature.jpeg" 
                     alt="Nicolette Mashaba - Software Engineer"
-                    className="w-24 h-24 sm:w-28 sm:h-28 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
@@ -126,7 +128,7 @@ export const Hero = () => {
                 <div className="inline-flex items-center gap-1.5 sm:gap-3 glass rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 border border-primary/20 mb-3 sm:mb-4 lg:mb-6">
                   <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-accent"></span>
+                    <span className="relative inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                   </span>
                   <span className="text-[10px] sm:text-sm font-medium text-foreground">Open to Opportunities</span>
                   <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">Johannesburg, SA</span>
@@ -253,13 +255,31 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Right: Interactive Terminal */}
-          <div className="flex flex-col items-center justify-center">
-            <InteractiveTerminal />
+          {/* Right: Interactive Panel */}
+          <div className="order-1 lg:order-2 flex w-full flex-col items-center justify-center gap-4">
+            <div className="inline-flex items-center gap-2 glass rounded-full p-1 border border-primary/20">
+              <button
+                onClick={() => setShowCube(false)}
+                className={`px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all ${
+                  !showCube ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                Terminal
+              </button>
+              <button
+                onClick={() => setShowCube(true)}
+                className={`px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all ${
+                  showCube ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                Cube
+              </button>
+            </div>
+
+            {showCube ? <PortfolioCube /> : <InteractiveTerminal />}
           </div>
         </div>
       </div>
     </section>
   );
 };
-

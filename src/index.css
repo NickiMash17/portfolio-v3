@@ -224,6 +224,24 @@ All colors MUST be HSL.
   .animate-float-soft {
     animation: float-soft 4.5s ease-in-out infinite;
   }
+
+  @keyframes cube-orbit {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .cube-orbit {
+    animation: cube-orbit 18s linear infinite;
+  }
+
+  @keyframes cube-twinkle {
+    0%, 100% { opacity: 0.25; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .cube-twinkle {
+    animation: cube-twinkle 2.8s ease-in-out infinite;
+  }
   
   /* Pulse glow */
   @keyframes pulse-glow {
