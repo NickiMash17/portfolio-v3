@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Code2, User, Briefcase, FolderOpen, MessageSquare, Award, Mail } from 'lucide-react';
+import { Menu, X, Code2, User, Briefcase, FolderOpen, Award, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { trackEvent } from '@/lib/analytics';
@@ -20,40 +20,9 @@ export const Navigation = () => {
 
   useEffect(() => {
     let rafId = 0;
-    const sectionMap = new Map<string, HTMLElement>();
-    let missingSections = true;
-
-    const refreshSections = () => {
-      missingSections = false;
-      navItems.forEach((item) => {
-        const el = document.getElementById(item.id);
-        if (el) {
-          sectionMap.set(item.id, el);
-        } else {
-          sectionMap.delete(item.id);
-          missingSections = true;
-        }
-      });
-    };
-
-    refreshSections();
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      if (missingSections) {
-        refreshSections();
-      }
-
-      const scrollPosition = window.scrollY + 150; // Offset for better UX
-
-      for (let i = navItems.length - 1; i >= 0; i--) {
-        const section = sectionMap.get(navItems[i].id);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
-          break;
-        }
-      }
     };
 
     const onScroll = () => {
@@ -72,6 +41,66 @@ export const Navigation = () => {
       if (rafId !== 0) {
         window.cancelAnimationFrame(rafId);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observed = new Set<Element>();
+    const sectionVisibility = new Map<string, number>();
+    let timer: number | undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = (entry.target as HTMLElement).id;
+          sectionVisibility.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+
+        let bestId = '';
+        let bestRatio = 0;
+        sectionVisibility.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        });
+
+        if (bestId) {
+          setActiveSection(bestId);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '-20% 0px -55% 0px',
+        threshold: [0.1, 0.2, 0.4, 0.6],
+      }
+    );
+
+    const connectSections = () => {
+      navItems.forEach((item) => {
+        const el = document.getElementById(item.id);
+        if (el && !observed.has(el)) {
+          observed.add(el);
+          observer.observe(el);
+        }
+      });
+
+      if (observed.size === navItems.length) {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = undefined;
+        }
+      }
+    };
+
+    connectSections();
+    timer = window.setInterval(connectSections, 1200);
+
+    return () => {
+      if (timer) {
+        window.clearInterval(timer);
+      }
+      observer.disconnect();
     };
   }, []);
 
