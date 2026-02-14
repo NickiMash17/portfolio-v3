@@ -180,31 +180,32 @@ export const PortfolioCube = () => {
             faceFlash ? 'opacity-85 scale-100' : 'opacity-0 scale-90'
           }`}
         />
-        <div
-          ref={cubeRef}
-          className={`relative transition-transform duration-700 ${isSpinning ? 'animate-spin' : ''}`}
-          style={{
-            width: 'var(--cube-size)',
-            height: 'var(--cube-size)',
-            transformStyle: 'preserve-3d',
-            transform: `rotateX(${view.x + tilt.x}deg) rotateY(${view.y + tilt.y}deg)`,
-          }}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseMove={(e) => {
-            if (isTouchDevice) return;
-            const rect = e.currentTarget.getBoundingClientRect();
-            const px = (e.clientX - rect.left) / rect.width;
-            const py = (e.clientY - rect.top) / rect.height;
-            setTilt({
-              x: (0.5 - py) * tiltMax,
-              y: (px - 0.5) * tiltMax,
-            });
-          }}
-          onMouseLeave={() => {
-            setIsPaused(false);
-            setTilt({ x: 0, y: 0 });
-          }}
-        >
+        <div className={faceFlash ? 'cube-impact' : ''}>
+          <div
+            ref={cubeRef}
+            className={`relative transition-transform duration-700 ${isSpinning ? 'animate-spin' : ''}`}
+            style={{
+              width: 'var(--cube-size)',
+              height: 'var(--cube-size)',
+              transformStyle: 'preserve-3d',
+              transform: `rotateX(${view.x + tilt.x}deg) rotateY(${view.y + tilt.y}deg)`,
+            }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseMove={(e) => {
+              if (isTouchDevice) return;
+              const rect = e.currentTarget.getBoundingClientRect();
+              const px = (e.clientX - rect.left) / rect.width;
+              const py = (e.clientY - rect.top) / rect.height;
+              setTilt({
+                x: (0.5 - py) * tiltMax,
+                y: (px - 0.5) * tiltMax,
+              });
+            }}
+            onMouseLeave={() => {
+              setIsPaused(false);
+              setTilt({ x: 0, y: 0 });
+            }}
+          >
           <div
             className={`absolute inset-0 rounded-2xl border border-white/35 shadow-2xl ${faces[0].glow} overflow-hidden transition-all duration-500 ${faceIndex === 0 ? 'brightness-110 saturate-125' : ''}`}
             style={{ transform: `rotateY(0deg) translateZ(${cubeDepth})`, backfaceVisibility: 'hidden' }}
@@ -240,6 +241,7 @@ export const PortfolioCube = () => {
             style={{ transform: `rotateX(-90deg) translateZ(${cubeDepth})`, backfaceVisibility: 'hidden' }}
           >
             <FaceContent face={faces[5]} isActive={faceIndex === 5} flash={faceFlash && faceIndex === 5} />
+          </div>
           </div>
         </div>
         <div className="pointer-events-none absolute inset-0 -z-10 transition-all duration-500">
