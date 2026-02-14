@@ -25,7 +25,7 @@ export const Hero = () => {
   const isMobile = useIsMobile();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [titleIndex, setTitleIndex] = useState(0);
-  const [titleText, setTitleText] = useState('');
+  const [titleText, setTitleText] = useState(TITLES[0]);
   const [isTitleDeleting, setIsTitleDeleting] = useState(false);
   const [showCube, setShowCube] = useState(false);
   const [isPanelReady, setIsPanelReady] = useState(false);
@@ -114,8 +114,8 @@ export const Hero = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
       <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block gradient-mesh'} />
-      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute top-8 left-1/2 -translate-x-1/2 w-40 h-40 bg-primary/15 rounded-full blur-3xl animate-float-soft'} />
-      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute bottom-8 right-6 w-28 h-28 bg-accent/10 rounded-full blur-2xl animate-float-soft'} style={{ animationDelay: '1.2s' }} />
+      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute top-8 left-1/2 -translate-x-1/2 w-32 h-32 bg-primary/10 rounded-full blur-2xl'} />
+      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute bottom-8 right-6 w-24 h-24 bg-accent/10 rounded-full blur-xl'} />
 
       <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float'} />
       <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float'} style={{ animationDelay: '2s' }} />
@@ -134,14 +134,20 @@ export const Hero = () => {
                   <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-primary rounded-bl-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.2s' }}></div>
                   <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-accent rounded-br-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.3s' }}></div>
 
-                  <img
-                    src="/my-caricature.jpeg"
-                    alt="Nicolette Mashaba - Software Engineer"
-                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                  />
+                  <picture>
+                    <source media="(max-width: 767px)" srcSet="/my-caricature-mobile.jpg" />
+                    <img
+                      src="/my-caricature.jpeg"
+                      alt="Nicolette Mashaba - Software Engineer"
+                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      width={224}
+                      height={224}
+                      sizes="(max-width: 639px) 80px, (max-width: 767px) 96px, 112px"
+                    />
+                  </picture>
                 </div>
 
                 <div className="absolute -top-11 sm:-top-16 left-1/2 -translate-x-1/2 glass rounded-xl px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 leading-tight w-max">
