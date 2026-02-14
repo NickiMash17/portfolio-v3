@@ -19,9 +19,33 @@ export const Navigation = () => {
 
   useEffect(() => {
     let rafId = 0;
+    let sections: { id: string; el: HTMLElement }[] = [];
+
+    const refreshSections = () => {
+      sections = navItems
+        .map((item) => {
+          const el = document.getElementById(item.id);
+          return el ? { id: item.id, el } : null;
+        })
+        .filter((v): v is { id: string; el: HTMLElement } => v !== null);
+    };
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      const scrollPosition = window.scrollY + 140;
+      let current = '';
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i].el.offsetTop <= scrollPosition) {
+          current = sections[i].id;
+          break;
+        }
+      }
+
+      if (current) {
+        setActiveSection(current);
+      }
     };
 
     const onScroll = () => {
@@ -32,69 +56,21 @@ export const Navigation = () => {
       });
     };
 
+    refreshSections();
+    const mutationObserver = new MutationObserver(refreshSections);
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', refreshSections);
     handleScroll(); // Initial check
 
     return () => {
+      mutationObserver.disconnect();
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', refreshSections);
       if (rafId !== 0) {
         window.cancelAnimationFrame(rafId);
       }
-    };
-  }, []);
-
-  useEffect(() => {
-    const observed = new Set<Element>();
-    const sectionVisibility = new Map<string, number>();
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const id = (entry.target as HTMLElement).id;
-          sectionVisibility.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
-        });
-
-        let bestId = '';
-        let bestRatio = 0;
-        sectionVisibility.forEach((ratio, id) => {
-          if (ratio > bestRatio) {
-            bestRatio = ratio;
-            bestId = id;
-          }
-        });
-
-      if (bestId) {
-          setActiveSection(bestId);
-        }
-      },
-      {
-        root: null,
-        rootMargin: '-20% 0px -55% 0px',
-        threshold: [0.1, 0.2, 0.4, 0.6],
-      }
-    );
-
-    const connectSections = () => {
-      navItems.forEach((item) => {
-        const el = document.getElementById(item.id);
-        if (el && !observed.has(el)) {
-          observed.add(el);
-          observer.observe(el);
-        }
-      });
-    };
-
-    connectSections();
-    const mutationObserver = new MutationObserver(() => {
-      if (observed.size < navItems.length) {
-        connectSections();
-      }
-    });
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      mutationObserver.disconnect();
-      observer.disconnect();
     };
   }, []);
 
@@ -114,6 +90,7 @@ export const Navigation = () => {
       behavior: 'smooth',
     });
 
+    setActiveSection(id);
     trackEvent('navigation_click', { section: id });
     setIsMobileMenuOpen(false);
   };
