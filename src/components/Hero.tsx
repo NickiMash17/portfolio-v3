@@ -129,7 +129,7 @@ export const Hero = () => {
                     <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-accent"></span>
                   </span>
                   <span className="text-[10px] sm:text-sm font-medium text-foreground">Open to Opportunities</span>
-                  <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">â€¢ Johannesburg, SA</span>
+                  <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">Johannesburg, SA</span>
                 </div>
 
                 {/* Name with Orbiting Icons */}
