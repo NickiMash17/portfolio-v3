@@ -2,6 +2,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { playUISound } from "@/lib/sound";
 
 export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
@@ -19,7 +20,10 @@ export const ThemeToggle = () => {
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => {
+        void playUISound('toggle');
+        setTheme(theme === "dark" ? "light" : "dark");
+      }}
       className="relative glass hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/30"
       aria-label="Toggle theme"
     >

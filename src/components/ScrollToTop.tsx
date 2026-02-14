@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
+import { playUISound } from '@/lib/sound';
 
 export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,6 +34,7 @@ export const ScrollToTop = () => {
   }, []);
 
   const scrollToTop = () => {
+    void playUISound('confirm');
     window.scrollTo({
       top: 0,
       behavior: 'smooth',

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Code2, User, Briefcase, FolderOpen, Award, Mail } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { trackEvent } from '@/lib/analytics';
+import { playUISound } from '@/lib/sound';
 
 const navItems = [
   { id: 'about', label: 'About', icon: User },
@@ -120,6 +121,7 @@ export const Navigation = () => {
             {/* Logo/Brand */}
             <button
               onClick={() => {
+                void playUISound('tap');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 trackEvent('navigation_click', { section: 'home' });
               }}
@@ -142,7 +144,10 @@ export const Navigation = () => {
                 return (
                   <button
                     key={item.id}
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => {
+                      void playUISound('tap');
+                      scrollToSection(item.id);
+                    }}
                     className={`relative px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 group ${
                       isActive
                         ? 'text-primary bg-primary/10'
@@ -166,7 +171,10 @@ export const Navigation = () => {
             <div className="md:hidden flex items-center gap-2">
               <ThemeToggle />
               <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => {
+                  void playUISound('toggle');
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                }}
                 className="p-2 rounded-lg glass border border-primary/20 hover:border-primary/50 transition-all"
                 aria-label="Toggle menu"
                 aria-expanded={isMobileMenuOpen}
@@ -196,7 +204,10 @@ export const Navigation = () => {
                 return (
                   <button
                     key={item.id}
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => {
+                      void playUISound('tap');
+                      scrollToSection(item.id);
+                    }}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
                       isActive
                         ? 'text-primary bg-primary/10 border border-primary/20'
