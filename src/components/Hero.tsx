@@ -90,7 +90,7 @@ export const Hero = () => {
         setTitleText(current.slice(0, Math.max(0, titleText.length - 1)));
         if (titleText.length === 0) {
           setIsTitleDeleting(false);
-          setTitleIndex((i) => (i + 1) % titles.length);
+          setTitleIndex((i) => (i + 1) % TITLES.length);
         }
       }
     }, speed);
