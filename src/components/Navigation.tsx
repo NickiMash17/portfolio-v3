@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Code2, User, Briefcase, FolderOpen, Award, Mail } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { trackEvent } from '@/lib/analytics';
 

@@ -3,11 +3,8 @@ import { AuroraBackground } from '@/components/AuroraBackground';
 import { Hero } from '@/components/Hero';
 import { Footer } from '@/components/Footer';
 import { Preloader } from '@/components/Preloader';
-import { CustomCursor } from '@/components/CustomCursor';
 import { SEO } from '@/components/SEO';
 import { Navigation } from '@/components/Navigation';
-import { ScrollToTop } from '@/components/ScrollToTop';
-import { ScrollProgress } from '@/components/ScrollProgress';
 import { SectionDivider } from '@/components/SectionDivider';
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -47,6 +44,18 @@ const SocialShare = lazy(async () => {
 const AIChat = lazy(async () => {
   const mod = await import('@/components/AIChat');
   return { default: mod.AIChat };
+});
+const CustomCursor = lazy(async () => {
+  const mod = await import('@/components/CustomCursor');
+  return { default: mod.CustomCursor };
+});
+const ScrollToTop = lazy(async () => {
+  const mod = await import('@/components/ScrollToTop');
+  return { default: mod.ScrollToTop };
+});
+const ScrollProgress = lazy(async () => {
+  const mod = await import('@/components/ScrollProgress');
+  return { default: mod.ScrollProgress };
 });
 
 const DeferredSection = ({
@@ -92,7 +101,24 @@ const Index = () => {
   useKeyboardNavigation();
   const isMobile = useIsMobile();
   const [renderAurora, setRenderAurora] = useState(false);
+  const [loadChromeEnhancements, setLoadChromeEnhancements] = useState(false);
   const [loadInteractiveTools, setLoadInteractiveTools] = useState(false);
+
+  useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const timeout = isMobile ? 3200 : 1400;
+      const idleId = window.requestIdleCallback(() => {
+        setLoadChromeEnhancements(true);
+      }, { timeout });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timer = window.setTimeout(() => {
+      setLoadChromeEnhancements(true);
+    }, isMobile ? 2600 : 1000);
+
+    return () => window.clearTimeout(timer);
+  }, [isMobile]);
 
   useEffect(() => {
     if ('requestIdleCallback' in window) {
@@ -129,10 +155,18 @@ const Index = () => {
     <>
       <SEO />
       <Preloader />
-      {!isMobile && <CustomCursor />}
+      {!isMobile && loadChromeEnhancements && (
+        <Suspense fallback={null}>
+          <CustomCursor />
+        </Suspense>
+      )}
       <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Scroll Progress Indicator */}
-      {!isMobile && <ScrollProgress />}
+      {!isMobile && loadChromeEnhancements && (
+        <Suspense fallback={null}>
+          <ScrollProgress />
+        </Suspense>
+      )}
       
       {/* Navigation */}
       <Navigation />
@@ -203,7 +237,11 @@ const Index = () => {
       )}
       
       {/* Scroll to Top Button */}
-      <ScrollToTop />
+      {loadChromeEnhancements && (
+        <Suspense fallback={null}>
+          <ScrollToTop />
+        </Suspense>
+      )}
     </div>
     </>
   );
