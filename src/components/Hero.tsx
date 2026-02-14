@@ -109,7 +109,7 @@ export const Hero = () => {
                 </div>
                 
                 {/* Floating badges */}
-                <div className="absolute -top-14 sm:-top-16 left-1/2 -translate-x-1/2 glass rounded-xl px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 leading-tight w-max">
+                <div className="absolute -top-11 sm:-top-16 left-1/2 -translate-x-1/2 glass rounded-xl px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 leading-tight w-max">
                   <span className="block whitespace-nowrap">#1 Female Most Active</span>
                   <span className="block whitespace-nowrap">GitHub User 🇿🇦</span>
                 </div>
