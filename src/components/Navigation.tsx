@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Code2, User, Briefcase, FolderOpen, Award, Mail } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { SoundToggle } from '@/components/SoundToggle';
 import { trackEvent } from '@/lib/analytics';
 import { playUISound } from '@/lib/sound';
 
@@ -169,6 +170,7 @@ export const Navigation = () => {
 
             {/* Right side buttons - Mobile */}
             <div className="md:hidden flex items-center gap-2">
+              <SoundToggle />
               <ThemeToggle />
               <button
                 onClick={() => {
@@ -188,7 +190,8 @@ export const Navigation = () => {
             </div>
 
             {/* Right side - Desktop */}
-            <div className="hidden md:flex items-center">
+            <div className="hidden md:flex items-center gap-2">
+              <SoundToggle />
               <ThemeToggle />
             </div>
           </div>
