@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { InteractiveTerminal } from './InteractiveTerminal';
 import { trackExternalLink, trackDownload } from '@/lib/analytics';
@@ -110,7 +110,7 @@ export const Hero = () => {
                 
                 {/* Floating badges */}
                 <div className="absolute -top-2 -right-2 glass rounded-full px-2 py-1 text-xs font-medium text-primary border border-primary/20 animate-float">
-                  #1 SA
+                  #1 Female Most Active GitHub User
                 </div>
                 <div className="absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 animate-float" style={{ animationDelay: '1s' }}>
                   Azure
@@ -126,7 +126,7 @@ export const Hero = () => {
                     <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-accent"></span>
                   </span>
                   <span className="text-[10px] sm:text-sm font-medium text-foreground">Open to Opportunities</span>
-                  <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">• Johannesburg, SA</span>
+                  <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">â€¢ Johannesburg, SA</span>
                 </div>
 
                 {/* Name with Orbiting Icons */}
@@ -259,3 +259,4 @@ export const Hero = () => {
     </section>
   );
 };
+

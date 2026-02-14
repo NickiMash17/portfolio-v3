@@ -112,7 +112,7 @@ export const About = () => {
               <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-muted-foreground">
                 Currently excelling in <span className="text-accent">full-stack development</span>, 
                 <span className="text-accent"> cloud computing</span>, and 
-                <span className="text-accent"> AI/ML technologies</span>. As the <span className="text-primary font-semibold">#1 ranked female GitHub contributor in South Africa</span>, 
+                <span className="text-accent"> AI/ML technologies</span>. As the <span className="text-primary font-semibold">#1 Female Most Active GitHub User</span>, 
                 I demonstrate consistent commitment to technical excellence.
               </p>
             </div>
@@ -171,4 +171,5 @@ export const About = () => {
     </section>
   );
 };
+
 
