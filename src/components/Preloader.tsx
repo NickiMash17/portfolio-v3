@@ -4,13 +4,7 @@ import { Code2, Sparkles } from 'lucide-react';
 export const Preloader = () => {
   const [progress, setProgress] = useState(0);
   const [loadingStage, setLoadingStage] = useState(0);
-  const [shouldShow] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isSmallViewport = window.innerWidth < 768;
-    const hasSeenPreloader = sessionStorage.getItem('preloader-seen') === '1';
-    return !(prefersReducedMotion || isSmallViewport || hasSeenPreloader);
-  });
+  const [shouldShow] = useState(() => typeof window !== 'undefined');
   const [isVisible, setIsVisible] = useState(shouldShow);
 
   const stages = [
@@ -19,11 +13,6 @@ export const Preloader = () => {
     { text: 'Preparing experience...', icon: '✨' },
     { text: 'Ready!', icon: '🚀' },
   ];
-
-  useEffect(() => {
-    if (!shouldShow || typeof window === 'undefined') return;
-    sessionStorage.setItem('preloader-seen', '1');
-  }, [shouldShow]);
 
   useEffect(() => {
     if (!shouldShow) return;

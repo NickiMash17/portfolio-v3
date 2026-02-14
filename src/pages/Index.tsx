@@ -166,11 +166,9 @@ const Index = () => {
   return (
     <>
       <SEO />
-      {!isMobile && (
-        <Suspense fallback={null}>
-          <Preloader />
-        </Suspense>
-      )}
+      <Suspense fallback={null}>
+        <Preloader />
+      </Suspense>
       {!isMobile && loadChromeEnhancements && (
         <Suspense fallback={null}>
           <CustomCursor />
