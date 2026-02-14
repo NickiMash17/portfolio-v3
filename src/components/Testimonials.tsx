@@ -85,7 +85,7 @@ export const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6">
+    <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
         <ScrollAnimation animation="fade-up">
           <div className="text-center mb-12 md:mb-16">

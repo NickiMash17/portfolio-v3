@@ -70,7 +70,7 @@ export const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
+    <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
         <ScrollAnimation animation="fade-up">
           <div className="mb-8 sm:mb-12 md:mb-16 text-center">

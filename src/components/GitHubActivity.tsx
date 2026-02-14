@@ -40,7 +40,7 @@ export const GitHubActivity = () => {
   };
 
   return (
-    <section id="github" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6">
+    <section className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
         <ScrollAnimation animation="fade-up">
           <div className="mb-12 sm:mb-16 text-center">
