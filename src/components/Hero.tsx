@@ -114,8 +114,8 @@ export const Hero = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
       <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block gradient-mesh'} />
-      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute top-8 left-1/2 -translate-x-1/2 w-32 h-32 bg-primary/10 rounded-full blur-2xl'} />
-      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute bottom-8 right-6 w-24 h-24 bg-accent/10 rounded-full blur-xl'} />
+      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute top-8 left-1/2 -translate-x-1/2 w-40 h-40 bg-primary/15 rounded-full blur-3xl animate-float-soft'} />
+      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute bottom-8 right-6 w-28 h-28 bg-accent/10 rounded-full blur-2xl animate-float-soft'} style={{ animationDelay: '1.2s' }} />
 
       <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float'} />
       <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float'} style={{ animationDelay: '2s' }} />
@@ -334,3 +334,4 @@ export const Hero = () => {
     </section>
   );
 };
+

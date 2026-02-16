@@ -32,9 +32,9 @@ export const AuroraBackground = () => {
     };
     const isDark = document.documentElement.classList.contains('dark');
 
-    const aPrimary = isDark ? 0.14 : 0.06;
-    const aSecondary = isDark ? 0.12 : 0.05;
-    const aAccent = isDark ? 0.10 : 0.045;
+    const aPrimary = isDark ? 0.22 : 0.06;
+    const aSecondary = isDark ? 0.19 : 0.05;
+    const aAccent = isDark ? 0.16 : 0.045;
 
     let time = 0;
     const waves = [
@@ -81,7 +81,7 @@ export const AuroraBackground = () => {
       }
       lastFrame = now;
 
-      ctx.fillStyle = hslVar('--background', isDark ? 0.12 : 0.06);
+      ctx.fillStyle = hslVar('--background', isDark ? 0.08 : 0.06);
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       waves.forEach((wave, index) => {
@@ -107,4 +107,5 @@ export const AuroraBackground = () => {
     />
   );
 };
+
 
