@@ -149,17 +149,12 @@ const Index = () => {
   }, [isMobile]);
 
   useEffect(() => {
-    if (isMobile) {
-      setRenderAurora(false);
-      return;
-    }
-
     if ('requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(() => setRenderAurora(true), { timeout: 1200 });
+      const id = window.requestIdleCallback(() => setRenderAurora(true), { timeout: isMobile ? 2200 : 1200 });
       return () => window.cancelIdleCallback(id);
     }
 
-    const timer = window.setTimeout(() => setRenderAurora(true), 500);
+    const timer = window.setTimeout(() => setRenderAurora(true), isMobile ? 1200 : 500);
     return () => window.clearTimeout(timer);
   }, [isMobile]);
 
@@ -262,3 +257,4 @@ const Index = () => {
 };
 
 export default Index;
+
