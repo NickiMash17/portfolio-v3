@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { ExternalLink, Github, Youtube, Filter, X } from 'lucide-react';
+import { ExternalLink, Github, Linkedin, Youtube, Filter, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TiltCard } from '@/components/TiltCard';
 import { ScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -27,6 +27,31 @@ export const Projects = () => {
 
   const projectsData = [
     {
+      title: 'EmpowaAI',
+      subtitle: 'AI-Powered Career & Economic Guidance Platform',
+      description:
+        'AI-powered career and economic guidance platform that builds a Digital Economic Twin to help youth make smarter career decisions.',
+      tech: [
+        'AI/ML',
+        'NLP',
+        'Career Analytics',
+        'Digital Twin',
+        'Simulation',
+        'Interview Coaching',
+      ],
+      highlights: [
+        'Creates a Digital Economic Twin to model skills, strengths, and potential',
+        'Analyzes CVs, identifies strongest skills, and matches users to suited industries',
+        'Simulates 3, 6, and 12-month career paths with actionable guidance',
+        'Provides interview prep with AI coaching and pathways for employment, learnership, or entrepreneurship',
+        'Designed to evolve into a talent and opportunity ecosystem',
+      ],
+      demo: 'https://www.empowa.org',
+      linkedin: 'https://www.linkedin.com/company/empowaai',
+      emoji: 'AI',
+      screenshot: '/screenshots/emoowaai.jpeg',
+    },
+    {
       title: 'AI Compliance Interrogator',
       subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly',
       description:
@@ -49,6 +74,7 @@ export const Projects = () => {
       ],
       github: 'https://github.com/NickiMash17/AIMS-Firefly',
       demo: null,
+      linkedin: null,
       emoji: '🧠',
       screenshot: '/screenshots/aims.jpg',
     },
@@ -75,6 +101,7 @@ export const Projects = () => {
       ],
       github: 'https://github.com/Lunga-Mashaba/LoanLife_Edge',
       demo: 'https://loan-life-edge.vercel.app/',
+      linkedin: null,
       emoji: '📈',
       screenshot: '/screenshots/loanlife.jpg',
     },
@@ -92,6 +119,7 @@ export const Projects = () => {
       ],
       github: 'https://github.com/NickiMash17/RealHomes',
       demo: 'https://real-homes.vercel.app/',
+      linkedin: null,
       emoji: '🏠',
       screenshot: '/screenshots/realhomes.jpeg',
     },
@@ -109,6 +137,7 @@ export const Projects = () => {
       ],
       github: 'https://github.com/NickiMash17/BookReviewApp',
       demo: 'https://bookreviewapp-1755367448.azurewebsites.net/',
+      linkedin: null,
       emoji: '📚',
       screenshot: '/screenshots/bookreviewapp.jpeg',
     },
@@ -126,6 +155,7 @@ export const Projects = () => {
       ],
       github: 'https://github.com/NickiMash17/fitquest-app',
       demo: 'https://youtu.be/Ist1QrlhFIg?si=lv-JSEcLseUJj4h0',
+      linkedin: null,
       emoji: '🌱',
       screenshot: '/screenshots/fitquest.jpeg',
     },
@@ -330,6 +360,18 @@ export const Projects = () => {
                           onClick={() => trackExternalLink(project.github!, 'github')}
                         >
                           <Github size={16} className="sm:w-5 sm:h-5" />
+                        </a>
+                      )}
+                      {project.linkedin && (
+                        <a
+                          href={project.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 sm:p-2 glass rounded-lg hover:bg-primary/20 transition-colors"
+                          onClick={() => trackExternalLink(project.linkedin!, 'linkedin')}
+                          title="View LinkedIn"
+                        >
+                          <Linkedin size={16} className="sm:w-5 sm:h-5" />
                         </a>
                       )}
                       {project.demo && (

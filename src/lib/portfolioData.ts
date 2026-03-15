@@ -53,6 +53,7 @@ export interface Project {
   highlights: string[];
   github?: string;
   demo?: string;
+  linkedin?: string;
   award?: string;
 }
 
@@ -177,6 +178,29 @@ export const portfolioData: PortfolioData = {
   ],
 
   projects: [
+    {
+      title: 'EmpowaAI',
+      subtitle: 'AI-Powered Career & Economic Guidance Platform',
+      description:
+        'AI-powered career and economic guidance platform that builds a Digital Economic Twin to help youth make smarter career decisions.',
+      tech: [
+        'AI/ML',
+        'NLP',
+        'Career Analytics',
+        'Digital Twin',
+        'Simulation',
+        'Interview Coaching',
+      ],
+      highlights: [
+        'Creates a Digital Economic Twin to model skills, strengths, and potential',
+        'Analyzes CVs, identifies strongest skills, and matches users to suited industries',
+        'Simulates 3, 6, and 12-month career paths with actionable guidance',
+        'Provides interview prep with AI coaching and pathways for employment, learnership, or entrepreneurship',
+        'Designed to evolve into a talent and opportunity ecosystem',
+      ],
+      demo: 'https://www.empowa.org',
+      linkedin: 'https://www.linkedin.com/company/empowaai',
+    },
     {
       title: 'AI Compliance Interrogator',
       subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly',
@@ -491,4 +515,3 @@ Nicolette is Microsoft Azure certified (Developer Associate & Data Fundamentals)
 
 What would you like to know? Try asking about her skills, best projects, or work experience!`;
 };
-
