@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -39,7 +40,7 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
 
 // Animation wrapper component
 interface ScrollAnimationProps {
-  children: React.ReactNode;
+  children: ReactNode;
   animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale' | 'blur';
   delay?: number;
   duration?: number;

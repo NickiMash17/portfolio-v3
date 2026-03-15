@@ -32,7 +32,7 @@ export const Projects = () => {
       subtitle: 'AI-Powered Career & Economic Guidance Platform',
       description:
         'AI-powered career and economic guidance platform that builds a Digital Economic Twin to help youth make smarter career decisions.',
-      role: 'Product & Frontend',
+      role: 'Full-Stack & AI Systems',
       scope: 'AI career guidance, digital twin, simulations',
       tech: [
         'AI/ML',
@@ -161,7 +161,7 @@ export const Projects = () => {
       subtitle: 'Advanced Book Review Application',
       description:
         'Full-featured book review platform built with ASP.NET Core and Entity Framework Core, focused on clean architecture and performance.',
-      role: 'Backend & API Developer',
+      role: 'Full-Stack Developer',
       scope: 'Clean architecture, reviews, persistence',
       tech: ['ASP.NET Core', 'C#', 'Entity Framework Core', 'SQL Server'],
       categories: ['Backend', 'Web App'],
@@ -374,14 +374,14 @@ export const Projects = () => {
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Visual with Creative Screenshot Display */}
                 <div className="w-full lg:w-72 xl:w-80 aspect-[16/9] rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0">
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full h-full bg-gradient-to-br from-background/80 via-background/60 to-background/80">
                     {/* Screenshot Background */}
                     {project.screenshot ? (
                       <div className="absolute inset-0">
                         <img 
                           src={project.screenshot} 
                           alt={`${project.title} screenshot`}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain p-2 sm:p-3"
                           loading="lazy"
                           decoding="async"
                           fetchPriority="low"
@@ -389,6 +389,7 @@ export const Projects = () => {
                           width="640"
                           height="360"
                         />
+                        <div className="absolute inset-0 border border-white/10 rounded-lg sm:rounded-xl pointer-events-none" />
                         {/* Creative Overlay Effects */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-transparent" />
