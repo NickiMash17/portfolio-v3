@@ -24,6 +24,7 @@ const getProjectGradient = (index: number) => {
 
 export const Projects = () => {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const projectsData = [
     {
@@ -31,6 +32,8 @@ export const Projects = () => {
       subtitle: 'AI-Powered Career & Economic Guidance Platform',
       description:
         'AI-powered career and economic guidance platform that builds a Digital Economic Twin to help youth make smarter career decisions.',
+      role: 'Product & Frontend',
+      scope: 'AI career guidance, digital twin, simulations',
       tech: [
         'AI/ML',
         'NLP',
@@ -38,6 +41,12 @@ export const Projects = () => {
         'Digital Twin',
         'Simulation',
         'Interview Coaching',
+      ],
+      categories: ['AI', 'Career Tech', 'Web App'],
+      impact: [
+        'Clear pathways from skills to career options',
+        'Decision support for employment, learnership, or entrepreneurship',
+        'Long-term vision toward a talent and opportunity ecosystem',
       ],
       highlights: [
         'Creates a Digital Economic Twin to model skills, strengths, and potential',
@@ -56,6 +65,8 @@ export const Projects = () => {
       subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly',
       description:
         'Hackathon-winning AI tool that helps organizations detect and prevent human trafficking using intelligent data analysis and pattern recognition.',
+      role: 'Team Project (Hackathon)',
+      scope: 'AI analysis, dashboard, real-time alerts',
       tech: [
         'React',
         'TypeScript',
@@ -65,6 +76,12 @@ export const Projects = () => {
         'Tailwind CSS',
         'Docker',
         'Kubernetes',
+      ],
+      categories: ['AI', 'Civic Tech', 'Full-Stack'],
+      impact: [
+        'Faster anomaly detection and risk identification',
+        'Actionable intelligence for compliance teams',
+        'Scalable, cloud-native architecture for growth',
       ],
       highlights: [
         '🏆 1st Place at AIMS Hackathon 2025 for AI Compliance Interrogator',
@@ -83,6 +100,8 @@ export const Projects = () => {
       subtitle: 'AI-Powered Loan Risk & Compliance Platform',
       description:
         'Fintech platform that turns each loan into a digital twin, monitored by AI with early covenant and ESG risk warnings.',
+      role: 'Backend & AI Integration Lead',
+      scope: 'Ingestion, predictions, ESG, audit trails',
       tech: [
         'Next.js',
         'TypeScript',
@@ -93,6 +112,12 @@ export const Projects = () => {
         'AI/ML',
         'Hardhat',
         'Solidity',
+      ],
+      categories: ['Fintech', 'AI', 'Full-Stack'],
+      impact: [
+        'Earlier visibility into covenant and ESG risks',
+        'Transparent audit trails for governance',
+        'Improved decision-making for loan portfolios',
       ],
       highlights: [
         'Backend & AI Integration Lead for ingestion, digital twin, prediction, ESG and audit services in FastAPI.',
@@ -110,7 +135,15 @@ export const Projects = () => {
       subtitle: 'South African Luxury Real Estate Platform',
       description:
         'A modern, responsive real estate platform showcasing premium properties across South Africa, with rich search and filtering.',
+      role: 'Full-Stack Developer',
+      scope: 'Listings, search, auth, responsive UI',
       tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'JWT'],
+      categories: ['Full-Stack', 'Web App'],
+      impact: [
+        'Streamlined property discovery experience',
+        'Secure access with role-based authentication',
+        'Scalable architecture for growing inventory',
+      ],
       highlights: [
         'Built end-to-end MERN stack application for property listing and discovery',
         'Responsive UI optimized for both mobile and desktop viewing',
@@ -128,7 +161,15 @@ export const Projects = () => {
       subtitle: 'Advanced Book Review Application',
       description:
         'Full-featured book review platform built with ASP.NET Core and Entity Framework Core, focused on clean architecture and performance.',
+      role: 'Backend & API Developer',
+      scope: 'Clean architecture, reviews, persistence',
       tech: ['ASP.NET Core', 'C#', 'Entity Framework Core', 'SQL Server'],
+      categories: ['Backend', 'Web App'],
+      impact: [
+        'Structured, maintainable domain architecture',
+        'Rich review workflow and user interactions',
+        'Efficient data access and persistence',
+      ],
       highlights: [
         'Implements clean architecture with separation of concerns',
         'Supports rich review features and user interactions',
@@ -146,7 +187,15 @@ export const Projects = () => {
       subtitle: 'Gamified Wellness Companion',
       description:
         'A gamified wellness application with an evolving plant companion. Track activities, earn XP, and watch your companion grow.',
+      role: 'Mobile Developer',
+      scope: 'Gamification, XP system, real-time sync',
       tech: ['Flutter', 'Dart', 'Firebase'],
+      categories: ['Mobile', 'Health'],
+      impact: [
+        'Motivates habit formation with gamified rewards',
+        'Cross-platform experience with smooth UX',
+        'Real-time sync across devices',
+      ],
       highlights: [
         'Built with Flutter for smooth cross-platform mobile experiences',
         'Gamified system that rewards healthy habits with XP and growth',
@@ -163,6 +212,14 @@ export const Projects = () => {
 
   const projects = useMemo(() => projectsData, [projectsData]);
 
+  const allCategories = useMemo(() => {
+    const categorySet = new Set<string>();
+    projects.forEach(project => {
+      project.categories.forEach(category => categorySet.add(category));
+    });
+    return Array.from(categorySet).sort();
+  }, [projects]);
+
   // Get all unique technologies
   const allTechs = useMemo(() => {
     const techSet = new Set<string>();
@@ -172,17 +229,32 @@ export const Projects = () => {
     return Array.from(techSet).sort();
   }, [projects]);
 
-  // Filter projects by selected technology
+  // Filter projects by category and selected technology
   const filteredProjects = useMemo(() => {
-    if (!selectedTech) return projects;
-    return projects.filter(project => 
+    let filtered = projects;
+
+    if (selectedCategory) {
+      filtered = filtered.filter(project =>
+        project.categories.some(category =>
+          category.toLowerCase().includes(selectedCategory.toLowerCase())
+        )
+      );
+    }
+
+    if (!selectedTech) return filtered;
+    return filtered.filter(project =>
       project.tech.some(tech => tech.toLowerCase().includes(selectedTech.toLowerCase()))
     );
-  }, [projects, selectedTech]);
+  }, [projects, selectedCategory, selectedTech]);
 
   const handleTechFilter = (tech: string | null) => {
     setSelectedTech(tech);
     trackEvent('Projects', { category: 'filter', tech: tech || 'all' });
+  };
+
+  const handleCategoryFilter = (category: string | null) => {
+    setSelectedCategory(category);
+    trackEvent('Projects', { category: 'category_filter', value: category || 'all' });
   };
 
   return (
@@ -202,10 +274,48 @@ export const Projects = () => {
         {/* Filter Bar */}
         <ScrollAnimation animation="fade-up" delay={50}>
           <div className="mb-6 sm:mb-8 md:mb-10">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 justify-center mb-3 sm:mb-4">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground font-mono">
+                <Filter className="w-4 h-4" />
+                <span>Categories:</span>
+              </div>
+              <button
+                onClick={() => handleCategoryFilter(null)}
+                className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-mono transition-all ${
+                  !selectedCategory
+                    ? 'bg-primary text-primary-foreground border border-primary'
+                    : 'glass border border-foreground/10 hover:border-primary/50 hover:bg-primary/10 text-foreground'
+                }`}
+              >
+                All
+              </button>
+              {allCategories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryFilter(category)}
+                  className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-mono transition-all ${
+                    selectedCategory === category
+                      ? 'bg-primary text-primary-foreground border border-primary'
+                      : 'glass border border-foreground/10 hover:border-primary/50 hover:bg-primary/10 text-foreground'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+              {selectedCategory && (
+                <button
+                  onClick={() => handleCategoryFilter(null)}
+                  className="p-1.5 rounded-lg glass border border-foreground/10 hover:border-destructive/50 hover:bg-destructive/10 transition-all"
+                  aria-label="Clear category filter"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              )}
+            </div>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 justify-center">
               <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground font-mono">
                 <Filter className="w-4 h-4" />
-                <span>Filter:</span>
+                <span>Tech:</span>
               </div>
               <button
                 onClick={() => handleTechFilter(null)}
@@ -234,15 +344,22 @@ export const Projects = () => {
                 <button
                   onClick={() => handleTechFilter(null)}
                   className="p-1.5 rounded-lg glass border border-foreground/10 hover:border-destructive/50 hover:bg-destructive/10 transition-all"
-                  aria-label="Clear filter"
+                  aria-label="Clear tech filter"
                 >
                   <X className="w-3 h-3" />
                 </button>
               )}
             </div>
-            {selectedTech && (
+            {(selectedCategory || selectedTech) && (
               <p className="text-center mt-3 text-xs sm:text-sm text-muted-foreground">
-                Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} with <span className="text-primary font-semibold">{selectedTech}</span>
+                Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}{' '}
+                {selectedCategory ? (
+                  <>in <span className="text-primary font-semibold">{selectedCategory}</span></>
+                ) : null}
+                {selectedCategory && selectedTech ? ' and ' : null}
+                {selectedTech ? (
+                  <>with <span className="text-primary font-semibold">{selectedTech}</span></>
+                ) : null}
               </p>
             )}
           </div>
@@ -349,6 +466,10 @@ export const Projects = () => {
                         {project.title}
                       </h3>
                       <p className="text-accent font-mono text-xs sm:text-sm">{project.subtitle}</p>
+                      <p className="text-[11px] sm:text-xs text-foreground/70 mt-1">
+                        <span className="text-primary font-mono">Role:</span> {project.role} â€¢{' '}
+                        <span className="text-primary font-mono">Scope:</span> {project.scope}
+                      </p>
                     </div>
                     <div className="flex gap-2 flex-shrink-0">
                       {project.github && (
@@ -393,9 +514,24 @@ export const Projects = () => {
                     </div>
                   </div>
 
-                  <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-2 sm:mb-3 md:mb-4 leading-relaxed line-clamp-2">
+                  <p className="text-sm sm:text-base text-foreground/80 mb-2 sm:mb-3 md:mb-4 leading-relaxed line-clamp-2">
                     {project.description}
                   </p>
+
+                  {/* Impact */}
+                  <div className="mb-2 sm:mb-3 md:mb-4">
+                    <p className="text-[11px] sm:text-xs font-mono text-primary mb-1">Impact</p>
+                    <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                      {project.impact.map((item) => (
+                        <span
+                          key={item}
+                          className="px-2 py-0.5 text-[10px] sm:text-[11px] bg-secondary/20 text-foreground/80 rounded-full border border-secondary/30"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-1 sm:gap-1.5 md:gap-2 mb-2 sm:mb-3 md:mb-4">
@@ -412,7 +548,7 @@ export const Projects = () => {
                   {/* Highlights */}
                   <ul className="space-y-1 sm:space-y-1.5 md:space-y-2">
                     {project.highlights.map((highlight, i) => (
-                      <li key={i} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs md:text-sm text-muted-foreground leading-relaxed">
+                      <li key={i} className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-foreground/75 leading-relaxed">
                         <span className="text-accent mt-0.5 flex-shrink-0">▹</span>
                         <span>{highlight}</span>
                       </li>
