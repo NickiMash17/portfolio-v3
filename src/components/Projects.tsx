@@ -373,7 +373,7 @@ export const Projects = () => {
                 <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary hover:shadow-xl hover:-translate-y-1 group cursor-pointer">
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Visual with Creative Screenshot Display */}
-                <div className="lg:w-72 xl:w-80 h-32 sm:h-40 md:h-48 lg:h-auto rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0">
+                <div className="w-full lg:w-72 xl:w-80 aspect-[16/9] rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0">
                   <div className="relative w-full h-full">
                     {/* Screenshot Background */}
                     {project.screenshot ? (
@@ -467,7 +467,7 @@ export const Projects = () => {
                       </h3>
                       <p className="text-accent font-mono text-xs sm:text-sm">{project.subtitle}</p>
                       <p className="text-[11px] sm:text-xs text-foreground/70 mt-1">
-                        <span className="text-primary font-mono">Role:</span> {project.role} â€¢{' '}
+                        <span className="text-primary font-mono">Role:</span> {project.role} ·{' '}
                         <span className="text-primary font-mono">Scope:</span> {project.scope}
                       </p>
                     </div>
