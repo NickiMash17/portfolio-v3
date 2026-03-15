@@ -44,9 +44,9 @@ export const Projects = () => {
       ],
       categories: ['AI', 'Career Tech', 'Web App'],
       impact: [
-        'Clear pathways from skills to career options',
+        '3, 6, and 12-month career path simulations',
+        'Clear pathways from skills to industry fit',
         'Decision support for employment, learnership, or entrepreneurship',
-        'Long-term vision toward a talent and opportunity ecosystem',
       ],
       highlights: [
         'Creates a Digital Economic Twin to model skills, strengths, and potential',
@@ -79,9 +79,9 @@ export const Projects = () => {
       ],
       categories: ['AI', 'Civic Tech', 'Full-Stack'],
       impact: [
-        'Faster anomaly detection and risk identification',
+        'Hackathon winner with real-time AI alerts',
         'Actionable intelligence for compliance teams',
-        'Scalable, cloud-native architecture for growth',
+        'Cloud-native, scalable deployment',
       ],
       highlights: [
         '🏆 1st Place at AIMS Hackathon 2025 for AI Compliance Interrogator',
@@ -115,7 +115,7 @@ export const Projects = () => {
       ],
       categories: ['Fintech', 'AI', 'Full-Stack'],
       impact: [
-        'Earlier visibility into covenant and ESG risks',
+        '30-90 day early warning on covenant and ESG risks',
         'Transparent audit trails for governance',
         'Improved decision-making for loan portfolios',
       ],
@@ -268,6 +268,16 @@ export const Projects = () => {
               <span className="text-primary font-mono">{' />'}</span>
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Building solutions that make an impact</p>
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {['AIMS Hackathon Winner 2025', 'Azure Certified', '1000+ Commits', 'Full-Stack & AI'].map((item) => (
+                <span
+                  key={item}
+                  className="px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono border border-primary/30 bg-primary/10 text-primary"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </ScrollAnimation>
 
@@ -374,25 +384,38 @@ export const Projects = () => {
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Visual with Creative Screenshot Display */}
                 <div className="w-full lg:w-72 xl:w-80 aspect-[16/9] rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0">
-                  <div className="relative w-full h-full bg-gradient-to-br from-background/80 via-background/60 to-background/80">
+                  <div className="relative w-full h-full bg-gradient-to-br from-background/90 via-background/70 to-background/90">
                     {/* Screenshot Background */}
                     {project.screenshot ? (
                       <div className="absolute inset-0">
-                        <img 
-                          src={project.screenshot} 
-                          alt={`${project.title} screenshot`}
-                          className="w-full h-full object-contain p-2 sm:p-3"
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="low"
-                          sizes="(max-width: 1024px) 100vw, 320px"
-                          width="640"
-                          height="360"
-                        />
-                        <div className="absolute inset-0 border border-white/10 rounded-lg sm:rounded-xl pointer-events-none" />
-                        {/* Creative Overlay Effects */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-transparent" />
+                        <div className="absolute inset-0 flex flex-col">
+                          {/* Browser chrome */}
+                          <div className="h-7 sm:h-8 bg-foreground/5 border-b border-foreground/10 flex items-center gap-2 px-2 sm:px-3">
+                            <div className="flex items-center gap-1.5">
+                              <span className="w-2.5 h-2.5 rounded-full bg-destructive/70" />
+                              <span className="w-2.5 h-2.5 rounded-full bg-secondary/70" />
+                              <span className="w-2.5 h-2.5 rounded-full bg-accent/70" />
+                            </div>
+                            <div className="ml-2 flex-1 h-3.5 rounded-full bg-foreground/10 border border-foreground/10" />
+                          </div>
+                          {/* Screenshot area */}
+                          <div className="relative flex-1">
+                            <img 
+                              src={project.screenshot} 
+                              alt={`${project.title} screenshot`}
+                              className="w-full h-full object-contain p-2 sm:p-3"
+                              loading="lazy"
+                              decoding="async"
+                              fetchPriority="low"
+                              sizes="(max-width: 1024px) 100vw, 320px"
+                              width="640"
+                              height="360"
+                            />
+                            <div className="absolute inset-2 rounded-md sm:rounded-lg ring-1 ring-white/10 pointer-events-none" />
+                            {/* Subtle Overlay for readability */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent" />
+                          </div>
+                        </div>
                         
                         {/* Animated Border Frame */}
                         <div className="absolute inset-0 border-2 border-transparent rounded-lg">
@@ -468,7 +491,7 @@ export const Projects = () => {
                       </h3>
                       <p className="text-accent font-mono text-xs sm:text-sm">{project.subtitle}</p>
                       <p className="text-[11px] sm:text-xs text-foreground/70 mt-1">
-                        <span className="text-primary font-mono">Role:</span> {project.role} ·{' '}
+                        <span className="text-primary font-mono">Role:</span> {project.role} &middot;{' '}
                         <span className="text-primary font-mono">Scope:</span> {project.scope}
                       </p>
                     </div>

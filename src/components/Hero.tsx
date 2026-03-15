@@ -55,33 +55,22 @@ export const Hero = () => {
   }, [isMobile]);
 
   useEffect(() => {
-    if (!isMobile || prefersReducedMotion) return;
-
     const interval = window.setInterval(() => {
       setTitleIndex((i) => (i + 1) % TITLES.length);
-    }, 2200);
+    }, prefersReducedMotion ? 3600 : 2400);
 
     return () => window.clearInterval(interval);
-  }, [isMobile, prefersReducedMotion]);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
-    if (!isMobile || prefersReducedMotion) return;
-
-    setTitleText(TITLES[titleIndex % TITLES.length]);
-    setIsTitleDeleting(false);
+    if (prefersReducedMotion || isMobile) {
+      setTitleText(TITLES[titleIndex % TITLES.length]);
+      setIsTitleDeleting(false);
+    }
   }, [isMobile, prefersReducedMotion, titleIndex]);
 
   useEffect(() => {
-    if (!isMobile || !prefersReducedMotion) return;
-
-    setTitleText(TITLES[0]);
-    setIsTitleDeleting(false);
-  }, [isMobile, prefersReducedMotion]);
-
-  useEffect(() => {
-    if (isMobile || prefersReducedMotion) {
-      return;
-    }
+    if (isMobile || prefersReducedMotion) return;
 
     const current = TITLES[titleIndex % TITLES.length];
     const speed = isTitleDeleting ? 40 : 80;
@@ -232,13 +221,34 @@ export const Hero = () => {
                     </div>
                   </a>
 
-                  <div className="space-y-1 sm:space-y-3 relative z-10 py-2 sm:py-8 md:py-12 px-2 sm:px-10 md:px-0">
+                  <div className="space-y-2 sm:space-y-3 relative z-10 py-2 sm:py-6 md:py-10 px-2 sm:px-8 md:px-0">
                     <h1 className="font-medium tracking-tight">
                       <span className="block text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-foreground">Nicolette Mashaba</span>
                       <span className="block text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-semibold mt-1 sm:mt-2 min-h-[1.2em]">
                         {titleText}<span className={isMobile || prefersReducedMotion ? 'text-primary' : 'animate-pulse text-primary'}>|</span>
                       </span>
                     </h1>
+                    <p className="text-sm sm:text-base md:text-lg text-foreground/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                      I build AI-driven web apps that turn complex data into clear decisions for people and businesses.
+                    </p>
+                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1 sm:pt-2">
+                      <button
+                        onClick={() => scrollToSection('projects')}
+                        className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm sm:text-base hover:shadow-lg hover:shadow-primary/20 transition-all"
+                      >
+                        View Projects
+                      </button>
+                      <a
+                        href="/Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf"
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackDownload('Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf', 'pdf')}
+                        className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/40 text-primary font-medium text-sm sm:text-base hover:bg-primary/10 transition-colors"
+                      >
+                        Download CV
+                      </a>
+                    </div>
 
                     <div className="sm:hidden flex flex-wrap justify-center gap-2 pt-3">
                       <a

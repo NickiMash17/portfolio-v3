@@ -91,6 +91,7 @@ export const Experience = () => {
           {experiences.map((exp, index) => {
             const isLeft = index % 2 === 0;
             const Icon = exp.type === 'work' ? Briefcase : GraduationCap;
+            const isCurrent = index === 0 && exp.type === 'work';
 
             return (
               <div
@@ -101,20 +102,25 @@ export const Experience = () => {
               >
                 {/* Content */}
                 <div className={`w-full md:w-5/12 ${isLeft ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8'} text-left`}>
-                  <div className="glass rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:scale-105 transition-all duration-300 hover:glow-primary">
+                  <div className={`glass rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 transition-all duration-300 hover:glow-primary ${isCurrent ? 'border border-primary/40 shadow-lg shadow-primary/10' : 'hover:scale-105'}`}>
                     <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 md:justify-end justify-start">
                       <Icon className="text-accent" size={14} />
                       <span className="text-[9px] sm:text-[10px] md:text-xs text-accent font-mono">{exp.type.toUpperCase()}</span>
+                      {isCurrent && (
+                        <span className="ml-2 px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono bg-primary/15 text-primary border border-primary/30">
+                          Current
+                        </span>
+                      )}
                     </div>
                     <h3 className="text-base sm:text-lg md:text-xl font-bold mb-1 text-foreground">{exp.title}</h3>
                     <div className="text-xs sm:text-sm md:text-base text-primary font-semibold mb-1">{exp.company}</div>
                     <div className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mb-2 sm:mb-3">
-                      {exp.period} • {exp.location}
+                      {exp.period} &middot; {exp.location}
                     </div>
                     <ul className={`space-y-1 sm:space-y-1.5 md:space-y-2 text-left ${isLeft ? 'md:text-right' : ''}`}>
                       {exp.description.map((item, i) => (
-                        <li key={i} className="text-[11px] sm:text-xs md:text-sm text-muted-foreground leading-relaxed flex items-start gap-1.5">
-                          <span className="text-accent mt-0.5 flex-shrink-0">▹</span>
+                        <li key={i} className="text-[11px] sm:text-xs md:text-sm text-foreground/75 leading-relaxed flex items-start gap-1.5">
+                          <span className="text-accent mt-0.5 flex-shrink-0">&rsaquo;</span>
                           <span>{item}</span>
                         </li>
                       ))}
