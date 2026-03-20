@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { ExternalLink, Github, Linkedin, Youtube, Filter, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TiltCard } from '@/components/TiltCard';
-import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ScrollAnimation } from '@/components/ScrollAnimation';
 import { trackProjectView, trackExternalLink, trackEvent } from '@/lib/analytics';
 
 // Helper to check if URL is YouTube

@@ -1,5 +1,5 @@
 import { Briefcase, GraduationCap } from 'lucide-react';
-import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ScrollAnimation } from '@/components/ScrollAnimation';
 
 export const Experience = () => {
   const experiences = [

@@ -1,6 +1,6 @@
-﻿import { Code2, Cloud, Anchor, Trophy, Users } from 'lucide-react';
+import { Code2, Cloud, Anchor, Trophy, Users } from 'lucide-react';
 import profileImage from '@/assets/Myself.jpg';
-import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ScrollAnimation } from '@/components/ScrollAnimation';
 
 export const About = () => {
   const highlights = [

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
-import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ScrollAnimation } from '@/components/ScrollAnimation';
 
 interface Testimonial {
   id: number;

@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, MapPin, Phone, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ScrollAnimation } from '@/components/ScrollAnimation';
 import { trackEvent } from '@/lib/analytics';
 
 interface FormErrors {

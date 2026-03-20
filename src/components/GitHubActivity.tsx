@@ -1,6 +1,6 @@
-﻿import { Github } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ScrollAnimation } from '@/components/ScrollAnimation';
 
 export const GitHubActivity = () => {
   const [contributionData, setContributionData] = useState<{ count: number; level: number }[][]>([]);

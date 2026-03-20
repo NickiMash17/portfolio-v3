@@ -10,7 +10,7 @@ import pythonLogo from '@/assets/logos/python.svg';
 import dockerLogo from '@/assets/logos/docker.svg';
 import gitLogo from '@/assets/logos/git.svg';
 import javascriptLogo from '@/assets/logos/javascript.svg';
-import { ScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ScrollAnimation } from '@/components/ScrollAnimation';
 
 export const Skills = () => {
   const techStack = [
