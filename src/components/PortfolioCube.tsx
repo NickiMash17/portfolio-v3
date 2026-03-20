@@ -61,7 +61,7 @@ export const PortfolioCube = () => {
       {
         icon: Github,
         title: 'GitHub',
-        items: ['1,962 Commits', '#1 Female', '65 Repos'],
+        items: ['2448 Commits', '#1 Female', '65 Repos'],
         gradient: 'from-[#0A132D] via-[#123479] to-[#38BDF8]',
         glow: 'shadow-sky-300/25',
       },

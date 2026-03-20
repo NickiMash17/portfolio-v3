@@ -48,6 +48,7 @@ export const Projects = () => {
         'Clear pathways from skills to industry fit',
         'Decision support for employment, learnership, or entrepreneurship',
       ],
+      metrics: ['3, 6, 12-month simulations', 'Digital Economic Twin model'],
       highlights: [
         'Creates a Digital Economic Twin to model skills, strengths, and potential',
         'Analyzes CVs, identifies strongest skills, and matches users to suited industries',
@@ -83,6 +84,7 @@ export const Projects = () => {
         'Actionable intelligence for compliance teams',
         'Cloud-native, scalable deployment',
       ],
+      metrics: ['1st Place AIMS Hackathon 2025', 'Real-time alerting'],
       highlights: [
         '🏆 1st Place at AIMS Hackathon 2025 for AI Compliance Interrogator',
         'Real-time data processing with NLP and OpenAI-powered analysis',
@@ -119,6 +121,7 @@ export const Projects = () => {
         'Transparent audit trails for governance',
         'Improved decision-making for loan portfolios',
       ],
+      metrics: ['30-90 day risk forecasting', 'ESG + covenant coverage'],
       highlights: [
         'Backend & AI Integration Lead for ingestion, digital twin, prediction, ESG and audit services in FastAPI.',
         'Predicts covenant breaches and ESG issues 30–90 days ahead for proactive risk management.',
@@ -269,7 +272,7 @@ export const Projects = () => {
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Building solutions that make an impact</p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">
-              {['AIMS Hackathon Winner 2025', 'Azure Certified', '1000+ Commits', 'Full-Stack & AI'].map((item) => (
+              {['AIMS Hackathon Winner 2025', 'Azure Certified', '2448 Commits', 'Full-Stack & AI'].map((item) => (
                 <span
                   key={item}
                   className="px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono border border-primary/30 bg-primary/10 text-primary"
@@ -383,7 +386,7 @@ export const Projects = () => {
                 <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary hover:shadow-xl hover:-translate-y-1 group cursor-pointer">
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Visual with Creative Screenshot Display */}
-                <div className="w-full lg:w-72 xl:w-80 aspect-[16/9] rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0">
+                <div className="w-full lg:w-72 xl:w-80 aspect-[16/9] rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0 shadow-lg shadow-black/10">
                   <div className="relative w-full h-full bg-gradient-to-br from-background/90 via-background/70 to-background/90">
                     {/* Screenshot Background */}
                     {project.screenshot ? (
@@ -542,11 +545,13 @@ export const Projects = () => {
                     {project.description}
                   </p>
 
-                  {/* Impact */}
+                  {/* Metrics / Outcomes */}
                   <div className="mb-2 sm:mb-3 md:mb-4">
-                    <p className="text-[11px] sm:text-xs font-mono text-primary mb-1">Impact</p>
+                    <p className="text-[11px] sm:text-xs font-mono text-primary mb-1">
+                      {project.metrics?.length ? 'Metrics' : 'Outcomes'}
+                    </p>
                     <div className="flex flex-wrap gap-1 sm:gap-1.5">
-                      {project.impact.map((item) => (
+                      {(project.metrics?.length ? project.metrics : project.impact).map((item) => (
                         <span
                           key={item}
                           className="px-2 py-0.5 text-[10px] sm:text-[11px] bg-secondary/20 text-foreground/80 rounded-full border border-secondary/30"

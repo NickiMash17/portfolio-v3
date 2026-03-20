@@ -249,6 +249,21 @@ export const Hero = () => {
                         Download CV
                       </a>
                     </div>
+                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-2">
+                      {[
+                        'AIMS Hackathon Winner 2025',
+                        'Azure Certified',
+                        '2448 Commits',
+                        '25% Prompt Accuracy Lift',
+                      ].map((item) => (
+                        <span
+                          key={item}
+                          className="px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono border border-primary/30 bg-primary/10 text-primary"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
 
                     <div className="sm:hidden flex flex-wrap justify-center gap-2 pt-3">
                       <a

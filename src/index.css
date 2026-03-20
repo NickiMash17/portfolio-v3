@@ -26,7 +26,7 @@ All colors MUST be HSL.
     --secondary-foreground: 222 47% 11%;
 
     --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted-foreground: 215 16% 40%;
 
     --accent: 199 89% 48%;
     --accent-foreground: 210 40% 98%;
@@ -79,7 +79,7 @@ All colors MUST be HSL.
     --secondary-foreground: 180 100% 95%;
 
     --muted: 220 30% 15%;
-    --muted-foreground: 180 20% 60%;
+    --muted-foreground: 180 22% 68%;
 
     --accent: 160 100% 45%;
     --accent-foreground: 220 40% 4%;
@@ -119,6 +119,9 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
   }
 
   :focus-visible {

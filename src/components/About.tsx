@@ -150,7 +150,7 @@ export const About = () => {
         <ScrollAnimation animation="fade-up" delay={300}>
           <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
           {[
-            { value: '1962', label: 'GitHub Commits' },
+            { value: '2448', label: 'GitHub Commits' },
             { value: '15+', label: 'Projects Built' },
             { value: '2', label: 'Azure Certs' },
             { value: '#1', label: 'Female Most Active GitHub User' },
