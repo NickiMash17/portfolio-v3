@@ -7,12 +7,12 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <!-- Homepage -->
   <url>
-    <loc>https://nicmash-porfolio.vercel.app/</loc>
+    <loc>https://nicmash-portfolio.vercel.app/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://nicmash-porfolio.vercel.app/src/assets/Myself.jpg</image:loc>
+      <image:loc>https://nicmash-portfolio.vercel.app/Nico.jpeg</image:loc>
       <image:title>Nicolette Mashaba - Software Engineer Graduate | Full-Stack Developer</image:title>
       <image:caption>Nicolette Mashaba, Software Engineer Graduate and Full-Stack Developer from Johannesburg, South Africa. Azure Certified, #1 ranked female GitHub contributor.</image:caption>
       <image:geo_location>Johannesburg, South Africa</image:geo_location>
@@ -28,42 +28,42 @@
   </url>
   <!-- Projects Section -->
   <url>
-    <loc>https://nicmash-porfolio.vercel.app/#projects</loc>
+    <loc>https://nicmash-portfolio.vercel.app/#projects</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <!-- About Section -->
   <url>
-    <loc>https://nicmash-porfolio.vercel.app/#about</loc>
+    <loc>https://nicmash-portfolio.vercel.app/#about</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Experience Section -->
   <url>
-    <loc>https://nicmash-porfolio.vercel.app/#experience</loc>
+    <loc>https://nicmash-portfolio.vercel.app/#experience</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Skills Section -->
   <url>
-    <loc>https://nicmash-porfolio.vercel.app/#skills</loc>
+    <loc>https://nicmash-portfolio.vercel.app/#skills</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Testimonials Section -->
   <url>
-    <loc>https://nicmash-porfolio.vercel.app/#testimonials</loc>
+    <loc>https://nicmash-portfolio.vercel.app/#testimonials</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Contact Section -->
   <url>
-    <loc>https://nicmash-porfolio.vercel.app/#contact</loc>
+    <loc>https://nicmash-portfolio.vercel.app/#contact</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

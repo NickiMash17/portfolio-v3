@@ -91,11 +91,11 @@ export const About = () => {
         {/* Bio Card with Image */}
         <ScrollAnimation animation="fade-up" delay={100}>
           <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 mb-8 sm:mb-10 md:mb-12 glow-primary">
-          <div className="grid md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-8 md:gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-10 md:gap-12 items-start">
             {/* Profile Image */}
-            <div className="relative group mx-auto md:mx-0 w-full max-w-[320px] md:max-w-none">
+            <div className="relative group mx-auto md:mx-0 w-full max-w-[260px] sm:max-w-[300px] md:max-w-none">
               {/* Unique animated geometric frame */}
-              <div className="absolute -inset-4">
+              <div className="absolute -inset-2 sm:-inset-4">
                 {/* Rotating outer ring */}
                 <div className="absolute inset-0 rounded-3xl border-2 border-primary/20 animate-spin-slow"></div>
                 
@@ -144,16 +144,16 @@ export const About = () => {
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"
-                  sizes="(max-width: 768px) 224px, 320px"
+                  sizes="(max-width: 768px) 260px, 400px"
                   width="400"
                   height="400" 
                   className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
                 />
 
                 {/* Typewriter Overlay */}
-                <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-4 z-20 animate-glitch-hover">
+                <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-2 sm:p-4 z-20 animate-glitch-hover">
                   <div 
-                    className="glitch-text font-mono text-primary text-[10px] sm:text-xs bg-background/80 px-3 py-2 rounded border border-primary/30 shadow-[0_0_15px_rgba(0,230,230,0.3)] relative"
+                    className="glitch-text font-mono text-primary text-[9px] sm:text-xs bg-background/80 px-2 sm:px-3 py-1.5 sm:py-2 rounded border border-primary/30 shadow-[0_0_15px_rgba(0,230,230,0.3)] relative"
                     data-text="Personnel File: N. Mashaba"
                   >
                     <span className="animate-pulse mr-1">{'>'}</span>
@@ -164,19 +164,19 @@ export const About = () => {
             </div>
             
             {/* Bio Text */}
-            <div className="space-y-6 pt-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] uppercase tracking-[0.2em]">
+            <div className="space-y-6 md:pt-4">
+              <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em]">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex h-full w-full rounded-full bg-primary"></span>
                 </span>
                 Status: Active Duty // Tech Transition
               </div>
-              <p className="text-base sm:text-lg md:text-xl leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-balance md:text-left">
                 I'm a <span className="text-primary font-semibold">Software Engineer Graduate</span> transitioning from the 
                 South African Navy to technology. My naval background taught me precision, leadership, and strategic thinking - skills I now apply to building innovative software solutions.
               </p>
-              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground text-balance md:text-left">
                 Currently excelling in <span className="text-accent">full-stack development</span>, 
                 <span className="text-accent"> cloud computing</span>, and 
                 <span className="text-accent"> AI/ML technologies</span>. As the <span className="text-primary font-semibold">#1 Female Most Active GitHub User</span>, 
@@ -184,7 +184,7 @@ export const About = () => {
               </p>
 
               {/* Mission Statement Code Block */}
-              <div className="relative group max-w-md pt-2">
+              <div className="relative group w-full max-w-md pt-2 mx-auto md:mx-0">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 <div className="relative p-4 rounded-lg bg-[#0d1117]/80 backdrop-blur-md border border-primary/20 font-mono text-[10px] sm:text-xs shadow-2xl">
                   <div className="flex gap-1.5 mb-3">
@@ -211,7 +211,7 @@ export const About = () => {
                       <div className="absolute -inset-2 bg-primary/20 rounded-lg blur opacity-0 group-hover/tool:opacity-100 transition-opacity duration-300" />
                       <button 
                         onClick={() => setActiveSkill(activeSkill === i ? null : i)}
-                        className={`relative p-2.5 rounded-lg glass border transition-all duration-300 hover:-translate-y-1 ${activeSkill === i ? 'border-primary bg-primary/10 shadow-[0_0_15px_rgba(0,230,230,0.2)]' : 'border-primary/10 hover:border-primary/40'}`}
+                        className={`relative p-3 sm:p-2.5 rounded-lg glass border transition-all duration-300 hover:-translate-y-1 ${activeSkill === i ? 'border-primary bg-primary/10 shadow-[0_0_15px_rgba(0,230,230,0.2)]' : 'border-primary/10 hover:border-primary/40'}`}
                       >
                         <tool.icon size={18} className="text-primary" />
                         <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-background/90 backdrop-blur-sm text-[10px] font-mono text-primary rounded border border-primary/20 opacity-0 group-hover/tool:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20">
@@ -223,10 +223,10 @@ export const About = () => {
                 </div>
 
                 {/* Interactive Diagnostic Bar */}
-                <div className={`h-12 flex flex-col justify-center transition-all duration-500 overflow-hidden ${activeSkill !== null ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0'}`}>
+                <div className={`flex flex-col justify-center transition-all duration-500 overflow-hidden ${activeSkill !== null ? 'opacity-100 max-h-24 pt-3' : 'opacity-0 max-h-0'}`}>
                   {activeSkill !== null && (
                     <div className="space-y-1.5">
-                      <div className="flex justify-between items-end px-1">
+                      <div className="flex justify-between items-end px-1 sm:px-0">
                         <span className="text-[10px] font-mono text-primary uppercase tracking-wider">{toolkit[activeSkill].label} Proficiency</span>
                         <span className="text-[10px] font-mono text-accent">{toolkit[activeSkill].level}%</span>
                       </div>
@@ -242,14 +242,14 @@ export const About = () => {
               </div>
 
               {/* Glowing Download Button */}
-              <div className="pt-4">
+              <div className="pt-4 flex justify-center md:justify-start">
                 <a 
                   href="/Nicolette-Mashaba-CV.pdf"
                   download="Nicolette-Mashaba-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(0,230,230,0.5)] shadow-lg shadow-primary/20 group text-sm sm:text-base"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(0,230,230,0.5)] shadow-lg shadow-primary/20 group text-sm sm:text-base w-full sm:w-auto justify-center"
                 >
                   <FileText size={20} className="group-hover:rotate-12 transition-transform" />
                   <span>Download Full Resume</span>
