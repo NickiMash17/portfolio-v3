@@ -255,7 +255,7 @@ export const InteractiveTerminal = () => {
   };
 
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleEscape = (e: globalThis.KeyboardEvent) => {
       if (e.key === 'Escape') {
         setShowMatrix(false);
         setShowPacman(false);
