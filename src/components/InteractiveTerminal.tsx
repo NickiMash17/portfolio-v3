@@ -127,7 +127,7 @@ export const InteractiveTerminal = () => {
   ),
   'download': (args) => {
     if (args?.[0] === 'cv') {
-      window.open('/Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf', '_blank');
+      window.open('/Nicolette-Mashaba-CV.pdf', '_blank');
       return <p className="text-accent">📄 Opening CV download...</p>;
     }
     return <p className="text-destructive">Unknown file. Try 'download cv'</p>;
@@ -160,7 +160,7 @@ export const InteractiveTerminal = () => {
   \\___/|_| \\_|
       `}</pre>
       <div className="text-xs space-y-1">
-        <p><span className="text-primary">OS:</span> Portfolio v2.0</p>
+        <p><span className="text-primary">OS:</span> Portfolio v3.0</p>
         <p><span className="text-primary">Host:</span> Johannesburg, SA</p>
         <p><span className="text-primary">Kernel:</span> React 18.3.1</p>
         <p><span className="text-primary">Shell:</span> TypeScript 5.0</p>

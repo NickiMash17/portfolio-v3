@@ -208,13 +208,13 @@ export const Hero = () => {
                   </button>
 
                   <a
-                    href="/Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf"
-                    download
+                    href="/Nicolette-Mashaba-CV.pdf"
+                    download="Nicolette-Mashaba-CV.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hidden sm:block absolute top-1/2 -translate-y-1/2 right-0 animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '2s', animationDuration: '4.8s' }}
-                    onClick={() => trackDownload('Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf', 'pdf')}
+                    onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
                   >
                     <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
                       <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
@@ -239,11 +239,11 @@ export const Hero = () => {
                         View Projects
                       </button>
                       <a
-                        href="/Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf"
-                        download
+                        href="/Nicolette-Mashaba-CV.pdf"
+                        download="Nicolette-Mashaba-CV.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={() => trackDownload('Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf', 'pdf')}
+                        onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
                         className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/40 text-primary font-medium text-sm sm:text-base hover:bg-primary/10 transition-colors"
                       >
                         Download CV
@@ -297,12 +297,12 @@ export const Hero = () => {
                         <Mail className="w-5 h-5 text-accent" />
                       </button>
                       <a
-                        href="/Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf"
-                        download
+                        href="/Nicolette-Mashaba-CV.pdf"
+                        download="Nicolette-Mashaba-CV.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
-                        onClick={() => trackDownload('Nicolette_Mashaba_Junior_Software_Engineer_CV.pdf', 'pdf')}
+                        onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
                       >
                         <FileText className="w-5 h-5 text-primary" />
                       </a>
@@ -359,4 +359,3 @@ export const Hero = () => {
     </section>
   );
 };
-

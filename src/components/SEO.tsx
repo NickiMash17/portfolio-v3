@@ -11,11 +11,11 @@ interface SEOProps {
 export const SEO = ({ 
   title = 'Nicolette Mashaba | Software Engineer Graduate | Full-Stack Developer',
   description = 'Software Engineer Graduate specializing in full-stack development, cloud computing, and AI technologies. Experienced in React, Node.js, Flutter, Azure, and .NET.',
-  image = 'https://nicmash-porfolio.vercel.app/src/assets/Myself.jpg',
+  image = 'https://nicmash-portfolio.vercel.app/Nico.jpeg',
   type = 'website'
 }: SEOProps) => {
   const location = useLocation();
-  const url = `https://nicmash-porfolio.vercel.app${location.pathname}`;
+  const url = `https://nicmash-portfolio.vercel.app${location.pathname}`;
 
   useEffect(() => {
     // Update document title
