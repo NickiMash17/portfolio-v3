@@ -14,6 +14,12 @@ export default {
     },
     extend: {
       colors: {
+        // Naval theme colors
+        sonar:    'hsl(174 100% 50%)',   // bright cyan ping
+        deep:     'hsl(200 40% 6%)',     // ocean black
+        hull:     'hsl(200 25% 12%)',    // panel bg
+        rust:     'hsl(15 70% 55%)',     // accent / alert
+        brass:    'hsl(40 65% 55%)',     // dossier stamp
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -64,8 +70,9 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['"Fira Code"', '"Courier New"', 'monospace'],
+        display: ['"Major Mono Display"', 'monospace'],   // hero / signature
+        sans: ['"Space Grotesk"', 'system-ui', 'sans-serif'], // body
+        mono: ['"JetBrains Mono"', 'monospace'],       // terminal / code
       },
       keyframes: {
         "accordion-down": {
@@ -96,6 +103,18 @@ export default {
           "0%": { backgroundPosition: "-1000px 0" },
           "100%": { backgroundPosition: "1000px 0" },
         },
+        "sonar-ping": {
+          "0%":   { transform: "scale(0)",   opacity: "1" },
+          "100%": { transform: "scale(4)",   opacity: "0" },
+        },
+        "sweep": {
+          "0%":   { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "flicker": {
+          "0%, 100%": { opacity: "1" },
+          "50%":      { opacity: "0.85" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -104,6 +123,9 @@ export default {
         "pulse-glow": "pulse-glow 3s ease-in-out infinite",
         "scan": "scan 8s linear infinite",
         "shimmer": "shimmer 3s linear infinite",
+        "sonar-ping": "sonar-ping 3s cubic-bezier(0,0,0.2,1) infinite",
+        "sweep":      "sweep 4s linear infinite",
+        "flicker":    "flicker 3s ease-in-out infinite",
       },
     },
   },

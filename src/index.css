@@ -6,6 +6,42 @@
 All colors MUST be HSL.
 */
 
+@layer utilities {
+  /* Reduced-motion guard */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Subtle scanline overlay for HUD feel */
+  .hud-scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(0, 255, 200, 0.03) 3px
+    );
+  }
+
+  /* Red alert theme for Konami code */
+  .theme-red-alert {
+    --background: 0 50% 6%;
+    --foreground: 0 100% 90%;
+    animation: flicker 1s ease-in-out infinite;
+  }
+  .theme-red-alert::before {
+    content: '⚠ BATTLE STATIONS';
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    text-align: center; padding: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: hsl(0 80% 40%); color: white;
+    letter-spacing: 0.3em;
+  }
+}
+
 @layer base {
   :root {
     /* Light Mode - Professional Neutral Theme */
@@ -117,8 +153,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    @apply bg-background text-foreground font-sans;
     font-size: 16px;
     line-height: 1.6;
     text-rendering: optimizeLegibility;

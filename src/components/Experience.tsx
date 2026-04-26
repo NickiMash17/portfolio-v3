@@ -5,6 +5,19 @@ export const Experience = () => {
   const experiences = [
     {
       type: 'work',
+      title: 'Junior AI Software Engineer',
+      company: 'Marisa Peer',
+      period: 'May 2026 - Present',
+      location: 'Remote',
+      description: [
+        'Developing AI-powered applications and solutions',
+        'Implementing machine learning models and algorithms',
+        'Contributing to full-stack development with AI integration',
+        'Collaborating with cross-functional teams on AI initiatives',
+      ],
+    },
+    {
+      type: 'work',
       title: 'Technical Trainer (Volunteer)',
       company: 'TechBridle Foundation',
       period: '2026 - Present',

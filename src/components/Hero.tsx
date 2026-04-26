@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { trackExternalLink, trackDownload } from '@/lib/analytics';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { SonarBackground } from './SonarBackground';
 
 const InteractiveTerminal = lazy(async () => {
   const mod = await import('./InteractiveTerminal');
@@ -101,15 +102,13 @@ export const Hero = () => {
     'p-2 sm:p-3 glass rounded-xl border border-foreground/10 transition-all duration-300';
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-0">
-      <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block gradient-mesh'} />
-      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute top-8 left-1/2 -translate-x-1/2 w-40 h-40 bg-primary/15 rounded-full blur-3xl animate-float-soft'} />
-      <div className={prefersReducedMotion ? 'hidden' : 'sm:hidden absolute bottom-8 right-6 w-28 h-28 bg-accent/10 rounded-full blur-2xl animate-float-soft'} style={{ animationDelay: '1.2s' }} />
+    <section id="hero" className="relative min-h-screen overflow-hidden">
+      <SonarBackground />
+      <div className="hud-scanlines absolute inset-0" />
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-24 flex items-center justify-center min-h-screen py-16 sm:py-20 md:py-0">
 
       <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float'} />
       <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float'} style={{ animationDelay: '2s' }} />
-
-      <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 order-1">
             <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
@@ -222,11 +221,8 @@ export const Hero = () => {
                   </a>
 
                   <div className="space-y-2 sm:space-y-3 relative z-10 py-2 sm:py-6 md:py-10 px-2 sm:px-8 md:px-0">
-                    <h1 className="font-medium tracking-tight">
-                      <span className="block text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-foreground">Nicolette Mashaba</span>
-                      <span className="block text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-semibold mt-1 sm:mt-2 min-h-[1.2em]">
-                        {titleText}<span className={isMobile || prefersReducedMotion ? 'text-primary' : 'animate-pulse text-primary'}>|</span>
-                      </span>
+                    <h1 className="font-display font-bold text-2xl md:text-4xl tracking-tight text-foreground whitespace-nowrap">
+                      Nicolette Mashaba
                     </h1>
                     <p className="text-sm sm:text-base md:text-lg text-foreground/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                       I build AI-driven web apps that turn complex data into clear decisions for people and businesses.
