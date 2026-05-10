@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { 
-  Code2, 
-  Cloud, 
-  Anchor, 
-  Trophy, 
-  Users, 
-  FileText,
+import {
+  Code2,
+  Cloud,
+  Anchor,
+  Trophy,
+  Users,
+  Download,
+  Eye,
   Database,
   Server,
   Cpu,
@@ -14,6 +15,7 @@ import {
 } from 'lucide-react';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
 import { trackDownload } from '@/lib/analytics';
+import { CVPreviewModal } from '@/components/CVPreviewModal';
 
 export const About = () => {
   const [activeSkill, setActiveSkill] = useState<number | null>(null);
@@ -39,8 +41,9 @@ export const About = () => {
     }
     .animate-glitch-hover:hover .glitch-text::before {
       content: attr(data-text);
-      position: absolute; left: 0; text-shadow: -1px 0 #ff00c1;
-      background: inherit; overflow: hidden; clip: rect(0,900px,0,0);
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      color: inherit; text-shadow: -1px 0 #ff00c1;
+      background: inherit; overflow: hidden; clip-path: inset(0);
       animation: glitch 2s infinite linear alternate-reverse;
     }
   `;
@@ -140,7 +143,7 @@ export const About = () => {
 
                 <img 
                   src="/Nico.jpeg" 
-                  alt="Nicolette Mashaba - Software Engineer Graduate"
+                  alt="Nicolette Mashaba - AI Software Engineer"
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"
@@ -173,13 +176,12 @@ export const About = () => {
                 Status: Active Duty // Tech Transition
               </div>
               <p className="text-base sm:text-lg md:text-xl leading-relaxed text-balance md:text-left">
-                I'm a <span className="text-primary font-semibold">Software Engineer Graduate</span> transitioning from the 
-                South African Navy to technology. My naval background taught me precision, leadership, and strategic thinking - skills I now apply to building innovative software solutions.
+                I'm a <span className="text-primary font-semibold">Junior AI Software Engineer</span> contracting remotely from South Africa for Rapid Transformational Therapy® (RTT) — a Dubai-based company — building AI-driven features with Python, OpenAI APIs, and prompt engineering. My journey from the South African Navy taught me precision, leadership, and strategic thinking, which I apply daily in production software.
               </p>
               <p className="text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground text-balance md:text-left">
-                Currently excelling in <span className="text-accent">full-stack development</span>, 
-                <span className="text-accent"> cloud computing</span>, and 
-                <span className="text-accent"> AI/ML technologies</span>. As the <span className="text-primary font-semibold">#1 Female Most Active GitHub User</span>, 
+                Specialising in <span className="text-accent">AI integration</span>,
+                <span className="text-accent"> full-stack development</span>, and
+                <span className="text-accent"> Azure cloud</span>. As the <span className="text-primary font-semibold">#1 Female Most Active GitHub User in SA</span>,
                 I demonstrate consistent commitment to technical excellence.
               </p>
 
@@ -241,18 +243,26 @@ export const About = () => {
                 </div>
               </div>
 
-              {/* Glowing Download Button */}
-              <div className="pt-4 flex justify-center md:justify-start">
-                <a 
-                  href="/Nicolette-Mashaba-CV.pdf"
-                  download="Nicolette-Mashaba-CV.pdf"
+              {/* CV Actions — Preview + Download */}
+              <div className="pt-4 flex flex-wrap gap-3 justify-center md:justify-start">
+                <CVPreviewModal
+                  trigger={
+                    <button className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(0,230,230,0.5)] shadow-lg shadow-primary/20 group text-sm sm:text-base">
+                      <Eye size={18} className="group-hover:scale-110 transition-transform" />
+                      <span>Preview CV</span>
+                    </button>
+                  }
+                />
+                <a
+                  href="/Nicolette_Mashaba_CV.pdf"
+                  download="Nicolette_Mashaba_CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(0,230,230,0.5)] shadow-lg shadow-primary/20 group text-sm sm:text-base w-full sm:w-auto justify-center"
+                  onClick={() => trackDownload('Nicolette_Mashaba_CV.pdf', 'pdf')}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-primary/40 text-primary font-bold transition-all hover:scale-105 hover:bg-primary/10 group text-sm sm:text-base"
                 >
-                  <FileText size={20} className="group-hover:rotate-12 transition-transform" />
-                  <span>Download Full Resume</span>
+                  <Download size={18} className="group-hover:translate-y-0.5 transition-transform" />
+                  <span>Download</span>
                 </a>
               </div>
             </div>
@@ -269,7 +279,6 @@ export const About = () => {
               <div
                 key={index}
                 className="glass rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:bg-card/60 transition-all duration-300 hover:scale-105 group"
-                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="flex items-start gap-2 sm:gap-3 md:gap-4">
                   <div className="p-2 sm:p-2.5 md:p-3 rounded-lg bg-primary/20 group-hover:bg-primary/30 transition-colors glow-primary flex-shrink-0">

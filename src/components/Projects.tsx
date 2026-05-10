@@ -1,9 +1,11 @@
 import { useState, useMemo } from 'react';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore — Github/Linkedin/Youtube are deprecated brand icons in lucide-react but have no non-deprecated replacement yet
 import { ExternalLink, Github, Linkedin, Youtube, Filter, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TiltCard } from '@/components/TiltCard';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
-import { trackProjectView, trackExternalLink, trackEvent } from '@/lib/analytics';
+import { trackExternalLink, trackEvent } from '@/lib/analytics';
 
 // Helper to check if URL is YouTube
 const isYouTubeUrl = (url: string | null): boolean => {
@@ -22,11 +24,7 @@ const getProjectGradient = (index: number) => {
   return gradients[index % gradients.length];
 };
 
-export const Projects = () => {
-  const [selectedTech, setSelectedTech] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const projectsData = [
+const projectsData = [
     {
       title: 'EmpowaAI',
       subtitle: 'AI-Powered Career & Economic Guidance Platform',
@@ -59,37 +57,37 @@ export const Projects = () => {
       demo: 'https://www.empowa.org',
       linkedin: 'https://www.linkedin.com/company/empowaai',
       emoji: 'AI',
-      screenshot: '/screenshots/emoowaai.jpeg',
+      screenshot: '/screenshots/empowaai.jpeg',
     },
     {
       title: 'AI Compliance Interrogator',
       subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly',
+      award: true,
       description:
         'Hackathon-winning AI tool that helps organizations detect and prevent human trafficking using intelligent data analysis and pattern recognition.',
       role: 'Team Project (Hackathon)',
       scope: 'AI analysis, dashboard, real-time alerts',
       tech: [
+        'Python',
+        'FastAPI',
+        'OpenAI API',
+        'Microsoft Azure',
+        'Prompt Engineering',
         'React',
         'TypeScript',
-        '.NET Core',
-        'Azure Functions',
-        'OpenAI API',
-        'Tailwind CSS',
-        'Docker',
-        'Kubernetes',
       ],
       categories: ['AI', 'Civic Tech', 'Full-Stack'],
       impact: [
         'Hackathon winner with real-time AI alerts',
         'Actionable intelligence for compliance teams',
-        'Cloud-native, scalable deployment',
+        'Featured on international Australian tech podcast',
       ],
-      metrics: ['1st Place AIMS Hackathon 2025', 'Real-time alerting'],
+      metrics: ['1st Place AIMS Hackathon 2025', 'Featured on International Tech Podcast'],
       highlights: [
-        '🏆 1st Place at AIMS Hackathon 2025 for AI Compliance Interrogator',
-        'Real-time data processing with NLP and OpenAI-powered analysis',
-        'Interactive React dashboard with live analytics and alerting',
-        'Deployed on Azure with a scalable, cloud-native architecture',
+        '🏆 1st Place at AIMS Hackathon 2025 - Best Team award',
+        'Designed controlled LLM prompt workflows ensuring consistent, auditable, and explainable outputs',
+        'Enforced backend-only AI calls with secure environment configuration to handle sensitive compliance data',
+        'Deployed full-stack application on Microsoft Azure; featured on an Australian technology podcast',
       ],
       github: 'https://github.com/NickiMash17/AIMS-Firefly',
       demo: null,
@@ -211,9 +209,39 @@ export const Projects = () => {
       emoji: '🌱',
       screenshot: '/screenshots/fitquest.jpeg',
     },
+    {
+      title: 'Interview Replay',
+      subtitle: 'AI-Powered Mock Interview Tool',
+      description:
+        'AI-driven mock interview application delivering structured, actionable feedback on candidate strengths and areas for improvement — live in production.',
+      role: 'Full-Stack Developer',
+      scope: 'AI coaching, feedback engine, production deployment',
+      tech: ['JavaScript', 'OpenAI API', 'Netlify', 'Prompt Engineering'],
+      categories: ['AI', 'Web App'],
+      impact: [
+        'Structured, actionable feedback on interview performance',
+        'Iteratively improved AI response quality through prompt engineering',
+        'Deployed and maintained in live production',
+      ],
+      metrics: ['Live Production App', 'OpenAI-powered feedback'],
+      highlights: [
+        'Developed an AI-driven mock interview tool delivering structured feedback on candidate strengths and improvement areas',
+        'Iteratively improved AI response quality through prompt engineering and refinement',
+        'Deployed and maintained in production using clean Git practices and secure environment configuration',
+      ],
+      github: null,
+      demo: null,
+      linkedin: null,
+      emoji: '🎤',
+      screenshot: '/screenshots/interview.jpeg',
+    },
   ];
 
-  const projects = useMemo(() => projectsData, [projectsData]);
+export const Projects = () => {
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const projects = useMemo(() => projectsData, []);
 
   const allCategories = useMemo(() => {
     const categorySet = new Set<string>();
@@ -383,7 +411,19 @@ export const Projects = () => {
             filteredProjects.map((project, index) => (
             <ScrollAnimation key={index} animation="fade-up" delay={index * 100}>
               <TiltCard tiltAmount={5} scale={1.01}>
-                <div className="glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:glow-primary hover:shadow-xl hover:-translate-y-1 group cursor-pointer">
+                <div className={`glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group cursor-pointer relative overflow-hidden ${
+                  'award' in project && project.award
+                    ? 'border border-amber-400/35 hover:border-amber-400/60 hover:shadow-amber-500/20 shadow-amber-400/10'
+                    : 'hover:glow-primary'
+                }`}>
+                  {/* Winner ribbon */}
+                  {'award' in project && project.award && (
+                    <div className="absolute top-0 right-0 w-28 h-28 overflow-hidden pointer-events-none z-10">
+                      <div className="absolute top-5 -right-7 rotate-45 bg-amber-500 text-black text-[9px] font-bold tracking-widest uppercase px-10 py-1 shadow-lg">
+                        WINNER
+                      </div>
+                    </div>
+                  )}
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Visual with Creative Screenshot Display */}
                 <div className="w-full lg:w-72 xl:w-80 aspect-[16/9] rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0 shadow-lg shadow-black/10">
@@ -492,7 +532,7 @@ export const Projects = () => {
                       <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-1 text-foreground group-hover:text-primary transition-colors">
                         {project.title}
                       </h3>
-                      <p className="text-accent font-mono text-xs sm:text-sm">{project.subtitle}</p>
+                      <p className={`font-mono text-xs sm:text-sm ${'award' in project && project.award ? 'text-amber-400' : 'text-accent'}`}>{project.subtitle}</p>
                       <p className="text-[11px] sm:text-xs text-foreground/70 mt-1">
                         <span className="text-primary font-mono">Role:</span> {project.role} &middot;{' '}
                         <span className="text-primary font-mono">Scope:</span> {project.scope}
@@ -578,7 +618,7 @@ export const Projects = () => {
                   <ul className="space-y-1 sm:space-y-1.5 md:space-y-2">
                     {project.highlights.map((highlight, i) => (
                       <li key={i} className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-foreground/75 leading-relaxed">
-                        <span className="text-accent mt-0.5 flex-shrink-0">▹</span>
+                        <span className="text-accent mt-0.5 flex-shrink-0" aria-hidden="true">▹</span>
                         <span>{highlight}</span>
                       </li>
                     ))}

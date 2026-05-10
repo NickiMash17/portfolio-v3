@@ -16,14 +16,16 @@ export default defineConfig(({ mode }) => ({
   },
 
   build: {
-    // Optimize build for production
-    minify: 'esbuild',
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+        manualChunks: (id) => {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
+            return 'react-vendor';
+          }
+          if (id.includes('@radix-ui/')) {
+            return 'ui-vendor';
+          }
         },
       },
     },

@@ -1,8 +1,9 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
-import { trackExternalLink, trackDownload } from '@/lib/analytics';
+import { trackExternalLink } from '@/lib/analytics';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { SonarBackground } from './SonarBackground';
+import { CVPreviewModal } from './CVPreviewModal';
 
 const InteractiveTerminal = lazy(async () => {
   const mod = await import('./InteractiveTerminal');
@@ -56,12 +57,14 @@ export const Hero = () => {
   }, [isMobile]);
 
   useEffect(() => {
+    // Only use the interval on mobile/reduced-motion — desktop lets the typewriter control cycling
+    if (!isMobile && !prefersReducedMotion) return;
     const interval = window.setInterval(() => {
       setTitleIndex((i) => (i + 1) % TITLES.length);
     }, prefersReducedMotion ? 3600 : 2400);
 
     return () => window.clearInterval(interval);
-  }, [prefersReducedMotion]);
+  }, [isMobile, prefersReducedMotion]);
 
   useEffect(() => {
     if (prefersReducedMotion || isMobile) {
@@ -150,13 +153,17 @@ export const Hero = () => {
               </div>
 
               <header className="w-full" aria-label="Introduction">
-                <div className="inline-flex items-center gap-1.5 sm:gap-3 glass rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 border border-primary/20 mb-3 sm:mb-4 lg:mb-6">
-                  <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                    <span className="relative inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                  </span>
-                  <span className="text-[10px] sm:text-sm font-medium text-foreground">Open to Opportunities</span>
-                  <span className="text-[10px] sm:text-sm text-muted-foreground hidden sm:inline">Johannesburg, SA</span>
+                <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4 lg:mb-6">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 glass rounded-full px-2.5 sm:px-3 py-1.5 border border-primary/20">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                      <span className="relative inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                    </span>
+                    <span className="text-[10px] sm:text-xs font-medium text-foreground">AI Engineer · Open to Full-Time</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1 glass rounded-full px-2.5 sm:px-3 py-1.5 border border-foreground/10 text-[10px] sm:text-xs text-muted-foreground">
+                    📍 South Africa · Remote
+                  </div>
                 </div>
 
                 <div className="relative">
@@ -188,6 +195,7 @@ export const Hero = () => {
 
                   <button
                     onClick={() => scrollToSection('projects')}
+                    aria-label="View projects"
                     className="hidden sm:block absolute bottom-0 left-[15%] animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '1s', animationDuration: '5s' }}
                   >
@@ -198,6 +206,7 @@ export const Hero = () => {
 
                   <button
                     onClick={() => scrollToSection('contact')}
+                    aria-label="Go to contact section"
                     className="hidden sm:block absolute -bottom-4 right-[5%] animate-float group z-20 cursor-pointer"
                     style={{ animationDelay: '1.5s', animationDuration: '4.2s' }}
                   >
@@ -206,22 +215,21 @@ export const Hero = () => {
                     </div>
                   </button>
 
-                  <a
-                    href="/Nicolette-Mashaba-CV.pdf"
-                    download="Nicolette-Mashaba-CV.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hidden sm:block absolute top-1/2 -translate-y-1/2 right-0 animate-float group z-20 cursor-pointer"
-                    style={{ animationDelay: '2s', animationDuration: '4.8s' }}
-                    onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
-                  >
-                    <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
-                      <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
-                    </div>
-                  </a>
+                  <CVPreviewModal
+                    trigger={
+                      <button
+                        className="hidden sm:block absolute top-1/2 -translate-y-1/2 right-0 animate-float group z-20 cursor-pointer"
+                        style={{ animationDelay: '2s', animationDuration: '4.8s' }}
+                      >
+                        <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
+                          <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
+                        </div>
+                      </button>
+                    }
+                  />
 
                   <div className="space-y-2 sm:space-y-3 relative z-10 py-2 sm:py-6 md:py-10 px-2 sm:px-8 md:px-0">
-                    <h1 className="font-display font-bold text-2xl md:text-4xl tracking-tight text-foreground whitespace-nowrap">
+                    <h1 className="font-display font-bold text-2xl md:text-4xl tracking-tight text-foreground">
                       Nicolette Mashaba
                     </h1>
                     <p className="text-sm sm:text-base md:text-lg text-foreground/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
@@ -234,16 +242,13 @@ export const Hero = () => {
                       >
                         View Projects
                       </button>
-                      <a
-                        href="/Nicolette-Mashaba-CV.pdf"
-                        download="Nicolette-Mashaba-CV.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
-                        className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/40 text-primary font-medium text-sm sm:text-base hover:bg-primary/10 transition-colors"
-                      >
-                        Download CV
-                      </a>
+                      <CVPreviewModal
+                        trigger={
+                          <button className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/40 text-primary font-medium text-sm sm:text-base hover:bg-primary/10 transition-colors">
+                            View CV
+                          </button>
+                        }
+                      />
                     </div>
                     <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-2">
                       {[
@@ -266,6 +271,7 @@ export const Hero = () => {
                         href="https://github.com/NickiMash17"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="GitHub profile"
                         className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
                         onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github')}
                       >
@@ -275,6 +281,7 @@ export const Hero = () => {
                         href="https://linkedin.com/in/nicolette-mashaba"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="LinkedIn profile"
                         className={`${iconButtonClass} hover:border-[#0A66C2]/50 hover:shadow-lg hover:shadow-[#0A66C2]/20`}
                         onClick={() => trackExternalLink('https://linkedin.com/in/nicolette-mashaba', 'linkedin')}
                       >
@@ -282,26 +289,25 @@ export const Hero = () => {
                       </a>
                       <button
                         onClick={() => scrollToSection('projects')}
+                        aria-label="View projects"
                         className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
                       >
                         <Folder className="w-5 h-5 text-primary fill-primary/20" />
                       </button>
                       <button
                         onClick={() => scrollToSection('contact')}
+                        aria-label="Go to contact section"
                         className={`${iconButtonClass} hover:border-accent/50 hover:shadow-lg hover:shadow-accent/20`}
                       >
                         <Mail className="w-5 h-5 text-accent" />
                       </button>
-                      <a
-                        href="/Nicolette-Mashaba-CV.pdf"
-                        download="Nicolette-Mashaba-CV.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
-                        onClick={() => trackDownload('Nicolette-Mashaba-CV.pdf', 'pdf')}
-                      >
-                        <FileText className="w-5 h-5 text-primary" />
-                      </a>
+                      <CVPreviewModal
+                        trigger={
+                          <button aria-label="View CV" className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}>
+                            <FileText className="w-5 h-5 text-primary" />
+                          </button>
+                        }
+                      />
                     </div>
                   </div>
                 </div>

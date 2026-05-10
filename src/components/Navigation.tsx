@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Code2, User, Briefcase, FolderOpen, Award, Mail } from 'lucide-react';
+import { Menu, X, Code2, User, Briefcase, FolderOpen, Award, Mail, FileText } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { SoundToggle } from '@/components/SoundToggle';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackDownload } from '@/lib/analytics';
 import { playUISound } from '@/lib/sound';
+import { CVPreviewModal } from '@/components/CVPreviewModal';
 
 const navItems = [
   { id: 'about', label: 'About', icon: User },
@@ -191,6 +192,17 @@ export const Navigation = () => {
 
             {/* Right side - Desktop */}
             <div className="hidden md:flex items-center gap-2">
+              <CVPreviewModal
+                trigger={
+                  <button
+                    onClick={() => void playUISound('tap')}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary/40 text-primary text-sm font-medium hover:bg-primary/10 hover:border-primary/60 transition-all duration-200"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>CV</span>
+                  </button>
+                }
+              />
               <SoundToggle />
               <ThemeToggle />
             </div>
@@ -226,6 +238,20 @@ export const Navigation = () => {
                   </button>
                 );
               })}
+              <CVPreviewModal
+                trigger={
+                  <button
+                    onClick={() => {
+                      void playUISound('tap');
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm border border-primary/30 text-primary bg-primary/5 hover:bg-primary/10 transition-all duration-200"
+                  >
+                    <FileText className="w-5 h-5" />
+                    <span>View / Download CV</span>
+                  </button>
+                }
+              />
             </div>
           </div>
         )}

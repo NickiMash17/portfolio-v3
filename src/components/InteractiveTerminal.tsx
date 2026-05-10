@@ -1,5 +1,6 @@
 import { Suspense, lazy, useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { getTerminalData } from '@/lib/terminalData';
+import { trackDownload } from '@/lib/analytics';
 
 const MatrixRain = lazy(async () => {
   const mod = await import('./MatrixRain');
@@ -127,7 +128,8 @@ export const InteractiveTerminal = () => {
   ),
   'download': (args) => {
     if (args?.[0] === 'cv') {
-      window.open('/Nicolette-Mashaba-CV.pdf', '_blank');
+      window.open('/Nicolette_Mashaba_CV.pdf', '_blank');
+      trackDownload('Nicolette_Mashaba_CV.pdf', 'pdf');
       return <p className="text-accent">📄 Opening CV download...</p>;
     }
     return <p className="text-destructive">Unknown file. Try 'download cv'</p>;
@@ -161,7 +163,7 @@ export const InteractiveTerminal = () => {
       `}</pre>
       <div className="text-xs space-y-1">
         <p><span className="text-primary">OS:</span> Portfolio v3.0</p>
-        <p><span className="text-primary">Host:</span> Johannesburg, SA</p>
+        <p><span className="text-primary">Host:</span> South Africa</p>
         <p><span className="text-primary">Kernel:</span> React 18.3.1</p>
         <p><span className="text-primary">Shell:</span> TypeScript 5.0</p>
         <p><span className="text-primary">Theme:</span> Dark Mode 🌙</p>

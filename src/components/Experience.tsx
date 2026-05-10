@@ -5,15 +5,16 @@ export const Experience = () => {
   const experiences = [
     {
       type: 'work',
-      title: 'Junior AI Software Engineer',
-      company: 'Marisa Peer',
-      period: 'May 2026 - Present',
-      location: 'Remote',
+      title: 'Junior AI Software Engineer (Contract)',
+      company: 'Rapid Transformational Therapy® (RTT)',
+      period: 'Apr 2026 - Present',
+      location: 'South Africa · Remote (Dubai-based client)',
       description: [
-        'Developing AI-powered applications and solutions',
-        'Implementing machine learning models and algorithms',
-        'Contributing to full-stack development with AI integration',
-        'Collaborating with cross-functional teams on AI initiatives',
+        'Build and integrate AI-driven features using Python and modern LLM frameworks, including OpenAI APIs, prompt engineering, and response optimisation',
+        'Develop and maintain backend services and RESTful APIs supporting AI workflows and data processing pipelines',
+        'Improve AI response quality, consistency, and reliability through iterative prompt refinement and structured output handling',
+        'Apply best practices in data privacy, security, and compliance including GDPR awareness within a regulated client environment',
+        'Support internal tools and automation systems to enhance operational efficiency and end-user experience',
       ],
     },
     {
@@ -32,13 +33,13 @@ export const Experience = () => {
     {
       type: 'work',
       title: 'Software Engineering Intern',
-      company: 'Coast IT (PTY) Ltd',
+      company: 'Coast IT (Pty) Ltd',
       period: 'Nov 2025 - Dec 2025',
-      location: 'Remote',
+      location: 'South Africa',
       description: [
-        'Developing mobile applications using Flutter for cross-platform deployment',
-        'Collaborating on full-stack development projects with Agile methodologies',
-        'Enhancing skills in coding, testing, and project delivery under mentorship',
+        'Contributed to feature development within an Agile/Scrum team, participating in sprint planning, daily standups, and retrospectives',
+        'Performed API testing using Postman, resolved bugs, and participated in peer code reviews to improve application stability',
+        'Collaborated with senior engineers to implement and test new application modules, gaining exposure to production-level codebases',
       ],
     },
     {
@@ -54,7 +55,7 @@ export const Experience = () => {
     },
     {
       type: 'work',
-      title: 'Navigation Officer',
+      title: 'Junior Navigation Officer',
       company: 'South African Navy',
       period: 'Jan 2015 - Jul 2021',
       location: "Simon's Town",
@@ -160,10 +161,10 @@ export const Experience = () => {
             {[
               'Microsoft Certified: Azure Developer Associate (AZ-204)',
               'Microsoft Certified: Azure Data Fundamentals (DP-900)',
-              'SheCodes: Basics, Plus, Responsive Web Development',
-              'Winner, AIMS Hackathon 2025 - Best Team',
+              'Azure DevOps Engineer Expert (AZ-400) — In Progress',
+              'Winner, AIMS Hackathon 2025 - Best Team · Featured on International Tech Podcast',
+              'J.P. Morgan Software Engineering Virtual Experience',
               'Programming Foundation Top Performer - CTU Training Solutions',
-              'J.P. Morgan Midas Core Software Engineering Simulation',
             ].map((cert, index) => (
               <div
                 key={index}

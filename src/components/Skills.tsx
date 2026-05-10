@@ -13,19 +13,27 @@ import javascriptLogo from '@/assets/logos/javascript.svg';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
 
 export const Skills = () => {
-  const techStack = [
-    { name: 'JavaScript', logo: javascriptLogo },
-    { name: 'TypeScript', logo: typescriptLogo },
-    { name: 'React', logo: reactLogo },
-    { name: 'Node.js', logo: nodejsLogo },
-    { name: 'Flutter', logo: flutterLogo },
-    { name: '.NET', logo: dotnetLogo },
-    { name: 'Azure', logo: azureLogo },
-    { name: 'MongoDB', logo: mongodbLogo },
-    { name: 'SQL', logo: sqlLogo },
-    { name: 'Python', logo: pythonLogo },
-    { name: 'Docker', logo: dockerLogo },
-    { name: 'Git', logo: gitLogo },
+  type Tier = 'Expert' | 'Proficient' | 'Familiar';
+
+  const tierStyle: Record<Tier, string> = {
+    Expert:     'text-amber-400 border-amber-400/40 bg-amber-400/10',
+    Proficient: 'text-primary border-primary/40 bg-primary/10',
+    Familiar:   'text-muted-foreground border-border bg-muted/20',
+  };
+
+  const techStack: { name: string; logo: string; tier: Tier }[] = [
+    { name: 'JavaScript', logo: javascriptLogo, tier: 'Expert' },
+    { name: 'TypeScript', logo: typescriptLogo, tier: 'Expert' },
+    { name: 'React',      logo: reactLogo,       tier: 'Expert' },
+    { name: 'Git',        logo: gitLogo,         tier: 'Expert' },
+    { name: 'Node.js',    logo: nodejsLogo,      tier: 'Proficient' },
+    { name: 'Python',     logo: pythonLogo,      tier: 'Proficient' },
+    { name: 'Azure',      logo: azureLogo,       tier: 'Proficient' },
+    { name: 'SQL',        logo: sqlLogo,         tier: 'Proficient' },
+    { name: 'MongoDB',    logo: mongodbLogo,     tier: 'Proficient' },
+    { name: '.NET',       logo: dotnetLogo,      tier: 'Proficient' },
+    { name: 'Flutter',    logo: flutterLogo,     tier: 'Familiar' },
+    { name: 'Docker',     logo: dockerLogo,      tier: 'Familiar' },
   ];
 
   const additionalSkills = [
@@ -80,6 +88,15 @@ export const Skills = () => {
           <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden mb-6">
           <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 md:mb-8 text-center">Core Technologies</h3>
 
+          {/* Tier legend */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+            {(['Expert', 'Proficient', 'Familiar'] as Tier[]).map((tier) => (
+              <span key={tier} className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono border ${tierStyle[tier]}`}>
+                {tier}
+              </span>
+            ))}
+          </div>
+
           {/* Mobile: Crisp Grid (no 3D to avoid blur and improve performance) */}
           <div className="sm:hidden">
             <div className="grid grid-cols-3 gap-4">
@@ -93,6 +110,9 @@ export const Skills = () => {
                   />
                   <span className="text-foreground font-mono text-[11px] font-medium text-center leading-tight">
                     {tech.name}
+                  </span>
+                  <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-mono border ${tierStyle[tech.tier]}`}>
+                    {tech.tier}
                   </span>
                 </div>
               ))}
@@ -126,6 +146,9 @@ export const Skills = () => {
                       />
                       <span className="text-foreground font-mono font-semibold text-xs sm:text-sm md:text-base text-center">
                         {tech.name}
+                      </span>
+                      <span className={`px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono border ${tierStyle[tech.tier]}`}>
+                        {tech.tier}
                       </span>
                     </div>
                   </div>

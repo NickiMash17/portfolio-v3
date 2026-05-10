@@ -88,21 +88,38 @@ export const Contact = () => {
     setIsSubmitting(true);
     trackEvent('form_submit', { category: 'contact' });
 
-    // Create mailto link
-    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    
-    // Small delay for better UX
-    setTimeout(() => {
-      window.location.href = `mailto:nene171408@gmail.com?subject=${subject}&body=${body}`;
-      toast.success('Opening email client...');
+    const openMailto = () => {
+      const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+      window.open(`mailto:nene171408@gmail.com?subject=${subject}&body=${body}`);
+    };
+
+    try {
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Message sent! I'll get back to you soon.");
+      } else {
+        openMailto();
+        toast.success('Your email client is ready — just hit send!');
+      }
+    } catch {
+      openMailto();
+      toast.success('Your email client is ready — just hit send!');
+    } finally {
       setFormData({ name: '', email: '', message: '' });
       setErrors({});
       setTouched({});
       setIsSubmitting(false);
-    }, 300);
+    }
   };
 
   return (
@@ -163,7 +180,7 @@ export const Contact = () => {
                   </div>
                   <div>
                     <div className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mb-0.5 sm:mb-1">Location</div>
-                    <div className="text-xs sm:text-sm md:text-base text-foreground">Johannesburg, South Africa</div>
+                    <div className="text-xs sm:text-sm md:text-base text-foreground">South Africa</div>
                     <div className="text-[10px] sm:text-xs text-muted-foreground">Available for remote & local opportunities</div>
                   </div>
                 </div>
@@ -174,18 +191,17 @@ export const Contact = () => {
             <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 animate-pulse-glow">
               <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 md:mb-4 text-foreground">Availability</h3>
               <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-2 sm:mb-3 md:mb-4 leading-relaxed">
-                Currently available for <span className="text-primary font-semibold">software engineering opportunities</span>, 
-                <span className="text-accent"> freelance projects</span>, and 
-                <span className="text-accent"> consulting work</span>. 
-                Open to full-time positions, remote work, and collaborative projects.
+                Currently contracting in <span className="text-primary font-semibold">AI engineering</span> and open to
+                <span className="text-accent"> full-time roles</span> in full-stack development, AI/ML integration, and cloud engineering.
+                Available for remote, hybrid, or on-site positions.
               </p>
               <div className="space-y-2">
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-accent animate-pulse" />
-                  <span className="text-accent font-mono text-[10px] sm:text-xs md:text-sm">Open to opportunities</span>
+                  <span className="text-accent font-mono text-[10px] sm:text-xs md:text-sm">Open to full-time opportunities</span>
                 </div>
                 <div className="text-[10px] sm:text-xs text-muted-foreground">
-                  Specializing in: Full-Stack Development • Cloud Computing • AI/ML Solutions
+                  Specializing in: AI Integration • Full-Stack Development • Azure Cloud
                 </div>
               </div>
             </div>
