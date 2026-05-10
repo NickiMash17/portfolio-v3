@@ -11,6 +11,7 @@ import dockerLogo from '@/assets/logos/docker.svg';
 import gitLogo from '@/assets/logos/git.svg';
 import javascriptLogo from '@/assets/logos/javascript.svg';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
+import { useMemo, useState } from 'react';
 
 export const Skills = () => {
   type Tier = 'Expert' | 'Proficient' | 'Familiar';
@@ -37,6 +38,19 @@ export const Skills = () => {
   ];
 
   const additionalSkills = [
+    'OpenAI API',
+    'Azure OpenAI',
+    'Prompt Engineering',
+    'RAG (Retrieval-Augmented Generation)',
+    'Function Calling / Tools',
+    'Embeddings & Vector Search',
+    'LLM Evaluation & Guardrails',
+    'FastAPI',
+    'Pydantic',
+    'LangChain',
+    'NumPy',
+    'Pandas',
+    'scikit-learn',
     'RESTful APIs',
     'GraphQL',
     'Entity Framework Core',
@@ -44,15 +58,29 @@ export const Skills = () => {
     'TailwindCSS',
     'Next.js',
     'Firebase',
-    'AWS Basics',
-    'Machine Learning',
-    'Data Structures',
-    'Algorithms',
-    'Clean Architecture',
+    'Docker',
+    'CI/CD Basics',
+    'System Design Fundamentals',
   ];
 
   const getSkillIcon = (skill: string): string => {
     const icons: Record<string, string> = {
+      'OpenAI API': '🧠',
+      'Azure OpenAI': '☁️',
+      'Prompt Engineering': '✍️',
+      'RAG (Retrieval-Augmented Generation)': '📚',
+      'Function Calling / Tools': '🛠️',
+      'Embeddings & Vector Search': '🔎',
+      'LLM Evaluation & Guardrails': '🧪',
+      'FastAPI': '⚡',
+      'Pydantic': '🧩',
+      'LangChain': '⛓️',
+      'NumPy': '🔢',
+      'Pandas': '🐼',
+      'scikit-learn': '📈',
+      'Docker': '🐳',
+      'CI/CD Basics': '🚀',
+      'System Design Fundamentals': '🧱',
       'RESTful APIs': '🔌',
       'GraphQL': '🔄',
       'Entity Framework Core': '🏗️',
@@ -68,6 +96,12 @@ export const Skills = () => {
     };
     return icons[skill] || '💻';
   };
+
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const carouselLabel = useMemo(
+    () => (isCarouselPaused ? 'Resume rotating carousel' : 'Pause rotating carousel'),
+    [isCarouselPaused],
+  );
 
   return (
     <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
@@ -123,17 +157,16 @@ export const Skills = () => {
           <div className="hidden sm:block">
             <div className="relative h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] perspective-1000">
               <div
-                className="tech-carousel"
-                style={{
-                  transform: 'translateZ(-200px) rotateY(0deg)',
-                }}
+                className={`tech-carousel${isCarouselPaused ? ' is-paused' : ''}`}
+                onMouseEnter={() => setIsCarouselPaused(true)}
+                onMouseLeave={() => setIsCarouselPaused(false)}
               >
                 {techStack.map((tech, index) => (
                   <div
                     key={tech.name}
                     className="tech-card glass will-change-transform [backface-visibility:hidden]"
                     style={{
-                      transform: `rotateY(${(index * 360) / techStack.length}deg) translateZ(200px)`,
+                      transform: `rotateY(${(index * 360) / techStack.length}deg) translateZ(var(--carousel-radius))`,
                     }}
                   >
                     <div className="flex flex-col items-center justify-center h-full gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 md:p-6">
@@ -155,9 +188,40 @@ export const Skills = () => {
                 ))}
               </div>
             </div>
-            <p className="text-center text-muted-foreground text-[10px] sm:text-xs md:text-sm mt-3 sm:mt-4 md:mt-6 font-mono">
-              [ Hover to pause • Auto-rotating 3D showcase ]
-            </p>
+
+            <div className="mt-3 sm:mt-4 md:mt-6 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                aria-label={carouselLabel}
+                onClick={() => setIsCarouselPaused((v) => !v)}
+                className="px-3 py-1.5 rounded-md text-[10px] sm:text-xs font-mono border border-border/60 bg-muted/20 text-muted-foreground hover:text-foreground hover:border-border transition-colors"
+              >
+                {isCarouselPaused ? 'Resume' : 'Pause'}
+              </button>
+              <p className="text-center text-muted-foreground text-[10px] sm:text-xs md:text-sm font-mono">
+                [ Auto-rotating 3D showcase ]
+              </p>
+            </div>
+
+          </div>
+
+          <div className="mt-10 sm:mt-12">
+            <h4 className="text-sm sm:text-base md:text-lg font-bold text-center mb-4">
+              AI & Engineering Toolkit
+            </h4>
+            <div className="flex flex-wrap justify-center gap-2">
+              {additionalSkills.map((skill) => (
+                <span
+                  key={skill}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-mono border border-border/60 bg-muted/20 text-foreground/90"
+                >
+                  <span aria-hidden className="text-[11px] sm:text-sm">
+                    {getSkillIcon(skill)}
+                  </span>
+                  <span className="leading-none">{skill}</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
         </ScrollAnimation>

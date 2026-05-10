@@ -111,9 +111,22 @@ export const portfolioData: PortfolioData = {
     { name: '.NET / C#', category: 'Backend', level: 'intermediate' },
     { name: 'Flutter', category: 'Mobile', level: 'intermediate' },
     { name: 'Microsoft Azure', category: 'Cloud', level: 'advanced' },
+    { name: 'Azure OpenAI', category: 'Cloud', level: 'intermediate' },
     { name: 'MongoDB', category: 'Database', level: 'intermediate' },
     { name: 'SQL', category: 'Database', level: 'intermediate' },
     { name: 'Python', category: 'Languages', level: 'intermediate' },
+    { name: 'FastAPI', category: 'Backend', level: 'intermediate' },
+    { name: 'OpenAI API', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Prompt Engineering', category: 'AI/ML', level: 'advanced' },
+    { name: 'RAG (Retrieval-Augmented Generation)', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Function Calling / Tools', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Embeddings', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Vector Databases (FAISS)', category: 'AI/ML', level: 'beginner' },
+    { name: 'LangChain', category: 'AI/ML', level: 'beginner' },
+    { name: 'Pydantic', category: 'Backend', level: 'intermediate' },
+    { name: 'NumPy', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Pandas', category: 'AI/ML', level: 'intermediate' },
+    { name: 'scikit-learn', category: 'AI/ML', level: 'beginner' },
     { name: 'Tailwind CSS', category: 'Frontend', level: 'advanced' },
     { name: 'Docker', category: 'DevOps', level: 'intermediate' },
     { name: 'Git', category: 'DevOps', level: 'advanced' },
@@ -155,6 +168,7 @@ export const portfolioData: PortfolioData = {
       description: [
         'Contributed to feature development within an Agile/Scrum team, participating in sprint planning, daily standups, and retrospectives',
         'Performed API testing using Postman, resolved bugs, and participated in peer code reviews to improve application stability',
+        'Built and refined UI features with Flutter, strengthening mobile development and state management fundamentals',
         'Collaborated with senior engineers to implement and test new application modules, gaining exposure to production-level codebases',
       ],
     },
@@ -468,6 +482,7 @@ export const generateLocalResponse = (query: string): string => {
     const backend = portfolioData.skills.filter((s) => s.category === 'Backend').map((s) => s.name);
     const languages = portfolioData.skills.filter((s) => s.category === 'Languages').map((s) => s.name);
     const cloud = portfolioData.skills.filter((s) => s.category === 'Cloud').map((s) => s.name);
+    const ai = portfolioData.skills.filter((s) => s.category === 'AI/ML').map((s) => s.name);
     
     return `🚀 **Technical Skills Overview:**
 
@@ -475,6 +490,7 @@ export const generateLocalResponse = (query: string): string => {
 **Backend:** ${backend.join(', ')}
 **Languages:** ${languages.join(', ')}
 **Cloud & DevOps:** ${cloud.join(', ')}
+**AI/ML:** ${ai.join(', ')}
 
 Nicolette specializes in full-stack development with strong expertise in React, TypeScript, and Node.js. She's also Azure certified and experienced with mobile development using Flutter. Her skill set spans from frontend UI/UX to backend APIs, cloud infrastructure, and DevOps practices.`;
   }
