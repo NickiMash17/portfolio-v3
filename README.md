@@ -58,8 +58,10 @@ A modern, responsive portfolio built with React, TypeScript, and Tailwind CSS.
 # Install dependencies
 npm install
 
-# Copy environment variables template
-cp .env.example .env
+# Create environment variables file
+# (PowerShell) Copy-Item .env.example .env
+# (macOS/Linux) cp .env.example .env
+# Or create `.env` manually if you prefer.
 
 # Edit .env and add your configuration:
 # - VITE_SUPABASE_URL
@@ -71,12 +73,33 @@ cp .env.example .env
 npm run dev
 ```
 
+If you’re on Windows PowerShell and you see an error like `npm.ps1 cannot be loaded because running scripts is disabled`, run the `.cmd` shim instead:
+
+```bash
+npm.cmd install
+npm.cmd run dev
+```
+
+Or run Vite directly (no `npm` required):
+
+```bash
+node .\node_modules\vite\bin\vite.js
+```
+
 Visit `http://localhost:8080`
 
 ## Build
 
 ```bash
 npm run build
+```
+
+PowerShell execution policy workaround:
+
+```bash
+npm.cmd run build
+# or
+node .\node_modules\vite\bin\vite.js build
 ```
 
 ## SEO Configuration
