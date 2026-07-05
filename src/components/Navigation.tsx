@@ -5,6 +5,7 @@ import { SoundToggle } from '@/components/SoundToggle';
 import { trackEvent, trackDownload } from '@/lib/analytics';
 import { playUISound } from '@/lib/sound';
 import { CVPreviewModal } from '@/components/CVPreviewModal';
+import { LiveStatusBar } from '@/components/LiveStatusBar';
 
 const navItems = [
   { id: 'about', label: 'About', icon: User },
@@ -118,6 +119,7 @@ export const Navigation = () => {
         role="navigation"
         aria-label="Main navigation"
       >
+        <LiveStatusBar />
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo/Brand */}

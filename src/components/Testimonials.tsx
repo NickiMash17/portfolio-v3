@@ -89,10 +89,8 @@ export const Testimonials = () => {
       <div className="container mx-auto max-w-6xl">
         <ScrollAnimation animation="fade-up">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 glow-text">
-              <span className="text-primary font-mono">{'<'}</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-3 md:mb-4">
               Testimonials
-              <span className="text-primary font-mono">{' />'}</span>
             </h2>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
               What colleagues and clients say about working with me
@@ -103,7 +101,7 @@ export const Testimonials = () => {
         <ScrollAnimation animation="scale" delay={200}>
           <div className="relative">
             {/* Main testimonial card */}
-            <div className="glass rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 relative overflow-hidden">
+            <div className="glass rounded-lg md:rounded-lg p-6 sm:p-8 md:p-12 relative overflow-hidden">
               {/* Background decoration */}
               <div className="absolute top-0 left-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
               <div className="absolute bottom-0 right-0 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
@@ -209,8 +207,8 @@ export const Testimonials = () => {
 
             {/* Side cards preview */}
             <div className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -left-4 -right-4 justify-between pointer-events-none">
-              <div className="glass rounded-xl p-4 opacity-30 blur-[1px] w-24 h-32" />
-              <div className="glass rounded-xl p-4 opacity-30 blur-[1px] w-24 h-32" />
+              <div className="glass rounded-md p-4 opacity-30 blur-[1px] w-24 h-32" />
+              <div className="glass rounded-md p-4 opacity-30 blur-[1px] w-24 h-32" />
             </div>
           </div>
         </ScrollAnimation>

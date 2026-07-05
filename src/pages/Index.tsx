@@ -24,6 +24,10 @@ const Projects = lazy(async () => {
   const mod = await import('@/components/Projects');
   return { default: mod.Projects };
 });
+const EngineeringLog = lazy(async () => {
+  const mod = await import('@/components/EngineeringLog');
+  return { default: mod.EngineeringLog };
+});
 const Testimonials = lazy(async () => {
   const mod = await import('@/components/Testimonials');
   return { default: mod.Testimonials };
@@ -184,7 +188,7 @@ const Index = () => {
       {renderAurora && <AuroraBackground />}
       
       {/* Main Content */}
-      <main id="main-content" className="relative z-10 pt-16 md:pt-20" role="main">
+      <main id="main-content" className="relative z-10 pt-16 sm:pt-[5.75rem] md:pt-[6.75rem]" role="main">
         <Hero />
         <SectionDivider variant="gradient" />
         <DeferredSection id="about" isMobile={isMobile} minHeight={760}>
@@ -199,9 +203,25 @@ const Index = () => {
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="gradient" />
+        <DeferredSection id="github" isMobile={isMobile} minHeight={560}>
+          <Suspense fallback={<SectionSkeleton minHeight={560} />}>
+            <GitHubActivity />
+          </Suspense>
+        </DeferredSection>
+        <SectionDivider variant="dots" />
         <DeferredSection id="experience" isMobile={isMobile} minHeight={820}>
           <Suspense fallback={<SectionSkeleton minHeight={820} />}>
             <Experience />
+          </Suspense>
+        </DeferredSection>
+        <SectionDivider variant="dots" />
+        <DeferredSection id="engineering-log" isMobile={isMobile} minHeight={280}>
+          <Suspense fallback={<SectionSkeleton minHeight={280} />}>
+            <section className="relative py-8 sm:py-10 md:py-14 px-4 sm:px-6">
+              <div className="container mx-auto max-w-3xl">
+                <EngineeringLog />
+              </div>
+            </section>
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="dots" />
@@ -214,12 +234,6 @@ const Index = () => {
         <DeferredSection id="testimonials" isMobile={isMobile} minHeight={720}>
           <Suspense fallback={<SectionSkeleton minHeight={720} />}>
             <Testimonials />
-          </Suspense>
-        </DeferredSection>
-        <SectionDivider variant="dots" />
-        <DeferredSection id="github" isMobile={isMobile} minHeight={560}>
-          <Suspense fallback={<SectionSkeleton minHeight={560} />}>
-            <GitHubActivity />
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="gradient" />

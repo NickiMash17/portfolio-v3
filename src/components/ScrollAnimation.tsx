@@ -3,7 +3,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface ScrollAnimationProps {
   children: ReactNode;
-  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale' | 'blur';
+  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale' | 'blur' | 'cinematic';
   delay?: number;
   duration?: number;
   className?: string;
@@ -37,6 +37,8 @@ export const ScrollAnimation = ({
           return { ...baseStyles, opacity: 0, transform: 'scale(0.9)' };
         case 'blur':
           return { ...baseStyles, opacity: 0, filter: 'blur(10px)' };
+        case 'cinematic':
+          return { ...baseStyles, opacity: 0, transform: 'translateY(28px) scale(0.96)', filter: 'blur(6px)' };
         default:
           return { ...baseStyles, opacity: 0 };
       }

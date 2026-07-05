@@ -81,8 +81,8 @@ export const TiltCard = ({
           style={{
             borderRadius: 'inherit',
             boxShadow: `
-              0 0 20px rgba(var(--primary-rgb, 0, 230, 230), 0.3),
-              inset 0 0 20px rgba(var(--primary-rgb, 0, 230, 230), 0.05)
+              0 0 20px hsl(var(--glow-primary) / 0.3),
+              inset 0 0 20px hsl(var(--glow-primary) / 0.05)
             `,
           }}
         />
