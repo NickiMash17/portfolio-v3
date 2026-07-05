@@ -82,21 +82,21 @@ export const portfolioData: PortfolioData = {
   personal: {
     name: 'Nicolette Mashaba',
     title: [
-      'Software Engineer',
-      'AI/ML Enthusiast',
-      'Azure Cloud Expert',
-      'Hackathon Winner',
-      'Full-Stack Developer',
+      'AI Engineer',
+      'LLM Applications',
+      'Agent Orchestration',
+      'RAG & Azure',
     ],
     location: 'South Africa',
-    status: 'Open to Opportunities',
-    bio: `I'm a Junior AI Software Engineer with a unique journey from the South African Navy to the world of technology. My naval background taught me precision, problem-solving, and strategic thinking — skills I now apply daily building AI-powered and full-stack web applications. Currently contracting remotely from Johannesburg for Rapid Transformational Therapy® (RTT), a Dubai-based company — integrating OpenAI APIs, engineering prompt workflows, and shipping production-grade AI features. Passionate about clean, maintainable code and real-world impact.`,
-    background: 'Former Junior Navigation Officer with South African Navy (2015-2021)',
+    status: 'Open to Full-Time & Relocation (EU)',
+    bio: `I'm an AI Engineer building and maintaining production LLM systems, RAG pipelines, and multi-agent architectures on Microsoft Azure. Currently engineering three live production AI systems at Always Enough LLC, applying GPT-4, Azure Durable Functions, LangGraph, LangChain, DSPy, and vector search to real business operations. Recognised in the Geekulcha Top 15 AI Innovators (South Africa 2026), AZ-204 renewed at 92%, and hackathon winner with Mila (Quebec AI Institute) and QUT applying NLP and Explainable AI to human rights compliance at scale. Sole developer and open source maintainer of EmpowaAI. My naval background taught me precision, leadership, and composure under pressure, which I apply daily to production engineering ownership. Open to relocation in Europe.`,
+    background: 'Former Navigation Officer with South African Navy (2015-2021)',
     highlights: [
-      'Full-Stack Developer - Building scalable applications with React, Node.js, .NET, and Flutter',
-      'Azure Certified - Microsoft Azure Developer Associate & Data Fundamentals certified',
+      'AI & Agent Engineering - Three live production AI systems at Always Enough LLC using LangGraph, DSPy, and RAG on Azure',
+      'Recognition - Geekulcha Top 15 AI Innovator (South Africa 2026), AZ-204 renewed at 92%',
+      'Hackathon Winner - AI Against Modern Slavery (AIMS), in partnership with Mila (Quebec AI Institute) and QUT',
+      'Open Source - Sole developer and maintainer of EmpowaAI, an AI career platform',
       'Naval Background - Former Navigation Officer with South African Navy',
-      'Award Winner - Winner at AIMS Hackathon 2025 - AI Compliance Interrogator',
     ],
     social: {
       github: 'https://github.com/NickiMash17',
@@ -111,18 +111,33 @@ export const portfolioData: PortfolioData = {
     { name: '.NET / C#', category: 'Backend', level: 'intermediate' },
     { name: 'Flutter', category: 'Mobile', level: 'intermediate' },
     { name: 'Microsoft Azure', category: 'Cloud', level: 'advanced' },
-    { name: 'Azure OpenAI', category: 'Cloud', level: 'intermediate' },
+    { name: 'Azure VM', category: 'Cloud', level: 'intermediate' },
     { name: 'MongoDB', category: 'Database', level: 'intermediate' },
     { name: 'SQL', category: 'Database', level: 'intermediate' },
     { name: 'Python', category: 'Languages', level: 'intermediate' },
     { name: 'FastAPI', category: 'Backend', level: 'intermediate' },
-    { name: 'OpenAI API', category: 'AI/ML', level: 'intermediate' },
+    { name: 'OpenAI API', category: 'AI/ML', level: 'advanced' },
+    { name: 'GPT-4', category: 'AI/ML', level: 'advanced' },
     { name: 'Prompt Engineering', category: 'AI/ML', level: 'advanced' },
-    { name: 'RAG (Retrieval-Augmented Generation)', category: 'AI/ML', level: 'intermediate' },
+    { name: 'RAG (Retrieval-Augmented Generation)', category: 'AI/ML', level: 'advanced' },
+    { name: 'Agent Orchestration', category: 'AI/ML', level: 'advanced' },
+    { name: 'LangGraph', category: 'AI/ML', level: 'advanced' },
+    { name: 'DSPy', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Azure Durable Functions', category: 'Cloud', level: 'advanced' },
+    { name: 'MCP (Model Context Protocol)', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Whisper', category: 'AI/ML', level: 'intermediate' },
+    { name: 'ElevenLabs API', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Structured Outputs', category: 'AI/ML', level: 'advanced' },
+    { name: 'Explainable AI', category: 'AI/ML', level: 'intermediate' },
+    { name: 'LLM Evaluation', category: 'AI/ML', level: 'intermediate' },
+    { name: 'ChromaDB', category: 'Database', level: 'intermediate' },
+    { name: 'pgvector', category: 'Database', level: 'intermediate' },
+    { name: 'PostgreSQL', category: 'Database', level: 'intermediate' },
     { name: 'Function Calling / Tools', category: 'AI/ML', level: 'intermediate' },
-    { name: 'Embeddings', category: 'AI/ML', level: 'intermediate' },
-    { name: 'Vector Databases (FAISS)', category: 'AI/ML', level: 'beginner' },
-    { name: 'LangChain', category: 'AI/ML', level: 'beginner' },
+    { name: 'Embeddings & Semantic Search', category: 'AI/ML', level: 'intermediate' },
+    { name: 'LangChain', category: 'AI/ML', level: 'intermediate' },
+    { name: 'Flask', category: 'Backend', level: 'intermediate' },
+    { name: '.NET 8', category: 'Backend', level: 'intermediate' },
     { name: 'Pydantic', category: 'Backend', level: 'intermediate' },
     { name: 'NumPy', category: 'AI/ML', level: 'intermediate' },
     { name: 'Pandas', category: 'AI/ML', level: 'intermediate' },
@@ -135,17 +150,30 @@ export const portfolioData: PortfolioData = {
 
   experience: [
     {
-      title: 'Junior AI Software Engineer',
-      company: 'Rapid Transformational Therapy® (RTT)',
-      period: 'Apr 2026 - Present',
-      location: 'South Africa · Remote (Dubai-based client)',
+      title: 'AI Engineer',
+      company: "Always Enough LLC (Marisa Peer's Rapid Transformational Therapy® brand)",
+      period: 'May 2026 - Present',
+      location: 'South Africa · Remote',
       type: 'work',
       description: [
-        'Build and integrate AI-driven features using Python and modern LLM frameworks, including OpenAI APIs, prompt engineering, and response optimisation',
-        'Develop and maintain backend services and RESTful APIs supporting AI workflows and data processing pipelines',
-        'Improve AI response quality through iterative prompt refinement and structured output handling',
-        'Apply best practices in data privacy, security, and compliance including GDPR awareness within a regulated client environment',
-        'Support internal tools and automation systems to enhance operational efficiency and end-user experience',
+        'Engineering and maintaining three live production AI systems across the full engineering lifecycle',
+        'Maintains an Azure Durable Functions orchestration pipeline running GPT-4-powered compliance analysis with automated structured reporting',
+        'Maintains an Azure Functions scheduling system monitoring live agent availability across global timezones in real time',
+        'Maintains an executive AI productivity agent on Azure VM providing automated daily digests and task orchestration',
+        'Renewed Microsoft AZ-204 Azure Developer Associate certification at 92%; recognised as a Geekulcha Top 15 AI Innovator (South Africa 2026)',
+        'Applies GDPR-aware data handling, secure environment configuration, and responsible AI practices across all systems',
+      ],
+    },
+    {
+      title: 'Engineer',
+      company: 'EmpowaAI (Open Source)',
+      period: '2025 - Present',
+      location: 'Remote · Open Source',
+      type: 'work',
+      description: [
+        'Sole developer, architect, and open source maintainer of an AI career platform, owning the full stack from infrastructure and AI microservices through to user-facing product features',
+        'Built multi-step LLM workflows and agentic orchestration patterns using LangGraph and LangChain, connecting user inputs to structured career outputs',
+        'Deployed and maintained production systems on Vercel and Render serving real beta users, iterating on AI features via systematic prompt evaluation',
       ],
     },
     {
@@ -155,21 +183,19 @@ export const portfolioData: PortfolioData = {
       location: 'South Africa · Remote',
       type: 'work',
       description: [
-        'Mentor learners in web development, JavaScript, React, and backend engineering concepts',
-        'Lead code review sessions and guide Git workflows, secure project setup, and debugging practices for junior developers',
+        'Trains aspiring developers in JavaScript, React, HTML/CSS, backend engineering, and AI integration including embedding LLMs into real applications',
+        'Leads code review sessions, guides Git workflows, and supports learners in building and deploying portfolio projects to production',
       ],
     },
     {
-      title: 'Software Engineering Intern',
+      title: 'Software Engineering Intern (Part-Time)',
       company: 'Coast IT (Pty) Ltd',
-      period: 'Nov 2025 - Dec 2025',
+      period: 'Jan 2025 - Dec 2025',
       location: 'South Africa',
       type: 'work',
       description: [
-        'Contributed to feature development within an Agile/Scrum team, participating in sprint planning, daily standups, and retrospectives',
-        'Performed API testing using Postman, resolved bugs, and participated in peer code reviews to improve application stability',
-        'Built and refined UI features with Flutter, strengthening mobile development and state management fundamentals',
-        'Collaborated with senior engineers to implement and test new application modules, gaining exposure to production-level codebases',
+        'Contributed to feature development within an Agile/Scrum team, shipping tested code across sprint cycles with structured stand-ups and retrospectives',
+        'Tested APIs, resolved production bugs, and participated in peer code reviews improving application stability on live codebases',
       ],
     },
     {
@@ -180,22 +206,31 @@ export const portfolioData: PortfolioData = {
       type: 'work',
       description: [
         'Evaluated AI-generated outputs and improved response quality through structured, documented feedback aligned with model guidelines',
-        'Conducted prompt testing and model behaviour analysis, identifying patterns that improved response clarity, accuracy, and reliability',
+        'Conducted systematic prompt testing and model behaviour analysis across multiple domains',
       ],
       achievements: ['Improved model accuracy by 25%'],
     },
     {
-      title: 'Junior Navigation Officer',
+      title: 'Navigation Officer',
       company: 'South African Navy',
-      period: 'Jan 2015 - Jul 2021',
-      location: "Simon's Town",
+      period: '2015 - 2021',
+      location: 'South Africa',
       type: 'work',
       description: [
-        'Operated in mission-critical environments demanding precision decision-making, high ownership, and strict adherence to protocol',
-        'Developed cross-functional team coordination and communication skills under high-pressure, time-sensitive conditions',
-        'Mentored 5+ junior officers, fostering a culture of safety and continuous learning',
+        'Served as a commissioned Navigation Officer in mission-critical maritime environments, responsible for vessel navigation, safety, and operational execution under strict protocol and time pressure',
+        'Developed cross-functional leadership, precision decision-making, and composure under pressure — disciplines applied directly to production engineering ownership and incident response',
       ],
       achievements: ['Mentored 5+ junior officers'],
+    },
+    {
+      title: 'Naval Officer Cadet',
+      company: 'South African Navy',
+      period: '2012 - 2015',
+      location: 'South Africa',
+      type: 'work',
+      description: [
+        'Completed a three-year full military officer training programme covering leadership, navigation, maritime operations, engineering systems, and command under pressure',
+      ],
     },
   ],
 
@@ -218,51 +253,124 @@ export const portfolioData: PortfolioData = {
 
   projects: [
     {
-      title: 'EmpowaAI',
-      subtitle: 'AI-Powered Career & Economic Guidance Platform',
+      title: 'Audio Processing & Compliance Pipeline',
+      subtitle: 'Production AI Compliance Automation · Always Enough LLC',
       description:
-        'AI-powered career and economic guidance platform that builds a Digital Economic Twin to help youth make smarter career decisions.',
+        'Maintains an Azure Durable Functions orchestration pipeline that ingests business data, runs GPT-4-powered compliance analysis against internal guidelines, and delivers automated structured reports on a scheduled basis.',
+      tech: ['Azure Durable Functions', 'GPT-4', 'Azure AI', 'Python', 'PostgreSQL', 'Structured Outputs'],
+      highlights: [
+        'Designed and implemented Azure Durable Function timer triggers replacing a Next.js heartbeat scheduler, improving pipeline reliability for a production sales call analysis system.',
+        'Built a compliance pipeline using GPT-4 and Azure AI to automatically score sales calls against regulatory guidelines, delivering structured JSON reports with violation flagging and mandatory statement verification.',
+        'Shipped a compliance filtering feature improving analysis precision by restricting processing to qualifying records, reducing noise in daily compliance outputs.',
+        'Diagnosed and resolved a UniqueViolation production bug in PostgreSQL by replacing plain INSERT logic with upsert operations, eliminating duplicate record crashes in the transcription pipeline.',
+      ],
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'Flowly Funnel Agent',
+      subtitle: 'LangGraph Agent for Marketing Funnels · Always Enough LLC',
+      description:
+        'An AI agent that builds interactive quiz-style marketing funnels from a plain-English brief, executing real tool calls against the live Flowly MCP server rather than just describing what it would do.',
+      tech: ['LangGraph', 'MCP', 'FastAPI', 'Python'],
+      highlights: [
+        'Thin-harness/fat-skills architecture: a lightweight LangGraph orchestrator with zero embedded domain logic, routing to 8 self-contained markdown skill files that hold all the intelligence.',
+        'Skills are auto-discovered at import time by scanning for `type: agent` frontmatter — no hardcoded registration, versus a comparable in-house project hardcoding 17 agent nodes in a TypedDict.',
+        'Two-tier audit system (shallow pass before deep pass) and a forced monetization gate before any funnel build.',
+        'Verified live: one instruction triggers 5 real sequential tool calls against the live MCP server.',
+      ],
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'Executive AI Productivity Agent',
+      subtitle: 'Agentic Productivity System · Always Enough LLC',
+      description:
+        'An AI agent running on Azure VM, integrated with communication and task management platforms, providing automated daily digests and intelligent task orchestration for executive use.',
+      tech: ['Azure VM', 'Python', 'Communication Platform APIs', 'Task Management APIs'],
+      highlights: [
+        'Maintains and develops an AI agent running on Azure VM, integrated with communication and task management platforms, providing automated daily digests and intelligent task orchestration for executive use.',
+        'Responsible for feature development, bug resolution, and uptime of a mission-critical agentic productivity system.',
+      ],
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'Scheduling Automation System',
+      subtitle: 'Real-Time Agent Availability · Always Enough LLC',
+      description:
+        'An Azure Functions application monitoring live agent availability across multiple global timezones in real time, automatically managing booking capacity based on availability thresholds.',
+      tech: ['Azure Functions', 'Python', 'Azure DevOps', 'CI/CD'],
+      highlights: [
+        'Maintains an Azure Functions application monitoring live agent availability across multiple global timezones in real time, automatically managing booking capacity based on availability thresholds.',
+        'Onboards new agents end-to-end including configuration, integration testing, and live deployment.',
+      ],
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'Call Note Generator',
+      subtitle: 'Automated Call Transcription & Notes · Always Enough LLC',
+      description:
+        "Transcribes sales call recordings, generates structured closer's-template call notes, and emails them to reps — replacing manual copy-pasting of recordings into personal AI accounts.",
+      tech: ['Whisper', 'Azure AI Foundry', 'FastAPI', 'Python', 'Azure Communication Services'],
+      highlights: [
+        'Transcribes call recordings with speaker diarization (gpt-4o-transcribe-diarize) and generates structured notes via gpt-5.4.',
+        'Zero-persistence architecture — no database or file storage, built for GDPR compliance in a mental-health/coaching context.',
+        'Automatic fallback from Azure content-filter blocks to OpenAI, plus PII-scrubbed logging.',
+      ],
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'EmpowaAI',
+      subtitle: 'AI Career Platform · Sole Developer · Open Source · Active Development',
+      description:
+        'Open source AI platform helping South African youth navigate career paths through intelligent personalisation — sole developer and maintainer responsible for full architecture, shipping, and community.',
       tech: [
-        'AI/ML',
-        'NLP',
-        'Career Analytics',
-        'Digital Twin',
-        'Simulation',
-        'Interview Coaching',
+        'React',
+        'TypeScript',
+        'Node.js',
+        'FastAPI',
+        'MongoDB Atlas',
+        'OpenAI API',
+        'RAG',
+        'LangChain',
+        'Embeddings',
       ],
       highlights: [
-        'Creates a Digital Economic Twin to model skills, strengths, and potential',
-        'Analyzes CVs, identifies strongest skills, and matches users to suited industries',
-        'Simulates 3, 6, and 12-month career paths with actionable guidance',
-        'Provides interview prep with AI coaching and pathways for employment, learnership, or entrepreneurship',
-        'Designed to evolve into a talent and opportunity ecosystem',
+        'Designed and deployed a full-stack RAG-powered platform integrating React (TypeScript), Node.js/Express, and FastAPI AI microservices, serving real beta users end-to-end.',
+        'Engineered a Digital Economic Twin using user profile embeddings and LangChain to generate personalised career insights and income pathway simulations.',
+        'Architected multi-step LLM workflows connecting user inputs to structured career outputs, applying agent orchestration patterns for reliable, multi-stage reasoning.',
+        'Manages the open source community on GitHub, including documentation, issue tracking, and roadmap planning.',
       ],
       demo: 'https://www.empowa.org',
       linkedin: 'https://www.linkedin.com/company/empowaai',
     },
     {
-      title: 'AI Compliance Interrogator',
-      subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly • Featured on International Tech Podcast',
+      title: 'AI Against Modern Slavery (AIMS)',
+      subtitle: 'Hackathon Winner · Mila–Quebec AI Institute & QUT · International Tech Podcast Feature',
       description:
-        'Hackathon-winning AI compliance tool that analyses structured inputs to automatically flag risks. Won 1st place and was featured on an Australian technology podcast.',
+        'Built AI-driven tools assessing corporate accountability and human rights compliance at scale, analysing large volumes of corporate modern slavery disclosures using NLP and LLMs — in partnership with Mila (Quebec AI Institute) and QUT Centre for Data Science.',
       tech: [
-        'Python',
-        'FastAPI',
-        'OpenAI API',
-        'Microsoft Azure',
-        'Prompt Engineering',
+        '.NET 8',
         'React',
-        'TypeScript',
+        'Python',
+        'Flask',
+        'pgvector',
+        'PostgreSQL',
+        'NLP',
+        'Explainable AI',
       ],
       highlights: [
-        '🏆 1st Place at AIMS Hackathon 2025 - Best Team award',
-        'Designed controlled LLM prompt workflows ensuring consistent, auditable, and explainable outputs',
-        'Enforced backend-only AI calls with secure environment configuration for sensitive compliance data',
-        'Deployed full-stack application on Microsoft Azure; featured on an Australian technology podcast',
+        'Shipped a semantic document analysis frontend enabling analysts to query AI-powered compliance outputs across thousands of corporate disclosures.',
+        'Contributed to an NLP classification pipeline applying chunking, embeddings, and retrieval to surface compliance signals from unstructured corporate text at scale.',
+        'Applied prompt engineering and structured output handling to improve consistency and explainability of LLM-generated compliance assessments.',
+        'Worked within a multidisciplinary team applying Explainable AI and Responsible AI principles to a cross-jurisdiction regulatory problem affecting millions of people globally.',
       ],
       github: 'https://github.com/NickiMash17/AIMS-Firefly',
       demo: null,
-      award: 'Best Team - AIMS Hackathon 2025 · Featured on International Tech Podcast',
+      award: 'Hackathon Winner · Mila x QUT Partnership · Featured on International Tech Podcast',
     },
     {
       title: 'LoanLife EDGE',
@@ -349,13 +457,25 @@ export const portfolioData: PortfolioData = {
 
   certifications: [
     {
-      name: 'Microsoft Certified: Azure Developer Associate (AZ-204)',
+      name: 'Microsoft Certified: Azure Developer Associate (AZ-204) — renewed 2026 at 92%',
       issuer: 'Microsoft',
       type: 'certification',
     },
     {
       name: 'Microsoft Certified: Azure Data Fundamentals (DP-900)',
       issuer: 'Microsoft',
+      type: 'certification',
+    },
+    {
+      name: 'Geekulcha Top 15 AI Innovators - South Africa 2026',
+      issuer: 'Geekulcha',
+      year: '2026',
+      type: 'award',
+    },
+    {
+      name: 'AWS AI Practitioner Challenge',
+      issuer: 'Udacity',
+      year: '2026',
       type: 'certification',
     },
     {
@@ -369,8 +489,8 @@ export const portfolioData: PortfolioData = {
       type: 'certification',
     },
     {
-      name: 'Winner, AIMS Hackathon 2025 - Best Team · Featured on International Tech Podcast',
-      issuer: 'AIMS',
+      name: 'Hackathon Winner, AI Against Modern Slavery (AIMS) - Mila x QUT · Featured on International Tech Podcast',
+      issuer: 'Mila (Quebec AI Institute) & QUT Centre for Data Science',
       year: '2025',
       type: 'award',
     },
@@ -383,8 +503,13 @@ export const portfolioData: PortfolioData = {
 
   achievements: [
     {
-      title: 'AIMS Hackathon 2025 Winner',
-      description: 'Won "Best Team" award for AI Compliance Interrogator project',
+      title: 'Geekulcha Top 15 AI Innovator',
+      description: 'Recognised among South Africa\'s Top 15 AI Innovators, 2026',
+      year: '2026',
+    },
+    {
+      title: 'AI Against Modern Slavery (AIMS) Hackathon Winner',
+      description: 'Won hackathon in partnership with Mila (Quebec AI Institute) and QUT, applying NLP and Explainable AI to human rights compliance',
       year: '2025',
     },
     {
@@ -408,13 +533,13 @@ export const portfolioData: PortfolioData = {
  * Get system prompt for AI assistant
  */
 export const getSystemPrompt = (): string => {
-  return `You are Nicolette Mashaba's AI assistant, an intelligent chatbot representing a Software Engineer Graduate and developer. Your role is to provide accurate, helpful, and engaging information about Nicolette's skills, experience, projects, and background.
+  return `You are Nicolette Mashaba's AI assistant, an intelligent chatbot representing an AI Engineer specializing in production LLM systems and agentic architectures. Your role is to provide accurate, helpful, and engaging information about Nicolette's skills, experience, projects, and background.
 
 PERSONALITY & TONE:
 - Professional yet friendly and approachable
 - Enthusiastic about technology and software development
 - Clear and concise in explanations
-- Use emojis sparingly and appropriately (⚡ 🚀 💻 🎯)
+- Do not use emojis — keep formatting clean and professional
 - Be conversational but maintain professionalism
 
 KEY INFORMATION ABOUT NICOLETTE:
@@ -484,7 +609,7 @@ export const generateLocalResponse = (query: string): string => {
     const cloud = portfolioData.skills.filter((s) => s.category === 'Cloud').map((s) => s.name);
     const ai = portfolioData.skills.filter((s) => s.category === 'AI/ML').map((s) => s.name);
     
-    return `🚀 **Technical Skills Overview:**
+    return `**Technical Skills Overview:**
 
 **Frontend:** ${frontend.join(', ')}
 **Backend:** ${backend.join(', ')}
@@ -492,29 +617,29 @@ export const generateLocalResponse = (query: string): string => {
 **Cloud & DevOps:** ${cloud.join(', ')}
 **AI/ML:** ${ai.join(', ')}
 
-Nicolette specializes in full-stack development with strong expertise in React, TypeScript, and Node.js. She's also Azure certified and experienced with mobile development using Flutter. Her skill set spans from frontend UI/UX to backend APIs, cloud infrastructure, and DevOps practices.`;
+Nicolette specializes in AI & agent engineering — LangGraph, DSPy, RAG, and Azure Durable Functions in production — backed by strong full-stack expertise in React, TypeScript, and Node.js. She's also Azure certified and experienced with mobile development using Flutter.`;
   }
 
   // Projects queries
   if (lowerQuery.includes('project') || lowerQuery.includes('work') || lowerQuery.includes('build')) {
     const featuredProject = portfolioData.projects[0];
-    return `💻 **Featured Projects:**
+    return `**Featured Projects:**
 
 **${featuredProject.title}** - ${featuredProject.subtitle}
 ${featuredProject.description}
-${featuredProject.award ? `🏆 ${featuredProject.award}` : ''}
+${featuredProject.award ? `Award: ${featuredProject.award}` : ''}
 Tech Stack: ${featuredProject.tech.join(', ')}
 
 **Other Notable Projects:**
 ${portfolioData.projects.slice(1, 3).map((p) => `• ${p.title} - ${p.description}`).join('\n')}
 
-All projects showcase full-stack capabilities, modern tech stacks, and real-world problem-solving. Check out the Projects section for more details!`;
+Projects range from production AI pipelines to full-stack apps, spanning agentic systems, RAG, and modern tech stacks. Check out the Projects section for more details!`;
   }
 
   // Experience queries
   if (lowerQuery.includes('experience') || lowerQuery.includes('work history') || lowerQuery.includes('internship')) {
     const recentExp = portfolioData.experience.filter((e) => e.type === 'work').slice(0, 2);
-    return `💼 **Recent Work Experience:**
+    return `**Recent Work Experience:**
 
 ${recentExp.map((e) => `**${e.title}** at ${e.company} (${e.period})
 ${e.description.join('\n')}
@@ -525,39 +650,39 @@ Nicolette has diverse experience from internships at tech companies to her uniqu
 
   // About/Bio queries
   if (lowerQuery.includes('about') || lowerQuery.includes('who') || lowerQuery.includes('background')) {
-    return `👋 **About Nicolette:**
+    return `**About Nicolette:**
 
 ${portfolioData.personal.bio}
 
 **Key Highlights:**
 ${portfolioData.personal.highlights.map((h) => `• ${h}`).join('\n')}
 
-What makes her unique is the transition from Naval Officer to Software Engineer, bringing leadership, problem-solving, and strategic thinking from military service to tech. She's a Software Engineer Graduate excelling in full-stack development, cloud computing, and AI technologies.`;
+What makes her unique is the transition from Naval Officer to AI Engineer, bringing leadership, problem-solving, and strategic thinking from military service to tech. She builds production LLM systems — agentic pipelines, RAG, and compliance automation — backed by full-stack and cloud engineering skills.`;
   }
 
   // Contact queries
   if (lowerQuery.includes('contact') || lowerQuery.includes('email') || lowerQuery.includes('linkedin') || lowerQuery.includes('github')) {
-    return `📧 **Get in Touch:**
+    return `**Get in Touch:**
 
-🔗 **LinkedIn:** ${portfolioData.personal.social.linkedin}
-💻 **GitHub:** ${portfolioData.personal.social.github}
-📍 **Location:** ${portfolioData.personal.location}
-✨ **Status:** ${portfolioData.personal.status}
+**LinkedIn:** ${portfolioData.personal.social.linkedin}
+**GitHub:** ${portfolioData.personal.social.github}
+**Location:** ${portfolioData.personal.location}
+**Status:** ${portfolioData.personal.status}
 
 Feel free to connect on LinkedIn or check out her projects on GitHub!`;
   }
 
   // Certifications queries
   if (lowerQuery.includes('certif') || lowerQuery.includes('award') || lowerQuery.includes('achievement')) {
-    return `🏆 **Certifications & Awards:**
+    return `**Certifications & Awards:**
 
 ${portfolioData.certifications.map((c) => `• ${c.name}${c.year ? ` (${c.year})` : ''}`).join('\n')}
 
-Nicolette is Microsoft Azure certified (Developer Associate & Data Fundamentals) and has won awards including the AIMS Hackathon 2025 "Best Team" award.`;
+Nicolette is Microsoft Azure certified (AZ-204 renewed at 92%, plus DP-900) and was recognised as a Geekulcha Top 15 AI Innovator and AIMS hackathon winner in partnership with Mila and QUT.`;
   }
 
   // Default response
-  return `⚡ I'm Nicolette's AI assistant! I can help you learn about:
+  return `I'm Nicolette's AI assistant! I can help you learn about:
 
 • **Skills & Technologies** - Her technical expertise
 • **Projects** - Featured work and achievements  

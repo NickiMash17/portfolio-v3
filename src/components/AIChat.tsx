@@ -52,7 +52,7 @@ export const AIChat = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "⚡ Neural link established. I'm Nicolette's AI consciousness—ask me anything about skills, projects, or experience. Try a quick command below!",
+      content: "Hi! I'm Nicolette's AI assistant. Ask me anything about her skills, projects, or experience — or try a quick command below.",
     },
   ]);
   const [input, setInput] = useState('');
@@ -198,7 +198,7 @@ export const AIChat = () => {
       const localResponse = generateLocalResponse(messageText);
       
       toast({
-        title: '⚠️ Using Local Mode',
+        title: 'Using Local Mode',
         description: 'API unavailable, using local knowledge base',
         variant: 'default',
       });
@@ -218,7 +218,7 @@ export const AIChat = () => {
   const handleReset = () => {
     setMessages([{
       role: 'assistant',
-      content: "⚡ Neural link established. I'm Nicolette's AI consciousness—ask me anything about skills, projects, or experience. Try a quick command below!",
+      content: "Hi! I'm Nicolette's AI assistant. Ask me anything about her skills, projects, or experience — or try a quick command below.",
     }]);
     setUseLocalFallback(false);
   };
@@ -275,13 +275,13 @@ export const AIChat = () => {
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-foreground flex items-center gap-2">
-                  Neural Assistant
-                  <span className={`text-xs font-mono animate-pulse ${
+                  AI Assistant
+                  <span className={`text-xs animate-pulse ${
                     useLocalFallback ? 'text-yellow-500' : 'text-primary'
                   }`}>●</span>
                 </h3>
-                <p className="text-xs text-muted-foreground font-mono">
-                  {useLocalFallback ? 'Local Mode • v2.5' : 'AI.v2.5 • Real-time'}
+                <p className="text-xs text-muted-foreground">
+                  {useLocalFallback ? 'Local Mode' : 'Online'}
                 </p>
               </div>
               {messages.length > 1 && (
@@ -450,8 +450,8 @@ export const AIChat = () => {
                 <Send size={16} className={`sm:w-[18px] sm:h-[18px] ${isLoading ? 'animate-pulse' : ''}`} />
               </Button>
             </div>
-            <p className="text-[10px] sm:text-xs text-muted-foreground font-mono mt-2 text-center">
-              Powered by Neural AI • {new Date().getFullYear()}
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-2 text-center">
+              AI Assistant &middot; {new Date().getFullYear()}
             </p>
           </form>
         </div>

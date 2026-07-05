@@ -1,36 +1,30 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
-import { Folder, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Github, Linkedin, Mail, FileText, MapPin, Award, ShieldCheck, AudioLines, CalendarClock, Bot, Briefcase } from 'lucide-react';
 import { trackExternalLink } from '@/lib/analytics';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { SonarBackground } from './SonarBackground';
 import { CVPreviewModal } from './CVPreviewModal';
+import { DotMatrixText } from './DotMatrixText';
+import { TiltCard } from './TiltCard';
 
-const InteractiveTerminal = lazy(async () => {
-  const mod = await import('./InteractiveTerminal');
-  return { default: mod.InteractiveTerminal };
-});
-
-const PortfolioCube = lazy(async () => {
-  const mod = await import('./PortfolioCube');
-  return { default: mod.PortfolioCube };
-});
-
-const TITLES = [
-  'Software Engineer',
-  'AI/ML Enthusiast',
-  'Azure Cloud Expert',
-  'Hackathon Winner',
-  'Full-Stack Developer',
+const SYSTEMS = [
+  {
+    icon: AudioLines,
+    name: 'Audio Processing & Compliance Pipeline',
+    detail: 'GPT-4 compliance scoring on Azure Durable Functions',
+  },
+  {
+    icon: CalendarClock,
+    name: 'Scheduling Automation System',
+    detail: 'Real-time agent availability across global timezones',
+  },
+  {
+    icon: Bot,
+    name: 'Executive AI Productivity Agent',
+    detail: 'Automated digests & task orchestration on Azure VM',
+  },
 ];
 
 export const Hero = () => {
-  const isMobile = useIsMobile();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [titleIndex, setTitleIndex] = useState(0);
-  const [titleText, setTitleText] = useState(TITLES[0]);
-  const [isTitleDeleting, setIsTitleDeleting] = useState(false);
-  const [showCube, setShowCube] = useState(false);
-  const [isPanelReady, setIsPanelReady] = useState(false);
 
   useEffect(() => {
     const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -40,321 +34,211 @@ export const Hero = () => {
     return () => mql.removeEventListener('change', onChange);
   }, []);
 
-  useEffect(() => {
-    if (!isMobile) {
-      setIsPanelReady(true);
-      return;
-    }
-
-    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    if (connection?.saveData) {
-      setIsPanelReady(false);
-      return;
-    }
-
-    const timer = window.setTimeout(() => setIsPanelReady(true), 1800);
-    return () => window.clearTimeout(timer);
-  }, [isMobile]);
-
-  useEffect(() => {
-    // Only use the interval on mobile/reduced-motion — desktop lets the typewriter control cycling
-    if (!isMobile && !prefersReducedMotion) return;
-    const interval = window.setInterval(() => {
-      setTitleIndex((i) => (i + 1) % TITLES.length);
-    }, prefersReducedMotion ? 3600 : 2400);
-
-    return () => window.clearInterval(interval);
-  }, [isMobile, prefersReducedMotion]);
-
-  useEffect(() => {
-    if (prefersReducedMotion || isMobile) {
-      setTitleText(TITLES[titleIndex % TITLES.length]);
-      setIsTitleDeleting(false);
-    }
-  }, [isMobile, prefersReducedMotion, titleIndex]);
-
-  useEffect(() => {
-    if (isMobile || prefersReducedMotion) return;
-
-    const current = TITLES[titleIndex % TITLES.length];
-    const speed = isTitleDeleting ? 40 : 80;
-
-    const timer = setTimeout(() => {
-      if (!isTitleDeleting) {
-        setTitleText(current.slice(0, titleText.length + 1));
-        if (titleText.length + 1 === current.length) {
-          setTimeout(() => setIsTitleDeleting(true), 2000);
-        }
-      } else {
-        setTitleText(current.slice(0, Math.max(0, titleText.length - 1)));
-        if (titleText.length === 0) {
-          setIsTitleDeleting(false);
-          setTitleIndex((i) => (i + 1) % TITLES.length);
-        }
-      }
-    }, speed);
-
-    return () => clearTimeout(timer);
-  }, [isMobile, prefersReducedMotion, titleText, titleIndex, isTitleDeleting]);
-
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const iconButtonClass =
-    'p-2 sm:p-3 glass rounded-xl border border-foreground/10 transition-all duration-300';
+    'p-2.5 sm:p-3 bg-card border border-border/60 rounded-md transition-all duration-300 hover:border-primary/50 hover:-translate-y-0.5';
 
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden">
-      <SonarBackground />
-      <div className="hud-scanlines absolute inset-0" />
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-24 flex items-center justify-center min-h-screen py-16 sm:py-20 md:py-0">
+    <section id="hero" className="relative overflow-hidden">
+      {/* Technical grid backdrop */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border)/0.5)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.5)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.08),transparent_55%)]" />
+      </div>
 
-      <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute top-1/4 right-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float'} />
-      <div className={prefersReducedMotion ? 'hidden' : 'hidden sm:block absolute bottom-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/10 rounded-full blur-[100px] animate-float'} style={{ animationDelay: '2s' }} />
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 order-1">
-            <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
-              <div className="relative group flex-shrink-0">
-                <div className={`absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 ${prefersReducedMotion ? '' : 'sm:animate-rotate-slow'}`}></div>
-                <div className="absolute -inset-1 bg-gradient-to-tr from-primary/50 via-accent/30 to-primary/50 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20">
 
-                <div className="relative glass rounded-full p-2 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300">
-                  <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-accent rounded-tl-full group-hover:scale-125 transition-transform duration-300"></div>
-                  <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-primary rounded-tr-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.1s' }}></div>
-                  <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-primary rounded-bl-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.2s' }}></div>
-                  <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-accent rounded-br-full group-hover:scale-125 transition-transform duration-300" style={{ transitionDelay: '0.3s' }}></div>
+        {/* Dot-matrix signature mark */}
+        <DotMatrixText
+          text="AI ENGINEER"
+          height={90}
+          dotGap={6}
+          reducedMotion={prefersReducedMotion}
+          className="w-full mb-10 sm:mb-14 flex justify-center [&>canvas]:max-w-full"
+        />
 
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-10 items-start w-full">
+
+          {/* Left — profile sheet */}
+          <div className="w-full">
+            <TiltCard tiltAmount={3} scale={1.005} glareEnabled={false} className="rounded-lg">
+            <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60">
+
+              {/* Status strip */}
+              <div className="flex flex-wrap items-center justify-between gap-2 px-5 sm:px-6 py-3.5">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
+                  </span>
+                  <span className="text-xs font-medium text-foreground">Open to Full-Time Roles</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <MapPin className="w-3 h-3 flex-shrink-0" />
+                  South Africa &middot; Remote &middot; Open to EU Relocation
+                </div>
+              </div>
+
+              {/* Identity strip */}
+              <div className="flex items-center gap-4 px-5 sm:px-6 py-5 sm:py-6">
+                <div className="relative flex-shrink-0">
                   <picture>
                     <source media="(max-width: 767px)" srcSet="/my-caricature-mobile.jpg" />
                     <img
                       src="/my-caricature.jpeg"
-                      alt="Nicolette Mashaba - Software Engineer"
-                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      alt="Nicolette Mashaba - AI Engineer"
+                      className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-primary/40"
                       loading="eager"
                       fetchPriority="high"
                       decoding="async"
-                      width={224}
-                      height={224}
-                      sizes="(max-width: 639px) 80px, (max-width: 767px) 96px, 112px"
+                      width={160}
+                      height={160}
+                      sizes="80px"
                     />
                   </picture>
                 </div>
-
-                <div className="absolute -top-11 sm:-top-16 left-1/2 -translate-x-1/2 glass rounded-xl px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-primary border border-primary/20 leading-tight w-max">
-                  <div className={prefersReducedMotion ? '' : 'animate-float-soft'}>
-                    <span className="block whitespace-nowrap">#1 Female Most Active</span>
-                    <span className="block whitespace-nowrap">GitHub User 🇿🇦</span>
-                  </div>
-                </div>
-                <div className={`absolute -bottom-2 -left-2 glass rounded-full px-2 py-1 text-xs font-medium text-accent border border-accent/20 ${prefersReducedMotion ? '' : 'animate-float'}`} style={{ animationDelay: '1s' }}>
-                  Azure
+                <div className="text-left min-w-0">
+                  <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl tracking-tight text-foreground">
+                    Nicolette Mashaba
+                  </h1>
+                  <p className="font-display text-sm sm:text-base text-primary font-medium">
+                    AI Engineer
+                  </p>
                 </div>
               </div>
 
-              <header className="w-full" aria-label="Introduction">
-                <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4 lg:mb-6">
-                  <div className="inline-flex items-center gap-1.5 sm:gap-2 glass rounded-full px-2.5 sm:px-3 py-1.5 border border-primary/20">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                      <span className="relative inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                    </span>
-                    <span className="text-[10px] sm:text-xs font-medium text-foreground">AI Engineer · Open to Full-Time</span>
-                  </div>
-                  <div className="inline-flex items-center gap-1 glass rounded-full px-2.5 sm:px-3 py-1.5 border border-foreground/10 text-[10px] sm:text-xs text-muted-foreground">
-                    📍 South Africa · Remote
-                  </div>
+              {/* Facts strip */}
+              <div className="px-5 sm:px-6 py-4 space-y-2">
+                <div className="flex items-center gap-2.5 text-sm text-foreground/80">
+                  <Briefcase className="w-4 h-4 text-primary flex-shrink-0" />
+                  <span>AI Engineer at Always Enough LLC</span>
                 </div>
+                <p className="text-sm text-foreground/70 leading-relaxed pl-[26px]">
+                  Building and maintaining three live production AI systems — RAG pipelines, multi-agent orchestration, and compliance automation — on Microsoft Azure.
+                </p>
+              </div>
 
-                <div className="relative">
+              {/* Actions strip */}
+              <div className="flex flex-wrap items-center gap-3 px-5 sm:px-6 py-4">
+                <button
+                  onClick={() => scrollToSection('projects')}
+                  className="px-6 py-2.5 rounded-md bg-primary text-primary-foreground font-semibold text-sm shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all"
+                >
+                  View Projects
+                </button>
+                <CVPreviewModal
+                  trigger={
+                    <button className="px-6 py-2.5 rounded-md border border-primary/30 text-foreground font-semibold text-sm hover:bg-primary/10 transition-colors">
+                      View CV
+                    </button>
+                  }
+                />
+                <div className="flex items-center gap-2 ml-auto">
                   <a
                     href="https://github.com/NickiMash17"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hidden sm:block absolute -top-2 left-[5%] animate-float group z-20 cursor-pointer"
-                    style={{ animationDelay: '0s', animationDuration: '4s' }}
+                    aria-label="GitHub profile"
+                    className={iconButtonClass}
                     onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github')}
                   >
-                    <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
-                      <Github className="w-5 h-5 sm:w-7 sm:h-7 text-foreground/70 group-hover:text-foreground transition-colors" />
-                    </div>
+                    <Github className="w-4 h-4 text-foreground/70" />
                   </a>
-
                   <a
                     href="https://linkedin.com/in/nicolette-mashaba"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hidden sm:block absolute top-0 right-[10%] animate-float group z-20 cursor-pointer"
-                    style={{ animationDelay: '0.5s', animationDuration: '4.5s' }}
+                    aria-label="LinkedIn profile"
+                    className={iconButtonClass}
                     onClick={() => trackExternalLink('https://linkedin.com/in/nicolette-mashaba', 'linkedin')}
                   >
-                    <div className={`${iconButtonClass} group-hover:border-[#0A66C2]/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#0A66C2]/20`}>
-                      <Linkedin className="w-5 h-5 sm:w-7 sm:h-7 text-[#0A66C2] group-hover:text-[#0A66C2]/80 transition-colors" />
-                    </div>
+                    <Linkedin className="w-4 h-4 text-foreground/70" />
                   </a>
-
-                  <button
-                    onClick={() => scrollToSection('projects')}
-                    aria-label="View projects"
-                    className="hidden sm:block absolute bottom-0 left-[15%] animate-float group z-20 cursor-pointer"
-                    style={{ animationDelay: '1s', animationDuration: '5s' }}
-                  >
-                    <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
-                      <Folder className="w-5 h-5 sm:w-7 sm:h-7 text-primary fill-primary/20 group-hover:fill-primary/40 transition-colors" />
-                    </div>
-                  </button>
-
                   <button
                     onClick={() => scrollToSection('contact')}
                     aria-label="Go to contact section"
-                    className="hidden sm:block absolute -bottom-4 right-[5%] animate-float group z-20 cursor-pointer"
-                    style={{ animationDelay: '1.5s', animationDuration: '4.2s' }}
+                    className={iconButtonClass}
                   >
-                    <div className={`${iconButtonClass} group-hover:border-accent/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent/20`}>
-                      <Mail className="w-5 h-5 sm:w-7 sm:h-7 text-accent group-hover:text-accent/80 transition-colors" />
-                    </div>
+                    <Mail className="w-4 h-4 text-foreground/70" />
                   </button>
-
                   <CVPreviewModal
                     trigger={
-                      <button
-                        className="hidden sm:block absolute top-1/2 -translate-y-1/2 right-0 animate-float group z-20 cursor-pointer"
-                        style={{ animationDelay: '2s', animationDuration: '4.8s' }}
-                      >
-                        <div className={`${iconButtonClass} group-hover:border-primary/50 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20`}>
-                          <FileText className="w-5 h-5 sm:w-7 sm:h-7 text-primary group-hover:text-primary/80 transition-colors" />
-                        </div>
+                      <button aria-label="View CV" className={iconButtonClass}>
+                        <FileText className="w-4 h-4 text-foreground/70" />
                       </button>
                     }
                   />
-
-                  <div className="space-y-2 sm:space-y-3 relative z-10 py-2 sm:py-6 md:py-10 px-2 sm:px-8 md:px-0">
-                    <h1 className="font-display font-bold text-2xl md:text-4xl tracking-tight text-foreground">
-                      Nicolette Mashaba
-                    </h1>
-                    <p className="text-sm sm:text-base md:text-lg text-foreground/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                      I build AI-driven web apps that turn complex data into clear decisions for people and businesses.
-                    </p>
-                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1 sm:pt-2">
-                      <button
-                        onClick={() => scrollToSection('projects')}
-                        className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm sm:text-base hover:shadow-lg hover:shadow-primary/20 transition-all"
-                      >
-                        View Projects
-                      </button>
-                      <CVPreviewModal
-                        trigger={
-                          <button className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/40 text-primary font-medium text-sm sm:text-base hover:bg-primary/10 transition-colors">
-                            View CV
-                          </button>
-                        }
-                      />
-                    </div>
-                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-2">
-                      {[
-                        'AIMS Hackathon Winner 2025',
-                        'Azure Certified',
-                        '2448 Commits',
-                        '25% Prompt Accuracy Lift',
-                      ].map((item) => (
-                        <span
-                          key={item}
-                          className="px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono border border-primary/30 bg-primary/10 text-primary"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="sm:hidden flex flex-wrap justify-center gap-2 pt-3">
-                      <a
-                        href="https://github.com/NickiMash17"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="GitHub profile"
-                        className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
-                        onClick={() => trackExternalLink('https://github.com/NickiMash17', 'github')}
-                      >
-                        <Github className="w-5 h-5 text-foreground/70" />
-                      </a>
-                      <a
-                        href="https://linkedin.com/in/nicolette-mashaba"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="LinkedIn profile"
-                        className={`${iconButtonClass} hover:border-[#0A66C2]/50 hover:shadow-lg hover:shadow-[#0A66C2]/20`}
-                        onClick={() => trackExternalLink('https://linkedin.com/in/nicolette-mashaba', 'linkedin')}
-                      >
-                        <Linkedin className="w-5 h-5 text-[#0A66C2]" />
-                      </a>
-                      <button
-                        onClick={() => scrollToSection('projects')}
-                        aria-label="View projects"
-                        className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}
-                      >
-                        <Folder className="w-5 h-5 text-primary fill-primary/20" />
-                      </button>
-                      <button
-                        onClick={() => scrollToSection('contact')}
-                        aria-label="Go to contact section"
-                        className={`${iconButtonClass} hover:border-accent/50 hover:shadow-lg hover:shadow-accent/20`}
-                      >
-                        <Mail className="w-5 h-5 text-accent" />
-                      </button>
-                      <CVPreviewModal
-                        trigger={
-                          <button aria-label="View CV" className={`${iconButtonClass} hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20`}>
-                            <FileText className="w-5 h-5 text-primary" />
-                          </button>
-                        }
-                      />
-                    </div>
-                  </div>
                 </div>
-              </header>
+              </div>
+
+              {/* Credibility strip */}
+              <div className="flex flex-wrap gap-2 px-5 sm:px-6 py-4">
+                {[
+                  { icon: Award, label: 'Geekulcha Top 15 AI Innovator' },
+                  { icon: ShieldCheck, label: 'AZ-204 Certified · 92%' },
+                  { icon: Award, label: 'Hackathon Winner — Mila x QUT' },
+                ].map(({ icon: Icon, label }) => (
+                  <span
+                    key={label}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border border-primary/20 bg-primary/5 text-foreground/80"
+                  >
+                    <Icon className="w-3.5 h-3.5 text-primary" />
+                    {label}
+                  </span>
+                ))}
+              </div>
             </div>
+            </TiltCard>
           </div>
 
-          <div className="order-2 lg:order-2 flex w-full flex-col items-center justify-center gap-4">
-            <div className="inline-flex items-center gap-2 glass rounded-full p-1 border border-primary/20">
-              <button
-                onClick={() => {
-                  setIsPanelReady(true);
-                  setShowCube(false);
-                }}
-                className={`px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all ${
-                  !showCube ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Terminal
-              </button>
-              <button
-                onClick={() => {
-                  setIsPanelReady(true);
-                  setShowCube(true);
-                }}
-                className={`px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all ${
-                  showCube ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Cube
-              </button>
-            </div>
-
-            {isPanelReady ? (
-              <Suspense fallback={<div className="w-full min-h-[340px] sm:min-h-[420px] glass rounded-2xl border border-primary/30" aria-hidden="true" />}>
-                {showCube ? <PortfolioCube /> : <InteractiveTerminal />}
-              </Suspense>
-            ) : (
-              <div className="w-full min-h-[340px] sm:min-h-[420px] glass rounded-2xl border border-primary/30 flex items-center justify-center px-4">
-                <button
-                  onClick={() => setIsPanelReady(true)}
-                  className="px-4 py-2 rounded-full border border-primary/30 text-sm text-primary hover:bg-primary/10 transition-colors"
-                >
-                  Load Interactive Panel
-                </button>
+          {/* Right — production systems panel */}
+          <div className="w-full">
+            <TiltCard tiltAmount={3} scale={1.005} glareEnabled={false} className="rounded-lg">
+            <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60">
+              <div className="flex items-center justify-between px-5 sm:px-6 py-3.5">
+                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Live Production Systems
+                </span>
+                <span className="flex items-center gap-1.5 text-xs font-medium text-primary">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
+                  </span>
+                  Active
+                </span>
               </div>
-            )}
+
+              {SYSTEMS.map(({ icon: Icon, name, detail }) => (
+                <div key={name} className="flex items-start gap-3.5 px-5 sm:px-6 py-4">
+                  <div className="p-2 rounded-md bg-primary/10 flex-shrink-0">
+                    <Icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-foreground leading-snug">{name}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{detail}</p>
+                  </div>
+                </div>
+              ))}
+
+              <div className="grid grid-cols-3 gap-3 text-center px-5 sm:px-6 py-4">
+                {[
+                  { value: '3', label: 'Live AI Systems' },
+                  { value: '92%', label: 'AZ-204 Score' },
+                  { value: '2026', label: 'Top 15 AI Innovator' },
+                ].map((stat) => (
+                  <div key={stat.label}>
+                    <div className="text-lg sm:text-xl font-bold font-display text-primary tabular-nums">
+                      {stat.value}
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] text-muted-foreground leading-tight mt-0.5">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            </TiltCard>
           </div>
         </div>
       </div>

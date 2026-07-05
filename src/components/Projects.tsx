@@ -1,10 +1,14 @@
 import { useState, useMemo } from 'react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore — Github/Linkedin/Youtube are deprecated brand icons in lucide-react but have no non-deprecated replacement yet
-import { ExternalLink, Github, Linkedin, Youtube, Filter, X } from 'lucide-react';
+import {
+  ExternalLink, Github, Linkedin, Youtube, Filter, X, ChevronDown, ChevronUp,
+  AudioLines, Workflow, Mic, ScanSearch, Compass, CalendarClock, Bot,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TiltCard } from '@/components/TiltCard';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
+import { AgentPipelineDiagram } from '@/components/AgentPipelineDiagram';
 import { trackExternalLink, trackEvent } from '@/lib/analytics';
 
 // Helper to check if URL is YouTube
@@ -26,220 +30,278 @@ const getProjectGradient = (index: number) => {
 
 const projectsData = [
     {
-      title: 'EmpowaAI',
-      subtitle: 'AI-Powered Career & Economic Guidance Platform',
+      title: 'Audio Processing & Compliance Pipeline',
+      subtitle: 'Production AI Compliance Automation · Always Enough LLC',
       description:
-        'AI-powered career and economic guidance platform that builds a Digital Economic Twin to help youth make smarter career decisions.',
-      role: 'Full-Stack & AI Systems',
-      scope: 'AI career guidance, digital twin, simulations',
+        'Maintains an Azure Durable Functions orchestration pipeline that ingests business data, runs GPT-4-powered compliance analysis against internal guidelines, and delivers automated structured reports on a scheduled basis.',
+      role: 'AI Engineer',
+      scope: 'Durable Functions orchestration, GPT-4 scoring, PostgreSQL persistence',
       tech: [
-        'AI/ML',
-        'NLP',
-        'Career Analytics',
-        'Digital Twin',
-        'Simulation',
-        'Interview Coaching',
-      ],
-      categories: ['AI', 'Career Tech', 'Web App'],
-      impact: [
-        '3, 6, and 12-month career path simulations',
-        'Clear pathways from skills to industry fit',
-        'Decision support for employment, learnership, or entrepreneurship',
-      ],
-      metrics: ['3, 6, 12-month simulations', 'Digital Economic Twin model'],
-      highlights: [
-        'Creates a Digital Economic Twin to model skills, strengths, and potential',
-        'Analyzes CVs, identifies strongest skills, and matches users to suited industries',
-        'Simulates 3, 6, and 12-month career paths with actionable guidance',
-        'Provides interview prep with AI coaching and pathways for employment, learnership, or entrepreneurship',
-        'Designed to evolve into a talent and opportunity ecosystem',
-      ],
-      demo: 'https://www.empowa.org',
-      linkedin: 'https://www.linkedin.com/company/empowaai',
-      emoji: 'AI',
-      screenshot: '/screenshots/empowaai.jpeg',
-    },
-    {
-      title: 'AI Compliance Interrogator',
-      subtitle: 'AIMS Hackathon 2025 Winner • Team Firefly',
-      award: true,
-      description:
-        'Hackathon-winning AI tool that helps organizations detect and prevent human trafficking using intelligent data analysis and pattern recognition.',
-      role: 'Team Project (Hackathon)',
-      scope: 'AI analysis, dashboard, real-time alerts',
-      tech: [
+        'Azure Durable Functions',
+        'GPT-4',
+        'Azure AI',
         'Python',
-        'FastAPI',
-        'OpenAI API',
-        'Microsoft Azure',
-        'Prompt Engineering',
-        'React',
-        'TypeScript',
+        'PostgreSQL',
+        'Structured Outputs',
       ],
-      categories: ['AI', 'Civic Tech', 'Full-Stack'],
+      categories: ['AI', 'Production', 'Compliance'],
       impact: [
-        'Hackathon winner with real-time AI alerts',
-        'Actionable intelligence for compliance teams',
-        'Featured on international Australian tech podcast',
+        'Automated regulatory scoring pipeline for sales calls',
+        'Structured, auditable violation reporting',
+        'Eliminated duplicate-record crashes in the transcription pipeline',
       ],
-      metrics: ['1st Place AIMS Hackathon 2025', 'Featured on International Tech Podcast'],
+      metrics: ['Zero-downtime scheduler migration', 'Structured JSON compliance reports'],
       highlights: [
-        '🏆 1st Place at AIMS Hackathon 2025 - Best Team award',
-        'Designed controlled LLM prompt workflows ensuring consistent, auditable, and explainable outputs',
-        'Enforced backend-only AI calls with secure environment configuration to handle sensitive compliance data',
-        'Deployed full-stack application on Microsoft Azure; featured on an Australian technology podcast',
-      ],
-      github: 'https://github.com/NickiMash17/AIMS-Firefly',
-      demo: null,
-      linkedin: null,
-      emoji: '🧠',
-      screenshot: '/screenshots/aims.jpg',
-    },
-    {
-      title: 'LoanLife EDGE',
-      subtitle: 'AI-Powered Loan Risk & Compliance Platform',
-      description:
-        'Fintech platform that turns each loan into a digital twin, monitored by AI with early covenant and ESG risk warnings.',
-      role: 'Backend & AI Integration Lead',
-      scope: 'Ingestion, predictions, ESG, audit trails',
-      tech: [
-        'Next.js',
-        'TypeScript',
-        'Tailwind CSS',
-        'Electron',
-        'Python',
-        'FastAPI',
-        'AI/ML',
-        'Hardhat',
-        'Solidity',
-      ],
-      categories: ['Fintech', 'AI', 'Full-Stack'],
-      impact: [
-        '30-90 day early warning on covenant and ESG risks',
-        'Transparent audit trails for governance',
-        'Improved decision-making for loan portfolios',
-      ],
-      metrics: ['30-90 day risk forecasting', 'ESG + covenant coverage'],
-      highlights: [
-        'Backend & AI Integration Lead for ingestion, digital twin, prediction, ESG and audit services in FastAPI.',
-        'Predicts covenant breaches and ESG issues 30–90 days ahead for proactive risk management.',
-        'Uses blockchain-style audit trails and smart-contract logic for transparent governance.',
-      ],
-      github: 'https://github.com/Lunga-Mashaba/LoanLife_Edge',
-      demo: 'https://loan-life-edge.vercel.app/',
-      linkedin: null,
-      emoji: '📈',
-      screenshot: '/screenshots/loanlife.jpg',
-    },
-    {
-      title: 'RealHomes',
-      subtitle: 'South African Luxury Real Estate Platform',
-      description:
-        'A modern, responsive real estate platform showcasing premium properties across South Africa, with rich search and filtering.',
-      role: 'Full-Stack Developer',
-      scope: 'Listings, search, auth, responsive UI',
-      tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'JWT'],
-      categories: ['Full-Stack', 'Web App'],
-      impact: [
-        'Streamlined property discovery experience',
-        'Secure access with role-based authentication',
-        'Scalable architecture for growing inventory',
-      ],
-      highlights: [
-        'Built end-to-end MERN stack application for property listing and discovery',
-        'Responsive UI optimized for both mobile and desktop viewing',
-        'Secure authentication and role-based access using JWT',
-        'Designed to scale with growing property inventory and traffic',
-      ],
-      github: 'https://github.com/NickiMash17/RealHomes',
-      demo: 'https://real-homes.vercel.app/',
-      linkedin: null,
-      emoji: '🏠',
-      screenshot: '/screenshots/realhomes.jpeg',
-    },
-    {
-      title: 'BookReviewApp',
-      subtitle: 'Advanced Book Review Application',
-      description:
-        'Full-featured book review platform built with ASP.NET Core and Entity Framework Core, focused on clean architecture and performance.',
-      role: 'Full-Stack Developer',
-      scope: 'Clean architecture, reviews, persistence',
-      tech: ['ASP.NET Core', 'C#', 'Entity Framework Core', 'SQL Server'],
-      categories: ['Backend', 'Web App'],
-      impact: [
-        'Structured, maintainable domain architecture',
-        'Rich review workflow and user interactions',
-        'Efficient data access and persistence',
-      ],
-      highlights: [
-        'Implements clean architecture with separation of concerns',
-        'Supports rich review features and user interactions',
-        'Uses EF Core for efficient data access and persistence',
-        'Built to demonstrate strong backend and .NET skills',
-      ],
-      github: 'https://github.com/NickiMash17/BookReviewApp',
-      demo: 'https://bookreviewapp-1755367448.azurewebsites.net/',
-      linkedin: null,
-      emoji: '📚',
-      screenshot: '/screenshots/bookreviewapp.jpeg',
-    },
-    {
-      title: 'FitQuest',
-      subtitle: 'Gamified Wellness Companion',
-      description:
-        'A gamified wellness application with an evolving plant companion. Track activities, earn XP, and watch your companion grow.',
-      role: 'Mobile Developer',
-      scope: 'Gamification, XP system, real-time sync',
-      tech: ['Flutter', 'Dart', 'Firebase'],
-      categories: ['Mobile', 'Health'],
-      impact: [
-        'Motivates habit formation with gamified rewards',
-        'Cross-platform experience with smooth UX',
-        'Real-time sync across devices',
-      ],
-      highlights: [
-        'Built with Flutter for smooth cross-platform mobile experiences',
-        'Gamified system that rewards healthy habits with XP and growth',
-        'Real-time data sync and auth powered by Firebase',
-        'Shows strong mobile UI/UX and state management skills',
-      ],
-      github: 'https://github.com/NickiMash17/fitquest-app',
-      demo: 'https://youtu.be/Ist1QrlhFIg?si=lv-JSEcLseUJj4h0',
-      linkedin: null,
-      emoji: '🌱',
-      screenshot: '/screenshots/fitquest.jpeg',
-    },
-    {
-      title: 'Interview Replay',
-      subtitle: 'AI-Powered Mock Interview Tool',
-      description:
-        'AI-driven mock interview application delivering structured, actionable feedback on candidate strengths and areas for improvement — live in production.',
-      role: 'Full-Stack Developer',
-      scope: 'AI coaching, feedback engine, production deployment',
-      tech: ['JavaScript', 'OpenAI API', 'Netlify', 'Prompt Engineering'],
-      categories: ['AI', 'Web App'],
-      impact: [
-        'Structured, actionable feedback on interview performance',
-        'Iteratively improved AI response quality through prompt engineering',
-        'Deployed and maintained in live production',
-      ],
-      metrics: ['Live Production App', 'OpenAI-powered feedback'],
-      highlights: [
-        'Developed an AI-driven mock interview tool delivering structured feedback on candidate strengths and improvement areas',
-        'Iteratively improved AI response quality through prompt engineering and refinement',
-        'Deployed and maintained in production using clean Git practices and secure environment configuration',
+        'Designed and implemented Azure Durable Function timer triggers replacing a Next.js heartbeat scheduler, improving pipeline reliability for a production sales call analysis system.',
+        'Built a compliance pipeline using GPT-4 and Azure AI to automatically score sales calls against regulatory guidelines, delivering structured JSON reports with violation flagging and mandatory statement verification.',
+        'Shipped a compliance filtering feature improving analysis precision by restricting processing to qualifying records, reducing noise in daily compliance outputs.',
+        'Diagnosed and resolved a UniqueViolation production bug in PostgreSQL by replacing plain INSERT logic with upsert operations, eliminating duplicate record crashes in the transcription pipeline.',
       ],
       github: null,
       demo: null,
       linkedin: null,
-      emoji: '🎤',
-      screenshot: '/screenshots/interview.jpeg',
+      Icon: AudioLines,
+      screenshot: null,
+    },
+    {
+      title: 'Flowly Funnel Agent',
+      subtitle: 'LangGraph Agent for Marketing Funnels · Always Enough LLC',
+      description:
+        'An AI agent that builds interactive quiz-style marketing funnels from a plain-English brief, executing real tool calls against the live Flowly MCP server rather than just describing what it would do.',
+      role: 'AI Engineer',
+      scope: 'Agent orchestration, MCP tool integration, skill-based architecture',
+      tech: ['LangGraph', 'MCP', 'FastAPI', 'Python'],
+      categories: ['AI', 'Agents', 'Production'],
+      impact: [
+        'One instruction triggers 5 real sequential tool calls end-to-end',
+        'Zero embedded domain logic in the orchestrator itself',
+        'Verified against the live server with real tool-call proof',
+      ],
+      metrics: ['8 auto-discovered skill modules', 'Live-verified via MCP server logs'],
+      highlights: [
+        'Thin-harness/fat-skills architecture: a lightweight LangGraph orchestrator with zero embedded domain logic, routing to 8 self-contained markdown skill files that hold all the intelligence.',
+        'Skills are auto-discovered at import time by scanning for `type: agent` frontmatter — no hardcoded registration, versus a comparable in-house project hardcoding 17 agent nodes in a TypedDict.',
+        'Two-tier audit system: a shallow 2-call pass runs before a deep pass, keeping the agent fast enough to run on every turn.',
+        "Forced monetization gate — the agent won't build a funnel until a delivery path (paid report, booking link, AI report) is chosen.",
+      ],
+      github: null,
+      demo: null,
+      linkedin: null,
+      Icon: Workflow,
+      screenshot: null,
+    },
+    {
+      title: 'Executive AI Productivity Agent',
+      subtitle: 'Agentic Productivity System · Always Enough LLC',
+      description:
+        'An AI agent running on Azure VM, integrated with communication and task management platforms, providing automated daily digests and intelligent task orchestration for executive use.',
+      role: 'AI Engineer',
+      scope: 'Agent deployment on Azure VM, communication and task platform integration',
+      tech: ['Azure VM', 'Python', 'Communication Platform APIs', 'Task Management APIs'],
+      categories: ['AI', 'Agents', 'Production'],
+      impact: [
+        'Automated daily digests for executive use',
+        'Intelligent task orchestration across platforms',
+        'Mission-critical uptime ownership',
+      ],
+      metrics: ['Mission-critical agentic system', 'Daily automated digests'],
+      highlights: [
+        'Maintains and develops an AI agent running on Azure VM, integrated with communication and task management platforms, providing automated daily digests and intelligent task orchestration for executive use.',
+        'Responsible for feature development, bug resolution, and uptime of a mission-critical agentic productivity system.',
+      ],
+      github: null,
+      demo: null,
+      linkedin: null,
+      Icon: Bot,
+      screenshot: null,
+    },
+    {
+      title: 'Scheduling Automation System',
+      subtitle: 'Real-Time Agent Availability · Always Enough LLC',
+      description:
+        'An Azure Functions application monitoring live agent availability across multiple global timezones in real time, automatically managing booking capacity based on availability thresholds.',
+      role: 'AI Engineer',
+      scope: 'Real-time availability monitoring, booking capacity automation',
+      tech: ['Azure Functions', 'Python', 'Azure DevOps', 'CI/CD'],
+      categories: ['AI', 'Production', 'Automation'],
+      impact: [
+        'Real-time availability across global timezones',
+        'Automated booking capacity management',
+        'End-to-end agent onboarding',
+      ],
+      metrics: ['Multi-timezone monitoring', 'End-to-end agent onboarding'],
+      highlights: [
+        'Maintains an Azure Functions application monitoring live agent availability across multiple global timezones in real time, automatically managing booking capacity based on availability thresholds.',
+        'Onboards new agents end-to-end including configuration, integration testing, and live deployment.',
+      ],
+      github: null,
+      demo: null,
+      linkedin: null,
+      Icon: CalendarClock,
+      screenshot: null,
+    },
+    {
+      title: 'Call Note Generator',
+      subtitle: 'Automated Call Transcription & Notes · Always Enough LLC',
+      description:
+        "Transcribes sales call recordings, generates structured closer's-template call notes, and emails them to reps — replacing manual copy-pasting of recordings into personal AI accounts, a flagged data security and cost risk.",
+      role: 'AI Engineer',
+      scope: 'Transcription pipeline, structured note generation, GDPR-compliant architecture',
+      tech: [
+        'Whisper',
+        'Azure AI Foundry',
+        'FastAPI',
+        'Python',
+        'Azure Communication Services',
+        'Google OAuth',
+      ],
+      categories: ['AI', 'Production', 'Compliance'],
+      impact: [
+        'Speaker-diarized transcription with automated note generation',
+        'Zero-persistence, GDPR-compliant architecture',
+        'Real production bugs found and fixed pre-rollout',
+      ],
+      metrics: ['No database — in-memory / guaranteed-deleted temp files only', 'In active development toward team rollout'],
+      highlights: [
+        'Transcribes call recordings with speaker diarization (gpt-4o-transcribe-diarize) and generates structured notes (situation, pain, cost of inaction, desire, objections, next steps) via gpt-5.4.',
+        'Zero-persistence architecture — no database or file storage, everything processed in memory or via guaranteed-deleted temp files, built for GDPR compliance in a mental-health/coaching context.',
+        'Automatic fallback from Azure content-filter blocks to OpenAI, plus PII-scrubbed logging.',
+        'Found and fixed real issues through systematic testing before rollout: a first-person voice leak, a gender-assumption bug, and inconsistent readiness-score formatting.',
+      ],
+      github: null,
+      demo: null,
+      linkedin: null,
+      Icon: Mic,
+      screenshot: null,
+    },
+    {
+      title: 'AI Against Modern Slavery (AIMS)',
+      subtitle: 'Hackathon Winner · Mila–Quebec AI Institute & QUT · International Tech Podcast Feature',
+      award: true,
+      description:
+        'Built AI-driven tools assessing corporate accountability and human rights compliance at scale, analysing large volumes of corporate modern slavery disclosures using NLP and LLMs — in partnership with Mila (Quebec AI Institute) and QUT Centre for Data Science.',
+      role: 'AI Engineer (Hackathon Team)',
+      scope: 'Semantic document analysis, NLP classification pipeline, explainable AI',
+      tech: [
+        '.NET 8',
+        'React',
+        'Python',
+        'Flask',
+        'pgvector',
+        'PostgreSQL',
+        'NLP',
+        'Explainable AI',
+      ],
+      categories: ['AI', 'Civic Tech', 'Research'],
+      impact: [
+        'Analysed thousands of corporate disclosures for compliance signals',
+        'Auditable, explainable LLM-generated compliance assessments',
+        'Cross-jurisdiction regulatory impact affecting millions globally',
+      ],
+      metrics: ['Hackathon Winner', 'Mila x QUT Partnership', 'Featured on International Tech Podcast'],
+      highlights: [
+        'Shipped a semantic document analysis frontend enabling analysts to query AI-powered compliance outputs across thousands of corporate disclosures.',
+        'Contributed to an NLP classification pipeline applying chunking, embeddings, and retrieval to surface compliance signals from unstructured corporate text at scale.',
+        'Applied prompt engineering and structured output handling to improve consistency and explainability of LLM-generated compliance assessments.',
+        'Worked within a multidisciplinary team applying Explainable AI and Responsible AI principles to a cross-jurisdiction regulatory problem affecting millions of people globally.',
+      ],
+      github: 'https://github.com/NickiMash17/AIMS-Firefly',
+      demo: null,
+      linkedin: null,
+      Icon: ScanSearch,
+      screenshot: '/screenshots/aims.jpg',
+    },
+    {
+      title: 'EmpowaAI',
+      subtitle: 'AI Career Platform · Sole Developer · Open Source · Active Development',
+      description:
+        'Open source AI platform helping South African youth navigate career paths through intelligent personalisation — sole developer and maintainer responsible for full architecture, shipping, and community.',
+      role: 'Sole Developer & Open Source Maintainer',
+      scope: 'Full-stack architecture, RAG-powered personalisation, agent orchestration',
+      tech: [
+        'React',
+        'TypeScript',
+        'Node.js',
+        'FastAPI',
+        'MongoDB Atlas',
+        'OpenAI API',
+        'RAG',
+        'LangChain',
+        'Embeddings',
+      ],
+      categories: ['AI', 'Open Source', 'Career Tech'],
+      impact: [
+        'Serves real beta users end-to-end',
+        'Personalised career insights via Digital Economic Twin',
+        'Community-driven open source roadmap',
+      ],
+      metrics: ['Sole developer & architect', 'Open source on GitHub'],
+      highlights: [
+        'Designed and deployed a full-stack RAG-powered platform integrating React (TypeScript), Node.js/Express, and FastAPI AI microservices, serving real beta users end-to-end.',
+        'Engineered a Digital Economic Twin using user profile embeddings and LangChain to generate personalised career insights and income pathway simulations.',
+        'Architected multi-step LLM workflows connecting user inputs to structured career outputs, applying agent orchestration patterns for reliable, multi-stage reasoning.',
+        'Manages the open source community on GitHub, including documentation, issue tracking, and roadmap planning.',
+      ],
+      github: null,
+      demo: 'https://www.empowa.org',
+      linkedin: 'https://www.linkedin.com/company/empowaai',
+      Icon: Compass,
+      screenshot: '/screenshots/empowaai.jpeg',
+    },
+  ];
+
+const otherProjectsData = [
+    {
+      title: 'LoanLife EDGE',
+      description: 'Fintech platform that turns each loan into a digital twin monitored by AI, with early covenant and ESG risk warnings.',
+      tech: ['Next.js', 'FastAPI', 'AI/ML', 'Solidity'],
+      github: 'https://github.com/Lunga-Mashaba/LoanLife_Edge',
+      demo: 'https://loan-life-edge.vercel.app/',
+    },
+    {
+      title: 'Interview Replay',
+      description: 'AI-driven mock interview tool delivering structured, actionable feedback — live in production.',
+      tech: ['JavaScript', 'OpenAI API', 'Netlify'],
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'RealHomes',
+      description: 'South African luxury real estate platform with rich search and filtering.',
+      tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+      github: 'https://github.com/NickiMash17/RealHomes',
+      demo: 'https://real-homes.vercel.app/',
+    },
+    {
+      title: 'BookReviewApp',
+      description: 'Book review platform built with ASP.NET Core and Entity Framework Core.',
+      tech: ['ASP.NET Core', 'C#', 'SQL Server'],
+      github: 'https://github.com/NickiMash17/BookReviewApp',
+      demo: 'https://bookreviewapp-1755367448.azurewebsites.net/',
+    },
+    {
+      title: 'FitQuest',
+      description: 'Gamified wellness app with an evolving plant companion built in Flutter.',
+      tech: ['Flutter', 'Dart', 'Firebase'],
+      github: 'https://github.com/NickiMash17/fitquest-app',
+      demo: 'https://youtu.be/Ist1QrlhFIg?si=lv-JSEcLseUJj4h0',
     },
   ];
 
 export const Projects = () => {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [showOtherProjects, setShowOtherProjects] = useState(false);
+  const [expanded, setExpanded] = useState<Set<string>>(() => new Set([projectsData[0]?.title]));
+
+  const toggleExpanded = (title: string) => {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(title)) next.delete(title);
+      else next.add(title);
+      return next;
+    });
+  };
 
   const projects = useMemo(() => projectsData, []);
 
@@ -289,21 +351,20 @@ export const Projects = () => {
   };
 
   return (
-    <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
-      <div className="container mx-auto max-w-6xl">
-        <ScrollAnimation animation="fade-up">
+    <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.08),transparent_60%)] pointer-events-none" aria-hidden="true" />
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <ScrollAnimation animation="cinematic">
           <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 glow-text">
-              <span className="text-primary font-mono">{'<'}</span>
-              Featured Projects
-              <span className="text-primary font-mono">{' />'}</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-2 sm:mb-3 md:mb-4">
+              Featured Projects <span className="text-muted-foreground">({projectsData.length})</span>
             </h2>
-            <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Building solutions that make an impact</p>
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Production AI systems, shipped and running</p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">
-              {['AIMS Hackathon Winner 2025', 'Azure Certified', '2448 Commits', 'Full-Stack & AI'].map((item) => (
+              {['Multi-Agent Systems', 'Production LLM Pipelines', 'Azure Certified', 'Geekulcha Top 15 AI Innovator'].map((item) => (
                 <span
                   key={item}
-                  className="px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono border border-primary/30 bg-primary/10 text-primary"
+                  className="px-3 py-1 rounded-md text-[10px] sm:text-xs font-mono border border-primary/30 bg-primary/10 text-primary"
                 >
                   {item}
                 </span>
@@ -408,10 +469,12 @@ export const Projects = () => {
 
         <div className="grid gap-3 sm:gap-4 md:gap-6 lg:gap-8">
           {filteredProjects.length > 0 ? (
-            filteredProjects.map((project, index) => (
+            filteredProjects.map((project, index) => {
+            const isExpanded = expanded.has(project.title);
+            return (
             <ScrollAnimation key={index} animation="fade-up" delay={index * 100}>
               <TiltCard tiltAmount={5} scale={1.01}>
-                <div className={`glass rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group cursor-pointer relative overflow-hidden ${
+                <div className={`glass rounded-lg sm:rounded-md md:rounded-lg p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group relative overflow-hidden ${
                   'award' in project && project.award
                     ? 'border border-amber-400/35 hover:border-amber-400/60 hover:shadow-amber-500/20 shadow-amber-400/10'
                     : 'hover:glow-primary'
@@ -426,10 +489,17 @@ export const Projects = () => {
                   )}
               <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6">
                 {/* Project Visual with Creative Screenshot Display */}
-                <div className="w-full lg:w-72 xl:w-80 aspect-[16/9] rounded-lg sm:rounded-xl overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0 shadow-lg shadow-black/10">
+                <div className="w-full lg:w-72 xl:w-80 aspect-[16/9] rounded-lg sm:rounded-md overflow-hidden glass group-hover:glow-primary group-hover:scale-105 transition-all duration-300 flex-shrink-0 shadow-lg shadow-black/10">
                   <div className="relative w-full h-full bg-gradient-to-br from-background/90 via-background/70 to-background/90">
                     {/* Screenshot Background */}
-                    {project.screenshot ? (
+                    {project.title === 'Flowly Funnel Agent' ? (
+                      <div className="relative w-full h-full flex flex-col items-center justify-center gap-1 p-2">
+                        <AgentPipelineDiagram />
+                        <p className="text-[8px] sm:text-[9px] font-mono text-muted-foreground text-center">
+                          thin-harness orchestrator → 8 auto-discovered skills
+                        </p>
+                      </div>
+                    ) : project.screenshot ? (
                       <div className="absolute inset-0">
                         <div className="absolute inset-0 flex flex-col">
                           {/* Browser chrome */}
@@ -471,9 +541,9 @@ export const Projects = () => {
                         {/* Project Info Overlay */}
                         <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
                           <div className="flex items-center justify-between gap-2">
-                            <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-primary/20 backdrop-blur-sm">
-                              <span className="text-white text-xs font-bold">{project.emoji ?? '💡'}</span>
-                              <span className="text-white text-xs font-mono truncate max-w-[100px]">{project.title}</span>
+                            <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-primary/20 backdrop-blur-sm">
+                              <project.Icon className="w-3 h-3 text-white" />
+                              <span className="text-white text-xs font-medium truncate max-w-[100px]">{project.title}</span>
                             </div>
                             <div className="flex gap-1">
                               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-lg shadow-emerald-400/50" />
@@ -489,10 +559,10 @@ export const Projects = () => {
                         <div className="absolute inset-0 opacity-20 bg-[linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[length:26px_26px]" />
 
                         {/* Inner card */}
-                        <div className="relative z-10 m-[3px] h-[calc(100%-6px)] rounded-xl bg-gradient-to-br from-background/95 to-background/80 border border-white/10 flex flex-col justify-between p-2.5 sm:p-3">
+                        <div className="relative z-10 m-[3px] h-[calc(100%-6px)] rounded-md bg-gradient-to-br from-background/95 to-background/80 border border-white/10 flex flex-col justify-between p-2.5 sm:p-3">
                           <div className="flex items-center justify-between gap-1.5">
-                            <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-[10px] sm:text-[11px] font-mono border border-primary/30">
-                              <span>{project.emoji ?? '💡'}</span>
+                            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-primary/10 text-[10px] sm:text-[11px] font-medium border border-primary/30">
+                              <project.Icon className="w-3 h-3 text-primary flex-shrink-0" />
                               <span className="truncate max-w-[110px] sm:max-w-[140px]">
                                 {project.title}
                               </span>
@@ -581,26 +651,9 @@ export const Projects = () => {
                     </div>
                   </div>
 
-                  <p className="text-sm sm:text-base text-foreground/80 mb-2 sm:mb-3 md:mb-4 leading-relaxed line-clamp-2">
+                  <p className="text-sm sm:text-base text-foreground/80 mb-2 sm:mb-3 md:mb-4 leading-relaxed">
                     {project.description}
                   </p>
-
-                  {/* Metrics / Outcomes */}
-                  <div className="mb-2 sm:mb-3 md:mb-4">
-                    <p className="text-[11px] sm:text-xs font-mono text-primary mb-1">
-                      {project.metrics?.length ? 'Metrics' : 'Outcomes'}
-                    </p>
-                    <div className="flex flex-wrap gap-1 sm:gap-1.5">
-                      {(project.metrics?.length ? project.metrics : project.impact).map((item) => (
-                        <span
-                          key={item}
-                          className="px-2 py-0.5 text-[10px] sm:text-[11px] bg-secondary/20 text-foreground/80 rounded-full border border-secondary/30"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-1 sm:gap-1.5 md:gap-2 mb-2 sm:mb-3 md:mb-4">
@@ -614,15 +667,47 @@ export const Projects = () => {
                     ))}
                   </div>
 
-                  {/* Highlights */}
-                  <ul className="space-y-1 sm:space-y-1.5 md:space-y-2">
-                    {project.highlights.map((highlight, i) => (
-                      <li key={i} className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-foreground/75 leading-relaxed">
-                        <span className="text-accent mt-0.5 flex-shrink-0" aria-hidden="true">▹</span>
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <button
+                    onClick={() => toggleExpanded(project.title)}
+                    className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-primary hover:text-primary/80 transition-colors mb-2 sm:mb-3 md:mb-4"
+                  >
+                    {isExpanded ? (
+                      <>Hide details <ChevronUp size={14} /></>
+                    ) : (
+                      <>Show metrics &amp; highlights <ChevronDown size={14} /></>
+                    )}
+                  </button>
+
+                  {isExpanded && (
+                    <div className="animate-fade-in">
+                      {/* Metrics / Outcomes */}
+                      <div className="mb-2 sm:mb-3 md:mb-4">
+                        <p className="text-[11px] sm:text-xs font-mono text-primary mb-1">
+                          {project.metrics?.length ? 'Metrics' : 'Outcomes'}
+                        </p>
+                        <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                          {(project.metrics?.length ? project.metrics : project.impact).map((item) => (
+                            <span
+                              key={item}
+                              className="px-2 py-0.5 text-[10px] sm:text-[11px] bg-secondary/20 text-foreground/80 rounded-full border border-secondary/30"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Highlights */}
+                      <ul className="space-y-1 sm:space-y-1.5 md:space-y-2">
+                        {project.highlights.map((highlight, i) => (
+                          <li key={i} className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-foreground/75 leading-relaxed">
+                            <span className="text-accent mt-0.5 flex-shrink-0" aria-hidden="true">▹</span>
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
                   {/* Side decoration */}
@@ -631,9 +716,9 @@ export const Projects = () => {
               </div>
               </TiltCard>
             </ScrollAnimation>
-            ))
+            );})
           ) : (
-            <div className="text-center py-12 glass rounded-xl">
+            <div className="text-center py-12 glass rounded-md">
               <p className="text-muted-foreground mb-2">No projects found with this filter.</p>
               <button
                 onClick={() => handleTechFilter(null)}
@@ -641,6 +726,60 @@ export const Projects = () => {
               >
                 Clear filter
               </button>
+            </div>
+          )}
+        </div>
+
+        {/* Other Projects (collapsed) */}
+        <div className="mt-6 sm:mt-8">
+          <button
+            onClick={() => setShowOtherProjects((v) => !v)}
+            className="mx-auto flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-mono glass border border-foreground/10 hover:border-primary/40 text-muted-foreground hover:text-foreground transition-all"
+          >
+            {showOtherProjects ? 'Hide' : 'Show'} Other Projects ({otherProjectsData.length})
+          </button>
+
+          {showOtherProjects && (
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {otherProjectsData.map((project) => (
+                <div key={project.title} className="glass rounded-lg p-3 sm:p-4 border border-foreground/10">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <h4 className="font-semibold text-sm text-foreground">{project.title}</h4>
+                    <div className="flex gap-1.5 flex-shrink-0">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackExternalLink(project.github, 'github')}
+                          aria-label={`${project.title} GitHub repo`}
+                        >
+                          <Github size={14} className="text-muted-foreground hover:text-foreground transition-colors" />
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackExternalLink(project.demo, isYouTubeUrl(project.demo) ? 'youtube' : 'demo')}
+                          aria-label={`${project.title} demo`}
+                        >
+                          <ExternalLink size={14} className="text-muted-foreground hover:text-foreground transition-colors" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-2 leading-relaxed">{project.description}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="px-1.5 py-0.5 text-[9px] font-mono bg-primary/5 text-muted-foreground rounded-full border border-primary/10">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>

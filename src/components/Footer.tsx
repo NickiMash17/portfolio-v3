@@ -35,7 +35,7 @@ export const Footer = () => {
         
         <div className="mt-6 sm:mt-7 md:mt-8 text-center">
           <p className="text-[10px] sm:text-xs text-muted-foreground font-mono px-2">
-            [ From Navigation Officer to AI Software Engineer - Charting a new course in technology ]
+            [ From Navigation Officer to AI Engineer - Charting a new course in technology ]
           </p>
         </div>
       </div>
