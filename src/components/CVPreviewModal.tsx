@@ -72,7 +72,7 @@ export const CVPreviewModal = ({ trigger }: CVPreviewModalProps) => {
               href={CV_PATH}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-muted-foreground border border-foreground/10 hover:text-foreground hover:border-foreground/30 transition-all"
+              className="min-h-11 flex items-center gap-1.5 px-3 rounded-lg text-xs font-medium text-muted-foreground border border-foreground/10 hover:text-foreground hover:border-foreground/30 transition-all"
               onClick={() => trackEvent('cv_open_tab', { category: 'cv' })}
             >
               <ExternalLink className="w-3.5 h-3.5" />
@@ -83,17 +83,17 @@ export const CVPreviewModal = ({ trigger }: CVPreviewModalProps) => {
             <a
               href={CV_PATH}
               download="Nicolette_Mashaba_CV.pdf"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-sm shadow-primary/20"
+              className="min-h-11 flex items-center gap-1.5 px-3 rounded-lg text-xs font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-sm shadow-primary/20"
               onClick={() => trackDownload('Nicolette_Mashaba_CV.pdf', 'pdf')}
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download</span>
+              <span className="hidden sm:inline">Download</span>
             </a>
 
             {/* Close */}
             <button
               onClick={() => setOpen(false)}
-              className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-all"
+              className="min-w-11 min-h-11 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-all"
               aria-label="Close CV preview"
             >
               <X className="w-4 h-4" />

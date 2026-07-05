@@ -137,7 +137,7 @@ export const Skills = () => {
               ))}
             </div>
 
-            <div className="sm:hidden">
+            <div className="md:hidden">
               <div className="grid grid-cols-3 gap-4">
                 {techStack.map((tech) => (
                   <div key={tech.name} className="flex flex-col items-center gap-2">
@@ -151,7 +151,7 @@ export const Skills = () => {
               </div>
             </div>
 
-            <div className="hidden sm:block">
+            <div className="hidden md:block">
               <div className="relative h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] perspective-1000">
                 <div
                   className={`tech-carousel${isCarouselPaused ? ' is-paused' : ''}`}
@@ -189,7 +189,7 @@ export const Skills = () => {
                   type="button"
                   aria-label={carouselLabel}
                   onClick={() => setIsCarouselPaused((v) => !v)}
-                  className="px-3 py-1.5 rounded-md text-[10px] sm:text-xs font-medium border border-border/60 bg-muted/20 text-muted-foreground hover:text-foreground hover:border-border transition-colors"
+                  className="min-h-11 px-4 py-2 rounded-md text-[10px] sm:text-xs font-medium border border-border/60 bg-muted/20 text-muted-foreground hover:text-foreground hover:border-border transition-colors"
                 >
                   {isCarouselPaused ? 'Resume' : 'Pause'}
                 </button>

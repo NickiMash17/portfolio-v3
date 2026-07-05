@@ -126,30 +126,30 @@ export const Experience = () => {
             return (
               <div
                 key={index}
-                className={`relative flex items-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 ${
+                className={`relative flex flex-col items-center mb-6 sm:mb-8 md:mb-12 lg:mb-16 ${
                   isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-                } flex-col md:flex-row`}
+                }`}
               >
                 {/* Content */}
                 <div className={`w-full md:w-5/12 ${isLeft ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8'} text-left`}>
                   <div className={`glass rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 transition-all duration-300 hover:glow-primary ${isCurrent ? 'border border-primary/40 shadow-lg shadow-primary/10' : 'hover:scale-105'}`}>
                     <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 md:justify-end justify-start">
                       <Icon className="text-secondary" size={14} />
-                      <span className="text-[9px] sm:text-[10px] md:text-xs text-secondary font-medium uppercase tracking-wide">{exp.type}</span>
+                      <span className="text-[11px] sm:text-xs md:text-xs text-secondary font-medium uppercase tracking-wide">{exp.type}</span>
                       {isCurrent && (
-                        <span className="ml-2 px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-medium bg-primary/15 text-primary border border-primary/30">
+                        <span className="ml-2 px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-medium bg-primary/15 text-primary border border-primary/30">
                           Current
                         </span>
                       )}
                     </div>
                     <h3 className="text-base sm:text-lg md:text-xl font-bold mb-1 text-foreground">{exp.title}</h3>
                     <div className="text-xs sm:text-sm md:text-base text-primary font-semibold mb-1">{exp.company}</div>
-                    <div className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mb-2 sm:mb-3">
+                    <div className="text-[11px] sm:text-xs md:text-sm text-muted-foreground mb-2 sm:mb-3">
                       {exp.period} &middot; {exp.location}
                     </div>
                     <ul className={`space-y-1 sm:space-y-1.5 md:space-y-2 text-left ${isLeft ? 'md:text-right' : ''}`}>
                       {exp.description.map((item, i) => (
-                        <li key={i} className="text-[11px] sm:text-xs md:text-sm text-foreground/75 leading-relaxed flex items-start gap-1.5">
+                        <li key={i} className="text-xs sm:text-xs md:text-sm text-foreground/75 leading-relaxed flex items-start gap-1.5">
                           <span className="text-secondary mt-0.5 flex-shrink-0">&rsaquo;</span>
                           <span>{item}</span>
                         </li>

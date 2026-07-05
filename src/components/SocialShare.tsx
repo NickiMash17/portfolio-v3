@@ -75,7 +75,7 @@ export const SocialShare = ({
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="fixed right-6 z-40" style={{ bottom: 'calc(5.75rem + env(safe-area-inset-bottom))' }}>
       {/* Share Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
@@ -95,7 +95,7 @@ export const SocialShare = ({
           />
           
           {/* Menu */}
-          <div className="absolute bottom-20 right-0 glass rounded-2xl p-4 border border-primary/20 shadow-xl min-w-[200px] animate-in fade-in slide-in-from-bottom-4 duration-200">
+          <div className="absolute bottom-20 right-0 glass rounded-2xl p-4 border border-primary/20 shadow-xl min-w-[200px] max-h-[70vh] overflow-y-auto animate-in fade-in slide-in-from-bottom-4 duration-200">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-sm font-semibold text-foreground">Share Portfolio</h3>
               <button

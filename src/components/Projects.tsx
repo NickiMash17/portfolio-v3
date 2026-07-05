@@ -614,8 +614,9 @@ export const Projects = () => {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 sm:p-2 glass rounded-lg hover:bg-primary/20 transition-colors"
+                          className="min-w-11 min-h-11 flex items-center justify-center glass rounded-lg hover:bg-primary/20 transition-colors"
                           onClick={() => trackExternalLink(project.github!, 'github')}
+                          aria-label={`${project.title} GitHub repo`}
                         >
                           <Github size={16} className="sm:w-5 sm:h-5" />
                         </a>
@@ -625,7 +626,7 @@ export const Projects = () => {
                           href={project.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 sm:p-2 glass rounded-lg hover:bg-primary/20 transition-colors"
+                          className="min-w-11 min-h-11 flex items-center justify-center glass rounded-lg hover:bg-primary/20 transition-colors"
                           onClick={() => trackExternalLink(project.linkedin!, 'linkedin')}
                           title="View LinkedIn"
                         >
@@ -637,7 +638,7 @@ export const Projects = () => {
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 sm:p-2 glass rounded-lg hover:bg-primary/20 transition-colors"
+                          className="min-w-11 min-h-11 flex items-center justify-center glass rounded-lg hover:bg-primary/20 transition-colors"
                           title={isYouTubeUrl(project.demo) ? 'Watch demo video' : 'View live demo'}
                           onClick={() => trackExternalLink(project.demo!, isYouTubeUrl(project.demo) ? 'youtube' : 'demo')}
                         >
@@ -745,7 +746,7 @@ export const Projects = () => {
                 <div key={project.title} className="glass rounded-lg p-3 sm:p-4 border border-foreground/10">
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <h4 className="font-semibold text-sm text-foreground">{project.title}</h4>
-                    <div className="flex gap-1.5 flex-shrink-0">
+                    <div className="flex gap-1 flex-shrink-0">
                       {project.github && (
                         <a
                           href={project.github}
@@ -753,6 +754,7 @@ export const Projects = () => {
                           rel="noopener noreferrer"
                           onClick={() => trackExternalLink(project.github, 'github')}
                           aria-label={`${project.title} GitHub repo`}
+                          className="p-2.5 -m-1 flex items-center justify-center"
                         >
                           <Github size={14} className="text-muted-foreground hover:text-foreground transition-colors" />
                         </a>
@@ -764,6 +766,7 @@ export const Projects = () => {
                           rel="noopener noreferrer"
                           onClick={() => trackExternalLink(project.demo, isYouTubeUrl(project.demo) ? 'youtube' : 'demo')}
                           aria-label={`${project.title} demo`}
+                          className="p-2.5 -m-1 flex items-center justify-center"
                         >
                           <ExternalLink size={14} className="text-muted-foreground hover:text-foreground transition-colors" />
                         </a>

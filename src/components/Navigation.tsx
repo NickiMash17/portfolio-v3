@@ -172,7 +172,7 @@ export const Navigation = () => {
             </div>
 
             {/* Right side buttons - Mobile */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="md:hidden flex items-center gap-3">
               <SoundToggle />
               <ThemeToggle />
               <button
@@ -180,7 +180,7 @@ export const Navigation = () => {
                   void playUISound('toggle');
                   setIsMobileMenuOpen(!isMobileMenuOpen);
                 }}
-                className="p-2 rounded-lg glass border border-primary/20 hover:border-primary/50 transition-all"
+                className="h-11 w-11 flex items-center justify-center rounded-lg glass border border-primary/20 hover:border-primary/50 transition-all"
                 aria-label="Toggle menu"
                 aria-expanded={isMobileMenuOpen}
               >
@@ -213,7 +213,7 @@ export const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden glass border-t border-primary/20 backdrop-blur-xl">
+          <div className="md:hidden glass border-t border-primary/20 backdrop-blur-xl max-h-[calc(100vh-4rem)] overflow-y-auto">
             <div className="container mx-auto px-4 py-4 space-y-1">
               {navItems.map((item) => {
                 const Icon = item.icon;

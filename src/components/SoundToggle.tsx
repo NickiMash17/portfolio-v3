@@ -50,7 +50,7 @@ export const SoundToggle = () => {
           setIsOpen((prev) => !prev);
           void playUISound('tap');
         }}
-        className="relative glass hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/30 rounded-md h-9 w-9 inline-flex items-center justify-center"
+        className="relative glass hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/30 rounded-md h-11 w-11 inline-flex items-center justify-center"
         aria-label="Sound settings"
         aria-expanded={isOpen}
       >

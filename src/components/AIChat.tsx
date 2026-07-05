@@ -28,8 +28,9 @@ const CopyButton = ({ text }: CopyButtonProps) => {
   return (
     <button
       onClick={handleCopy}
-      className="absolute top-2 right-2 p-1.5 rounded-lg glass border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all group opacity-0 group-hover:opacity-100"
+      className="absolute top-2 right-2 h-9 w-9 flex items-center justify-center rounded-lg glass border border-primary/20 hover:border-primary/50 hover:bg-primary/10 transition-all group opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100"
       title="Copy to clipboard"
+      aria-label="Copy message to clipboard"
     >
       {copied ? (
         <Check size={14} className="text-accent" />
@@ -235,7 +236,7 @@ export const AIChat = () => {
   return (
     <>
       {/* Chat Toggle Button with Animated Ring */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed right-6 z-50" style={{ bottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}>
         <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
         <Button
           onClick={() => setIsOpen(!isOpen)}
@@ -289,7 +290,7 @@ export const AIChat = () => {
                   onClick={handleReset}
                   size="sm"
                   variant="ghost"
-                  className="h-8 w-8 p-0 rounded-full hover:bg-primary/10"
+                  className="h-11 w-11 p-0 rounded-full hover:bg-primary/10"
                   title="Reset conversation"
                 >
                   <RefreshCw size={14} />
@@ -345,7 +346,7 @@ export const AIChat = () => {
                   }`}
                 >
                   {message.role === 'assistant' && <CopyButton text={message.content} />}
-                  <div className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words">
+                  <div className={`text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words ${message.role === 'assistant' ? 'pr-9 sm:pr-0' : ''}`}>
                     {message.content.split('\n').map((line, i) => {
                       // Enhanced markdown-like formatting
                       const parts: (string | JSX.Element)[] = [];
@@ -433,7 +434,7 @@ export const AIChat = () => {
                   placeholder="Type command or query..."
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl glass border border-primary/30 bg-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-mono text-xs sm:text-sm"
                   disabled={isLoading}
-                  autoFocus
+                  autoFocus={typeof window !== 'undefined' && window.matchMedia('(min-width: 640px)').matches}
                 />
                 {input && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-primary">
@@ -444,7 +445,7 @@ export const AIChat = () => {
               <Button
                 type="submit"
                 size="icon"
-                className="rounded-xl bg-gradient-to-br from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-primary/50 transition-all hover:scale-105 disabled:opacity-50 h-10 w-10 sm:h-11 sm:w-11"
+                className="rounded-xl bg-gradient-to-br from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-primary/50 transition-all hover:scale-105 disabled:opacity-50 h-11 w-11"
                 disabled={isLoading || !input.trim()}
               >
                 <Send size={16} className={`sm:w-[18px] sm:h-[18px] ${isLoading ? 'animate-pulse' : ''}`} />

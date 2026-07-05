@@ -107,7 +107,7 @@ export const Contact = () => {
                 <a
                   href="mailto:nene171408@gmail.com"
                   onClick={() => trackExternalLink('mailto:nene171408@gmail.com', 'email')}
-                  className="px-3 py-1.5 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
+                  className="min-h-11 flex items-center px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
                 >
                   Send
                 </a>
@@ -127,7 +127,7 @@ export const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackExternalLink('https://wa.me/27631526795', 'whatsapp')}
-                  className="px-3 py-1.5 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
+                  className="min-h-11 flex items-center px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
                 >
                   Chat
                 </a>
@@ -145,7 +145,7 @@ export const Contact = () => {
               </div>
               <CVPreviewModal
                 trigger={
-                  <button className="px-3 py-1.5 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex items-center gap-1.5 flex-shrink-0">
+                  <button className="min-h-11 px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex items-center gap-1.5 flex-shrink-0">
                     <Eye className="w-3.5 h-3.5" />
                     Preview
                   </button>

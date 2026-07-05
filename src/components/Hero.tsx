@@ -39,7 +39,7 @@ export const Hero = () => {
   };
 
   const iconButtonClass =
-    'p-2.5 sm:p-3 bg-card border border-border/60 rounded-md transition-all duration-300 hover:border-primary/50 hover:-translate-y-0.5';
+    'min-w-11 min-h-11 flex items-center justify-center bg-card border border-border/60 rounded-md transition-all duration-300 hover:border-primary/50 hover:-translate-y-0.5';
 
   return (
     <section id="hero" className="relative overflow-hidden">
@@ -136,7 +136,7 @@ export const Hero = () => {
                     </button>
                   }
                 />
-                <div className="flex items-center gap-2 ml-auto">
+                <div className="flex items-center gap-2 basis-full sm:basis-auto justify-start sm:justify-end sm:ml-auto">
                   <a
                     href="https://github.com/NickiMash17"
                     target="_blank"

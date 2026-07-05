@@ -47,7 +47,8 @@ export const ScrollToTop = () => {
   return (
     <Button
       onClick={scrollToTop}
-      className="fixed bottom-6 left-6 z-40 p-3 rounded-full glass border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all shadow-lg hover:shadow-primary/20 group"
+      className="fixed left-6 z-40 h-11 w-11 flex items-center justify-center rounded-full glass border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all shadow-lg hover:shadow-primary/20 group"
+      style={{ bottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}
       aria-label="Scroll to top"
       title="Scroll to top (K)"
     >

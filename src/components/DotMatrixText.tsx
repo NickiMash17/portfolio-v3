@@ -51,11 +51,21 @@ export const DotMatrixText = ({ text, className = '', height = 120, dotGap = 7, 
       const offCtx = off.getContext('2d');
       if (!offCtx) return;
 
-      const fontSize = height * 0.62;
+      let fontSize = height * 0.62;
       offCtx.fillStyle = '#fff';
-      offCtx.font = `800 ${fontSize}px "Sora", system-ui, sans-serif`;
       offCtx.textAlign = 'center';
       offCtx.textBaseline = 'middle';
+
+      // Shrink the font until the text fits the available width — prevents
+      // clipping when a fixed `height` prop yields glyphs wider than the
+      // container on narrow (mobile) viewports.
+      const maxTextWidth = width * 0.92;
+      offCtx.font = `800 ${fontSize}px "Sora", system-ui, sans-serif`;
+      while (offCtx.measureText(text).width > maxTextWidth && fontSize > 8) {
+        fontSize *= 0.94;
+        offCtx.font = `800 ${fontSize}px "Sora", system-ui, sans-serif`;
+      }
+
       offCtx.fillText(text, width / 2, height / 2 + height * 0.04);
 
       const imageData = offCtx.getImageData(0, 0, width, height).data;

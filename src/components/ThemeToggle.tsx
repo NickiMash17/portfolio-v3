@@ -24,7 +24,7 @@ export const ThemeToggle = () => {
         void playUISound('toggle');
         setTheme(theme === "dark" ? "light" : "dark");
       }}
-      className="relative glass hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/30"
+      className="relative glass hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/30 h-11 w-11"
       aria-label="Toggle theme"
     >
       <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

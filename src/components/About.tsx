@@ -78,7 +78,7 @@ export const About = () => {
         {/* Bio Card with Image */}
         <ScrollAnimation animation="fade-up" delay={100}>
           <div className="glass rounded-md sm:rounded-lg p-4 sm:p-6 md:p-8 lg:p-12 mb-8 sm:mb-10 md:mb-12 glow-primary">
-          <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-10 md:gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-6 sm:gap-8 md:gap-12 items-start">
             {/* Profile Image */}
             <div className="relative group mx-auto md:mx-0 w-full max-w-[260px] sm:max-w-[300px] md:max-w-none">
               <div className="absolute -inset-2 bg-gradient-to-br from-primary via-secondary to-primary rounded-[2rem] opacity-60 blur-md group-hover:opacity-90 transition-opacity duration-500" />
@@ -129,9 +129,11 @@ export const About = () => {
                   {toolkit.map((tool, i) => (
                     <div key={i} className="group/tool relative">
                       <div className="absolute -inset-2 bg-primary/20 rounded-lg blur opacity-0 group-hover/tool:opacity-100 transition-opacity duration-300" />
-                      <button 
+                      <button
                         onClick={() => setActiveSkill(activeSkill === i ? null : i)}
-                        className={`relative p-3 sm:p-2.5 rounded-lg glass border transition-all duration-300 hover:-translate-y-1 ${activeSkill === i ? 'border-primary bg-primary/10 shadow-[0_0_15px_hsl(var(--primary)/0.25)]' : 'border-primary/10 hover:border-primary/40'}`}
+                        aria-label={tool.label}
+                        aria-pressed={activeSkill === i}
+                        className={`relative min-w-11 min-h-11 flex items-center justify-center rounded-lg glass border transition-all duration-300 hover:-translate-y-1 ${activeSkill === i ? 'border-primary bg-primary/10 shadow-[0_0_15px_hsl(var(--primary)/0.25)]' : 'border-primary/10 hover:border-primary/40'}`}
                       >
                         <tool.icon size={18} className="text-primary" />
                         <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-background/90 backdrop-blur-sm text-[10px] font-mono text-primary rounded border border-primary/20 opacity-0 group-hover/tool:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20">

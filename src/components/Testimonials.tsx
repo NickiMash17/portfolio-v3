@@ -169,7 +169,7 @@ export const Testimonials = () => {
                 {/* Navigation */}
                 <div className="flex items-center justify-between mt-8 pt-6 border-t border-primary/20">
                   {/* Dots */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-1">
                     {testimonials.map((_, index) => (
                       <button
                         key={index}
@@ -177,12 +177,18 @@ export const Testimonials = () => {
                           setIsAutoPlaying(false);
                           setCurrentIndex(index);
                         }}
-                        className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
-                          index === currentIndex
-                            ? 'bg-primary w-6 md:w-8'
-                            : 'bg-primary/30 hover:bg-primary/50'
-                        }`}
-                      />
+                        aria-label={`Go to testimonial ${index + 1}`}
+                        aria-current={index === currentIndex}
+                        className="min-w-11 min-h-11 flex items-center justify-center"
+                      >
+                        <span
+                          className={`block w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                            index === currentIndex
+                              ? 'bg-primary w-6 md:w-8'
+                              : 'bg-primary/30 hover:bg-primary/50 active:bg-primary/50'
+                          }`}
+                        />
+                      </button>
                     ))}
                   </div>
 
@@ -190,13 +196,15 @@ export const Testimonials = () => {
                   <div className="flex gap-2">
                     <button
                       onClick={goToPrevious}
-                      className="p-2 md:p-3 glass rounded-full border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all group"
+                      aria-label="Previous testimonial"
+                      className="min-w-11 min-h-11 flex items-center justify-center glass rounded-full border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all group"
                     >
                       <ChevronLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
                     </button>
                     <button
                       onClick={goToNext}
-                      className="p-2 md:p-3 glass rounded-full border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all group"
+                      aria-label="Next testimonial"
+                      className="min-w-11 min-h-11 flex items-center justify-center glass rounded-full border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all group"
                     >
                       <ChevronRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
