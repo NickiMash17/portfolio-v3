@@ -13,8 +13,8 @@
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://nicmash-portfolio.vercel.app/Nico.jpeg</image:loc>
-      <image:title>Nicolette Mashaba - Software Engineer Graduate | Full-Stack Developer</image:title>
-      <image:caption>Nicolette Mashaba, Software Engineer Graduate and Full-Stack Developer from Johannesburg, South Africa. Azure Certified, #1 ranked female GitHub contributor.</image:caption>
+      <image:title>Nicolette Mashaba - AI Engineer</image:title>
+      <image:caption>Nicolette Mashaba, AI Engineer building production LLM systems, from Johannesburg, South Africa. Azure Certified, #1 ranked female GitHub contributor.</image:caption>
       <image:geo_location>Johannesburg, South Africa</image:geo_location>
     </image:image>
     <video:video>

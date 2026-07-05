@@ -11,8 +11,8 @@ interface SocialShareProps {
 
 export const SocialShare = ({ 
   url = typeof window !== 'undefined' ? window.location.href : '',
-  title = 'Nicolette Mashaba | Software Engineer Graduate | Full-Stack Developer',
-  description = 'Software Engineer Graduate specializing in full-stack development, cloud computing, and AI technologies.'
+  title = 'Nicolette Mashaba | AI Engineer | LLM & Agent Systems',
+  description = 'AI Engineer building production LLM systems — multi-agent orchestration (LangGraph, DSPy), RAG pipelines, and compliance automation on Azure.'
 }: SocialShareProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);

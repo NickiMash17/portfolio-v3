@@ -1,7 +1,7 @@
 {
-  "name": "Nicolette Mashaba - Software Engineer Portfolio",
+  "name": "Nicolette Mashaba - AI Engineer Portfolio",
   "short_name": "Nicolette Portfolio",
-  "description": "Software Engineer Graduate specializing in full-stack development, cloud computing, and AI technologies. Experienced in React, Node.js, Flutter, Azure, and .NET.",
+  "description": "AI Engineer building production LLM systems — multi-agent orchestration, RAG pipelines, and compliance automation on Azure.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",

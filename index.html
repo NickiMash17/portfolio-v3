@@ -7,25 +7,25 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Primary Meta Tags -->
-    <title>Nicolette Mashaba — Junior AI Software Engineer</title>
-    <meta name="description" content="Junior AI Software Engineer at RTT (Dubai) and ex-South African Navy officer building AI-powered web applications. Azure AZ-204 certified, AIMS Hackathon Winner 2025." />
+    <title>Nicolette Mashaba — AI Engineer | LLM & Agent Orchestration</title>
+    <meta name="description" content="AI Engineer at Always Enough LLC engineering three live production AI systems — LangGraph, DSPy, RAG, and Azure Durable Functions. Geekulcha Top 15 AI Innovator, AZ-204 certified (92%), hackathon winner with Mila (Quebec AI Institute) and QUT. Open to relocation in Europe." />
     <link rel="canonical" href="https://nicmash-porfolio.vercel.app/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Nicolette Mashaba — Junior AI Software Engineer" />
-    <meta property="og:description" content="From Naval Officer to Junior AI Software Engineer. Building AI-powered web apps at RTT (Dubai). Azure certified, Hackathon Winner." />
+    <meta property="og:title" content="Nicolette Mashaba — AI Engineer | LLM & Agent Orchestration" />
+    <meta property="og:description" content="From Naval Officer to AI Engineer. Engineering production LLM systems and multi-agent architectures on Azure. Geekulcha Top 15 AI Innovator, AZ-204 certified, hackathon winner with Mila x QUT." />
     <meta property="og:image" content="https://nicmash-porfolio.vercel.app/og-image.png" />
     <meta property="og:url" content="https://nicmash-porfolio.vercel.app/" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Nicolette Mashaba — Junior AI Software Engineer" />
-    <meta name="twitter:description" content="From Naval Officer to Junior AI Software Engineer. Azure certified, AIMS Hackathon Winner 2025." />
+    <meta name="twitter:title" content="Nicolette Mashaba — AI Engineer | LLM & Agent Orchestration" />
+    <meta name="twitter:description" content="From Naval Officer to AI Engineer. Geekulcha Top 15 AI Innovator, AZ-204 certified, hackathon winner with Mila x QUT." />
     <meta name="twitter:image" content="https://nicmash-porfolio.vercel.app/og-image.png" />
 
     <!-- JSON-LD -->
@@ -34,7 +34,7 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Nicolette Mashaba",
-  "jobTitle": "Software Engineer",
+  "jobTitle": "AI Engineer",
   "url": "https://nicmash-porfolio.vercel.app/",
   "image": "https://nicmash-porfolio.vercel.app/Nico.jpeg",
   "address": { "@type": "PostalAddress", "addressLocality": "Johannesburg", "addressCountry": "ZA" },
@@ -42,7 +42,7 @@
     "https://github.com/NickiMash17",
     "https://www.linkedin.com/in/nicolette-mashaba/"
   ],
-  "knowsAbout": ["React", "TypeScript", "Node.js", ".NET", "Flutter", "Azure", "AI/ML"]
+  "knowsAbout": ["LangGraph", "DSPy", "LangChain", "RAG", "Agent Orchestration", "Azure Durable Functions", "MCP", "React", "TypeScript", "Node.js", "Azure", "AI/ML"]
 }
 </script>
     
@@ -94,10 +94,11 @@
       "alternateName": "NickiMash17",
       "url": "https://nicmash-porfolio.vercel.app/",
       "image": "https://nicmash-porfolio.vercel.app/src/assets/Myself.jpg",
-      "jobTitle": "Junior AI Software Engineer",
+      "jobTitle": "AI Engineer",
       "worksFor": {
         "@type": "Organization",
-        "name": "Rapid Transformational Therapy® (RTT)"
+        "name": "Always Enough LLC",
+        "description": "The company behind Marisa Peer's Rapid Transformational Therapy® (RTT) brand"
       },
       "address": {
         "@type": "PostalAddress",
@@ -111,6 +112,12 @@
         "https://twitter.com/m_neyi"
       ],
       "knowsAbout": [
+        "AI Engineering",
+        "LangGraph",
+        "DSPy",
+        "Retrieval-Augmented Generation (RAG)",
+        "Azure Durable Functions",
+        "Model Context Protocol (MCP)",
         "Software Engineering",
         "Full-Stack Development",
         "React",
@@ -119,7 +126,6 @@
         "Azure Cloud Computing",
         "Flutter",
         ".NET",
-        "AI/ML",
         "Web Development",
         "Mobile Development"
       ],
@@ -151,7 +157,7 @@
       "@type": "WebSite",
       "name": "Nicolette Mashaba Portfolio",
       "url": "https://nicmash-porfolio.vercel.app/",
-      "description": "Software Engineer Graduate specializing in full-stack development, cloud computing, and AI technologies",
+      "description": "AI Engineer specializing in production LLM systems, multi-agent orchestration, RAG pipelines, and cloud computing",
       "author": {
         "@type": "Person",
         "name": "Nicolette Mashaba"
@@ -173,6 +179,42 @@
         {
           "@type": "SoftwareApplication",
           "position": 1,
+          "name": "Sales Call Compliance Pipeline",
+          "description": "Production pipeline that scores sales calls against regulatory guidelines using GPT-4 and Azure AI, with structured JSON reporting and violation flagging.",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web",
+          "creator": {
+            "@type": "Person",
+            "name": "Nicolette Mashaba"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "position": 2,
+          "name": "Flowly Funnel Agent",
+          "description": "LangGraph/MCP agent that builds interactive quiz-style marketing funnels from a plain-English brief, executing real tool calls against a live MCP server.",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web",
+          "creator": {
+            "@type": "Person",
+            "name": "Nicolette Mashaba"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "position": 3,
+          "name": "Call Note Generator",
+          "description": "Transcribes sales call recordings and generates structured, GDPR-compliant call notes using Whisper and Azure AI Foundry.",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web",
+          "creator": {
+            "@type": "Person",
+            "name": "Nicolette Mashaba"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "position": 4,
           "name": "AI Compliance Interrogator",
           "description": "Hackathon-winning AI tool that helps organizations detect and prevent human trafficking using intelligent data analysis and pattern recognition.",
           "applicationCategory": "WebApplication",
@@ -189,50 +231,12 @@
         },
         {
           "@type": "SoftwareApplication",
-          "position": 2,
+          "position": 5,
           "name": "LoanLife EDGE",
           "description": "AI-Powered Loan Risk & Compliance Platform that turns each loan into a digital twin, monitored by AI with early covenant and ESG risk warnings.",
           "applicationCategory": "WebApplication",
           "operatingSystem": "Web",
           "url": "https://loan-life-edge.vercel.app/",
-          "creator": {
-            "@type": "Person",
-            "name": "Nicolette Mashaba"
-          }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "position": 3,
-          "name": "RealHomes",
-          "description": "A modern, responsive real estate platform showcasing premium properties across South Africa, with rich search and filtering.",
-          "applicationCategory": "WebApplication",
-          "operatingSystem": "Web",
-          "url": "https://real-homes.vercel.app/",
-          "creator": {
-            "@type": "Person",
-            "name": "Nicolette Mashaba"
-          }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "position": 4,
-          "name": "BookReviewApp",
-          "description": "Full-featured book review platform built with ASP.NET Core and Entity Framework Core, focused on clean architecture and performance.",
-          "applicationCategory": "WebApplication",
-          "operatingSystem": "Web",
-          "url": "https://bookreviewapp-1755367448.azurewebsites.net/",
-          "creator": {
-            "@type": "Person",
-            "name": "Nicolette Mashaba"
-          }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "position": 5,
-          "name": "FitQuest",
-          "description": "A gamified wellness application with an evolving plant companion. Track activities, earn XP, and watch your companion grow.",
-          "applicationCategory": "MobileApplication",
-          "operatingSystem": "iOS, Android",
           "creator": {
             "@type": "Person",
             "name": "Nicolette Mashaba"
@@ -251,7 +255,7 @@
           "name": "What technologies does Nicolette Mashaba specialize in?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nicolette specializes in full-stack development with expertise in React, TypeScript, Node.js, Flutter, Azure Cloud Computing, .NET, and AI/ML technologies. She is also experienced in MongoDB, SQL Server, Entity Framework Core, ASP.NET Core, and various modern web frameworks."
+            "text": "Nicolette specializes in AI and agent engineering — LangGraph, DSPy, RAG pipelines, and Azure Durable Functions in production — backed by full-stack expertise in React, TypeScript, Node.js, Flutter, Azure Cloud Computing, and .NET. She is also experienced with MongoDB, PostgreSQL, SQL Server, and modern web frameworks."
           }
         },
         {
@@ -267,7 +271,7 @@
           "name": "Is Nicolette Mashaba available for opportunities?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nicolette is currently working as a Junior AI Software Engineer at Rapid Transformational Therapy® (RTT) in Dubai (remote). She is also open to additional opportunities in AI engineering, full-stack development, cloud computing, and AI/ML roles. Available for remote or hybrid positions."
+            "text": "Nicolette is currently working as an AI Engineer at Always Enough LLC, the company behind Marisa Peer's Rapid Transformational Therapy® (RTT) brand (Dubai, remote). She is also open to additional opportunities in AI engineering, agentic systems, and full-stack/cloud roles. Available for remote or hybrid positions."
           }
         },
         {
@@ -291,7 +295,7 @@
           "name": "What projects has Nicolette Mashaba built?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nicolette has built several notable projects including: AI Compliance Interrogator (hackathon winner), LoanLife EDGE (AI-powered loan risk platform), RealHomes (real estate platform), BookReviewApp (ASP.NET Core application), and FitQuest (Flutter wellness app). All projects are available on GitHub and some have live demos."
+            "text": "Nicolette has built several notable projects including: a production Sales Call Compliance Pipeline (Azure Durable Functions, GPT-4), the Flowly Funnel Agent (LangGraph, MCP), a Call Note Generator (Whisper, Azure AI Foundry), AI Compliance Interrogator (hackathon winner), and LoanLife EDGE (AI-powered loan risk platform)."
           }
         },
         {

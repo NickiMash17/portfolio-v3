@@ -12,8 +12,8 @@ export interface SEOData {
   keywords?: string[];
 }
 
-const DEFAULT_TITLE = 'Nicolette Mashaba | Software Engineer Graduate | Full-Stack Developer | Azure Certified';
-const DEFAULT_DESCRIPTION = 'Software Engineer Graduate specializing in full-stack development, cloud computing, and AI technologies. Experienced in React, Node.js, Flutter, Azure, and .NET. #1 ranked female GitHub contributor in South Africa.';
+const DEFAULT_TITLE = 'Nicolette Mashaba | AI Engineer | LLM & Agent Orchestration';
+const DEFAULT_DESCRIPTION = 'AI Engineer engineering three live production AI systems — LangGraph, DSPy, RAG, and Azure Durable Functions. Geekulcha Top 15 AI Innovator, AZ-204 certified (92%), open to relocation in Europe.';
 const DEFAULT_IMAGE = 'https://nicmash-porfolio.vercel.app/src/assets/Myself.jpg';
 const BASE_URL = 'https://nicmash-porfolio.vercel.app';
 
