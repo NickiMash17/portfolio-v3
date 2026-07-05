@@ -16,16 +16,6 @@ All colors MUST be HSL.
     }
   }
 
-  /* Subtle scanline overlay for HUD feel */
-  .hud-scanlines {
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 2px,
-      rgba(0, 255, 200, 0.03) 3px
-    );
-  }
-
   /* Red alert theme for Konami code */
   .theme-red-alert {
     --background: 0 50% 6%;
@@ -44,106 +34,109 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light Mode - Professional Neutral Theme */
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    /* Light Mode - Aurora Iris (daylight) */
+    --background: 260 40% 98%;
+    --foreground: 258 35% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 258 35% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 258 35% 14%;
 
-    /* Brand accents */
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
-    
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    /* Iris — deepened for legibility on a light ground */
+    --primary: 254 68% 55%;
+    --primary-foreground: 260 40% 98%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 40%;
+    /* Orchid — secondary accent */
+    --secondary: 303 48% 45%;
+    --secondary-foreground: 260 40% 98%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 210 40% 98%;
+    --muted: 258 20% 94%;
+    --muted-foreground: 258 12% 45%;
 
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 210 40% 98%;
+    /* Champagne — reserved for awards / highlights */
+    --accent: 38 55% 45%;
+    --accent-foreground: 260 40% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+    --destructive: 350 65% 45%;
+    --destructive-foreground: 0 0% 98%;
 
-    --radius: 0.75rem;
+    --border: 258 20% 88%;
+    --input: 258 20% 90%;
+    --ring: 254 68% 55%;
+
+    --radius: 0.9rem;
 
     /* Glow + visuals */
-    --glow-primary: 221 83% 53%;
-    --glow-secondary: 270 70% 55%;
-    --glow-accent: 199 89% 48%;
-    
+    --glow-primary: 254 68% 55%;
+    --glow-secondary: 303 48% 45%;
+    --glow-accent: 38 55% 45%;
+
     /* Gradients */
-    --gradient-neural: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 40% 98%), hsl(0 0% 100%));
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.9), hsl(210 40% 98% / 0.6));
-    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(221 83% 53% / 0.12), transparent 70%);
-    
+    --gradient-neural: linear-gradient(135deg, hsl(260 45% 97%), hsl(280 40% 95%), hsl(260 40% 98%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.9), hsl(270 35% 96% / 0.6));
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(254 68% 55% / 0.12), transparent 70%);
+
     /* Shadows */
-    --shadow-glow: 0 8px 24px hsl(221 83% 53% / 0.12);
-    --shadow-card: 0 4px 20px hsl(220 15% 10% / 0.06);
+    --shadow-glow: 0 8px 24px hsl(254 68% 55% / 0.14);
+    --shadow-card: 0 4px 20px hsl(258 30% 20% / 0.08);
 
     /* Light-specific tuning */
-    --glass-alpha: 0.6;
-    --mesh-intensity: 0.08;
+    --glass-alpha: 0.65;
+    --mesh-intensity: 0.10;
   }
 
   .dark {
-    /* Dark Mode - Neural Interface Theme */
-    --background: 220 42% 8%;
-    --foreground: 180 100% 95%;
+    /* Dark Mode - Aurora Iris (mission: elegant, not neon) */
+    --background: 256 32% 6%;
+    --foreground: 255 40% 94%;
 
-    --card: 220 35% 8%;
-    --card-foreground: 180 100% 95%;
+    --card: 256 24% 10%;
+    --card-foreground: 255 40% 94%;
 
-    --popover: 220 40% 6%;
-    --popover-foreground: 180 100% 95%;
+    --popover: 256 30% 8%;
+    --popover-foreground: 255 40% 94%;
 
-    /* Electric Cyan Primary */
-    --primary: 185 100% 50%;
-    --primary-foreground: 220 40% 4%;
-    
-    /* Neon Accent */
-    --secondary: 270 100% 65%;
-    --secondary-foreground: 180 100% 95%;
+    /* Iris primary */
+    --primary: 249 89% 74%;
+    --primary-foreground: 256 32% 8%;
 
-    --muted: 220 30% 15%;
-    --muted-foreground: 180 22% 68%;
+    /* Orchid secondary */
+    --secondary: 291 62% 74%;
+    --secondary-foreground: 256 32% 8%;
 
-    --accent: 160 100% 45%;
-    --accent-foreground: 220 40% 4%;
+    --muted: 256 18% 16%;
+    --muted-foreground: 258 14% 68%;
 
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 180 100% 95%;
+    /* Champagne — reserved for awards / highlights */
+    --accent: 38 79% 71%;
+    --accent-foreground: 256 32% 8%;
 
-    --border: 220 30% 18%;
-    --input: 220 30% 12%;
-    --ring: 185 100% 50%;
+    --destructive: 350 70% 62%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 256 20% 20%;
+    --input: 256 20% 14%;
+    --ring: 249 89% 74%;
 
     /* Glow effects */
-    --glow-primary: 185 100% 50%;
-    --glow-secondary: 270 100% 65%;
-    --glow-accent: 160 100% 45%;
-    
+    --glow-primary: 249 89% 74%;
+    --glow-secondary: 291 62% 74%;
+    --glow-accent: 38 79% 71%;
+
     /* Gradients */
-    --gradient-neural: linear-gradient(135deg, hsl(220 42% 10%), hsl(260 42% 14%), hsl(220 42% 8%));
-    --gradient-card: linear-gradient(135deg, hsl(220 35% 10% / 0.6), hsl(260 35% 12% / 0.4));
-    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(185 100% 50% / 0.24), transparent 70%);
-    
+    --gradient-neural: linear-gradient(135deg, hsl(256 32% 8%), hsl(270 34% 11%), hsl(256 32% 6%));
+    --gradient-card: linear-gradient(135deg, hsl(256 26% 12% / 0.6), hsl(270 35% 15% / 0.4));
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(249 89% 74% / 0.22), transparent 70%);
+
     /* Shadows */
     --shadow-glow: 0 0 20px hsl(var(--glow-primary) / 0.3), 0 0 40px hsl(var(--glow-primary) / 0.1);
-    --shadow-card: 0 8px 32px hsl(220 40% 2% / 0.5);
+    --shadow-card: 0 8px 32px hsl(256 40% 2% / 0.5);
 
     /* Dark-specific tuning */
     --glass-alpha: 0.35;
-    --mesh-intensity: 0.22;
+    --mesh-intensity: 0.20;
   }
 }
 

@@ -13,9 +13,9 @@ export const LiveCommits = ({ user = 'NickiMash17' }: { user?: string }) => {
   }, [user]);
 
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-sonar/40 bg-hull/60 px-4 py-1.5 font-mono text-sm">
-      <span className="h-2 w-2 animate-pulse rounded-full bg-sonar" />
-      <span className="text-sonar">
+    <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-card/60 px-4 py-1.5 font-mono text-sm">
+      <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
+      <span className="text-primary">
         {count?.toLocaleString() ?? '2,448'}
       </span>
       <span className="text-muted-foreground">commits · live</span>
