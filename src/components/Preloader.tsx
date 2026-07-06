@@ -1,9 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+
+const BOOT_LINES = [
+  'Booting compliance pipeline…',
+  'Syncing scheduling system…',
+  'Waking executive agent…',
+  'All systems nominal.',
+];
 
 export const Preloader = () => {
   const [progress, setProgress] = useState(0);
   const [shouldShow] = useState(() => typeof window !== 'undefined');
   const [isVisible, setIsVisible] = useState(shouldShow);
+  const [entered, setEntered] = useState(false);
+
+  const bootLine = useMemo(() => {
+    if (progress >= 92) return BOOT_LINES[3];
+    if (progress >= 62) return BOOT_LINES[2];
+    if (progress >= 30) return BOOT_LINES[1];
+    return BOOT_LINES[0];
+  }, [progress]);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setEntered(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     if (!shouldShow) return;
@@ -13,7 +33,7 @@ export const Preloader = () => {
         const newProgress = prev + 4;
         if (newProgress >= 100) {
           clearInterval(progressInterval);
-          setTimeout(() => setIsVisible(false), 260);
+          setTimeout(() => setIsVisible(false), 500);
           return 100;
         }
         return newProgress;
@@ -25,10 +45,12 @@ export const Preloader = () => {
 
   if (!shouldShow || !isVisible) return null;
 
+  const isDone = progress === 100;
+
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-background transition-opacity duration-700 ${
-        progress === 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-background transition-all duration-500 ease-out ${
+        isDone ? 'opacity-0 scale-105 blur-sm pointer-events-none' : 'opacity-100 scale-100 blur-none'
       }`}
     >
       {/* Ambient gradient atmosphere */}
@@ -37,7 +59,22 @@ export const Preloader = () => {
         <div className="absolute bottom-1/3 right-1/3 w-[480px] h-[480px] translate-x-1/2 translate-y-1/2 bg-secondary/20 rounded-full blur-[140px] animate-pulse-glow" style={{ animationDelay: '1s' }} />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center gap-10 px-6">
+      <div
+        className={`relative z-10 flex flex-col items-center gap-8 px-6 transition-all duration-700 ease-out ${
+          entered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+        }`}
+      >
+        {/* Neural-node signature mark */}
+        <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" className="overflow-visible">
+          <line x1="14" y1="14" x2="28" y2="28" stroke="hsl(var(--primary) / 0.35)" strokeWidth="1" />
+          <line x1="28" y1="28" x2="42" y2="16" stroke="hsl(var(--secondary) / 0.35)" strokeWidth="1" />
+          <line x1="28" y1="28" x2="18" y2="42" stroke="hsl(var(--accent) / 0.35)" strokeWidth="1" />
+          <circle cx="14" cy="14" r="3" className="fill-primary cube-twinkle" style={{ animationDelay: '0s' }} />
+          <circle cx="28" cy="28" r="3.5" className="fill-secondary cube-twinkle" style={{ animationDelay: '0.4s' }} />
+          <circle cx="42" cy="16" r="3" className="fill-accent cube-twinkle" style={{ animationDelay: '0.8s' }} />
+          <circle cx="18" cy="42" r="2.5" className="fill-primary cube-twinkle" style={{ animationDelay: '1.2s' }} />
+        </svg>
+
         <div className="text-center space-y-3">
           <h1 className="font-display font-semibold text-3xl md:text-5xl tracking-tight bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
             Nicolette Mashaba
@@ -54,8 +91,12 @@ export const Preloader = () => {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="flex justify-end">
-            <span className="text-[11px] text-muted-foreground font-medium tabular-nums">
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-[10px] md:text-[11px] font-mono text-muted-foreground/80 truncate">
+              {bootLine}
+              <span className="terminal-cursor text-primary">_</span>
+            </span>
+            <span className="text-[11px] text-muted-foreground font-medium tabular-nums flex-shrink-0">
               {Math.round(progress)}%
             </span>
           </div>

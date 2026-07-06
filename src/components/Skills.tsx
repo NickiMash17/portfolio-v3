@@ -10,11 +10,16 @@ import pythonLogo from '@/assets/logos/python.svg';
 import dockerLogo from '@/assets/logos/docker.svg';
 import gitLogo from '@/assets/logos/git.svg';
 import javascriptLogo from '@/assets/logos/javascript.svg';
+import { lazy, Suspense } from 'react';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
-import { useMemo, useState } from 'react';
 import {
   Workflow, Timer, Library, Mic, FlaskConical, Braces, ArrowUpRight, type LucideIcon,
 } from 'lucide-react';
+
+const TechSnakeGame = lazy(async () => {
+  const mod = await import('@/components/TechSnakeGame');
+  return { default: mod.TechSnakeGame };
+});
 
 const skillsInProduction: { name: string; icon: LucideIcon; project: string }[] = [
   { name: 'LangGraph', icon: Workflow, project: 'Flowly Funnel Agent' },
@@ -27,45 +32,50 @@ const skillsInProduction: { name: string; icon: LucideIcon; project: string }[] 
 
 const aiSkills = [
   'OpenAI API', 'GPT-4', 'LangGraph', 'LangChain', 'DSPy', 'RAG', 'MCP', 'Azure Durable Functions',
+  'Sentence Transformers',
 ];
 
+export type Tier = 'Expert' | 'Proficient' | 'Familiar';
+
+export const TIER_META: Record<Tier, { fill: number; accent: string; description: string }> = {
+  Expert: { fill: 100, accent: 'text-accent', description: 'Daily driver' },
+  Proficient: { fill: 72, accent: 'text-primary', description: 'Production-ready' },
+  Familiar: { fill: 42, accent: 'text-muted-foreground', description: 'Working knowledge' },
+};
+
+export const TIER_ORDER: Tier[] = ['Expert', 'Proficient', 'Familiar'];
+
+export interface TechStackItem {
+  name: string;
+  logo: string;
+  tier: Tier;
+}
+
+export const techStack: TechStackItem[] = [
+  { name: 'JavaScript', logo: javascriptLogo, tier: 'Expert' },
+  { name: 'TypeScript', logo: typescriptLogo, tier: 'Expert' },
+  { name: 'React', logo: reactLogo, tier: 'Expert' },
+  { name: 'Git', logo: gitLogo, tier: 'Expert' },
+  { name: 'Node.js', logo: nodejsLogo, tier: 'Proficient' },
+  { name: 'Python', logo: pythonLogo, tier: 'Proficient' },
+  { name: 'Azure', logo: azureLogo, tier: 'Proficient' },
+  { name: 'SQL', logo: sqlLogo, tier: 'Proficient' },
+  { name: 'MongoDB', logo: mongodbLogo, tier: 'Proficient' },
+  { name: '.NET', logo: dotnetLogo, tier: 'Proficient' },
+  { name: 'Flutter', logo: flutterLogo, tier: 'Familiar' },
+  { name: 'Docker', logo: dockerLogo, tier: 'Familiar' },
+];
+
+const byTier = TIER_ORDER.map((tier) => ({ tier, items: techStack.filter((t) => t.tier === tier) }));
+
 export const Skills = () => {
-  type Tier = 'Expert' | 'Proficient' | 'Familiar';
-
-  const tierStyle: Record<Tier, string> = {
-    Expert: 'text-accent border-accent/40 bg-accent/10',
-    Proficient: 'text-primary border-primary/40 bg-primary/10',
-    Familiar: 'text-muted-foreground border-border bg-muted/20',
-  };
-
-  const techStack: { name: string; logo: string; tier: Tier }[] = [
-    { name: 'JavaScript', logo: javascriptLogo, tier: 'Expert' },
-    { name: 'TypeScript', logo: typescriptLogo, tier: 'Expert' },
-    { name: 'React', logo: reactLogo, tier: 'Expert' },
-    { name: 'Git', logo: gitLogo, tier: 'Expert' },
-    { name: 'Node.js', logo: nodejsLogo, tier: 'Proficient' },
-    { name: 'Python', logo: pythonLogo, tier: 'Proficient' },
-    { name: 'Azure', logo: azureLogo, tier: 'Proficient' },
-    { name: 'SQL', logo: sqlLogo, tier: 'Proficient' },
-    { name: 'MongoDB', logo: mongodbLogo, tier: 'Proficient' },
-    { name: '.NET', logo: dotnetLogo, tier: 'Proficient' },
-    { name: 'Flutter', logo: flutterLogo, tier: 'Familiar' },
-    { name: 'Docker', logo: dockerLogo, tier: 'Familiar' },
-  ];
-
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
-  const carouselLabel = useMemo(
-    () => (isCarouselPaused ? 'Resume rotating carousel' : 'Pause rotating carousel'),
-    [isCarouselPaused],
-  );
-
   return (
     <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.08),transparent_60%)] pointer-events-none" aria-hidden="true" />
       <div className="container mx-auto max-w-6xl relative z-10">
         <ScrollAnimation animation="cinematic">
           <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-2 sm:mb-3 md:mb-4">
+            <h2 className="heading-fluid-lg font-bold font-display mb-2 sm:mb-3 md:mb-4">
               Tech Stack
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">
@@ -75,7 +85,7 @@ export const Skills = () => {
         </ScrollAnimation>
 
         <ScrollAnimation animation="scale" delay={50}>
-          <div className="glass rounded-md sm:rounded-lg p-4 sm:p-6 md:p-8 mb-6 border border-primary/20">
+          <div className="glass shadow-premium rounded-md sm:rounded-lg p-4 sm:p-6 md:p-8 mb-6 border border-primary/20">
             <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6 md:mb-8">
               <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-center">
                 AI &amp; Agent Engineering
@@ -86,7 +96,7 @@ export const Skills = () => {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 items-start mb-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_440px] gap-6 items-start mb-6">
               <div className="flex flex-wrap justify-center lg:justify-start gap-2 content-start">
                 {aiSkills.map((name) => (
                   <span
@@ -99,10 +109,10 @@ export const Skills = () => {
               </div>
 
               <div className="rounded-lg border border-border/60 bg-card/80 p-5 sm:p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary mb-4">
+                <p className="eyebrow-label text-primary mb-4">
                   Skills in Production
                 </p>
-                <div className="space-y-3.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   {skillsInProduction.map(({ name, icon: Icon, project }) => (
                     <div key={name} className="flex items-start gap-3">
                       <div className="p-1.5 rounded-lg bg-primary/10 flex-shrink-0 mt-0.5">
@@ -124,81 +134,41 @@ export const Skills = () => {
         </ScrollAnimation>
 
         <ScrollAnimation animation="scale" delay={100}>
-          <div className="glass rounded-md sm:rounded-lg p-4 sm:p-6 md:p-8 overflow-hidden mb-6">
-            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 md:mb-8 text-center">
+          <div className="glass shadow-premium rounded-md sm:rounded-lg p-4 sm:p-6 md:p-8 mb-6">
+            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-1 text-center">
               Full-Stack Foundations
             </h3>
+            <p className="text-muted-foreground text-xs sm:text-sm text-center mb-6">
+              Play the snake &mdash; it eats the stack
+            </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
-              {(['Expert', 'Proficient', 'Familiar'] as Tier[]).map((tier) => (
-                <span key={tier} className={`px-2.5 py-0.5 rounded-md text-[10px] font-medium border ${tierStyle[tier]}`}>
-                  {tier}
-                </span>
+            <Suspense
+              fallback={<div className="h-[360px] rounded-lg border border-border/40 bg-card/40 animate-pulse" aria-hidden="true" />}
+            >
+              <TechSnakeGame techStack={techStack} />
+            </Suspense>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-5">
+              {byTier.map(({ tier, items }) => (
+                <div key={tier}>
+                  <div className="flex items-baseline justify-between mb-2.5 px-1">
+                    <span className={`eyebrow-label ${TIER_META[tier].accent}`}>{tier}</span>
+                    <span className="text-[10px] text-muted-foreground">{TIER_META[tier].description}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {items.map((tech) => (
+                      <span
+                        key={tech.name}
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium border border-border/50 bg-card/60 text-foreground/80"
+                      >
+                        <img src={tech.logo} alt="" aria-hidden="true" loading="lazy" className="w-3.5 h-3.5 object-contain" />
+                        {tech.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
-
-            <div className="md:hidden">
-              <div className="grid grid-cols-3 gap-4">
-                {techStack.map((tech) => (
-                  <div key={tech.name} className="flex flex-col items-center gap-2">
-                    <img src={tech.logo} alt={`${tech.name} logo`} loading="lazy" className="w-12 h-12 object-contain" />
-                    <span className="text-foreground text-[11px] font-medium text-center leading-tight">{tech.name}</span>
-                    <span className={`px-1.5 py-0.5 rounded-md text-[9px] font-medium border ${tierStyle[tech.tier]}`}>
-                      {tech.tier}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="hidden md:block">
-              <div className="relative h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] perspective-1000">
-                <div
-                  className={`tech-carousel${isCarouselPaused ? ' is-paused' : ''}`}
-                  onMouseEnter={() => setIsCarouselPaused(true)}
-                  onMouseLeave={() => setIsCarouselPaused(false)}
-                >
-                  {techStack.map((tech, index) => (
-                    <div
-                      key={tech.name}
-                      className="tech-card glass will-change-transform [backface-visibility:hidden]"
-                      style={{
-                        transform: `rotateY(${(index * 360) / techStack.length}deg) translateZ(var(--carousel-radius))`,
-                      }}
-                    >
-                      <div className="flex flex-col items-center justify-center h-full gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 md:p-6">
-                        <img
-                          src={tech.logo}
-                          alt={`${tech.name} logo`}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-contain"
-                        />
-                        <span className="text-foreground font-semibold text-xs sm:text-sm md:text-base text-center">{tech.name}</span>
-                        <span className={`px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-medium border ${tierStyle[tech.tier]}`}>
-                          {tech.tier}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-3 sm:mt-4 md:mt-6 flex items-center justify-center gap-3">
-                <button
-                  type="button"
-                  aria-label={carouselLabel}
-                  onClick={() => setIsCarouselPaused((v) => !v)}
-                  className="min-h-11 px-4 py-2 rounded-md text-[10px] sm:text-xs font-medium border border-border/60 bg-muted/20 text-muted-foreground hover:text-foreground hover:border-border transition-colors"
-                >
-                  {isCarouselPaused ? 'Resume' : 'Pause'}
-                </button>
-                <p className="text-center text-muted-foreground text-[10px] sm:text-xs md:text-sm">
-                  Auto-rotating showcase
-                </p>
-              </div>
-            </div>
-
           </div>
         </ScrollAnimation>
       </div>

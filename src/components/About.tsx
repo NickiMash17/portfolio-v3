@@ -16,6 +16,9 @@ import {
 import { ScrollAnimation } from '@/components/ScrollAnimation';
 import { trackDownload } from '@/lib/analytics';
 import { CVPreviewModal } from '@/components/CVPreviewModal';
+import { TiltCard } from '@/components/TiltCard';
+import { MagneticButton } from '@/components/MagneticButton';
+import { AnimatedCounter } from '@/components/AnimatedCounter';
 
 export const About = () => {
   const [activeSkill, setActiveSkill] = useState<number | null>(null);
@@ -68,7 +71,7 @@ export const About = () => {
       <div className="container mx-auto max-w-6xl">
         <ScrollAnimation animation="cinematic">
           <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-2 sm:mb-3 md:mb-4">
+            <h2 className="heading-fluid-lg font-bold font-display mb-2 sm:mb-3 md:mb-4">
               About Me
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">From Naval Officer to AI Engineer</p>
@@ -124,7 +127,7 @@ export const About = () => {
 
               {/* Technical Toolkit */}
               <div className="pt-4 space-y-3">
-                <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.2em]">Technical Toolkit</p>
+                <p className="eyebrow-label font-mono text-muted-foreground">Technical Toolkit</p>
                 <div className="flex flex-wrap gap-2.5">
                   {toolkit.map((tool, i) => (
                     <div key={i} className="group/tool relative">
@@ -167,10 +170,12 @@ export const About = () => {
               <div className="pt-4 flex flex-wrap gap-3 justify-center md:justify-start">
                 <CVPreviewModal
                   trigger={
-                    <button className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--primary)/0.45)] shadow-lg shadow-primary/20 group text-sm sm:text-base">
-                      <Eye size={18} className="group-hover:scale-110 transition-transform" />
-                      <span>Preview CV</span>
-                    </button>
+                    <MagneticButton>
+                      <button className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-bold transition-all hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--primary)/0.45)] shadow-lg shadow-primary/20 group text-sm sm:text-base">
+                        <Eye size={18} className="group-hover:scale-110 transition-transform" />
+                        <span>Preview CV</span>
+                      </button>
+                    </MagneticButton>
                   }
                 />
                 <a
@@ -196,20 +201,19 @@ export const About = () => {
           {highlights.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div
-                key={index}
-                className="glass rounded-lg sm:rounded-md p-3 sm:p-4 md:p-6 hover:bg-card/60 transition-all duration-300 hover:scale-105 group"
-              >
-                <div className="flex items-start gap-2 sm:gap-3 md:gap-4">
-                  <div className="p-2 sm:p-2.5 md:p-3 rounded-lg bg-primary/20 group-hover:bg-primary/30 transition-colors glow-primary flex-shrink-0">
-                    <Icon className="text-primary" size={18} />
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 text-foreground">{item.title}</h3>
-                    <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">{item.description}</p>
+              <TiltCard key={index} tiltAmount={4} scale={1.015} glareEnabled={false} spotlightEnabled className="rounded-lg sm:rounded-md">
+                <div className="glass rounded-lg sm:rounded-md p-3 sm:p-4 md:p-6 hover:bg-card/60 transition-all duration-300 group h-full">
+                  <div className="flex items-start gap-2 sm:gap-3 md:gap-4">
+                    <div className="p-2 sm:p-2.5 md:p-3 rounded-lg bg-primary/20 group-hover:bg-primary/30 transition-colors glow-primary flex-shrink-0">
+                      <Icon className="text-primary" size={18} />
+                    </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 text-foreground">{item.title}</h3>
+                      <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">{item.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             );
           })}
           </div>
@@ -228,9 +232,10 @@ export const About = () => {
               key={index}
               className="glass rounded-lg sm:rounded-md p-3 sm:p-4 md:p-6 text-center hover:scale-105 transition-transform"
             >
-              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary glow-text mb-1">
-                {stat.value}
-              </div>
+              <AnimatedCounter
+                value={stat.value}
+                className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary glow-text mb-1"
+              />
               <div className="text-muted-foreground text-[10px] sm:text-xs md:text-sm">{stat.label}</div>
             </div>
           ))}

@@ -6,6 +6,7 @@ interface TiltCardProps {
   tiltAmount?: number;
   glareEnabled?: boolean;
   scale?: number;
+  spotlightEnabled?: boolean;
 }
 
 export const TiltCard = ({
@@ -14,6 +15,7 @@ export const TiltCard = ({
   tiltAmount = 10,
   glareEnabled = true,
   scale = 1.02,
+  spotlightEnabled = false,
 }: TiltCardProps) => {
   const [transform, setTransform] = useState('');
   const [glarePosition, setGlarePosition] = useState({ x: 50, y: 50 });
@@ -58,7 +60,22 @@ export const TiltCard = ({
       onMouseLeave={handleMouseLeave}
     >
       {children}
-      
+
+      {/* Cursor-tracked spotlight */}
+      {spotlightEnabled && isHovering && (
+        <div
+          className="absolute inset-0 pointer-events-none overflow-hidden"
+          style={{ borderRadius: 'inherit' }}
+        >
+          <div
+            className="absolute w-full h-full transition-opacity duration-300"
+            style={{
+              background: `radial-gradient(360px circle at ${glarePosition.x}% ${glarePosition.y}%, hsl(var(--primary) / 0.14), transparent 65%)`,
+            }}
+          />
+        </div>
+      )}
+
       {/* Glare effect */}
       {glareEnabled && isHovering && (
         <div

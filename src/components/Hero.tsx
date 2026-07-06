@@ -1,9 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Github, Linkedin, Mail, FileText, MapPin, Award, ShieldCheck, AudioLines, CalendarClock, Bot, Briefcase } from 'lucide-react';
 import { trackExternalLink } from '@/lib/analytics';
 import { CVPreviewModal } from './CVPreviewModal';
 import { DotMatrixText } from './DotMatrixText';
 import { TiltCard } from './TiltCard';
+import { ParticleNetwork } from './ParticleNetwork';
+import { MagneticButton } from './MagneticButton';
+import { AnimatedCounter } from './AnimatedCounter';
+
+const ProductionSystemsScene = lazy(async () => {
+  const mod = await import('./ProductionSystemsScene');
+  return { default: mod.ProductionSystemsScene };
+});
 
 const SYSTEMS = [
   {
@@ -23,8 +31,25 @@ const SYSTEMS = [
   },
 ];
 
+const StaticSystemsList = () => (
+  <>
+    {SYSTEMS.map(({ icon: Icon, name, detail }) => (
+      <div key={name} className="flex items-start gap-3.5 px-5 sm:px-6 py-4">
+        <div className="p-2 rounded-md bg-primary/10 flex-shrink-0">
+          <Icon className="w-4 h-4 text-primary" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-foreground leading-snug">{name}</p>
+          <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{detail}</p>
+        </div>
+      </div>
+    ))}
+  </>
+);
+
 export const Hero = () => {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [show3DScene, setShow3DScene] = useState(false);
 
   useEffect(() => {
     const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -32,6 +57,27 @@ export const Hero = () => {
     onChange();
     mql.addEventListener('change', onChange);
     return () => mql.removeEventListener('change', onChange);
+  }, []);
+
+  useEffect(() => {
+    const canRun3D = () =>
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      window.matchMedia('(pointer: fine)').matches &&
+      window.innerWidth >= 1024;
+
+    if (!canRun3D()) return;
+
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(() => {
+        if (canRun3D()) setShow3DScene(true);
+      }, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const timer = window.setTimeout(() => {
+      if (canRun3D()) setShow3DScene(true);
+    }, 1500);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -46,6 +92,9 @@ export const Hero = () => {
       {/* Technical grid backdrop */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border)/0.5)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.5)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]" />
+        <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_100%_90%_at_50%_20%,black,transparent)]">
+          <ParticleNetwork />
+        </div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.08),transparent_55%)]" />
       </div>
 
@@ -65,7 +114,7 @@ export const Hero = () => {
           {/* Left — profile sheet */}
           <div className="w-full">
             <TiltCard tiltAmount={3} scale={1.005} glareEnabled={false} className="rounded-lg">
-            <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60">
+            <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60 shadow-premium">
 
               {/* Status strip */}
               <div className="flex flex-wrap items-center justify-between gap-2 px-5 sm:px-6 py-3.5">
@@ -85,6 +134,7 @@ export const Hero = () => {
               {/* Identity strip */}
               <div className="flex items-center gap-4 px-5 sm:px-6 py-5 sm:py-6">
                 <div className="relative flex-shrink-0">
+                  <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary via-secondary to-primary opacity-70 blur-md animate-pulse-glow" aria-hidden="true" />
                   <picture>
                     <source media="(max-width: 767px)" srcSet="/my-caricature-mobile.jpg" />
                     <img
@@ -123,12 +173,14 @@ export const Hero = () => {
 
               {/* Actions strip */}
               <div className="flex flex-wrap items-center gap-3 px-5 sm:px-6 py-4">
-                <button
-                  onClick={() => scrollToSection('projects')}
-                  className="px-6 py-2.5 rounded-md bg-primary text-primary-foreground font-semibold text-sm shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all"
-                >
-                  View Projects
-                </button>
+                <MagneticButton>
+                  <button
+                    onClick={() => scrollToSection('projects')}
+                    className="btn-sheen px-6 py-2.5 rounded-md bg-primary text-primary-foreground font-semibold text-sm shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all"
+                  >
+                    View Projects
+                  </button>
+                </MagneticButton>
                 <CVPreviewModal
                   trigger={
                     <button className="px-6 py-2.5 rounded-md border border-primary/30 text-foreground font-semibold text-sm hover:bg-primary/10 transition-colors">
@@ -197,7 +249,7 @@ export const Hero = () => {
           {/* Right — production systems panel */}
           <div className="w-full">
             <TiltCard tiltAmount={3} scale={1.005} glareEnabled={false} className="rounded-lg">
-            <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60">
+            <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60 shadow-premium">
               <div className="flex items-center justify-between px-5 sm:px-6 py-3.5">
                 <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                   Live Production Systems
@@ -211,17 +263,15 @@ export const Hero = () => {
                 </span>
               </div>
 
-              {SYSTEMS.map(({ icon: Icon, name, detail }) => (
-                <div key={name} className="flex items-start gap-3.5 px-5 sm:px-6 py-4">
-                  <div className="p-2 rounded-md bg-primary/10 flex-shrink-0">
-                    <Icon className="w-4 h-4 text-primary" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-foreground leading-snug">{name}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{detail}</p>
-                  </div>
+              {show3DScene ? (
+                <div className="px-2 py-2">
+                  <Suspense fallback={<StaticSystemsList />}>
+                    <ProductionSystemsScene systems={SYSTEMS} />
+                  </Suspense>
                 </div>
-              ))}
+              ) : (
+                <StaticSystemsList />
+              )}
 
               <div className="grid grid-cols-3 gap-3 text-center px-5 sm:px-6 py-4">
                 {[
@@ -230,9 +280,10 @@ export const Hero = () => {
                   { value: '2026', label: 'Top 15 AI Innovator' },
                 ].map((stat) => (
                   <div key={stat.label}>
-                    <div className="text-lg sm:text-xl font-bold font-display text-primary tabular-nums">
-                      {stat.value}
-                    </div>
+                    <AnimatedCounter
+                      value={stat.value}
+                      className="block text-lg sm:text-xl font-bold font-display text-primary"
+                    />
                     <div className="text-[10px] sm:text-[11px] text-muted-foreground leading-tight mt-0.5">{stat.label}</div>
                   </div>
                 ))}

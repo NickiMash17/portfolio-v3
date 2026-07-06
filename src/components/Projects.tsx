@@ -356,7 +356,7 @@ export const Projects = () => {
       <div className="container mx-auto max-w-6xl relative z-10">
         <ScrollAnimation animation="cinematic">
           <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-2 sm:mb-3 md:mb-4">
+            <h2 className="heading-fluid-lg font-bold font-display mb-2 sm:mb-3 md:mb-4">
               Featured Projects <span className="text-muted-foreground">({projectsData.length})</span>
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Production AI systems, shipped and running</p>
@@ -473,8 +473,8 @@ export const Projects = () => {
             const isExpanded = expanded.has(project.title);
             return (
             <ScrollAnimation key={index} animation="fade-up" delay={index * 100}>
-              <TiltCard tiltAmount={5} scale={1.01}>
-                <div className={`glass rounded-lg sm:rounded-md md:rounded-lg p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group relative overflow-hidden ${
+              <TiltCard tiltAmount={5} scale={1.01} spotlightEnabled>
+                <div className={`glass shadow-premium rounded-lg sm:rounded-md md:rounded-lg p-3 sm:p-4 md:p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden ${
                   'award' in project && project.award
                     ? 'border border-amber-400/35 hover:border-amber-400/60 hover:shadow-amber-500/20 shadow-amber-400/10'
                     : 'hover:glow-primary'
