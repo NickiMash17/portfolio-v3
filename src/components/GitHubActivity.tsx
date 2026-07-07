@@ -1,6 +1,7 @@
 import { Github, ExternalLink } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
+import { MagneticButton } from '@/components/MagneticButton';
 
 const GITHUB_USER = 'NickiMash17';
 
@@ -86,7 +87,7 @@ export const GitHubActivity = () => {
       <div className="container mx-auto max-w-6xl">
         <ScrollAnimation animation="cinematic">
           <div className="mb-12 sm:mb-16 text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display mb-3 sm:mb-4">
+            <h2 className="heading-fluid-lg font-bold font-display mb-3 sm:mb-4">
               GitHub Activity
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base md:text-lg">Live data from my real GitHub profile</p>
@@ -94,7 +95,7 @@ export const GitHubActivity = () => {
         </ScrollAnimation>
 
         <ScrollAnimation animation="scale" delay={100}>
-          <div className="glass rounded-md sm:rounded-lg p-4 sm:p-6 md:p-8">
+          <div className="glass shadow-premium rounded-md sm:rounded-lg p-4 sm:p-6 md:p-8">
             <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
               <Github className="text-primary" size={20} />
               <h3 className="text-base sm:text-lg md:text-xl font-semibold">@{GITHUB_USER}</h3>
@@ -163,16 +164,18 @@ export const GitHubActivity = () => {
 
         <ScrollAnimation animation="fade-up" delay={200}>
           <div className="mt-8 sm:mt-12 text-center">
-            <a
-              href={`https://github.com/${GITHUB_USER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base glass rounded-lg border border-primary/40 hover:bg-primary/10 transition-all group"
-            >
-              <Github size={18} />
-              <span>View Full GitHub Profile</span>
-              <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
+            <MagneticButton className="inline-flex">
+              <a
+                href={`https://github.com/${GITHUB_USER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base glass rounded-lg border border-primary/40 hover:bg-primary/10 transition-all group"
+              >
+                <Github size={18} />
+                <span>View Full GitHub Profile</span>
+                <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+            </MagneticButton>
           </div>
         </ScrollAnimation>
       </div>

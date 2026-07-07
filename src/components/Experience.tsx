@@ -1,5 +1,6 @@
 import { Briefcase, GraduationCap, CheckCircle2 } from 'lucide-react';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
+import { TiltCard } from '@/components/TiltCard';
 
 export const Experience = () => {
   const experiences = [
@@ -106,7 +107,7 @@ export const Experience = () => {
       <div className="container mx-auto max-w-6xl">
         <ScrollAnimation animation="cinematic">
           <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-2 sm:mb-3 md:mb-4">
+            <h2 className="heading-fluid-lg font-bold font-display mb-2 sm:mb-3 md:mb-4">
               Journey
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">Experience &amp; Education</p>
@@ -132,10 +133,11 @@ export const Experience = () => {
               >
                 {/* Content */}
                 <div className={`w-full md:w-5/12 ${isLeft ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8'} text-left`}>
-                  <div className={`glass rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 transition-all duration-300 hover:glow-primary ${isCurrent ? 'border border-primary/40 shadow-lg shadow-primary/10' : 'hover:scale-105'}`}>
+                  <TiltCard tiltAmount={3} scale={1.01} glareEnabled={false} spotlightEnabled className="rounded-lg sm:rounded-xl block">
+                  <div className={`glass shadow-premium rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 transition-all duration-300 hover:glow-primary h-full ${isCurrent ? 'border border-primary/40' : ''}`}>
                     <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 md:justify-end justify-start">
                       <Icon className="text-secondary" size={14} />
-                      <span className="text-[11px] sm:text-xs md:text-xs text-secondary font-medium uppercase tracking-wide">{exp.type}</span>
+                      <span className="eyebrow-label text-secondary">{exp.type}</span>
                       {isCurrent && (
                         <span className="ml-2 px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-medium bg-primary/15 text-primary border border-primary/30">
                           Current
@@ -156,6 +158,7 @@ export const Experience = () => {
                       ))}
                     </ul>
                   </div>
+                  </TiltCard>
                 </div>
 
                 {/* Center node - hidden on mobile */}
@@ -172,7 +175,7 @@ export const Experience = () => {
         {/* Certifications */}
         <ScrollAnimation animation="fade-up" delay={200}>
           <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-display mb-4 sm:mb-6 md:mb-8 text-center">Certifications &amp; Awards</h3>
+            <h3 className="heading-fluid-md font-bold font-display mb-4 sm:mb-6 md:mb-8 text-center">Certifications &amp; Awards</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
             {[
               'Microsoft Certified: Azure Developer Associate (AZ-204) — renewed 2026 at 92%',
@@ -184,15 +187,14 @@ export const Experience = () => {
               'J.P. Morgan Software Engineering Virtual Experience',
               'Programming Foundation Top Performer - CTU Training Solutions',
             ].map((cert, index) => (
-              <div
-                key={index}
-                className="glass rounded-lg p-2.5 sm:p-3 md:p-4 hover:scale-105 transition-transform hover:glow-accent"
-              >
-                <div className="flex items-start gap-2 sm:gap-2.5 md:gap-3">
-                  <CheckCircle2 className="text-primary flex-shrink-0" size={20} />
-                  <div className="text-xs sm:text-sm md:text-base text-foreground leading-relaxed">{cert}</div>
+              <TiltCard key={index} tiltAmount={3} scale={1.015} glareEnabled={false} spotlightEnabled className="rounded-lg block">
+                <div className="glass shadow-premium rounded-lg p-2.5 sm:p-3 md:p-4 hover:glow-accent transition-colors h-full">
+                  <div className="flex items-start gap-2 sm:gap-2.5 md:gap-3">
+                    <CheckCircle2 className="text-primary flex-shrink-0" size={20} />
+                    <div className="text-xs sm:text-sm md:text-base text-foreground leading-relaxed">{cert}</div>
+                  </div>
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>

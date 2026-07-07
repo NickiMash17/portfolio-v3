@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import { Github, Linkedin, Mail, FileText, MapPin, Award, ShieldCheck, AudioLines, CalendarClock, Bot, Briefcase } from 'lucide-react';
 import { trackExternalLink } from '@/lib/analytics';
 import { CVPreviewModal } from './CVPreviewModal';
@@ -7,11 +7,7 @@ import { TiltCard } from './TiltCard';
 import { ParticleNetwork } from './ParticleNetwork';
 import { MagneticButton } from './MagneticButton';
 import { AnimatedCounter } from './AnimatedCounter';
-
-const ProductionSystemsScene = lazy(async () => {
-  const mod = await import('./ProductionSystemsScene');
-  return { default: mod.ProductionSystemsScene };
-});
+import { NeuralNetworkCanvas } from './NeuralNetworkCanvas';
 
 const SYSTEMS = [
   {
@@ -31,25 +27,34 @@ const SYSTEMS = [
   },
 ];
 
+// Written out as complete literal class strings (not interpolated) so
+// Tailwind's static scanner actually generates them — dynamically building
+// class names like `border-${accent}/20` would silently produce no CSS.
+const SYSTEM_ACCENTS = [
+  { border: 'border-primary/25', iconBg: 'bg-primary/15', iconText: 'text-primary' },
+  { border: 'border-secondary/25', iconBg: 'bg-secondary/15', iconText: 'text-secondary' },
+  { border: 'border-accent/25', iconBg: 'bg-accent/15', iconText: 'text-accent' },
+];
+
 const StaticSystemsList = () => (
-  <>
-    {SYSTEMS.map(({ icon: Icon, name, detail }) => (
-      <div key={name} className="flex items-start gap-3.5 px-5 sm:px-6 py-4">
-        <div className="p-2 rounded-md bg-primary/10 flex-shrink-0">
-          <Icon className="w-4 h-4 text-primary" />
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 px-5 sm:px-6 py-4">
+    {SYSTEMS.map(({ icon: Icon, name, detail }, i) => {
+      const accent = SYSTEM_ACCENTS[i % SYSTEM_ACCENTS.length];
+      return (
+        <div key={name} className={`rounded-lg border ${accent.border} bg-card/40 p-3 flex flex-col gap-2`}>
+          <div className={`w-7 h-7 rounded-md ${accent.iconBg} flex items-center justify-center flex-shrink-0`}>
+            <Icon className={`w-3.5 h-3.5 ${accent.iconText}`} />
+          </div>
+          <p className="text-xs font-semibold text-foreground leading-snug">{name}</p>
+          <p className="text-[10px] text-muted-foreground leading-relaxed">{detail}</p>
         </div>
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-foreground leading-snug">{name}</p>
-          <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{detail}</p>
-        </div>
-      </div>
-    ))}
-  </>
+      );
+    })}
+  </div>
 );
 
 export const Hero = () => {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [show3DScene, setShow3DScene] = useState(false);
 
   useEffect(() => {
     const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -57,27 +62,6 @@ export const Hero = () => {
     onChange();
     mql.addEventListener('change', onChange);
     return () => mql.removeEventListener('change', onChange);
-  }, []);
-
-  useEffect(() => {
-    const canRun3D = () =>
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-      window.matchMedia('(pointer: fine)').matches &&
-      window.innerWidth >= 1024;
-
-    if (!canRun3D()) return;
-
-    if ('requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(() => {
-        if (canRun3D()) setShow3DScene(true);
-      }, { timeout: 2500 });
-      return () => window.cancelIdleCallback(id);
-    }
-
-    const timer = window.setTimeout(() => {
-      if (canRun3D()) setShow3DScene(true);
-    }, 1500);
-    return () => window.clearTimeout(timer);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -92,10 +76,12 @@ export const Hero = () => {
       {/* Technical grid backdrop */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border)/0.5)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.5)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]" />
-        <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_100%_90%_at_50%_20%,black,transparent)]">
+        <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_130%_110%_at_50%_18%,black,transparent)]">
           <ParticleNetwork />
         </div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.08),transparent_55%)]" />
+        {/* Guaranteed glow behind the AI ENGINEER mark — plain CSS, always visible regardless of canvas timing */}
+        <div className="absolute left-1/2 top-16 sm:top-20 -translate-x-1/2 w-[90%] max-w-3xl h-40 sm:h-48 rounded-full bg-gradient-to-r from-primary/25 via-secondary/25 to-accent/25 blur-3xl" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20">
@@ -250,44 +236,40 @@ export const Hero = () => {
           <div className="w-full">
             <TiltCard tiltAmount={3} scale={1.005} glareEnabled={false} className="rounded-lg">
             <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60 shadow-premium">
-              <div className="flex items-center justify-between px-5 sm:px-6 py-3.5">
-                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                  Live Production Systems
-                </span>
-                <span className="flex items-center gap-1.5 text-xs font-medium text-primary">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                    <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
+                <div className="flex items-center justify-between px-5 sm:px-6 py-3.5">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    Live Production Systems
                   </span>
-                  Active
-                </span>
-              </div>
-
-              {show3DScene ? (
-                <div className="px-2 py-2">
-                  <Suspense fallback={<StaticSystemsList />}>
-                    <ProductionSystemsScene systems={SYSTEMS} />
-                  </Suspense>
+                  <span className="flex items-center gap-1.5 text-xs font-medium text-primary">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                      <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
+                    </span>
+                    Active
+                  </span>
                 </div>
-              ) : (
-                <StaticSystemsList />
-              )}
 
-              <div className="grid grid-cols-3 gap-3 text-center px-5 sm:px-6 py-4">
-                {[
-                  { value: '3', label: 'Live AI Systems' },
-                  { value: '92%', label: 'AZ-204 Score' },
-                  { value: '2026', label: 'Top 15 AI Innovator' },
-                ].map((stat) => (
-                  <div key={stat.label}>
-                    <AnimatedCounter
-                      value={stat.value}
-                      className="block text-lg sm:text-xl font-bold font-display text-primary"
-                    />
-                    <div className="text-[10px] sm:text-[11px] text-muted-foreground leading-tight mt-0.5">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+                <div className="px-3 py-3">
+                  <NeuralNetworkCanvas className="h-64 sm:h-72" />
+                </div>
+
+                <StaticSystemsList />
+
+                <div className="grid grid-cols-3 gap-3 text-center px-5 sm:px-6 py-4">
+                  {[
+                    { value: '3', label: 'Live AI Systems' },
+                    { value: '92%', label: 'AZ-204 Score' },
+                    { value: '2026', label: 'Top 15 AI Innovator' },
+                  ].map((stat) => (
+                    <div key={stat.label}>
+                      <AnimatedCounter
+                        value={stat.value}
+                        className="block text-lg sm:text-xl font-bold font-display text-primary"
+                      />
+                      <div className="text-[10px] sm:text-[11px] text-muted-foreground leading-tight mt-0.5">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
             </div>
             </TiltCard>
           </div>

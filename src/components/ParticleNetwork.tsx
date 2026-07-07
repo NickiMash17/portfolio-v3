@@ -43,8 +43,8 @@ export const ParticleNetwork = () => {
     const primaryRgb = hslStringToRgb(css.getPropertyValue('--primary'));
     const secondaryRgb = hslStringToRgb(css.getPropertyValue('--secondary'));
 
-    const particleAlpha = isDark ? 0.9 : 0.6;
-    const lineAlpha = isDark ? 0.28 : 0.16;
+    const particleAlpha = isDark ? 1 : 0.75;
+    const lineAlpha = isDark ? 0.36 : 0.22;
 
     const width = () => canvas.clientWidth;
     const height = () => canvas.clientHeight;
@@ -59,7 +59,7 @@ export const ParticleNetwork = () => {
         y: Math.random() * height(),
         vx: (Math.random() - 0.5) * 0.2,
         vy: (Math.random() - 0.5) * 0.2,
-        radius: Math.random() * 1.5 + 1.1,
+        radius: Math.random() * 1.8 + 1.5,
         twinkleOffset: Math.random() * Math.PI * 2,
         r: Math.round(primaryRgb.r + (secondaryRgb.r - primaryRgb.r) * mix),
         g: Math.round(primaryRgb.g + (secondaryRgb.g - primaryRgb.g) * mix),

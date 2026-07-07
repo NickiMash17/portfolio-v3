@@ -20,19 +20,6 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Match exact package boundaries (trailing slash) so lookalike
-          // packages (react-reconciler, react-is, react-router-dom handled
-          // separately below) aren't swept into the wrong chunk.
-          if (
-            id.includes('node_modules/three/') ||
-            id.includes('node_modules/@react-three/') ||
-            id.includes('node_modules/react-reconciler/') ||
-            id.includes('node_modules/its-fine/') ||
-            id.includes('node_modules/zustand/') ||
-            id.includes('node_modules/react-is/')
-          ) {
-            return 'three-vendor';
-          }
           if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/') || id.includes('node_modules/react-router-dom/')) {
             return 'react-vendor';
           }

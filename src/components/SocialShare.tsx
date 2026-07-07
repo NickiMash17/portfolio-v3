@@ -79,7 +79,7 @@ export const SocialShare = ({
       {/* Share Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-14 h-14 rounded-full glass border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all shadow-lg hover:shadow-primary/20 group"
+        className="relative w-14 h-14 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-110 transition-all shadow-xl shadow-primary/40 group"
         aria-label="Share portfolio"
       >
         <Share2 className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />

@@ -18,9 +18,9 @@ const entries = [
 ];
 
 export const EngineeringLog = () => (
-  <aside className="rounded-lg border border-border/60 bg-card/60 p-6 sm:p-8">
+  <aside className="rounded-lg border border-border/60 bg-card/60 shadow-premium p-6 sm:p-8">
     <header className="mb-6">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">Engineering Notes</p>
+      <p className="eyebrow-label text-primary">Engineering Notes</p>
       <p className="text-sm text-muted-foreground mt-1">Recent decisions and fixes, straight from the changelog</p>
     </header>
     <ul className="space-y-5">

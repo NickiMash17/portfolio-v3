@@ -241,7 +241,7 @@ export const AIChat = () => {
         <Button
           onClick={() => setIsOpen(!isOpen)}
           size="lg"
-          className="relative rounded-full h-14 w-14 p-0 glass border-primary/50 hover:bg-primary/20 hover:scale-110 transition-all shadow-xl glow-primary group"
+          className="relative rounded-full h-14 w-14 p-0 bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-110 transition-all shadow-xl shadow-primary/40 group"
         >
           {isOpen ? (
             <X size={24} className="group-hover:rotate-90 transition-transform" />

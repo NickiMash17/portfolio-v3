@@ -10,16 +10,12 @@ import pythonLogo from '@/assets/logos/python.svg';
 import dockerLogo from '@/assets/logos/docker.svg';
 import gitLogo from '@/assets/logos/git.svg';
 import javascriptLogo from '@/assets/logos/javascript.svg';
-import { lazy, Suspense } from 'react';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
+import { TechNeuralNetwork } from '@/components/TechNeuralNetwork';
 import {
-  Workflow, Timer, Library, Mic, FlaskConical, Braces, ArrowUpRight, type LucideIcon,
+  Workflow, Timer, Library, Mic, FlaskConical, Braces, ArrowUpRight,
+  Sparkles, Bot, Link2, Cable, ScanText, type LucideIcon,
 } from 'lucide-react';
-
-const TechSnakeGame = lazy(async () => {
-  const mod = await import('@/components/TechSnakeGame');
-  return { default: mod.TechSnakeGame };
-});
 
 const skillsInProduction: { name: string; icon: LucideIcon; project: string }[] = [
   { name: 'LangGraph', icon: Workflow, project: 'Flowly Funnel Agent' },
@@ -30,9 +26,16 @@ const skillsInProduction: { name: string; icon: LucideIcon; project: string }[] 
   { name: 'GPT-4 + Structured Outputs', icon: Braces, project: 'Compliance scoring pipeline' },
 ];
 
-const aiSkills = [
-  'OpenAI API', 'GPT-4', 'LangGraph', 'LangChain', 'DSPy', 'RAG', 'MCP', 'Azure Durable Functions',
-  'Sentence Transformers',
+const aiSkills: { name: string; icon: LucideIcon }[] = [
+  { name: 'OpenAI API', icon: Sparkles },
+  { name: 'GPT-4', icon: Bot },
+  { name: 'LangGraph', icon: Workflow },
+  { name: 'LangChain', icon: Link2 },
+  { name: 'DSPy', icon: FlaskConical },
+  { name: 'RAG', icon: Library },
+  { name: 'MCP', icon: Cable },
+  { name: 'Azure Durable Functions', icon: Timer },
+  { name: 'Sentence Transformers', icon: ScanText },
 ];
 
 export type Tier = 'Expert' | 'Proficient' | 'Familiar';
@@ -97,14 +100,17 @@ export const Skills = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_440px] gap-6 items-start mb-6">
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 content-start">
-                {aiSkills.map((name) => (
-                  <span
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 lg:gap-3 content-start">
+                {aiSkills.map(({ name, icon: Icon }) => (
+                  <div
                     key={name}
-                    className="inline-flex items-center px-3 py-1.5 rounded-md text-[10px] sm:text-xs font-medium border border-primary/30 bg-primary/10 text-foreground leading-none"
+                    className="flex flex-col items-center gap-1.5 text-center px-2 py-3.5 rounded-lg border border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/40 transition-colors"
                   >
-                    {name}
-                  </span>
+                    <div className="p-2 rounded-md bg-primary/10">
+                      <Icon className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-medium text-foreground leading-tight">{name}</span>
+                  </div>
                 ))}
               </div>
 
@@ -139,14 +145,12 @@ export const Skills = () => {
               Full-Stack Foundations
             </h3>
             <p className="text-muted-foreground text-xs sm:text-sm text-center mb-6">
-              Play the snake &mdash; it eats the stack
+              Grouped by depth of experience, not novelty
             </p>
 
-            <Suspense
-              fallback={<div className="h-[360px] rounded-lg border border-border/40 bg-card/40 animate-pulse" aria-hidden="true" />}
-            >
-              <TechSnakeGame techStack={techStack} />
-            </Suspense>
+            <div className="rounded-lg border border-border/40 bg-background/40 overflow-hidden">
+              <TechNeuralNetwork techStack={techStack} className="h-64 sm:h-80" />
+            </div>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-5">
               {byTier.map(({ tier, items }) => (

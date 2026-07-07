@@ -104,17 +104,13 @@ export const DotMatrixText = ({ text, className = '', height = 120, dotGap = 7, 
       for (const dot of dots) {
         const dist = Math.abs(dot.x - sweep);
         const boost = reducedMotion ? 0 : Math.max(0, 1 - dist / 140);
-        const alpha = Math.min(1, dot.baseAlpha * (0.8 + boost * 0.45));
-        const radius = 1.6 + boost * 0.9;
+        const alpha = Math.min(1, dot.baseAlpha * (1 + boost * 0.3));
+        const radius = 1.9 + boost * 1.1;
 
         ctx.beginPath();
         ctx.fillStyle = `rgba(${dot.r},${dot.g},${dot.b},${alpha})`;
-        if (boost > 0.3) {
-          ctx.shadowColor = `rgba(${dot.r},${dot.g},${dot.b},${boost * 0.8})`;
-          ctx.shadowBlur = 6;
-        } else {
-          ctx.shadowBlur = 0;
-        }
+        ctx.shadowColor = `rgba(${dot.r},${dot.g},${dot.b},${0.55 + boost * 0.4})`;
+        ctx.shadowBlur = 4 + boost * 6;
         ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
         ctx.fill();
       }

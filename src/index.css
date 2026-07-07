@@ -440,7 +440,7 @@ All colors MUST be HSL.
     0% { transform: translateY(0); }
     100% { transform: translateY(50px); }
   }
-  
+
   @keyframes shimmer {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }

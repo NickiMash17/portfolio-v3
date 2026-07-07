@@ -2,6 +2,7 @@ import { Mail, ExternalLink, Eye, Briefcase, Users, GitBranch } from 'lucide-rea
 import { ScrollAnimation } from '@/components/ScrollAnimation';
 import { trackExternalLink } from '@/lib/analytics';
 import { CVPreviewModal } from '@/components/CVPreviewModal';
+import { TiltCard } from '@/components/TiltCard';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -55,7 +56,7 @@ export const Contact = () => {
       <div className="container mx-auto max-w-5xl">
         <ScrollAnimation animation="cinematic">
           <div className="mb-8 sm:mb-12 md:mb-16 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-2 sm:mb-3 md:mb-4">
+            <h2 className="heading-fluid-lg font-bold font-display mb-2 sm:mb-3 md:mb-4">
               Get In Touch
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">
@@ -66,7 +67,7 @@ export const Contact = () => {
 
         {/* Connections + Resume */}
         <ScrollAnimation animation="scale" delay={50}>
-          <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60 mb-4 sm:mb-6">
+          <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60 shadow-premium mb-4 sm:mb-6">
             <div className="grid sm:grid-cols-2 sm:divide-x divide-border/60">
               {connections.map(({ label, value, href, icon: Icon, bg, key }) => (
                 <a
@@ -159,18 +160,17 @@ export const Contact = () => {
         <ScrollAnimation animation="fade-up" delay={150}>
           <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
             {openTo.map(({ icon: Icon, label, detail }) => (
-              <div
-                key={label}
-                className="flex items-start gap-3 px-4 py-4 rounded-lg border-l-2 border-primary/50 bg-card/60"
-              >
-                <div className="w-9 h-9 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-4 h-4 text-primary" />
+              <TiltCard key={label} tiltAmount={3} scale={1.015} glareEnabled={false} spotlightEnabled className="rounded-lg block">
+                <div className="flex items-start gap-3 px-4 py-4 rounded-lg border-l-2 border-primary/50 bg-card/60 h-full">
+                  <div className="w-9 h-9 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-foreground">{label}</div>
+                    <div className="text-xs text-muted-foreground leading-relaxed">{detail}</div>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold text-foreground">{label}</div>
-                  <div className="text-xs text-muted-foreground leading-relaxed">{detail}</div>
-                </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </ScrollAnimation>
