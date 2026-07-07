@@ -1,8 +1,10 @@
-import { Mail, ExternalLink, Eye, Briefcase, Users, GitBranch } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, ExternalLink, Eye, Briefcase, Users, GitBranch, Copy, Check } from 'lucide-react';
 import { ScrollAnimation } from '@/components/ScrollAnimation';
 import { trackExternalLink } from '@/lib/analytics';
 import { CVPreviewModal } from '@/components/CVPreviewModal';
 import { TiltCard } from '@/components/TiltCard';
+import { MagneticButton } from '@/components/MagneticButton';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -51,11 +53,29 @@ const openTo = [
 ];
 
 export const Contact = () => {
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    await navigator.clipboard.writeText('nene171408@gmail.com');
+    setEmailCopied(true);
+    trackExternalLink('mailto:nene171408@gmail.com', 'email_copy');
+    setTimeout(() => setEmailCopied(false), 2000);
+  };
+
   return (
-    <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6">
-      <div className="container mx-auto max-w-5xl">
+    <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 overflow-hidden">
+      <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="container mx-auto max-w-5xl relative z-10">
         <ScrollAnimation animation="cinematic">
           <div className="mb-8 sm:mb-12 md:mb-16 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-[0.14em] mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
+              </span>
+              Open to Opportunities
+            </div>
             <h2 className="heading-fluid-lg font-bold font-display mb-2 sm:mb-3 md:mb-4">
               Get In Touch
             </h2>
@@ -95,7 +115,7 @@ export const Contact = () => {
               ))}
             </div>
             <div className="grid sm:grid-cols-2 sm:divide-x divide-border/60">
-              <div className="flex items-center justify-between gap-3 px-5 sm:px-6 py-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 sm:px-6 py-4">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-md flex items-center justify-center flex-shrink-0 bg-primary">
                     <Mail className="w-5 h-5 text-primary-foreground" />
@@ -105,15 +125,27 @@ export const Contact = () => {
                     <div className="text-xs text-muted-foreground truncate">nene171408@gmail.com</div>
                   </div>
                 </div>
-                <a
-                  href="mailto:nene171408@gmail.com"
-                  onClick={() => trackExternalLink('mailto:nene171408@gmail.com', 'email')}
-                  className="min-h-11 flex items-center px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
-                >
-                  Send
-                </a>
+                <div className="flex items-center gap-1.5 flex-shrink-0 self-end sm:self-auto">
+                  <button
+                    onClick={handleCopyEmail}
+                    aria-label="Copy email address"
+                    title="Copy email address"
+                    className="min-h-11 min-w-11 flex items-center justify-center rounded-md border border-primary/30 text-primary hover:bg-primary/10 transition-colors"
+                  >
+                    {emailCopied ? <Check className="w-3.5 h-3.5 text-accent" /> : <Copy className="w-3.5 h-3.5" />}
+                  </button>
+                  <MagneticButton>
+                    <a
+                      href="mailto:nene171408@gmail.com"
+                      onClick={() => trackExternalLink('mailto:nene171408@gmail.com', 'email')}
+                      className="min-h-11 flex items-center px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors"
+                    >
+                      Send
+                    </a>
+                  </MagneticButton>
+                </div>
               </div>
-              <div className="flex items-center justify-between gap-3 px-5 sm:px-6 py-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 sm:px-6 py-4">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-md flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#25D366' }}>
                     <WhatsAppIcon className="w-5 h-5 text-white" />
@@ -123,18 +155,20 @@ export const Contact = () => {
                     <div className="text-xs text-muted-foreground truncate">+27 63 152 6795</div>
                   </div>
                 </div>
-                <a
-                  href="https://wa.me/27631526795"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackExternalLink('https://wa.me/27631526795', 'whatsapp')}
-                  className="min-h-11 flex items-center px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex-shrink-0"
-                >
-                  Chat
-                </a>
+                <MagneticButton className="flex-shrink-0 self-end sm:self-auto">
+                  <a
+                    href="https://wa.me/27631526795"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackExternalLink('https://wa.me/27631526795', 'whatsapp')}
+                    className="min-h-11 flex items-center px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors"
+                  >
+                    Chat
+                  </a>
+                </MagneticButton>
               </div>
             </div>
-            <div className="flex items-center justify-between gap-3 px-5 sm:px-6 py-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 sm:px-6 py-4">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="w-10 h-10 rounded-md flex items-center justify-center flex-shrink-0 bg-secondary">
                   <Briefcase className="w-5 h-5 text-secondary-foreground" />
@@ -144,20 +178,25 @@ export const Contact = () => {
                   <div className="text-xs text-muted-foreground truncate">Full CV — experience, projects, certifications</div>
                 </div>
               </div>
-              <CVPreviewModal
-                trigger={
-                  <button className="min-h-11 px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex items-center gap-1.5 flex-shrink-0">
-                    <Eye className="w-3.5 h-3.5" />
-                    Preview
-                  </button>
-                }
-              />
+              <MagneticButton className="flex-shrink-0 self-end sm:self-auto">
+                <CVPreviewModal
+                  trigger={
+                    <button className="min-h-11 px-3 rounded-md border border-primary/30 text-xs font-medium text-primary hover:bg-primary/10 transition-colors flex items-center gap-1.5">
+                      <Eye className="w-3.5 h-3.5" />
+                      Preview
+                    </button>
+                  }
+                />
+              </MagneticButton>
             </div>
           </div>
         </ScrollAnimation>
 
         {/* What I'm open to */}
         <ScrollAnimation animation="fade-up" delay={150}>
+          <p className="eyebrow-label text-muted-foreground text-center mb-3 sm:mb-4">
+            What I'm Open To
+          </p>
           <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
             {openTo.map(({ icon: Icon, label, detail }) => (
               <TiltCard key={label} tiltAmount={3} scale={1.015} glareEnabled={false} spotlightEnabled className="rounded-lg block">
