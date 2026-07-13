@@ -28,6 +28,10 @@ const EngineeringLog = lazy(async () => {
   const mod = await import('@/components/EngineeringLog');
   return { default: mod.EngineeringLog };
 });
+const VideosSection = lazy(async () => {
+  const mod = await import('@/components/VideosSection');
+  return { default: mod.VideosSection };
+});
 const Testimonials = lazy(async () => {
   const mod = await import('@/components/Testimonials');
   return { default: mod.Testimonials };
@@ -228,6 +232,12 @@ const Index = () => {
         <DeferredSection id="projects" isMobile={isMobile} minHeight={920}>
           <Suspense fallback={<SectionSkeleton minHeight={920} />}>
             <Projects />
+          </Suspense>
+        </DeferredSection>
+        <SectionDivider variant="dots" />
+        <DeferredSection id="videos" isMobile={isMobile} minHeight={640}>
+          <Suspense fallback={<SectionSkeleton minHeight={640} />}>
+            <VideosSection />
           </Suspense>
         </DeferredSection>
         <SectionDivider variant="gradient" />
