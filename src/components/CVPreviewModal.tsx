@@ -59,7 +59,7 @@ export const CVPreviewModal = ({ trigger }: CVPreviewModalProps) => {
               <FileText className="w-4 h-4 text-primary" />
             </div>
             <DialogTitle className="text-sm font-mono font-semibold text-foreground truncate">
-              Nicolette Mashaba — CV
+              Nicolette Mashaba: CV
             </DialogTitle>
             <DialogDescription className="sr-only">
               Interactive preview of Nicolette Mashaba's Curriculum Vitae.

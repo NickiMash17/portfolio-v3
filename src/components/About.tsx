@@ -57,7 +57,7 @@ export const About = () => {
     {
       icon: Trophy,
       title: 'Hackathon Winner',
-      description: 'AI Against Modern Slavery (AIMS) — built in partnership with Mila (Quebec AI Institute) and QUT',
+      description: 'AI Against Modern Slavery (AIMS), built in partnership with Mila (Quebec AI Institute) and QUT',
     },
     {
       icon: Users,
@@ -112,7 +112,7 @@ export const About = () => {
                 AI Engineer &middot; Always Enough LLC
               </div>
               <p className="text-base sm:text-lg md:text-xl leading-relaxed text-balance md:text-left">
-                I'm an <span className="text-primary font-semibold">AI Engineer</span> building and maintaining three live production AI systems — compliance automation, real-time scheduling, and an executive productivity agent — remotely from South Africa for Always Enough LLC, the company behind Marisa Peer's Rapid Transformational Therapy® (RTT) brand. My journey from the South African Navy taught me precision, leadership, and strategic thinking, which I apply daily in production software.
+                I'm an <span className="text-primary font-semibold">AI Engineer</span> building and maintaining three live production AI systems (compliance automation, real-time scheduling, and an executive productivity agent) remotely from South Africa for Always Enough LLC, the company behind Marisa Peer's Rapid Transformational Therapy® (RTT) brand. My journey from the South African Navy taught me precision, leadership, and strategic thinking, which I apply daily in production software.
               </p>
               <p className="text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground text-balance md:text-left">
                 Recognised as a <span className="text-secondary font-semibold">Geekulcha Top 15 AI Innovator</span> (South Africa 2026), AZ-204 renewed at <span className="text-secondary font-semibold">92%</span>, and hackathon winner with <span className="text-accent">Mila (Quebec AI Institute) and QUT</span>. Sole developer and open source maintainer of EmpowaAI. Open to relocation in Europe.
@@ -121,7 +121,7 @@ export const About = () => {
               {/* Mission Statement */}
               <div className="relative w-full max-w-md pt-2 mx-auto md:mx-0 pl-5 border-l-2 border-primary/40">
                 <p className="text-sm sm:text-base italic text-foreground/85 leading-relaxed">
-                  "I ship production AI systems that hold up — precision and leadership from the Navy, applied to engineering agentic systems at scale."
+                  "I ship production AI systems that hold up: precision and leadership from the Navy, applied to engineering agentic systems at scale."
                 </p>
               </div>
 
@@ -166,7 +166,7 @@ export const About = () => {
                 </div>
               </div>
 
-              {/* CV Actions — Preview + Download */}
+              {/* CV Actions: Preview + Download */}
               <div className="pt-4 flex flex-wrap gap-3 justify-center md:justify-start">
                 <CVPreviewModal
                   trigger={

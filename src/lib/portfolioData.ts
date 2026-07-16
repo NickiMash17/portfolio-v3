@@ -218,7 +218,7 @@ export const portfolioData: PortfolioData = {
       type: 'work',
       description: [
         'Served as a commissioned Navigation Officer in mission-critical maritime environments, responsible for vessel navigation, safety, and operational execution under strict protocol and time pressure',
-        'Developed cross-functional leadership, precision decision-making, and composure under pressure — disciplines applied directly to production engineering ownership and incident response',
+        'Developed cross-functional leadership, precision decision-making, and composure under pressure, disciplines applied directly to production engineering ownership and incident response',
       ],
       achievements: ['Mentored 5+ junior officers'],
     },
@@ -275,7 +275,7 @@ export const portfolioData: PortfolioData = {
       tech: ['LangGraph', 'MCP', 'FastAPI', 'Python'],
       highlights: [
         'Thin-harness/fat-skills architecture: a lightweight LangGraph orchestrator with zero embedded domain logic, routing to 8 self-contained markdown skill files that hold all the intelligence.',
-        'Skills are auto-discovered at import time by scanning for `type: agent` frontmatter — no hardcoded registration, versus a comparable in-house project hardcoding 17 agent nodes in a TypedDict.',
+        'Skills are auto-discovered at import time by scanning for `type: agent` frontmatter, with no hardcoded registration, versus a comparable in-house project hardcoding 17 agent nodes in a TypedDict.',
         'Two-tier audit system (shallow pass before deep pass) and a forced monetization gate before any funnel build.',
         'Verified live: one instruction triggers 5 real sequential tool calls against the live MCP server.',
       ],
@@ -312,11 +312,11 @@ export const portfolioData: PortfolioData = {
       title: 'Call Note Generator',
       subtitle: 'Automated Call Transcription & Notes · Always Enough LLC',
       description:
-        "Transcribes sales call recordings, generates structured closer's-template call notes, and emails them to reps — replacing manual copy-pasting of recordings into personal AI accounts.",
+        "Transcribes sales call recordings, generates structured closer's-template call notes, and emails them to reps, replacing manual copy-pasting of recordings into personal AI accounts.",
       tech: ['Whisper', 'Azure AI Foundry', 'FastAPI', 'Python', 'Azure Communication Services'],
       highlights: [
         'Transcribes call recordings with speaker diarization (gpt-4o-transcribe-diarize) and generates structured notes via gpt-5.4.',
-        'Zero-persistence architecture — no database or file storage, built for GDPR compliance in a mental-health/coaching context.',
+        'Zero-persistence architecture: no database or file storage, built for GDPR compliance in a mental-health/coaching context.',
         'Automatic fallback from Azure content-filter blocks to OpenAI, plus PII-scrubbed logging.',
       ],
       github: null,
@@ -326,7 +326,7 @@ export const portfolioData: PortfolioData = {
       title: 'EmpowaAI',
       subtitle: 'AI Career Platform · Sole Developer · Open Source · Active Development',
       description:
-        'Open source AI platform helping South African youth navigate career paths through intelligent personalisation — sole developer and maintainer responsible for full architecture, shipping, and community.',
+        'Open source AI platform helping South African youth navigate career paths through intelligent personalisation. Sole developer and maintainer responsible for full architecture, shipping, and community.',
       tech: [
         'React',
         'TypeScript',
@@ -351,7 +351,7 @@ export const portfolioData: PortfolioData = {
       title: 'AI Against Modern Slavery (AIMS)',
       subtitle: 'Hackathon Winner · Mila–Quebec AI Institute & QUT · International Tech Podcast Feature',
       description:
-        'Built AI-driven tools assessing corporate accountability and human rights compliance at scale, analysing large volumes of corporate modern slavery disclosures using NLP and LLMs — in partnership with Mila (Quebec AI Institute) and QUT Centre for Data Science.',
+        'Built AI-driven tools assessing corporate accountability and human rights compliance at scale, analysing large volumes of corporate modern slavery disclosures using NLP and LLMs, in partnership with Mila (Quebec AI Institute) and QUT Centre for Data Science.',
       tech: [
         '.NET 8',
         'React',
@@ -457,7 +457,7 @@ export const portfolioData: PortfolioData = {
 
   certifications: [
     {
-      name: 'Microsoft Certified: Azure Developer Associate (AZ-204) — renewed 2026 at 92%',
+      name: 'Microsoft Certified: Azure Developer Associate (AZ-204), renewed 2026 at 92%',
       issuer: 'Microsoft',
       type: 'certification',
     },
@@ -479,7 +479,7 @@ export const portfolioData: PortfolioData = {
       type: 'certification',
     },
     {
-      name: 'Azure DevOps Engineer Expert (AZ-400) — In Progress',
+      name: 'Azure DevOps Engineer Expert (AZ-400), In Progress',
       issuer: 'Microsoft',
       type: 'certification',
     },
@@ -539,7 +539,7 @@ PERSONALITY & TONE:
 - Professional yet friendly and approachable
 - Enthusiastic about technology and software development
 - Clear and concise in explanations
-- Do not use emojis — keep formatting clean and professional
+- Do not use emojis: keep formatting clean and professional
 - Be conversational but maintain professionalism
 
 KEY INFORMATION ABOUT NICOLETTE:
@@ -617,7 +617,7 @@ export const generateLocalResponse = (query: string): string => {
 **Cloud & DevOps:** ${cloud.join(', ')}
 **AI/ML:** ${ai.join(', ')}
 
-Nicolette specializes in AI & agent engineering — LangGraph, DSPy, RAG, and Azure Durable Functions in production — backed by strong full-stack expertise in React, TypeScript, and Node.js. She's also Azure certified and experienced with mobile development using Flutter.`;
+Nicolette specializes in AI & agent engineering (LangGraph, DSPy, RAG, and Azure Durable Functions in production), backed by strong full-stack expertise in React, TypeScript, and Node.js. She's also Azure certified and experienced with mobile development using Flutter.`;
   }
 
   // Projects queries
@@ -657,7 +657,7 @@ ${portfolioData.personal.bio}
 **Key Highlights:**
 ${portfolioData.personal.highlights.map((h) => `• ${h}`).join('\n')}
 
-What makes her unique is the transition from Naval Officer to AI Engineer, bringing leadership, problem-solving, and strategic thinking from military service to tech. She builds production LLM systems — agentic pipelines, RAG, and compliance automation — backed by full-stack and cloud engineering skills.`;
+What makes her unique is the transition from Naval Officer to AI Engineer, bringing leadership, problem-solving, and strategic thinking from military service to tech. She builds production LLM systems (agentic pipelines, RAG, and compliance automation), backed by full-stack and cloud engineering skills.`;
   }
 
   // Contact queries

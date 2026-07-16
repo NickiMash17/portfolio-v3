@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore — Github/Linkedin/Youtube are deprecated brand icons in lucide-react but have no non-deprecated replacement yet
+// @ts-ignore: Github/Linkedin/Youtube are deprecated brand icons in lucide-react but have no non-deprecated replacement yet
 import {
   ExternalLink, Github, Linkedin, Youtube, Filter, X, ChevronDown, ChevronUp,
   AudioLines, Workflow, Mic, ScanSearch, Compass, CalendarClock, Bot,
@@ -80,9 +80,9 @@ const projectsData = [
       metrics: ['8 auto-discovered skill modules', 'Live-verified via MCP server logs'],
       highlights: [
         'Thin-harness/fat-skills architecture: a lightweight LangGraph orchestrator with zero embedded domain logic, routing to 8 self-contained markdown skill files that hold all the intelligence.',
-        'Skills are auto-discovered at import time by scanning for `type: agent` frontmatter — no hardcoded registration, versus a comparable in-house project hardcoding 17 agent nodes in a TypedDict.',
+        'Skills are auto-discovered at import time by scanning for `type: agent` frontmatter, with no hardcoded registration, versus a comparable in-house project hardcoding 17 agent nodes in a TypedDict.',
         'Two-tier audit system: a shallow 2-call pass runs before a deep pass, keeping the agent fast enough to run on every turn.',
-        "Forced monetization gate — the agent won't build a funnel until a delivery path (paid report, booking link, AI report) is chosen.",
+        "Forced monetization gate: the agent won't build a funnel until a delivery path (paid report, booking link, AI report) is chosen.",
       ],
       github: null,
       demo: null,
@@ -144,7 +144,7 @@ const projectsData = [
       title: 'Call Note Generator',
       subtitle: 'Automated Call Transcription & Notes · Always Enough LLC',
       description:
-        "Transcribes sales call recordings, generates structured closer's-template call notes, and emails them to reps — replacing manual copy-pasting of recordings into personal AI accounts, a flagged data security and cost risk.",
+        "Transcribes sales call recordings, generates structured closer's-template call notes, and emails them to reps, replacing manual copy-pasting of recordings into personal AI accounts, a flagged data security and cost risk.",
       role: 'AI Engineer',
       scope: 'Transcription pipeline, structured note generation, GDPR-compliant architecture',
       tech: [
@@ -161,10 +161,10 @@ const projectsData = [
         'Zero-persistence, GDPR-compliant architecture',
         'Real production bugs found and fixed pre-rollout',
       ],
-      metrics: ['No database — in-memory / guaranteed-deleted temp files only', 'In active development toward team rollout'],
+      metrics: ['No database: in-memory / guaranteed-deleted temp files only', 'In active development toward team rollout'],
       highlights: [
         'Transcribes call recordings with speaker diarization (gpt-4o-transcribe-diarize) and generates structured notes (situation, pain, cost of inaction, desire, objections, next steps) via gpt-5.4.',
-        'Zero-persistence architecture — no database or file storage, everything processed in memory or via guaranteed-deleted temp files, built for GDPR compliance in a mental-health/coaching context.',
+        'Zero-persistence architecture: no database or file storage, everything processed in memory or via guaranteed-deleted temp files, built for GDPR compliance in a mental-health/coaching context.',
         'Automatic fallback from Azure content-filter blocks to OpenAI, plus PII-scrubbed logging.',
         'Found and fixed real issues through systematic testing before rollout: a first-person voice leak, a gender-assumption bug, and inconsistent readiness-score formatting.',
       ],
@@ -179,7 +179,7 @@ const projectsData = [
       subtitle: 'Hackathon Winner · Mila–Quebec AI Institute & QUT · International Tech Podcast Feature',
       award: true,
       description:
-        'Built AI-driven tools assessing corporate accountability and human rights compliance at scale, analysing large volumes of corporate modern slavery disclosures using NLP and LLMs — in partnership with Mila (Quebec AI Institute) and QUT Centre for Data Science.',
+        'Built AI-driven tools assessing corporate accountability and human rights compliance at scale, analysing large volumes of corporate modern slavery disclosures using NLP and LLMs, in partnership with Mila (Quebec AI Institute) and QUT Centre for Data Science.',
       role: 'AI Engineer (Hackathon Team)',
       scope: 'Semantic document analysis, NLP classification pipeline, explainable AI',
       tech: [
@@ -215,7 +215,7 @@ const projectsData = [
       title: 'EmpowaAI',
       subtitle: 'AI Career Platform · Sole Developer · Open Source · Active Development',
       description:
-        'Open source AI platform helping South African youth navigate career paths through intelligent personalisation — sole developer and maintainer responsible for full architecture, shipping, and community.',
+        'Open source AI platform helping South African youth navigate career paths through intelligent personalisation. Sole developer and maintainer responsible for full architecture, shipping, and community.',
       role: 'Sole Developer & Open Source Maintainer',
       scope: 'Full-stack architecture, RAG-powered personalisation, agent orchestration',
       tech: [
@@ -260,7 +260,7 @@ const otherProjectsData = [
     },
     {
       title: 'Interview Replay',
-      description: 'AI-driven mock interview tool delivering structured, actionable feedback — live in production.',
+      description: 'AI-driven mock interview tool delivering structured, actionable feedback, live in production.',
       tech: ['JavaScript', 'OpenAI API', 'Netlify'],
       github: null,
       demo: null,

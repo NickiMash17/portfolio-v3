@@ -5,7 +5,7 @@ import { trackEvent, trackExternalLink } from '@/lib/analytics';
 
 const CHANNEL_URL = 'https://www.youtube.com/@NicoletteBuilds';
 
-// ID → title mapping verified against each video's actual watch page —
+// ID → title mapping verified against each video's actual watch page:
 // thumbnails, titles, and durations must stay in sync with the real uploads.
 const VIDEOS = [
   {
@@ -22,7 +22,7 @@ const VIDEOS = [
   },
   {
     id: 'Lukkjf7n0IU',
-    title: 'Interview Replay — AI Interview Coach with Receipts',
+    title: 'Interview Replay: AI Interview Coach with Receipts',
     subtitle: 'Hackathon Demo',
     duration: '2:31',
   },

@@ -26,11 +26,11 @@ interface Edge {
 }
 
 /**
- * Dense node-and-edge "neural network / knowledge graph" visualization —
+ * Dense node-and-edge "neural network / knowledge graph" visualization:
  * many small nodes wired to a few larger hub nodes, with animated light
  * pulses traveling along the connections. Plain canvas 2D (same proven
  * technique as ParticleNetwork/AuroraBackground elsewhere in this app), not
- * WebGL — deliberately, since that's the technique that has reliably
+ * WebGL (deliberately), since that's the technique that has reliably
  * rendered in this codebase.
  */
 export const NeuralNetworkCanvas = ({ hubCount = 3, nodeCount = 34, className = '' }: NeuralNetworkCanvasProps) => {
@@ -62,13 +62,13 @@ export const NeuralNetworkCanvas = ({ hubCount = 3, nodeCount = 34, className = 
     const w = () => canvas.clientWidth;
     const h = () => canvas.clientHeight;
 
-    // Fewer nodes on narrow viewports — keeps the graph readable instead of
+    // Fewer nodes on narrow viewports: keeps the graph readable instead of
     // a dense tangle when squeezed into a phone-width panel, and cheaper to
     // animate on lower-powered devices.
     const isNarrow = window.innerWidth < 640;
     const effectiveNodeCount = isNarrow ? Math.round(nodeCount * 0.5) : nodeCount;
 
-    // Hub nodes — evenly spaced anchors, one per production system
+    // Hub nodes: evenly spaced anchors, one per production system
     const hubs: Node[] = Array.from({ length: hubCount }, (_, i) => ({
       x: w() * ((i + 1) / (hubCount + 1)),
       y: h() * (0.35 + (i % 2 === 0 ? -0.08 : 0.08)),
@@ -79,7 +79,7 @@ export const NeuralNetworkCanvas = ({ hubCount = 3, nodeCount = 34, className = 
       colorIndex: i % colors.length,
     }));
 
-    // Minor nodes — scattered, drifting
+    // Minor nodes: scattered, drifting
     const minors: Node[] = Array.from({ length: effectiveNodeCount }, () => ({
       x: Math.random() * w(),
       y: Math.random() * h(),
@@ -196,7 +196,7 @@ export const NeuralNetworkCanvas = ({ hubCount = 3, nodeCount = 34, className = 
         ctx.fill();
       });
 
-      // Hub nodes — bigger, glowing, gently pulsing
+      // Hub nodes: bigger, glowing, gently pulsing
       hubs.forEach((hub) => {
         const color = colors[hub.colorIndex];
         const pulse = prefersReducedMotion ? 1 : 0.85 + Math.sin(time * 1.6 + hub.colorIndex) * 0.15;

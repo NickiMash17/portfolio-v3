@@ -53,7 +53,7 @@ export const AIChat = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hi! I'm Nicolette's AI assistant. Ask me anything about her skills, projects, or experience — or try a quick command below.",
+      content: "Hi! I'm Nicolette's AI assistant. Ask me anything about her skills, projects, or experience, or try a quick command below.",
     },
   ]);
   const [input, setInput] = useState('');
@@ -219,7 +219,7 @@ export const AIChat = () => {
   const handleReset = () => {
     setMessages([{
       role: 'assistant',
-      content: "Hi! I'm Nicolette's AI assistant. Ask me anything about her skills, projects, or experience — or try a quick command below.",
+      content: "Hi! I'm Nicolette's AI assistant. Ask me anything about her skills, projects, or experience, or try a quick command below.",
     }]);
     setUseLocalFallback(false);
   };

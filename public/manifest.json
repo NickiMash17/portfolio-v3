@@ -1,7 +1,7 @@
 {
   "name": "Nicolette Mashaba - AI Engineer Portfolio",
   "short_name": "Nicolette Portfolio",
-  "description": "AI Engineer building production LLM systems — multi-agent orchestration, RAG pipelines, and compliance automation on Azure.",
+  "description": "AI Engineer building production LLM systems: multi-agent orchestration, RAG pipelines, and compliance automation on Azure.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0D0A14",

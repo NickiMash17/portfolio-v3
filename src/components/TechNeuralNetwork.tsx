@@ -29,11 +29,11 @@ const TIER_RADIUS: Record<Tier, number> = { Expert: 24, Proficient: 20, Familiar
 const TIER_COLOR_INDEX: Record<Tier, number> = { Expert: 2, Proficient: 0, Familiar: 1 };
 
 /**
- * Tech stack shown as a neural-network / knowledge graph — each logo is a
+ * Tech stack shown as a neural-network / knowledge graph: each logo is a
  * node, wired to its nearest neighbors, with light pulses traveling along
  * the connections. Plain canvas 2D, the same technique proven to render
  * reliably elsewhere in this app (Hero's NeuralNetworkCanvas, ParticleNetwork).
- * No text baked into the canvas — names/tiers stay in the real DOM list
+ * No text baked into the canvas: names/tiers stay in the real DOM list
  * rendered underneath.
  */
 export const TechNeuralNetwork = ({ techStack, className = '' }: TechNeuralNetworkProps) => {
@@ -65,7 +65,7 @@ export const TechNeuralNetwork = ({ techStack, className = '' }: TechNeuralNetwo
     const w = () => canvas.clientWidth;
     const h = () => canvas.clientHeight;
 
-    // Grid-with-jitter layout — organic scatter without heavy overlap
+    // Grid-with-jitter layout: organic scatter without heavy overlap
     const cols = techStack.length <= 8 ? 4 : 4;
     const rows = Math.ceil(techStack.length / cols);
     const nodes: TechNode[] = techStack.map((tech, i) => {
@@ -168,7 +168,7 @@ export const TechNeuralNetwork = ({ techStack, className = '' }: TechNeuralNetwo
         }
       });
 
-      // Nodes — glow + light backdrop chip + logo
+      // Nodes: glow + light backdrop chip + logo
       nodes.forEach((node) => {
         const color = colors[node.colorIndex];
         const pulse = prefersReducedMotion ? 1 : 0.9 + Math.sin(time * 1.4 + node.x) * 0.1;

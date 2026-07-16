@@ -44,18 +44,18 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 258 35% 14%;
 
-    /* Iris — deepened for legibility on a light ground */
+    /* Iris: deepened for legibility on a light ground */
     --primary: 254 68% 55%;
     --primary-foreground: 260 40% 98%;
 
-    /* Orchid — secondary accent */
+    /* Orchid: secondary accent */
     --secondary: 303 48% 45%;
     --secondary-foreground: 260 40% 98%;
 
     --muted: 258 20% 94%;
     --muted-foreground: 258 12% 45%;
 
-    /* Champagne — reserved for awards / highlights */
+    /* Champagne: reserved for awards / highlights */
     --accent: 38 55% 45%;
     --accent-foreground: 260 40% 98%;
 
@@ -87,7 +87,7 @@ All colors MUST be HSL.
     --mesh-intensity: 0.10;
     --grain-opacity: 0.035;
 
-    /* Premium layered shadow — ambient + key + tinted rim */
+    /* Premium layered shadow: ambient + key + tinted rim */
     --shadow-premium: 0 1px 2px hsl(258 30% 20% / 0.05),
                        0 8px 24px hsl(258 30% 20% / 0.10),
                        0 28px 56px hsl(254 68% 55% / 0.08);
@@ -115,7 +115,7 @@ All colors MUST be HSL.
     --muted: 256 18% 16%;
     --muted-foreground: 258 14% 68%;
 
-    /* Champagne — reserved for awards / highlights */
+    /* Champagne: reserved for awards / highlights */
     --accent: 38 79% 71%;
     --accent-foreground: 256 32% 8%;
 
@@ -145,7 +145,7 @@ All colors MUST be HSL.
     --mesh-intensity: 0.20;
     --grain-opacity: 0.06;
 
-    /* Premium layered shadow — ambient + key + tinted rim */
+    /* Premium layered shadow: ambient + key + tinted rim */
     --shadow-premium: 0 1px 2px hsl(256 40% 2% / 0.4),
                        0 16px 32px hsl(256 40% 2% / 0.45),
                        0 0 48px hsl(249 89% 74% / 0.08);
@@ -164,7 +164,7 @@ All colors MUST be HSL.
     text-rendering: optimizeLegibility;
   }
 
-  /* Film-grain texture — the "expensive print" cue on high-end dark UIs */
+  /* Film-grain texture: the "expensive print" cue on high-end dark UIs */
   body::before {
     content: '';
     position: fixed;
@@ -236,7 +236,7 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-premium);
   }
 
-  /* Fluid heading scale — smooth cross-breakpoint scaling instead of stepped text-2xl/3xl/4xl/5xl */
+  /* Fluid heading scale: smooth cross-breakpoint scaling instead of stepped text-2xl/3xl/4xl/5xl */
   .heading-fluid-lg {
     font-size: clamp(1.75rem, 1.35rem + 1.8vw, 3.25rem);
     line-height: 1.1;
@@ -247,7 +247,7 @@ All colors MUST be HSL.
     line-height: 1.2;
   }
 
-  /* Always-on sheen sweep — signals "this button is alive" without needing hover */
+  /* Always-on sheen sweep: signals "this button is alive" without needing hover */
   .btn-sheen {
     position: relative;
     overflow: hidden;
@@ -459,7 +459,7 @@ All colors MUST be HSL.
     animation: fade-in 0.3s ease-out;
   }
   
-  /* Slow rotation — profile image ring in Hero & About */
+  /* Slow rotation: profile image ring in Hero & About */
   @keyframes rotate-slow {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
@@ -467,35 +467,35 @@ All colors MUST be HSL.
   .animate-rotate-slow { animation: rotate-slow 12s linear infinite; }
   .animate-spin-slow   { animation: rotate-slow 12s linear infinite; }
 
-  /* Pulsing ring — About profile frame */
+  /* Pulsing ring: About profile frame */
   @keyframes pulse-ring {
     0%, 100% { opacity: 0.3; transform: scale(1); }
     50%       { opacity: 0.7; transform: scale(1.04); }
   }
   .animate-pulse-ring { animation: pulse-ring 3s ease-in-out infinite; }
 
-  /* Floating particle — About profile frame dots */
+  /* Floating particle: About profile frame dots */
   @keyframes float-particle {
     0%, 100% { transform: translateY(0) scale(1);      opacity: 0.7; }
     50%       { transform: translateY(-8px) scale(1.2); opacity: 1; }
   }
   .animate-float-particle { animation: float-particle 3s ease-in-out infinite; }
 
-  /* Triangle corner pulse — About profile frame corners */
+  /* Triangle corner pulse: About profile frame corners */
   @keyframes triangle-pulse {
     0%, 100% { opacity: 0.4; }
     50%       { opacity: 1; }
   }
   .animate-triangle-pulse { animation: triangle-pulse 2s ease-in-out infinite; }
 
-  /* Scan line — About profile image overlay */
+  /* Scan line: About profile image overlay */
   @keyframes scan-line {
     0%   { transform: translateY(-100%); }
     100% { transform: translateY(400%); }
   }
   .animate-scan-line { animation: scan-line 4s linear infinite; }
 
-  /* Matrix cell flicker — About profile hover grid */
+  /* Matrix cell flicker: About profile hover grid */
   @keyframes matrix-flicker {
     0%, 90%, 100% { opacity: 0; }
     92%            { opacity: 0.4; }

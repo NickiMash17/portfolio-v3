@@ -80,7 +80,7 @@ export const Contact = () => {
               Get In Touch
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg">
-              Open to full-time AI engineering roles — reach me directly below
+              Open to full-time AI engineering roles: reach me directly below
             </p>
           </div>
         </ScrollAnimation>
@@ -175,7 +175,7 @@ export const Contact = () => {
                 </div>
                 <div className="min-w-0">
                   <div className="text-sm font-semibold text-foreground">Resume</div>
-                  <div className="text-xs text-muted-foreground truncate">Full CV — experience, projects, certifications</div>
+                  <div className="text-xs text-muted-foreground truncate">Full CV: experience, projects, certifications</div>
                 </div>
               </div>
               <MagneticButton className="flex-shrink-0 self-end sm:self-auto">

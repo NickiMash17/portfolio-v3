@@ -1,19 +1,19 @@
 const entries = [
   {
     date: 'Jun 2026',
-    text: 'Diagnosed a UniqueViolation crash in the transcription pipeline — root cause was a plain INSERT racing on duplicate keys. Fixed with PostgreSQL upsert logic.',
+    text: 'Diagnosed a UniqueViolation crash in the transcription pipeline: root cause was a plain INSERT racing on duplicate keys. Fixed with PostgreSQL upsert logic.',
   },
   {
     date: 'May 2026',
-    text: 'Migrated the compliance pipeline off a Next.js heartbeat scheduler onto Azure Durable Function timer triggers — zero-downtime, more reliable retries.',
+    text: 'Migrated the compliance pipeline off a Next.js heartbeat scheduler onto Azure Durable Function timer triggers: zero-downtime, more reliable retries.',
   },
   {
     date: 'May 2026',
-    text: 'Designed structured JSON output for the GPT-4 compliance scorer — auditable violation flags instead of free-text summaries the team had to re-read by hand.',
+    text: 'Designed structured JSON output for the GPT-4 compliance scorer: auditable violation flags instead of free-text summaries the team had to re-read by hand.',
   },
   {
     date: 'Apr 2026',
-    text: 'Prototyped DSPy + LangChain for a multi-agent copywriting system — working modules for landing pages and email sequences.',
+    text: 'Prototyped DSPy + LangChain for a multi-agent copywriting system: working modules for landing pages and email sequences.',
   },
 ];
 

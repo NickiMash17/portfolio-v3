@@ -10,7 +10,7 @@ interface SEOProps {
 
 export const SEO = ({ 
   title = 'Nicolette Mashaba | AI Engineer | LLM & Agent Orchestration',
-  description = 'AI Engineer engineering three live production AI systems — LangGraph, DSPy, RAG, and Azure Durable Functions. Geekulcha Top 15 AI Innovator, AZ-204 certified (92%), open to relocation in Europe.',
+  description = 'AI Engineer engineering three live production AI systems: LangGraph, DSPy, RAG, and Azure Durable Functions. Geekulcha Top 15 AI Innovator, AZ-204 certified (92%), open to relocation in Europe.',
   image = 'https://nicmash-portfolio.vercel.app/Nico.jpeg',
   type = 'website'
 }: SEOProps) => {

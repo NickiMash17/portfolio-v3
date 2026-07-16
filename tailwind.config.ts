@@ -14,10 +14,10 @@ export default {
     },
     extend: {
       colors: {
-        // Aurora Iris — fixed gradient-stop accents (consistent vividness across themes)
-        iris:      'hsl(249 89% 74%)',   // primary — periwinkle violet
-        orchid:    'hsl(291 62% 74%)',   // secondary — soft orchid
-        champagne: 'hsl(38 79% 71%)',    // reserved accent — awards / highlights
+        // Aurora Iris: fixed gradient-stop accents (consistent vividness across themes)
+        iris:      'hsl(249 89% 74%)',   // primary: periwinkle violet
+        orchid:    'hsl(291 62% 74%)',   // secondary: soft orchid
+        champagne: 'hsl(38 79% 71%)',    // reserved accent: awards / highlights
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

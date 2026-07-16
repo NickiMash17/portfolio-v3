@@ -103,7 +103,7 @@ export const GitHubActivity = () => {
 
             {status === 'error' && (
               <p className="text-sm text-muted-foreground py-8 text-center">
-                Couldn't load live GitHub data right now — see the real profile below.
+                Couldn't load live GitHub data right now. See the real profile below.
               </p>
             )}
 
@@ -151,7 +151,7 @@ export const GitHubActivity = () => {
                   ].map((stat) => (
                     <div key={stat.label} className="text-center">
                       <div className="text-xl sm:text-2xl font-bold text-primary font-display mb-0.5 sm:mb-1 tabular-nums">
-                        {status === 'loading' ? '—' : stat.value?.toLocaleString()}
+                        {status === 'loading' ? '…' : stat.value?.toLocaleString()}
                       </div>
                       <div className="text-[10px] sm:text-xs text-muted-foreground">{stat.label}</div>
                     </div>

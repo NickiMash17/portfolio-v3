@@ -178,11 +178,11 @@ export const Experience = () => {
             <h3 className="heading-fluid-md font-bold font-display mb-4 sm:mb-6 md:mb-8 text-center">Certifications &amp; Awards</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
             {[
-              'Microsoft Certified: Azure Developer Associate (AZ-204) — renewed 2026 at 92%',
+              'Microsoft Certified: Azure Developer Associate (AZ-204), renewed 2026 at 92%',
               'Microsoft Certified: Azure Data Fundamentals (DP-900)',
               'Geekulcha Top 15 AI Innovators - South Africa 2026',
               'AWS AI Practitioner Challenge - Udacity, 2026',
-              'Azure DevOps Engineer Expert (AZ-400) — In Progress',
+              'Azure DevOps Engineer Expert (AZ-400), In Progress',
               'Hackathon Winner, AI Against Modern Slavery (AIMS) - Mila x QUT · Featured on International Tech Podcast',
               'J.P. Morgan Software Engineering Virtual Experience',
               'Programming Foundation Top Performer - CTU Training Solutions',

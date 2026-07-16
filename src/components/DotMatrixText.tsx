@@ -57,7 +57,7 @@ export const DotMatrixText = ({ text, className = '', height = 120, dotGap = 7, 
       offCtx.textAlign = 'center';
       offCtx.textBaseline = 'middle';
 
-      // Shrink the font until the text fits the available width — prevents
+      // Shrink the font until the text fits the available width: prevents
       // clipping when a fixed `height` prop yields glyphs wider than the
       // container on narrow (mobile) viewports.
       const maxTextWidth = width * 0.92;

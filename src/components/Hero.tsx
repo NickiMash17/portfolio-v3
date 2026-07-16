@@ -28,7 +28,7 @@ const SYSTEMS = [
 ];
 
 // Written out as complete literal class strings (not interpolated) so
-// Tailwind's static scanner actually generates them — dynamically building
+// Tailwind's static scanner actually generates them. Dynamically building
 // class names like `border-${accent}/20` would silently produce no CSS.
 const SYSTEM_ACCENTS = [
   { border: 'border-primary/25', iconBg: 'bg-primary/15', iconText: 'text-primary' },
@@ -80,7 +80,7 @@ export const Hero = () => {
           <ParticleNetwork />
         </div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.08),transparent_55%)]" />
-        {/* Guaranteed glow behind the AI ENGINEER mark — plain CSS, always visible regardless of canvas timing */}
+        {/* Guaranteed glow behind the AI ENGINEER mark: plain CSS, always visible regardless of canvas timing */}
         <div className="absolute left-1/2 top-16 sm:top-20 -translate-x-1/2 w-[90%] max-w-3xl h-40 sm:h-48 rounded-full bg-gradient-to-r from-primary/25 via-secondary/25 to-accent/25 blur-3xl" />
       </div>
 
@@ -97,7 +97,7 @@ export const Hero = () => {
 
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-10 items-start w-full">
 
-          {/* Left — profile sheet */}
+          {/* Left: profile sheet */}
           <div className="w-full">
             <TiltCard tiltAmount={3} scale={1.005} glareEnabled={false} className="rounded-lg">
             <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60 shadow-premium">
@@ -153,7 +153,7 @@ export const Hero = () => {
                   <span>AI Engineer at Always Enough LLC</span>
                 </div>
                 <p className="text-sm text-foreground/70 leading-relaxed pl-[26px]">
-                  Building and maintaining three live production AI systems — RAG pipelines, multi-agent orchestration, and compliance automation — on Microsoft Azure.
+                  Building and maintaining three live production AI systems (RAG pipelines, multi-agent orchestration, and compliance automation) on Microsoft Azure.
                 </p>
               </div>
 
@@ -217,7 +217,7 @@ export const Hero = () => {
                 {[
                   { icon: Award, label: 'Geekulcha Top 15 AI Innovator' },
                   { icon: ShieldCheck, label: 'AZ-204 Certified · 92%' },
-                  { icon: Award, label: 'Hackathon Winner — Mila x QUT' },
+                  { icon: Award, label: 'Hackathon Winner: Mila x QUT' },
                 ].map(({ icon: Icon, label }) => (
                   <span
                     key={label}
@@ -232,7 +232,7 @@ export const Hero = () => {
             </TiltCard>
           </div>
 
-          {/* Right — production systems panel */}
+          {/* Right: production systems panel */}
           <div className="w-full">
             <TiltCard tiltAmount={3} scale={1.005} glareEnabled={false} className="rounded-lg">
             <div className="rounded-lg border border-border/60 divide-y divide-border/60 overflow-hidden bg-card/60 shadow-premium">
