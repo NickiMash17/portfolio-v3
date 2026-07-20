@@ -120,7 +120,11 @@ export const GitHubActivity = () => {
                           </div>
                         ))
                       : weeks.map((week, weekIndex) => (
-                          <div key={weekIndex} className="flex flex-col gap-0.5 sm:gap-1">
+                          <div
+                            key={weekIndex}
+                            className="flex flex-col gap-0.5 sm:gap-1 animate-cell-reveal"
+                            style={{ animationDelay: `${weekIndex * 16}ms` }}
+                          >
                             {week.map((day) => (
                               <div
                                 key={day.date}

@@ -19,6 +19,7 @@ export const AnimatedCounter = ({ value, duration = 1400, className = '' }: Anim
   const ref = useRef<HTMLSpanElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [display, setDisplay] = useState(value);
+  const [justCompleted, setJustCompleted] = useState(false);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
@@ -61,6 +62,8 @@ export const AnimatedCounter = ({ value, duration = 1400, className = '' }: Anim
         frameId = requestAnimationFrame(tick);
       } else {
         setDisplay(value);
+        setJustCompleted(true);
+        window.setTimeout(() => setJustCompleted(false), 600);
       }
     };
     frameId = requestAnimationFrame(tick);
@@ -69,7 +72,10 @@ export const AnimatedCounter = ({ value, duration = 1400, className = '' }: Anim
   }, [isVisible, value, duration]);
 
   return (
-    <span ref={ref} className={`tabular-nums ${className}`}>
+    <span
+      ref={ref}
+      className={`tabular-nums ${className} ${justCompleted ? 'animate-counter-flash' : ''}`}
+    >
       {display}
     </span>
   );

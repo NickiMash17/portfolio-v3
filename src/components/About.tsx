@@ -19,9 +19,11 @@ import { CVPreviewModal } from '@/components/CVPreviewModal';
 import { TiltCard } from '@/components/TiltCard';
 import { MagneticButton } from '@/components/MagneticButton';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
+import { useGitHubStats } from '@/hooks/useGitHubStats';
 
 export const About = () => {
   const [activeSkill, setActiveSkill] = useState<number | null>(null);
+  const { stats: githubStats, status: githubStatus } = useGitHubStats();
 
   const toolkit = [
     { icon: Cpu, label: 'AI/ML', level: 88, color: 'from-accent to-secondary' },
@@ -225,17 +227,33 @@ export const About = () => {
           {[
             { value: '3', label: 'Live Production AI Systems' },
             { value: '92%', label: 'AZ-204 Certification Score' },
-            { value: '2448', label: 'GitHub Commits' },
-            { value: '#1', label: 'Female Most Active GitHub User' },
+            {
+              value: githubStatus === 'ready' ? String(githubStats?.contributionsLastYear ?? 0) : null,
+              label: 'GitHub Contributions (12mo)',
+            },
+            {
+              value: githubStatus === 'ready' ? String(githubStats?.followers ?? 0) : null,
+              label: 'GitHub Followers',
+            },
           ].map((stat, index) => (
             <div
               key={index}
               className="glass rounded-lg sm:rounded-md p-3 sm:p-4 md:p-6 text-center hover:scale-105 transition-transform"
             >
-              <AnimatedCounter
-                value={stat.value}
-                className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary glow-text mb-1"
-              />
+              {stat.value === null ? (
+                <div className="h-[1.75em] sm:h-[2em] md:h-[2.25em] lg:h-[2.5em] flex items-center justify-center">
+                  <span
+                    className={`text-muted-foreground/50 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold ${githubStatus === 'loading' ? 'animate-pulse' : ''}`}
+                  >
+                    {githubStatus === 'loading' ? '···' : '—'}
+                  </span>
+                </div>
+              ) : (
+                <AnimatedCounter
+                  value={stat.value}
+                  className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary glow-text mb-1"
+                />
+              )}
               <div className="text-muted-foreground text-[10px] sm:text-xs md:text-sm">{stat.label}</div>
             </div>
           ))}
