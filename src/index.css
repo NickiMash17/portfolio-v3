@@ -542,3 +542,36 @@ All colors MUST be HSL.
   }
 }
 
+/* Print support for the /cv page — clean single-column, black-on-white */
+@media print {
+  .cv-page .no-print {
+    display: none !important;
+  }
+
+  .cv-page {
+    background: #fff !important;
+  }
+
+  .cv-page canvas,
+  .cv-page .film-grain,
+  body::before {
+    display: none !important;
+  }
+
+  .cv-page * {
+    color: #111 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border-color: #ccc !important;
+  }
+
+  .cv-page main {
+    padding-top: 0 !important;
+  }
+
+  .cv-page a {
+    text-decoration: underline;
+  }
+}
+

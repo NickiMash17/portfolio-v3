@@ -4,9 +4,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { useKonami } from "@/hooks/useKonami";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+
+const CV = lazy(() => import("./pages/CV"));
 
 const App = () => {
   const [redAlert, setRedAlert] = useState(false);
@@ -26,6 +28,14 @@ const App = () => {
           <GoogleAnalytics />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route
+              path="/cv"
+              element={
+                <Suspense fallback={null}>
+                  <CV />
+                </Suspense>
+              }
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FileText, Download, ExternalLink, X } from 'lucide-react';
+import { FileText, Download, ExternalLink, X, Sparkles } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -67,6 +67,19 @@ export const CVPreviewModal = ({ trigger }: CVPreviewModalProps) => {
           </div>
 
           <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Interactive CV page */}
+            <a
+              href="/cv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="min-h-11 flex items-center gap-1.5 px-3 rounded-lg text-xs font-medium bg-secondary/15 text-secondary border border-secondary/30 hover:bg-secondary/25 transition-all"
+              onClick={() => trackEvent('cv_interactive_open', { category: 'cv' })}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">View Interactive CV</span>
+              <span className="sm:hidden">Interactive</span>
+            </a>
+
             {/* Open in new tab */}
             <a
               href={CV_PATH}

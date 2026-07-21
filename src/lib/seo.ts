@@ -14,7 +14,7 @@ export interface SEOData {
 
 const DEFAULT_TITLE = 'Nicolette Mashaba | AI Engineer | LLM & Agent Orchestration';
 const DEFAULT_DESCRIPTION = 'AI Engineer engineering three live production AI systems: LangGraph, DSPy, RAG, and Azure Durable Functions. Geekulcha Top 15 AI Innovator, AZ-204 certified (92%), open to relocation in Europe.';
-const DEFAULT_IMAGE = 'https://nicmash-porfolio.vercel.app/src/assets/Myself.jpg';
+const DEFAULT_IMAGE = 'https://nicmash-porfolio.vercel.app/my-caricature.jpeg';
 const BASE_URL = 'https://nicmash-porfolio.vercel.app';
 
 /**

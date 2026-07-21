@@ -11,11 +11,11 @@ interface SEOProps {
 export const SEO = ({ 
   title = 'Nicolette Mashaba | AI Engineer | LLM & Agent Orchestration',
   description = 'AI Engineer engineering three live production AI systems: LangGraph, DSPy, RAG, and Azure Durable Functions. Geekulcha Top 15 AI Innovator, AZ-204 certified (92%), open to relocation in Europe.',
-  image = 'https://nicmash-portfolio.vercel.app/Nico.jpeg',
+  image = 'https://nicmash-porfolio.vercel.app/my-caricature.jpeg',
   type = 'website'
 }: SEOProps) => {
   const location = useLocation();
-  const url = `https://nicmash-portfolio.vercel.app${location.pathname}`;
+  const url = `https://nicmash-porfolio.vercel.app${location.pathname}`;
 
   useEffect(() => {
     // Update document title

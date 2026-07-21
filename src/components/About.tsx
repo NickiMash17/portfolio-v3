@@ -90,7 +90,7 @@ export const About = () => {
 
               <div className="relative aspect-[3/4] w-full rounded-[1.75rem] overflow-hidden border border-primary/20 shadow-2xl">
                 <img
-                  src="/Nico.jpeg"
+                  src="/my-caricature.jpeg"
                   alt="Nicolette Mashaba - AI Engineer"
                   loading="lazy"
                   decoding="async"
