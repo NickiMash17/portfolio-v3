@@ -7,9 +7,29 @@ const BOOT_LINES = [
   'All systems nominal.',
 ];
 
+const SESSION_KEY = 'preloader-shown';
+
+const hasShownThisSession = () => {
+  if (typeof window === 'undefined') return false;
+  try {
+    return window.sessionStorage.getItem(SESSION_KEY) === '1';
+  } catch {
+    // Storage access can throw in some privacy modes — fail open and show it.
+    return false;
+  }
+};
+
+const markShownThisSession = () => {
+  try {
+    window.sessionStorage.setItem(SESSION_KEY, '1');
+  } catch {
+    // Nothing to do if storage isn't available — just won't persist the skip.
+  }
+};
+
 export const Preloader = () => {
   const [progress, setProgress] = useState(0);
-  const [shouldShow] = useState(() => typeof window !== 'undefined');
+  const [shouldShow] = useState(() => typeof window !== 'undefined' && !hasShownThisSession());
   const [isVisible, setIsVisible] = useState(shouldShow);
   const [entered, setEntered] = useState(false);
 
@@ -34,6 +54,7 @@ export const Preloader = () => {
         if (newProgress >= 100) {
           clearInterval(progressInterval);
           setTimeout(() => setIsVisible(false), 500);
+          markShownThisSession();
           return 100;
         }
         return newProgress;
@@ -66,9 +87,9 @@ export const Preloader = () => {
       >
         {/* Neural-node signature mark */}
         <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" className="overflow-visible">
-          <line x1="14" y1="14" x2="28" y2="28" stroke="hsl(var(--primary) / 0.35)" strokeWidth="1" />
-          <line x1="28" y1="28" x2="42" y2="16" stroke="hsl(var(--secondary) / 0.35)" strokeWidth="1" />
-          <line x1="28" y1="28" x2="18" y2="42" stroke="hsl(var(--accent) / 0.35)" strokeWidth="1" />
+          <line x1="14" y1="14" x2="28" y2="28" stroke="hsl(var(--primary) / 0.45)" strokeWidth="1" className="line-draw" style={{ animationDelay: '0.1s' }} />
+          <line x1="28" y1="28" x2="42" y2="16" stroke="hsl(var(--secondary) / 0.45)" strokeWidth="1" className="line-draw" style={{ animationDelay: '0.5s' }} />
+          <line x1="28" y1="28" x2="18" y2="42" stroke="hsl(var(--accent) / 0.45)" strokeWidth="1" className="line-draw" style={{ animationDelay: '0.9s' }} />
           <circle cx="14" cy="14" r="3" className="fill-primary cube-twinkle" style={{ animationDelay: '0s' }} />
           <circle cx="28" cy="28" r="3.5" className="fill-secondary cube-twinkle" style={{ animationDelay: '0.4s' }} />
           <circle cx="42" cy="16" r="3" className="fill-accent cube-twinkle" style={{ animationDelay: '0.8s' }} />
